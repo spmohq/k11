@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>X-Contents Genie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --input-bg: #374151;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .container { max-width: 1000px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 40px; }
+    h1 { font-size: 2.5rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; }
+    
+    /* Top Input Section */
+    .input-section {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 40px;
+      backdrop-filter: blur(12px);
+    }
+    .label-tag {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+    textarea#issueInput {
+      width: 100%;
+      min-height: 100px;
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 15px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      resize: vertical;
+      outline: none;
+    }
+
+    /* Grid for Prompts */
+    .prompts-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .prompt-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(12px);
+    }
+    .prompt-card h2 {
+      font-size: 1.1rem;
+      color: var(--accent-primary);
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+    .prompt-preview {
+      background: var(--code-bg);
+      padding: 20px;
+      border-radius: 10px;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      white-space: pre-wrap;
+      overflow-y: auto;
+      max-height: 300px;
+      border: 1px solid var(--card-border);
+      margin-bottom: 20px;
+    }
+    .copy-btn {
+      align-self: flex-end;
+      padding: 10px 20px;
+      background: var(--accent-primary);
+      color: var(--bg-gradient-end);
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .copy-btn:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .copy-btn.copied { background: var(--accent-success); }
+    .icon { width: 16px; height: 16px; }
+
+    footer { text-align: center; margin-top: 50px; color: var(--text-secondary); font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>X-Contents Genie</h1>
+      <p>Evergreen orientation-first content architect.</p>
+    </header>
+
+    <div class="input-section">
+      <label class="label-tag" for="issueInput">[Issue – angle of discussion]</label>
+      <textarea id="issueInput" placeholder="Enter the core friction point or psychological angle you want to explore..."></textarea>
+    </div>
+
+    <div class="prompts-grid">
+      <!-- Stage 1 -->
+      <div class="prompt-card">
+        <h2>Stage 1: Idea, Structure & Discard Filter</h2>
+        <div id="preview1" class="prompt-preview"></div>
+        <button class="copy-btn" data-target="preview1">Copy Stage 1</button>
+      </div>
+
+      <!-- Stage 2 -->
+      <div class="prompt-card">
+        <h2>Stage 2: KEEP-Only Outline Generator</h2>
+        <div id="preview2" class="prompt-preview"></div>
+        <button class="copy-btn" data-target="preview2">Copy Stage 2</button>
+      </div>
+
+      <!-- Stage 3 -->
+      <div class="prompt-card">
+        <h2>Stage 3: Poetic Drift Prevention</h2>
+        <div id="preview3" class="prompt-preview"></div>
+        <button class="copy-btn" data-target="preview3">Copy Stage 3</button>
+      </div>
+
+      <!-- Stage 4 -->
+      <div class="prompt-card">
+        <h2>Stage 4: Impact Evaluation Audit</h2>
+        <div id="preview4" class="prompt-preview"></div>
+        <button class="copy-btn" data-target="preview4">Copy Stage 4</button>
+      </div>
+    </div>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const issueInput = document.getElementById('issueInput');
+    
+    const stage1Template = `You are a content architect and diagnostic editor, not a writer.
+
+Your task is to extract evergreen content ideas, determine their most durable tweet forms, and evaluate their long-term suitability, without writing any tweet prose.
+
+CORE INTENT:
+I want to write X short tweets, long tweets, or threads that remain relevant for years by addressing recurring human problems, not trends. The subject matter is spiritual insight expressed through logic, psychology, and lived observation, without spiritual language.
+
+HARD CONSTRAINTS:
+- Do not write tweet text, examples, or prose.
+- Do not give advice, instructions, or CTAs.
+- Explain mechanisms, not meanings.
+- Remain valid if read 5–10 years later.
+
+INPUT:
+I want to generate X contents on the following issue / angle:
+[ISSUE]
+
+TASKS:
+1. Identify the recurring human friction.
+2. Propose X evergreen content ideas.
+3. Recommend tweet form (Universal observation, False belief reframe, etc).
+4. Justify form choice.
+5. List core points (Behaviors, Cause-effect, Dynamics).
+6. SELF-SCORING DISCARD FILTER (Score 0-10).
+
+Acknowledge all constraints and wait.`;
+
+    const stage2Text = `You are a structural editor and outline architect, not a writer.
+Your task is to convert ONLY KEEP-rated ideas (8-10) into draft-ready outlines, without writing tweet prose.
+
+STRICT INPUT GATE:
+You will receive only ideas marked KEEP. Ignore REWRITE or REJECT ideas.
+
+HARD CONSTRAINTS:
+- Do not write tweet text or sentences.
+- Do not add advice, conclusions, or CTAs.
+
+TASKS (FOR EACH KEEP IDEA):
+1. Confirm chosen tweet form.
+2. Define structural spine (e.g., Observation -> Mechanism -> Consequence).
+3. Create draft-ready outline (Core points, dimensions, natural stops).
+4. Identify core mechanisms (Attention, Identity, Control loops, etc).
+5. Structural integrity check (No advice flag).
+
+No commentary after last outline.`;
+
+    const stage3Text = `You are a language auditor and precision editor, not a stylist.
+Task: Convert Stage-2 outlines into final X content language while preventing poetic or motivational drift.
+
+LANGUAGE INTENT:
+- Describe what happens, not what it means.
+- Explain mechanisms, not values.
+- Invite recognition, not inspiration.
+
+HARD LANGUAGE CONSTRAINTS:
+- Allowed: Neutral verbs (notice, maintain), Functional nouns (attention, pattern).
+- Disallowed: Metaphors, spiritual/moral vocab, motivational phrasing.
+
+SENTENCE RULES:
+- Short/medium sentences. No exclamation marks.
+- No poetic rhythm. No quotable "poster" talk.
+
+FINAL DRIFT CHECK:
+- Could this be advice? Does it rely on emotion?
+
+Output only the final tweets. No explanations.`;
+
+    const stage4Text = `You are an idea-integrity auditor and impact analyst, not a writer.
+Task: Evaluate whether the original idea survives intact in the final X content.
+
+TASKS:
+1. Restate original idea neutrally.
+2. IDEA SURVIVAL AUDIT (Full/Partial/None).
+3. DRIFT & DISTORTION ANALYSIS (Compression loss, implicit advice, drift).
+4. MESSAGE INTEGRITY SCORECARD (0–10).
+5. IMPACT EVALUATION REPORT (Likely mental shift, orientation effect).
+6. LONGEVITY ASSESSMENT.
+7. FINAL VERDICT (IDEA SURVIVES CLEANLY / WITH LOSS / DOES NOT SURVIVE).
+
+END AFTER VERDICT.`;
+
+    function updatePrompts() {
+      const issue = issueInput.value.trim() || "[Issue – angle of discussion]";
+      document.getElementById('preview1').textContent = stage1Template.replace('[ISSUE]', issue);
+      document.getElementById('preview2').textContent = stage2Text;
+      document.getElementById('preview3').textContent = stage3Text;
+      document.getElementById('preview4').textContent = stage4Text;
+    }
+
+    issueInput.addEventListener('input', updatePrompts);
+    updatePrompts();
+
+    // Copy functionality
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const text = document.getElementById(btn.dataset.target).textContent;
+        navigator.clipboard.writeText(text).then(() => {
+          const originalText = btn.textContent;
+          btn.textContent = 'Copied!';
+          btn.classList.add('copied');
+          setTimeout(() => {
+            btn.textContent = originalText;
+            btn.classList.remove('copied');
+          }, 2000);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
