@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Short Reads Prompt Generator</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --input-bg: #1f2937;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container {
+      max-width: 850px;
+      width: 100%;
+      margin: 0 auto;
+      flex-grow: 1;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -1px;
+      margin-bottom: 10px;
+    }
+    p.subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+    }
+    .prompts-container {
+      display: grid;
+      gap: 30px;
+    }
+    .input-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 25px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      margin-bottom: 30px;
+    }
+    .input-card h2 {
+      font-size: 1.25rem;
+      margin-bottom: 15px;
+      color: var(--accent-primary);
+    }
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      background-color: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 15px;
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    textarea:focus {
+      border-color: var(--accent-primary);
+    }
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .prompt-card h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--text-heading);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 20px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      font-weight: 400;
+      flex-grow: 1;
+      margin-bottom: 20px;
+      border: 1px solid var(--card-border);
+      max-height: 500px;
+      overflow-y: auto;
+    }
+    .copy-button {
+      align-self: flex-end;
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--bg-gradient-end);
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .copy-button:hover {
+      background-color: var(--accent-hover);
+      transform: scale(1.05);
+    }
+    .copy-button.copied {
+      background-color: var(--accent-success);
+    }
+    .copy-button .icon {
+      width: 16px;
+      height: 16px;
+    }
+    .copy-button .copied-icon {
+        display: none;
+    }
+    .copy-button.copied .copy-icon {
+        display: none;
+    }
+    .copy-button.copied .copied-icon {
+        display: inline-block;
+    }
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      .prompt-card h2 { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Short Reads Prompt Generator</h1>
+      <p class="subtitle">Enter your book idea to generate a comprehensive drafting structure prompt.</p>
+    </header>
+
+    <main>
+      <div class="input-card">
+        <h2>[PASTE BOOK IDEA HERE]</h2>
+        <textarea id="bookIdeaInput" placeholder="Enter your ebook topic, problem, or main idea here..."></textarea>
+      </div>
+
+      <div class="prompts-container">
+        <div class="prompt-card">
+          <h2>Drafting Prompt</h2>
+          <pre id="generatedPrompt" class="prompt-text">Please enter a book idea above to generate the prompt...</pre>
+          <button class="copy-button" id="copyBtn">
+            <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /></svg>
+            <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+            <span class="button-text">Copy Prompt</span>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const bookInput = document.getElementById('bookIdeaInput');
+    const promptDisplay = document.getElementById('generatedPrompt');
+    const copyBtn = document.getElementById('copyBtn');
+
+    const updatePrompt = () => {
+      const idea = bookInput.value.trim() || "[PASTE BOOK IDEA HERE]";
+      
+      const fullPrompt = `CONTEXT:
+
+A. Short reads are not about being short but about being:
+- Specific
+- Actionable
+- Finishable
+- Easy to agree with
+Short read ebooks match how people actually read now: they want something fast, focused, and outcome-driven.
+
+B. So, What Are Short Reads?
+A short read ebook is a single-idea book designed to be read in one sitting (30 — 60 minutes). It solves one specific problem or explains one clear concept.
+It is not a summary, a teaser, or a light book. It is a complete book focused on one idea that's designed to be read in one sitting.
+
+C. What's The Ideal Word Count for Short Reads?
+It depends. While true short reads are about 3,000 — 5,000 words, premium shorts are between 5,000 — 8,000 words. 
+However, the strongest performance reads are 4,000 — 6,000 words.
+This range (3,000–6,000 words) is long enough to feel like a real book, but short enough to finish quickly. It is also easy to price for an impulse buy.
+
+D. How Short Reads Are Structured? Here is a simple example:
+Focus: One clear problem, one clear solution.
+Example length: 4,500 words.
+Reading time: 60 minutes max.
+Typical structure of a short read book:
+Intro: In 400 — 600 words, define the problem, say who it's for, and give a promise.
+
+Chapter 1: What's the real issue? Why does the problem exist? (No theory overload!) Explain in 700 — 900 words.
+Chapter 2: The Framework or Method: Give a short step-by-step process. Make it clear, usable, and easy to understand. 1,400 — 1,600 words.
+Chapter 3: Application (How it works in real life. Common mistakes. 900 — 1,100 words.
+Conclusion and Action Steps: A checklist, the next steps, or create a simple system to follow. 400 — 600 words.
+
+There must be no fillers, no fluff, no detours, and no padding with extra chapters for either.
+
+E. Why Short Reads Are Winning
+Short reads work because they speak the words the average person can understand clearly. The words must align with reality.
+
+F. Good News for Creators
+For creators, short reads are faster to write, easier to sell, and simpler to make into a series.
+
+ROLE:
+You are an expert Short Reads drafting assistant for independent digital Short Reads ebooks.
+
+TASK:
+I will give you a Short Reads ebook idea.
+Your task is to generate a DRAFT-LEVEL BOOK STRUCTURE ONLY — the skeleton and the meat — so I can begin drafting the book.
+
+IMPORTANT CONSTRAINTS:
+- This is for drafting, NOT editing or publishing.
+- Do NOT optimize prose, hooks, or style.
+- Do NOT write the actual book.
+- Focus only on structure, flow, and content territory.
+
+OUTPUT REQUIREMENTS:
+Follow the exact structure below. Do not add or remove sections.
+1. BOOK-LEVEL CORE
+2. READER CONTEXT (GUMROAD-SPECIFIC)
+3. STRUCTURE SELECTION
+4. BOOK SKELETON
+5. CHAPTER SKELETON
+6. CHAPTER FLOW (CONCEPTUAL)
+7. BOOK INTRODUCTION (DRAFT-LEVEL)
+8. BOOK CONCLUSION (DRAFT-LEVEL)
+9. DRAFT READINESS CHECK
+
+SHORT READS EBOOK IDEA TO STRUCTURE:
+${idea}
+
+Now generate the DRAFT-LEVEL BOOK STRUCTURE and provide a checklist showing how each of the recommendations provided in the context was applied.`;
+
+      promptDisplay.textContent = fullPrompt;
+    };
+
+    bookInput.addEventListener('input', updatePrompt);
+    
+    // Initialize on load
+    updatePrompt();
+
+    copyBtn.addEventListener('click', () => {
+      const textToCopy = promptDisplay.textContent;
+      const buttonTextEl = copyBtn.querySelector('.button-text');
+
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        const originalText = buttonTextEl.textContent;
+        buttonTextEl.textContent = 'Copied!';
+        copyBtn.classList.add('copied');
+        
+        setTimeout(() => {
+          buttonTextEl.textContent = originalText;
+          copyBtn.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    });
+  </script>
+</body>
+</html>
