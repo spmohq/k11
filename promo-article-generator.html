@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Promo Article Generator</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1e1b4b; /* Deep Indigo shift for Medium context */
+      --bg-gradient-end: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.6);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-heading: #ffffff;
+      --accent-primary: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --accent-success: #22c55e;
+      --code-bg: rgba(0, 0, 0, 0.4);
+      --shadow-color: rgba(0, 0, 0, 0.3);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container {
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      flex-grow: 1;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    h1 {
+      font-size: 2.75rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+    p.subtitle {
+      font-size: 1.2rem;
+      color: var(--accent-primary);
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .prompts-container {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      box-shadow: 0 10px 40px var(--shadow-color);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+    .prompt-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--accent-primary);
+    }
+    .prompt-card h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .prompt-card h2 span {
+        background: var(--accent-primary);
+        color: var(--bg-gradient-end);
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 0.9rem;
+    }
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 24px;
+      border-radius: 12px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      line-height: 1.5;
+      flex-grow: 1;
+      margin-bottom: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .copy-button {
+      align-self: flex-end;
+      padding: 12px 24px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #ffffff;
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .copy-button:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(56, 189, 248, 0.3);
+    }
+    .copy-button.copied {
+      background-color: var(--accent-success);
+    }
+    .copy-button .icon {
+      width: 18px;
+      height: 18px;
+    }
+    .copy-button .copied-icon {
+        display: none;
+    }
+    .copy-button.copied .copy-icon {
+        display: none;
+    }
+    .copy-button.copied .copied-icon {
+        display: inline-block;
+    }
+    footer {
+        margin-top: 60px;
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        padding-bottom: 40px;
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      .prompt-card { padding: 20px; }
+      .prompt-text { font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Promo Article</h1>
+      <p class="subtitle">for medium.com</p>
+    </header>
+
+    <main>
+      <div class="prompts-container" id="promptsContainer">
+        
+        <!-- Prompt #1 -->
+        <div class="prompt-card">
+          <h2><span>1</span> Foundation: Mimic & Direct</h2>
+          <pre id="prompt1" class="prompt-text">Read and fully understand the provided Medium.com article.
+
+Context:
+- The original article’s primary purpose is to promote a product.
+
+Task:
+Write a new, original Medium.com article that:
+- Mimics the original article’s structure, tone, pacing, and language style
+- Is clearly promotional in intent
+- Promotes the PDF previously shared in this conversation
+
+Constraints:
+- Do NOT mention or reveal the product name
+- Do NOT include any direct links to the PDF
+- Do NOT hint at filenames, internal labels, or pricing
+- Keep all references abstract and curiosity-driven
+- Assume the audience is creators, solopreneurs, or knowledge sellers
+
+CTA rules:
+- Use this CTA exactly as written
+- Include it once, at the end of the article only:
+  “You can DM me on X if you want to explore this.”
+
+Here is the source article:
+[ARTICLE]</pre>
+          <button class="copy-button" data-target="prompt1">
+            <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /></svg>
+            <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+            <span class="button-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Prompt #2 -->
+        <div class="prompt-card">
+          <h2><span>2</span> Variance: Fresh Angle</h2>
+          <pre id="prompt2" class="prompt-text">Now write another new Medium.com article with the same promotional goal as the previous one.
+
+Requirements:
+- Keep the same overall intent, positioning, and outcome
+- Use a different opening angle, examples, and narrative flow
+- Do NOT reuse phrases, metaphors, or paragraph structures from the previous article
+- Maintain a natural Medium-style essay tone (not salesy, not ad-like)
+
+Audience:
+- Creators, solopreneurs, or knowledge sellers
+
+Constraints (strict):
+- Do NOT mention or reveal the product name
+- Do NOT include any direct links
+- Do NOT hint at filenames, internal labels, pricing, or offers
+- Keep references abstract and curiosity-driven
+
+CTA rules:
+- Use this CTA exactly as written
+- Include it once, at the end of the article only:
+  “You can DM me on X if you want to explore this.”
+
+Before finalizing, internally check:
+- Does this feel like a fresh article, not a variation?
+- Would a Medium reader perceive it as valuable even without the CTA?
+- Does it subtly create curiosity without revealing specifics?
+
+If not, revise once and then output the final article only.</pre>
+          <button class="copy-button" data-target="prompt2">
+            <span class="button-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Prompt #3 -->
+        <div class="prompt-card">
+          <h2><span>3</span> Scale: 20-Article Rotation</h2>
+          <pre id="prompt3" class="prompt-text">Goal:
+Create a 20-article evergreen Medium.com content rotation for the same promotional purpose as the previous articles.
+
+Definition:
+“Evergreen” means the articles must remain relevant for years without relying on trends, tools, dates, platforms, or temporary tactics.
+
+Phase 1 — Evergreen Angle Framework:
+Design a 20-article rotation system where each article has:
+- One timeless core angle (principle, mistake, insight, mental model, or quiet realization)
+- A unique opening hook style
+- A one-sentence evergreen promise to the reader
+
+Output Phase 1 as a numbered list (1–20).
+
+Phase 2 — Article Creation:
+Write 20 full, original Medium-style articles using the angle framework above.
+
+Article Length & Depth (mandatory):
+- Each article must be 800–1,200 words
+- Minimum 6 paragraphs
+- Include at least one:
+  - Reflective story, OR
+  - Concrete example, OR
+  - Practical framework
+- No filler or summarization
+
+Global Constraints (apply to ALL articles):
+- Audience: creators, solopreneurs, or knowledge sellers
+- Tone: thoughtful, reflective, practical
+- Promotional but subtle; value first
+- Do NOT mention or reveal the product name
+- Do NOT include any links
+- Do NOT hint at filenames, internal labels, pricing, or offers
+- Do NOT reuse phrases, metaphors, examples, or structures across articles
+
+CTA Rules (strict):
+- Use this CTA exactly as written
+- Include it once, at the end of each article only:
+  “You can DM me on X if you want to explore this.”
+
+Quality Control (internal):
+Before finalizing EACH article, check:
+- Is this genuinely 800–1,200 words?
+- Would this stand alone as a Medium feature article?
+- Is it clearly distinct from the other 19?
+If not, revise once.
+
+Output Format:
+- “=== Evergreen Angle System ===”
+- “=== Article 1 ===” through “=== Article 20 ===”
+- Output only the requested content.</pre>
+          <button class="copy-button" data-target="prompt3">
+            <span class="button-text">Copy Prompt</span>
+          </button>
+        </div>
+
+      </div>
+    </main>
+
+    <footer>
+        <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('promptsContainer');
+
+      container.addEventListener('click', (e) => {
+        const btn = e.target.closest('.copy-button');
+        if (!btn) return;
+
+        const targetId = btn.dataset.target;
+        const text = document.getElementById(targetId).textContent;
+        const btnText = btn.querySelector('.button-text');
+
+        navigator.clipboard.writeText(text).then(() => {
+          const original = btnText.textContent;
+          btnText.textContent = 'Copied to Clipboard';
+          btn.classList.add('copied');
+          
+          setTimeout(() => {
+            btnText.textContent = original;
+            btn.classList.remove('copied');
+          }, 2000);
+        }).catch(err => {
+          console.error('Copy failed', err);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
