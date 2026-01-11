@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aggressive Rebranded Prompt</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --input-bg: #374151;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container {
+      max-width: 850px;
+      width: 100%;
+      margin: 0 auto;
+      flex-grow: 1;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -1px;
+      margin-bottom: 10px;
+    }
+    p.subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      text-transform: lowercase;
+    }
+    .prompts-container {
+      display: grid;
+      gap: 30px;
+    }
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .prompt-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px 0 var(--shadow-color);
+    }
+    .prompt-card h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--accent-primary);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 20px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      font-weight: 400;
+      flex-grow: 1;
+      margin-bottom: 20px;
+      border: 1px solid var(--card-border);
+    }
+    .copy-button {
+      align-self: flex-end;
+      padding: 10px 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--bg-gradient-end);
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .copy-button:hover {
+      background-color: var(--accent-hover);
+      transform: scale(1.05);
+    }
+    .copy-button.copied {
+      background-color: var(--accent-success);
+    }
+    .copy-button .icon {
+      width: 16px;
+      height: 16px;
+    }
+    .copy-button .copied-icon {
+        display: none;
+    }
+    .copy-button.copied .copy-icon {
+        display: none;
+    }
+    .copy-button.copied .copied-icon {
+        display: inline-block;
+    }
+    footer {
+        margin-top: 50px;
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 20px 15px;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      .prompt-card h2 {
+        font-size: 1.1rem;
+      }
+      .prompt-text {
+          font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Aggressive Rebranded Prompt</h1>
+      <p class="subtitle">create pdf from pdf</p>
+    </header>
+
+    <main>
+      <div class="prompts-container" id="promptsContainer">
+        
+        <!-- Main Prompt -->
+        <div class="prompt-card">
+          <h2>Main Prompt: Rebrand Strategy</h2>
+          <pre id="promptMain" class="prompt-text">SYSTEM / TASK
+Read and fully understand the provided upgraded PDF eBook before writing anything. Treat this task as a complete rebrand and author-identity separation, not a stylistic rewrite.
+
+PRIMARY OBJECTIVE
+Create a fully original manuscript that delivers the same functional outcomes as the original eBook, while feeling unmistakably written by a different author.
+The final manuscript must: Enable end-to-end execution of the strategy without guesswork. Preserve functional completeness. Eliminate any detectable author, tone, or hustle DNA overlap with the original.
+
+STRUCTURE RULES (NON-NEGOTIABLE)
+Keep all existing sections and sub-sections intact. Preserve the original order of sections. Do not remove, merge, or rename sections. Maintain similar length per section (plus or minus 10 percent).
+
+CONTENT COMPLETENESS RULES
+Include every how-to, framework, step, checklist, and AI prompt present in the original. If a how-to or prompt is implied rather than explicit, make it explicit. Do not abstract away operational details. After reading the final manuscript, a reader must be able to execute the strategy end-to-end without guessing or filling gaps.
+
+AUTHOR-IDENTITY SEPARATION (CRITICAL)
+Write as if you are a completely different author with a different mental model. Assume the book belongs to a different intellectual lineage. No sentence should feel like it could have been written by the original author.
+This is not a tone swap. This is a full author-identity separation.
+
+REWRITING RULES
+Rewrite every sentence in fresh, human-sounding language. Do not rely on synonym swapping. Reconstruct ideas from first principles while preserving outcomes. Improve clarity, flow, and decisiveness. Avoid instructional AI phrasing, hustle clichés, or generic creator language.
+
+STYLE AND QUALITY CONSTRAINTS
+Write in a natural, expert human tone. Assume the reader is intelligent but busy. Optimize for clarity, momentum, and decisiveness. The manuscript must be genuinely original and pass plagiarism and AI-detection checks.
+
+TITLE AND SUB-TITLE (BEFORE WRITING THE CONTENT)
+Before rewriting the manuscript, generate a rewritten title and sub-title that clearly signal a different author identity. Shift the axis of promise while remaining truthful to the body. Do not reuse the original promise angle or emotional hook.
+Optimize the title and sub-title specifically for: Gumroad product page psychology. PDF drop or lead asset clarity. Ebook credibility and longevity.
+Treat this as a rebrand, not a rename.
+
+OUTPUT ORDER (STRICT)
+Rewritten Title
+Rewritten Sub-title
+Full manuscript, section by section, in original order
+A brief internal checklist confirming: Author identity is fully separated. All how-tos and prompts are included. The manuscript is functionally complete.</pre>
+          <button class="copy-button" data-target="promptMain">
+            <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /></svg>
+            <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+            <span class="button-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Follow up 1 -->
+        <div class="prompt-card">
+          <h2>Follow-up 1: Outcome-Based Title</h2>
+          <pre id="f1" class="prompt-text">Could you change the title and sub-title and make them outcome based so that readers can easily understand what's in it for them as the original pdf did?</pre>
+          <button class="copy-button" data-target="f1">
+            <span class="button-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Follow up 2 -->
+        <div class="prompt-card">
+          <h2>Follow-up 2: Functional AI Prompts</h2>
+          <pre id="f2" class="prompt-text">For functional completeness, could you please add AI prompts to be used in ChatGPT for the activities ChatGPT can help the readers?</pre>
+          <button class="copy-button" data-target="f2">
+            <span class="button-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Follow up 3 -->
+        <div class="prompt-card">
+          <h2>Follow-up 3: Integration</h2>
+          <pre id="f3" class="prompt-text">Integrate these prompts directly into each section of the manuscript.</pre>
+          <button class="copy-button" data-target="f3">
+            <span class="button-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Follow up 4 -->
+        <div class="prompt-card">
+          <h2>Follow-up 4: Verification</h2>
+          <pre id="f4" class="prompt-text">Is this the full and final version of the pdf's content? Does it have functional completeness?</pre>
+          <button class="copy-button" data-target="f4">
+            <span class="button-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Follow up 5 -->
+        <div class="prompt-card">
+          <h2>Follow-up 5: Export to Canvas</h2>
+          <pre id="f5" class="prompt-text">Format this into a print-ready PDF and give me in canvas editor for easy copy / paste</pre>
+          <button class="copy-button" data-target="f5">
+            <span class="button-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Follow up 6 -->
+        <div class="prompt-card">
+          <h2>Follow-up 6: Missing Sections</h2>
+          <pre id="f6" class="prompt-text">Did you include these two sections and concerned AI prompts?:
+ 1, how to create mockup for pdf
+ 2, how to the write Gumroad ready title and description for the pdf?</pre>
+          <button class="copy-button" data-target="f6">
+            <span class="button-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Follow up 7 -->
+        <div class="prompt-card">
+          <h2>Follow-up 7: Mockup Canvas</h2>
+          <pre id="f7" class="prompt-text">Add the mockup section to the canvas</pre>
+          <button class="copy-button" data-target="f7">
+            <span class="button-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Follow up 8 -->
+        <div class="prompt-card">
+          <h2>Follow-up 8: Critic Mode</h2>
+          <pre id="f8" class="prompt-text">Now act as a critic. Critic this aggressive rebranded content, verify its content value and scale its functional completeness.</pre>
+          <button class="copy-button" data-target="f8">
+            <span class="button-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Follow up 9 -->
+        <div class="prompt-card">
+          <h2>Follow-up 9: Lock Status</h2>
+          <pre id="f9" class="prompt-text">Is this now a lockable product?</pre>
+          <button class="copy-button" data-target="f9">
+            <span class="button-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Follow up 10 -->
+        <div class="prompt-card">
+          <h2>Follow-up 10: Cover Creation</h2>
+          <pre id="f10" class="prompt-text">Create a minimalist ebook cover image for this pdf. Style: clean, ADHD-friendly, 1-page cheat sheet vibe. White background, bold text, subtle icons.</pre>
+          <button class="copy-button" data-target="f10">
+            <span class="button-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Follow up 11 -->
+        <div class="prompt-card">
+          <h2>Follow-up 11: Gumroad Listing</h2>
+          <pre id="f11" class="prompt-text">I’ll enlist this pdf as a digital product on Gumroad. 
+
+Based on its content, produce the followings:
+
+1. Product Title (Gumroad-ready)
+2. Product Description (Gumroad-ready)
+3. Suggested Gumroad Categories
+4. Banner Image Concept (visual idea only)
+5. Thumbnail Image Concept
+6. Recommended Price ($3)</pre>
+          <button class="copy-button" data-target="f11">
+            <span class="button-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Follow up 12 -->
+        <div class="prompt-card">
+          <h2>Follow-up 12: Banner Generation</h2>
+          <pre id="f12" class="prompt-text">Create the banner image with the banner image concept you gave on point #4 in your previous answer</pre>
+          <button class="copy-button" data-target="f12">
+            <span class="button-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Follow up 13 -->
+        <div class="prompt-card">
+          <h2>Follow-up 13: Thumbnail Generation</h2>
+          <pre id="f13" class="prompt-text">Create the thumbnail image (1:1) with the thumbnail image concept you gave on point #5 in your previous answer</pre>
+          <button class="copy-button" data-target="f13">
+            <span class="button-text">Copy Prompt</span>
+          </button>
+        </div>
+
+      </div>
+    </main>
+
+    <footer>
+        <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const promptsContainer = document.getElementById('promptsContainer');
+
+      promptsContainer.addEventListener('click', (event) => {
+        const button = event.target.closest('.copy-button');
+        if (!button) return;
+
+        const targetId = button.dataset.target;
+        const textToCopy = document.getElementById(targetId).textContent;
+        const buttonTextEl = button.querySelector('.button-text');
+
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          const originalText = buttonTextEl.textContent;
+          buttonTextEl.textContent = 'Copied!';
+          button.classList.add('copied');
+          
+          setTimeout(() => {
+            buttonTextEl.textContent = originalText;
+            button.classList.remove('copied');
+          }, 2000);
+        }).catch(err => {
+          console.error('Failed to copy text: ', err);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
