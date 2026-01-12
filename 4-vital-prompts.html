@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Four Vital Prompts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #064e3b; 
+      --bg-gradient-end: #020617;
+      --card-bg: rgba(16, 185, 129, 0.05);
+      --card-border: rgba(16, 185, 129, 0.2);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-heading: #ffffff;
+      --accent-primary: #10b981; 
+      --accent-hover: #34d399;
+      --accent-success: #059669;
+      --code-bg: rgba(0, 0, 0, 0.4);
+      --shadow-color: rgba(0, 0, 0, 0.5);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container {
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      flex-grow: 1;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -1px;
+      margin-bottom: 10px;
+    }
+    p.subtitle {
+      font-size: 1.1rem;
+      color: var(--accent-primary);
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .prompts-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 30px;
+    }
+    @media (max-width: 850px) {
+      .prompts-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      box-shadow: 0 10px 40px var(--shadow-color);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+    .prompt-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--accent-primary);
+    }
+    .prompt-card h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent-primary);
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 20px;
+      border-radius: 12px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      color: #ecfdf5;
+      line-height: 1.6;
+      flex-grow: 1;
+      margin-bottom: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .copy-button {
+      align-self: flex-end;
+      padding: 12px 24px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #ffffff;
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .copy-button:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+    }
+    .copy-button.copied {
+      background-color: var(--accent-success);
+    }
+    .icon { width: 18px; height: 18px; }
+    .copied-icon { display: none; }
+    .copy-button.copied .copy-icon { display: none; }
+    .copy-button.copied .copied-icon { display: inline-block; }
+
+    footer {
+        margin-top: 60px;
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        padding-bottom: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Four Vital Prompts</h1>
+      <p class="subtitle">Optimization & Metadata Tools</p>
+    </header>
+
+    <main class="prompts-container" id="promptsContainer">
+      
+      <!-- Prompt #1 -->
+      <div class="prompt-card">
+        <h2>1. Effectiveness Evaluation</h2>
+        <pre id="prompt1" class="prompt-text">Which one is more effective - original one or the paraphrased one?</pre>
+        <button class="copy-button" data-target="prompt1">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h10a1 1 0 011 1v14a1 1 0 01-1 1h-3M9 7h6a1 1 0 011 1v14a1 1 0 01-1 1H9a1 1 0 01-1-1V8a1 1 0 011-1z" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+          <span class="button-text">Copy Prompt</span>
+        </button>
+      </div>
+
+      <!-- Prompt #2 -->
+      <div class="prompt-card">
+        <h2>2. Stress Testing</h2>
+        <pre id="prompt2" class="prompt-text">Stress-test both prompts against edge cases.</pre>
+        <button class="copy-button" data-target="prompt2">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h10a1 1 0 011 1v14a1 1 0 01-1 1h-3M9 7h6a1 1 0 011 1v14a1 1 0 01-1 1H9a1 1 0 01-1-1V8a1 1 0 011-1z" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+          <span class="button-text">Copy Prompt</span>
+        </button>
+      </div>
+
+      <!-- Prompt #3 -->
+      <div class="prompt-card">
+        <h2>3. Plain Text Export</h2>
+        <pre id="prompt3" class="prompt-text">Give me the prompt in canvas editor in .txt format without markdown like the texts of a Microsoft notepad file for easy copy / paste. Please don't use Unicode style in it.</pre>
+        <button class="copy-button" data-target="prompt3">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h10a1 1 0 011 1v14a1 1 0 01-1 1h-3M9 7h6a1 1 0 011 1v14a1 1 0 01-1 1H9a1 1 0 01-1-1V8a1 1 0 011-1z" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+          <span class="button-text">Copy Prompt</span>
+        </button>
+      </div>
+
+      <!-- Prompt #4 -->
+      <div class="prompt-card">
+        <h2>4. Identification</h2>
+        <pre id="prompt4" class="prompt-text">Name this prompt and give me a one-line description of it.</pre>
+        <button class="copy-button" data-target="prompt4">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h10a1 1 0 011 1v14a1 1 0 01-1 1h-3M9 7h6a1 1 0 011 1v14a1 1 0 01-1 1H9a1 1 0 01-1-1V8a1 1 0 011-1z" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+          <span class="button-text">Copy Prompt</span>
+        </button>
+      </div>
+
+    </main>
+
+    <footer>
+        <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('promptsContainer').addEventListener('click', (e) => {
+      const button = e.target.closest('.copy-button');
+      if (!button) return;
+
+      const targetId = button.dataset.target;
+      const text = document.getElementById(targetId).textContent;
+      const btnText = button.querySelector('.button-text');
+
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btnText.textContent;
+        btnText.textContent = 'Copied!';
+        button.classList.add('copied');
+        
+        setTimeout(() => {
+          btnText.textContent = originalText;
+          button.classList.remove('copied');
+        }, 2000);
+      });
+    });
+  </script>
+</body>
+</html>
