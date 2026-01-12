@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Standalone Tweet Genie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #064e3b; 
+      --bg-gradient-end: #020617;
+      --card-bg: rgba(16, 185, 129, 0.05);
+      --card-border: rgba(16, 185, 129, 0.2);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-heading: #ffffff;
+      --accent-primary: #10b981; 
+      --accent-hover: #34d399;
+      --accent-success: #059669;
+      --code-bg: rgba(0, 0, 0, 0.4);
+      --shadow-color: rgba(0, 0, 0, 0.5);
+      --input-bg: rgba(0, 0, 0, 0.3);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container {
+      max-width: 850px;
+      width: 100%;
+      margin: 0 auto;
+      flex-grow: 1;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -1px;
+      margin-bottom: 10px;
+    }
+    p.subtitle {
+      font-size: 1.1rem;
+      color: var(--accent-primary);
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* Input Section Styles */
+    .input-section {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 40px;
+      box-shadow: 0 10px 40px var(--shadow-color);
+      backdrop-filter: blur(12px);
+    }
+    .input-group {
+      margin-bottom: 20px;
+    }
+    .input-group:last-child {
+      margin-bottom: 0;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--accent-primary);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+    }
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    /* Prompt Card Styles */
+    .prompts-container {
+      display: grid;
+      gap: 30px;
+    }
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      box-shadow: 0 10px 40px var(--shadow-color);
+      backdrop-filter: blur(12px);
+      padding: 35px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+    .prompt-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--accent-primary);
+    }
+    .prompt-card h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text-heading);
+      margin-bottom: 25px;
+    }
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 24px;
+      border-radius: 12px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      color: #ecfdf5;
+      line-height: 1.5;
+      flex-grow: 1;
+      margin-bottom: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    /* Button Styles */
+    .copy-button {
+      align-self: flex-end;
+      padding: 14px 28px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #ffffff;
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .copy-button:hover {
+      background-color: var(--accent-hover);
+      box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+    }
+    .copy-button.copied {
+      background-color: var(--accent-success);
+    }
+    .copy-button .icon { width: 18px; height: 18px; }
+    .copy-button.copied .copy-icon { display: none; }
+    .copy-button:not(.copied) .copied-icon { display: none; }
+
+    footer {
+        margin-top: 60px;
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        padding-bottom: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Standalone Tweet Genie</h1>
+      <p class="subtitle">Quiet Promotion Generator</p>
+    </header>
+
+    <div class="input-section">
+      <div class="input-group">
+        <label for="prodName">Product name:</label>
+        <input type="text" id="prodName" placeholder="e.g. 50+ Minimalist Logo Prompts">
+      </div>
+      <div class="input-group">
+        <label for="prodPurpose">One-line product purpose:</label>
+        <textarea id="prodPurpose" placeholder="e.g. helps creators build a visual brand identity without hiring a designer"></textarea>
+      </div>
+      <div class="input-group">
+        <label for="prodUrl">Gumroad product URL:</label>
+        <input type="text" id="prodUrl" placeholder="https://yourname.gumroad.com/l/product">
+      </div>
+    </div>
+
+    <main class="prompts-container">
+      
+      <!-- Prompt 1 -->
+      <div class="prompt-card">
+        <h2>Main Prompt</h2>
+        <pre id="prompt1" class="prompt-text">You are writing ONE promotional tweet for X (Twitter) to quietly promote a $3 digital product sold on Gumroad.
+
+Assume the account has X Premium, so you may exceed 280 characters if clarity improves.
+Do not write a thread. Write ONE complete tweet.
+
+This product is a paid AI prompt or prompt bundle.
+The promotion must feel intentional, restrained, and finished.
+
+First, internally infer (do NOT explain):
+- The quiet problem this product solves
+- The most natural buyer
+- Why this is worth $3 without over-selling
+
+Now generate TWO things:
+
+1) ONE standalone long-form tweet (up to ~600 characters) that:
+- Opens with a calm observation (not a hook)
+- Names a real friction in simple language
+- Explains the benefit briefly, without listing features
+- Signals small size and low commitment
+- Includes the Gumroad URL naturally at the end
+
+2) A short description of the PROMPT MOCKUP IMAGE to attach:
+- One-page PDF-style mockup
+- Clean, minimal, legible
+- Describe only the visible text structure (header + 3–5 short lines)
+- No colors, no tools, no spoilers
+
+Tone rules:
+- No hype, no emojis, no hashtags
+- No “launch”, “buy now”, or urgency language
+- Calm, precise, grounded
+- Written for thoughtful, value-conscious readers
+
+Inputs:
+Product name: [Product Name]
+One-line product purpose: [What it helps the buyer do]
+Gumroad product URL: [URL]</pre>
+        <button class="copy-button" data-target="prompt1">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h10a1 1 0 011 1v14a1 1 0 01-1 1h-3M9 7h6a1 1 0 011 1v14a1 1 0 01-1 1H9a1 1 0 01-1-1V8a1 1 0 011-1z" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+          <span class="button-text">Copy Prompt</span>
+        </button>
+      </div>
+
+      <!-- Prompt 2 -->
+      <div class="prompt-card">
+        <h2>Follow up prompt #1</h2>
+        <pre id="prompt2" class="prompt-text">Regenerate ONE more standalone long-form tweet and prompt mockup using the SAME inputs.
+
+Rules:
+- Do not reuse sentence structures, openings, or phrasing from the previous output
+- Maintain the same tone, restraint, and $3 pricing psychology
+- Preserve calm, non-salesy framing
+- Do not introduce new claims or features
+- Keep the message equally small and finished
+
+Return only:
+- The tweet
+- The prompt mockup image description
+
+No explanation.</pre>
+        <button class="copy-button" data-target="prompt2">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h10a1 1 0 011 1v14a1 1 0 01-1 1h-3M9 7h6a1 1 0 011 1v14a1 1 0 01-1 1H9a1 1 0 01-1-1V8a1 1 0 011-1z" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+          <span class="button-text">Copy Prompt</span>
+        </button>
+      </div>
+
+      <!-- Prompt 3 -->
+      <div class="prompt-card">
+        <h2>Follow up prompt #2</h2>
+        <pre id="prompt3" class="prompt-text">Using the SAME product inputs and positioning as before, generate STANDALONE promotional tweets for X.
+
+Assume the account has X Premium.
+You are encouraged to exceed 280 characters when it improves clarity, precision, or trust.
+Do NOT write a thread. Write ONE complete tweet per output.
+
+Each tweet must:
+- Use a clearly different angle or perspective
+- Work independently
+- Be calm, restrained, and non-salesy
+- Be appropriate for a $3 digital product
+- Avoid hype, emojis, hashtags, urgency, or launch language
+
+For EACH tweet, do the following internally:
+1. Identify the primary angle being used
+2. Select the most appropriate mockup framing for that angle
+3. Generate both:
+   - a mockup image idea
+   - the exact mockup text to appear on the image
+
+Tweet guidelines:
+- Open with a grounded observation, not a hook
+- Explain the friction clearly (you have space)
+- Keep the benefit concrete but modest
+- Include the Gumroad URL naturally at the end
+
+Mockup constraints (strict):
+- One-page PDF-style mockup
+- Text-only
+- Header + 3–5 short lines maximum
+- No full prompt text
+- No spoilers
+- Must feel like an internal or paid document
+
+Inputs (locked):
+Product name: [Product Name]
+One-line product purpose: [What it helps the buyer do]
+Gumroad product URL: [URL]
+
+Output format (STRICT):
+
+Tweet:
+[long-form tweet text]
+
+Mockup image idea:
+[one sentence describing what kind of page this mockup represents]
+
+Mockup text:
+Header:
+[header]
+Body:
+[line 1]
+[line 2]
+[line 3]
+(optional line 4 or 5)</pre>
+        <button class="copy-button" data-target="prompt3">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h10a1 1 0 011 1v14a1 1 0 01-1 1h-3M9 7h6a1 1 0 011 1v14a1 1 0 01-1 1H9a1 1 0 01-1-1V8a1 1 0 011-1z" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+          <span class="button-text">Copy Prompt</span>
+        </button>
+      </div>
+
+    </main>
+
+    <footer>
+        <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Standalone Tweet Genie. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const nameIn = document.getElementById('prodName');
+    const purposeIn = document.getElementById('prodPurpose');
+    const urlIn = document.getElementById('prodUrl');
+
+    const prompt1Base = document.getElementById('prompt1').textContent;
+    const prompt3Base = document.getElementById('prompt3').textContent;
+
+    function updatePrompts() {
+      const name = nameIn.value || '[Product Name]';
+      const purpose = purposeIn.value || '[What it helps the buyer do]';
+      const url = urlIn.value || '[URL]';
+
+      // Update Prompt 1
+      let p1 = prompt1Base.replace(/\[Product Name\]/g, name);
+      p1 = p1.replace(/\[What it helps the buyer do\]/g, purpose);
+      p1 = p1.replace(/\[URL\]/g, url);
+      document.getElementById('prompt1').textContent = p1;
+
+      // Update Prompt 3
+      let p3 = prompt3Base.replace(/\[Product Name\]/g, name);
+      p3 = p3.replace(/\[What it helps the buyer do\]/g, purpose);
+      p3 = p3.replace(/\[URL\]/g, url);
+      document.getElementById('prompt3').textContent = p3;
+    }
+
+    [nameIn, purposeIn, urlIn].forEach(el => el.addEventListener('input', updatePrompts));
+
+    document.querySelectorAll('.copy-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.dataset.target;
+        const textToCopy = document.getElementById(targetId).textContent;
+        const buttonTextEl = button.querySelector('.button-text');
+
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          const originalText = buttonTextEl.textContent;
+          buttonTextEl.textContent = 'Copied!';
+          button.classList.add('copied');
+          
+          setTimeout(() => {
+            buttonTextEl.textContent = originalText;
+            button.classList.remove('copied');
+          }, 2000);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
