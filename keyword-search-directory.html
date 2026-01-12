@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>List of Keywords to Search</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #0f172a;
+      --bg-gradient-end: #020617;
+      --card-bg: rgba(30, 41, 59, 0.4);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-heading: #ffffff;
+      --accent-primary: #f59e0b; /* Amber/Gold for Discovery */
+      --accent-hover: #fbbf24;
+      --accent-success: #10b981;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.5);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .container { max-width: 1000px; width: 100%; margin: 0 auto; }
+    
+    header { text-align: center; margin-bottom: 50px; }
+    h1 { font-size: 2.5rem; font-weight: 700; color: var(--text-heading); margin-bottom: 15px; }
+    .desc-box { 
+        background: var(--card-bg); 
+        padding: 20px; 
+        border-radius: 12px; 
+        border: 1px solid var(--card-border);
+        color: var(--text-secondary);
+        max-width: 700px;
+        margin: 0 auto;
+        font-size: 0.95rem;
+    }
+    .desc-box b { color: var(--accent-primary); }
+
+    section { margin-bottom: 60px; }
+    .section-header { margin-bottom: 25px; border-left: 4px solid var(--accent-primary); padding-left: 20px; }
+    .section-header h2 { font-size: 1.75rem; color: var(--text-heading); margin-bottom: 5px; }
+    .section-header p { color: var(--text-secondary); font-size: 0.95rem; }
+
+    /* Keyword Grid */
+    .keyword-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 15px;
+    }
+    .keyword-card {
+      background: var(--code-bg);
+      border: 1px solid var(--card-border);
+      padding: 15px 20px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .keyword-card:hover {
+      border-color: var(--accent-primary);
+      transform: translateY(-2px);
+      background: rgba(245, 158, 11, 0.05);
+    }
+    .keyword-text {
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    .copy-icon-small {
+      color: var(--accent-primary);
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+    .keyword-card:hover .copy-icon-small { opacity: 1; }
+
+    /* Guidelines Style */
+    .guideline-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 25px;
+    }
+    .guideline-card h3 { color: var(--accent-primary); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+    .guideline-content { white-space: pre-wrap; font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 20px; }
+    .guideline-content blockquote {
+        background: rgba(0,0,0,0.3);
+        padding: 15px;
+        border-radius: 8px;
+        color: white;
+        margin: 15px 0;
+        font-family: 'Source Code Pro', monospace;
+        border-left: 3px solid var(--accent-primary);
+    }
+    .guideline-content b { color: white; }
+
+    .copy-btn-large {
+      padding: 10px 20px;
+      background: var(--accent-primary);
+      border: none;
+      border-radius: 8px;
+      color: #000;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+
+    footer { text-align: center; margin-top: 40px; color: var(--text-secondary); font-size: 0.9rem; padding-bottom: 40px; }
+
+    @media (max-width: 600px) {
+      .keyword-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>List of Keywords to Search</h1>
+      <div class="desc-box">
+        Below are the most effective search keywords to find high-leverage, rising posts. These surface posts containing: <b>Emotion, Friction, Curiosity, Buyer intent, and Algorithm momentum.</b> Use them directly in platform search bars.
+      </div>
+    </header>
+
+    <!-- Universal -->
+    <section>
+      <div class="section-header">
+        <h2>Universal High-Signal Keywords</h2>
+        <p>Perfect for hijack comments. These indicate real experience and open curiosity loops.</p>
+      </div>
+      <div class="keyword-grid">
+        <div class="keyword-card" onclick="copyText('tried this')"><span class="keyword-text">tried this</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('this didn’t work')"><span class="keyword-text">this didn’t work</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('finally worked')"><span class="keyword-text">finally worked</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('I don’t get why')"><span class="keyword-text">I don’t get why</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('what am I missing')"><span class="keyword-text">what am I missing</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('am I doing this wrong')"><span class="keyword-text">am I doing this wrong</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('unpopular opinion')"><span class="keyword-text">unpopular opinion</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('nobody talks about')"><span class="keyword-text">nobody talks about</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('why does this fail')"><span class="keyword-text">why does this fail</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('honest results')"><span class="keyword-text">honest results</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('quick update')"><span class="keyword-text">quick update</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('small change')"><span class="keyword-text">small change</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('unexpected result')"><span class="keyword-text">unexpected result</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('opposite happened')"><span class="keyword-text">opposite happened</span><span class="copy-icon-small">⧉</span></div>
+      </div>
+    </section>
+
+    <!-- TikTok -->
+    <section>
+      <div class="section-header">
+        <h2>TikTok-Specific Keyword Sets</h2>
+        <p>Tip: Prioritize videos posted <b>under 2 hours ago</b> with comments still accelerating.</p>
+      </div>
+      <div class="keyword-grid">
+        <div class="keyword-card" onclick="copyText('tried this and')"><span class="keyword-text">tried this and</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('didn’t expect this')"><span class="keyword-text">didn’t expect this</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('this surprised me')"><span class="keyword-text">this surprised me</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('quick experiment')"><span class="keyword-text">quick experiment</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('before and after')"><span class="keyword-text">before and after</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('why nobody told me')"><span class="keyword-text">why nobody told me</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('this feels wrong but')"><span class="keyword-text">this feels wrong but</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('update after')"><span class="keyword-text">update after</span><span class="copy-icon-small">⧉</span></div>
+      </div>
+    </section>
+
+    <!-- X -->
+    <section>
+      <div class="section-header">
+        <h2>X (Twitter)-Specific Keyword Sets</h2>
+        <p>Search for opinion tension and contradictions to attract debate and boost visibility.</p>
+      </div>
+      <div class="keyword-grid">
+        <div class="keyword-card" onclick="copyText('hot take')"><span class="keyword-text">hot take</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('unpopular opinion')"><span class="keyword-text">unpopular opinion</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('this is wrong')"><span class="keyword-text">this is wrong</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('most people miss')"><span class="keyword-text">most people miss</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('stop doing this')"><span class="keyword-text">stop doing this</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('everyone says')"><span class="keyword-text">everyone says</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('the problem isn’t')"><span class="keyword-text">the problem isn’t</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('here’s why this fails')"><span class="keyword-text">here’s why this fails</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('this advice is bad')"><span class="keyword-text">this advice is bad</span><span class="copy-icon-small">⧉</span></div>
+      </div>
+    </section>
+
+    <!-- Reddit -->
+    <section>
+      <div class="section-header">
+        <h2>Reddit-Specific Keyword Sets</h2>
+        <p>Scan New/Rising tabs for posts with 5–20 comments (not 200+).</p>
+      </div>
+      <div class="keyword-grid">
+        <div class="keyword-card" onclick="copyText('what am I missing')"><span class="keyword-text">what am I missing</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('anyone else experienced')"><span class="keyword-text">anyone else experienced</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('update')"><span class="keyword-text">update</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('honest review')"><span class="keyword-text">honest review</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('did I mess up')"><span class="keyword-text">did I mess up</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('why does this happen')"><span class="keyword-text">why does this happen</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('lessons learned')"><span class="keyword-text">lessons learned</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('unexpected outcome')"><span class="keyword-text">unexpected outcome</span><span class="copy-icon-small">⧉</span></div>
+      </div>
+    </section>
+
+    <!-- YouTube -->
+    <section>
+      <div class="section-header">
+        <h2>YouTube-Specific Keyword Sets</h2>
+        <p>Target videos posted within 24–72 hours. Search inside comments.</p>
+      </div>
+      <div class="keyword-grid">
+        <div class="keyword-card" onclick="copyText('this didn’t work for me')"><span class="keyword-text">this didn’t work for me</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('tried this and')"><span class="keyword-text">tried this and</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('confused about')"><span class="keyword-text">confused about</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('quick question')"><span class="keyword-text">quick question</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('update after')"><span class="keyword-text">update after</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('anyone else notice')"><span class="keyword-text">anyone else notice</span><span class="copy-icon-small">⧉</span></div>
+      </div>
+    </section>
+
+    <!-- Facebook -->
+    <section>
+      <div class="section-header">
+        <h2>Facebook Group-Specific Keyword Sets</h2>
+        <p>Search conversational frustration. Daily active groups outperform pages.</p>
+      </div>
+      <div class="keyword-grid">
+        <div class="keyword-card" onclick="copyText('stuck with')"><span class="keyword-text">stuck with</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('need help with')"><span class="keyword-text">need help with</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('tried everything')"><span class="keyword-text">tried everything</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('still confused')"><span class="keyword-text">still confused</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('small win')"><span class="keyword-text">small win</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('quick update')"><span class="keyword-text">quick update</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('what would you do')"><span class="keyword-text">what would you do</span><span class="copy-icon-small">⧉</span></div>
+        <div class="keyword-card" onclick="copyText('honest feedback')"><span class="keyword-text">honest feedback</span><span class="copy-icon-small">⧉</span></div>
+      </div>
+    </section>
+
+    <!-- Guidelines -->
+    <section>
+      <div class="section-header">
+        <h2>Strategic Guidelines</h2>
+        <p>Follow these points for maximum efficiency.</p>
+      </div>
+
+      <div class="guideline-card">
+        <h3>Point 1: The Highest-ROI Keyword Pattern</h3>
+        <div class="guideline-content" id="guide1">If you remember <b>one formula</b>, remember this:
+<blockquote>Experience + friction + uncertainty</blockquote>
+Examples:
+“I tried X but Y happened”
+“This worked until…”
+“I’m confused why…”
+“Opposite result than expected”
+
+These posts invite peer input and reward nuance.</div>
+        <button class="copy-btn-large" onclick="copyTextById('guide1')">Copy Guideline</button>
+      </div>
+
+      <div class="guideline-card">
+        <h3>Point 2: What NOT to Search For</h3>
+        <div class="guideline-content" id="guide2">Avoid keywords that surface polished tutorials or completed success stories:
+<b>Examples to avoid:</b>
+step by step guide
+full tutorial
+proven system
+ultimate method
+guaranteed results
+
+These threads reward creators, not commenters.</div>
+        <button class="copy-btn-large" onclick="copyTextById('guide2')">Copy Guideline</button>
+      </div>
+
+      <div class="guideline-card">
+        <h3>Point 3: Simple Daily Search Routine</h3>
+        <div class="guideline-content" id="guide3">1. Pick <b>ONE</b> platform
+2. Search 2–3 keywords from the lists above
+3. Filter by “Latest” or “New”
+4. Open posts with:
+   - Emotional language
+   - Active but not saturated comments
+5. Then run your <b>main prompt</b>.</div>
+        <button class="copy-btn-large" onclick="copyTextById('guide3')">Copy Guideline</button>
+      </div>
+
+      <div class="guideline-card">
+        <h3>Point 4: The Bottom Line</h3>
+        <div class="guideline-content" id="guide4">The best posts are not “viral.” 
+
+They are:
+- Slightly confused
+- Emotionally charged
+- Mid-conversation
+
+These keywords are designed to surface <b>exactly that</b>.</div>
+        <button class="copy-btn-large" onclick="copyTextById('guide4')">Copy Guideline</button>
+      </div>
+    </section>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function copyText(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        // Optional: Simple feedback logic could go here
+        console.log('Copied: ' + text);
+      });
+    }
+
+    function copyTextById(id) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Guideline copied to clipboard!');
+      });
+    }
+  </script>
+
+</body>
+</html>
