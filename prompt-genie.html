@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Prompt Genie Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #064e3b; 
+      --bg-gradient-end: #020617;
+      --card-bg: rgba(16, 185, 129, 0.05);
+      --card-border: rgba(16, 185, 129, 0.2);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-heading: #ffffff;
+      --accent-primary: #10b981; 
+      --accent-hover: #34d399;
+      --accent-success: #059669;
+      --code-bg: rgba(0, 0, 0, 0.4);
+      --shadow-color: rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navigation Tabs */
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .ai-tab {
+      padding: 10px 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 30px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    .ai-tab:hover {
+      background: var(--accent-primary);
+      border-color: var(--accent-primary);
+      transform: translateY(-2px);
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      flex-grow: 1;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -1px;
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--accent-primary);
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      box-shadow: 0 10px 40px var(--shadow-color);
+      backdrop-filter: blur(12px);
+      padding: 30px;
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+    }
+
+    .prompt-card h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-heading);
+      margin-bottom: 15px;
+    }
+
+    /* Textarea Styling */
+    textarea {
+      width: 100%;
+      background-color: var(--code-bg);
+      padding: 20px;
+      border-radius: 12px;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 1rem;
+      color: #ecfdf5;
+      line-height: 1.6;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      resize: vertical;
+      min-height: 120px;
+      margin-bottom: 20px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    textarea:focus {
+      border-color: var(--accent-primary);
+    }
+
+    textarea::placeholder {
+      color: rgba(148, 163, 184, 0.5);
+    }
+
+    .button-group {
+      display: flex;
+      gap: 15px;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-primary { background-color: var(--accent-primary); }
+    .btn-primary:hover { 
+        background-color: var(--accent-hover); 
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+    }
+
+    .btn-clear { 
+        background-color: transparent; 
+        border: 1px solid var(--card-border);
+        color: var(--text-secondary);
+    }
+    .btn-clear:hover { background-color: rgba(255, 255, 255, 0.05); }
+
+    .btn-copy { 
+        background-color: var(--accent-success); 
+        margin-left: auto;
+    }
+
+    .copied-icon { display: none; }
+    .copied .copy-icon { display: none; }
+    .copied .copied-icon { display: inline-block; }
+    .copied { background-color: #10b981 !important; }
+
+    footer {
+        margin-top: 40px;
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 0.8rem;
+        padding-bottom: 20px;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.8rem; }
+      .prompt-card { padding: 20px; }
+      .nav-tabs { gap: 5px; }
+      .ai-tab { padding: 8px 12px; font-size: 0.75rem; }
+      .btn { width: 100%; justify-content: center; }
+      .btn-copy { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav-tabs">
+    <a href="https://chat.openai.com" target="_blank" class="ai-tab">ChatGPT</a>
+    <a href="https://claude.ai" target="_blank" class="ai-tab">Claude</a>
+    <a href="https://gemini.google.com" target="_blank" class="ai-tab">Gemini</a>
+    <a href="https://www.perplexity.ai" target="_blank" class="ai-tab">Perplexity</a>
+    <a href="https://chat.deepseek.com" target="_blank" class="ai-tab">DeepSeek</a>
+  </nav>
+
+  <div class="container">
+    <header>
+      <h1>AI Prompt Genie Pro</h1>
+      <p class="subtitle">Ultimate Creator Tool</p>
+    </header>
+
+    <main>
+      <!-- Input Section -->
+      <div class="prompt-card">
+        <h2>I want to create a prompt that:</h2>
+        <textarea id="userInput" placeholder="Type here an idea for any prompt you want to create"></textarea>
+        <div class="button-group">
+          <button class="btn btn-primary" onclick="generatePrompt()">
+            Generate Prompt Creation Prompt
+          </button>
+          <button class="btn btn-clear" onclick="clearInput()">Clear</button>
+        </div>
+      </div>
+
+      <!-- Output Section -->
+      <div class="prompt-card">
+        <h2>Copy & Paste This Into ChatGPT, Gemini, Claude, Perplexity, or DeepSeek To Create Your Prompt:</h2>
+        <textarea id="outputBox" readonly placeholder=" "></textarea>
+        <div class="button-group">
+          <button class="btn btn-copy" id="copyBtn" onclick="copyToClipboard()">
+            <svg class="copy-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+            </svg>
+            <svg class="copied-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path d="M5 13l4 4L19 7" />
+            </svg>
+            <span id="copyBtnText">Copy Prompt</span>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+        <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    // The reusable prompt template (kept in JS to remain "invisible" from standard page view)
+    const template = `I would like to create a prompt that [idea]. Generate one award-caliber, elite-level prompt designed to produce exceptional results on the first run. The output must begin with "Act as" and assign exactly three carefully selected expert roles that work in tight synergy, with one role providing strategic or conceptual authority, one providing technical or analytical precision, and one providing practical or executional mastery. The prompt must be written as a single, uninterrupted paragraph using natural, confident, professional language with no steps, bullet points, or structural formatting. The generated prompt must include one clear internal placeholder that represents the variable subject or input the end user will supply, and all instructions should be built around that single placeholder rather than vague language like "any subject" or "various topics." The prompt must explicitly direct how the AI should think, reason, and approach the task while defining tone, depth, and stylistic boundaries. Include intelligent constraints that actively prevent generic phrasing, surface-level explanations, templated responses, or low-effort output, and require nuanced judgment, originality, and high signal density. The final result should be immediately usable in ChatGPT or similar systems to generate world-class output without clarification, iteration, or follow-up.`;
+
+    function generatePrompt() {
+      const idea = document.getElementById('userInput').value.trim();
+      const outputBox = document.getElementById('outputBox');
+      
+      if (!idea) {
+        alert("Please enter an idea first!");
+        return;
+      }
+
+      // Replace placeholder with user input
+      const finalPrompt = template.replace("[idea]", idea);
+      outputBox.value = finalPrompt;
+    }
+
+    function clearInput() {
+      document.getElementById('userInput').value = "";
+      document.getElementById('outputBox').value = "";
+    }
+
+    function copyToClipboard() {
+      const outputBox = document.getElementById('outputBox');
+      const copyBtn = document.getElementById('copyBtn');
+      const copyBtnText = document.getElementById('copyBtnText');
+
+      if (!outputBox.value) return;
+
+      navigator.clipboard.writeText(outputBox.value).then(() => {
+        copyBtn.classList.add('copied');
+        copyBtnText.textContent = "Copied!";
+        
+        setTimeout(() => {
+          copyBtn.classList.remove('copied');
+          copyBtnText.textContent = "Copy Prompt";
+        }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>
