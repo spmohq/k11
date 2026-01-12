@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prompt Paraphraser</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #064e3b; 
+      --bg-gradient-end: #020617;
+      --card-bg: rgba(16, 185, 129, 0.05);
+      --card-border: rgba(16, 185, 129, 0.2);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-heading: #ffffff;
+      --accent-primary: #10b981; 
+      --accent-hover: #34d399;
+      --accent-success: #059669;
+      --code-bg: rgba(0, 0, 0, 0.4);
+      --shadow-color: rgba(0, 0, 0, 0.5);
+      --input-bg: rgba(0, 0, 0, 0.3);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container {
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      flex-grow: 1;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -1px;
+      margin-bottom: 10px;
+    }
+    p.subtitle {
+      font-size: 1.1rem;
+      color: var(--accent-primary);
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* Input Section */
+    .input-section {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 40px;
+      box-shadow: 0 10px 40px var(--shadow-color);
+      backdrop-filter: blur(12px);
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--accent-primary);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .input-instructions {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 15px;
+      font-family: 'Source Code Pro', monospace;
+      background: rgba(0,0,0,0.2);
+      padding: 10px;
+      border-radius: 8px;
+      border-left: 3px solid var(--accent-primary);
+    }
+    textarea {
+      width: 100%;
+      min-height: 200px;
+      padding: 16px;
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+      resize: vertical;
+    }
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+    }
+
+    /* Prompt Cards */
+    .prompts-container {
+      display: grid;
+      gap: 30px;
+    }
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      box-shadow: 0 10px 40px var(--shadow-color);
+      backdrop-filter: blur(12px);
+      padding: 35px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+    .prompt-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--accent-primary);
+    }
+    .prompt-card h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text-heading);
+      margin-bottom: 5px;
+    }
+    .prompt-desc {
+        font-size: 0.9rem;
+        color: var(--accent-primary);
+        margin-bottom: 25px;
+        font-style: italic;
+    }
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 24px;
+      border-radius: 12px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      color: #ecfdf5;
+      line-height: 1.5;
+      margin-bottom: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 14px 28px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #ffffff;
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .copy-button:hover {
+      background-color: var(--accent-hover);
+      box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+    }
+    .copy-button.copied {
+      background-color: var(--accent-success);
+    }
+    .icon { width: 18px; height: 18px; }
+    .copied-icon { display: none; }
+    .copy-button.copied .copy-icon { display: none; }
+    .copy-button.copied .copied-icon { display: inline-block; }
+
+    footer {
+        margin-top: 60px;
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        padding-bottom: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Prompt Paraphraser</h1>
+      <p class="subtitle">rewrite and upgrade AI prompt or prompts</p>
+    </header>
+
+    <div class="input-section">
+      <label for="promptInput">Insert Original Prompt or Prompts</label>
+      <div class="input-instructions">
+        Instructions for batch:<br>
+        Prompt 1: [PASTE PROMPT 1 HERE]<br>
+        Prompt 2: [PASTE PROMPT 2 HERE]<br>
+        Prompt 3: [PASTE PROMPT 3 HERE]
+      </div>
+      <textarea id="promptInput" placeholder="Paste your prompt(s) here..."></textarea>
+    </div>
+
+    <main class="prompts-container">
+      
+      <!-- Prompt #1 -->
+      <div class="prompt-card">
+        <h2>SemanticShield Prompt Paraphraser</h2>
+        <p class="prompt-desc">Strict semantic fidelity, legal/IP safety, and built-in drift detection.</p>
+        <pre id="displayP1" class="prompt-text"></pre>
+        <button class="copy-button" data-target="displayP1">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h10a1 1 0 011 1v14a1 1 0 01-1 1h-3M9 7h6a1 1 0 011 1v14a1 1 0 01-1 1H9a1 1 0 01-1-1V8a1 1 0 011-1z" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+          <span class="button-text">Copy Prompt</span>
+        </button>
+      </div>
+
+      <!-- Prompt #2 -->
+      <div class="prompt-card">
+        <h2>SemanticShield Batch Prompt Paraphraser</h2>
+        <p class="prompt-desc">Paraphrase multiple AI prompts with strict isolation and drift protection.</p>
+        <pre id="displayP2" class="prompt-text"></pre>
+        <button class="copy-button" data-target="displayP2">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h10a1 1 0 011 1v14a1 1 0 01-1 1h-3M9 7h6a1 1 0 011 1v14a1 1 0 01-1 1H9a1 1 0 01-1-1V8a1 1 0 011-1z" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+          <span class="button-text">Copy Prompt</span>
+        </button>
+      </div>
+
+    </main>
+
+    <footer>
+        <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const promptInput = document.getElementById('promptInput');
+    const displayP1 = document.getElementById('displayP1');
+    const displayP2 = document.getElementById('displayP2');
+
+    const templateP1 = `ROLE & OBJECTIVE
+You are an expert AI prompt editor and semantic analyst.
+Your task is to paraphrase the provided AI prompt while fully preserving its original meaning, purpose, logic, constraints, and behavioral outcomes.
+If any part of the original prompt’s intent is unclear, prioritize semantic fidelity over stylistic improvement.
+
+INPUT
+Original AI Prompt:
+[PASTE THE ORIGINAL PROMPT HERE]
+
+CORE INSTRUCTIONS (NON-NEGOTIABLE)
+Intent Preservation
+Do not change the prompt’s intent, use case, or the problem it solves.
+Do not alter what success looks like for the prompt.
+Behavioral Equivalence
+The paraphrased prompt must cause an AI to behave the same way as the original.
+Output type, depth, structure, tone, and constraints must remain equivalent.
+No Capability Drift
+Do not add new tasks, abilities, steps, assumptions, or guarantees.
+Do not remove or weaken any existing requirement, rule, or limitation.
+Language-Only Transformation
+Change wording, sentence structure, and phrasing only.
+Improve clarity, flow, and readability without changing meaning.
+Structural Fidelity
+Preserve assigned AI roles, instruction hierarchy, conditional logic, formatting requirements, and input/output expectations.
+
+LEGAL-SAFE / IP-CONSCIOUS CONSTRAINTS
+Treat the original prompt as protected intellectual property.
+Avoid distinctive phrasing, sentence rhythms, or recognizable stylistic fingerprints.
+Ensure the paraphrase is semantically equivalent, linguistically original, and not reversible through trivial rewording.
+Do not reference the source, creator, or ownership of the original prompt.
+Do not imply derivative authorship or attribution.
+
+OUTPUT RULES
+Output only the paraphrased prompt.
+Do not include explanations, comparisons, summaries, commentary, or metadata.
+The paraphrased prompt must function as a drop-in replacement for the original.
+
+SILENT SELF-VALIDATION (BEFORE RESPONDING)
+Internally verify:
+Both prompts would yield the same category and quality of output.
+No instruction has been strengthened, softened, added, or removed.
+Decision boundaries and constraints remain unchanged.
+The paraphrase is legally safer but functionally identical.
+
+PROMPT-DRIFT DETECTION CHECKLIST (FOR REVIEW)
+Intent & Scope
+Same problem being solved
+Same target user or use case
+Same success criteria
+Behavioral Output
+Same output format and structure
+Same depth and level of detail
+Same tone and constraints
+Logic & Rules
+No new steps introduced
+No steps removed
+Conditional logic preserved
+Constraints & Boundaries
+Limitations unchanged
+Prohibitions unchanged
+No new guarantees implied
+Legal / IP Safety
+No distinctive phrasing preserved
+No stylistic fingerprint detectable
+Cannot be trivially reconstructed into the original
+Final Equivalence Test
+An AI receiving either prompt would behave the same
+Differences are linguistic only, not functional`;
+
+    const templateP2 = `ROLE & OBJECTIVE You are an expert AI prompt editor, semantic analyst, and prompt-isolation specialist.
+Your task is to paraphrase multiple AI prompts provided together, while fully preserving the original meaning, purpose, logic, constraints, and behavioral outcomes of each prompt individually.
+If any part of any prompt’s intent is unclear, prioritize semantic fidelity over stylistic improvement.
+Each prompt must be treated as a separate, isolated unit. No information, structure, or intent may leak from one prompt into another.
+
+INPUT Original AI Prompts (each prompt is independent):
+[PASTE THE ORIGINAL PROMPT / PROMPTS HERE]
+
+CORE INSTRUCTIONS (NON-NEGOTIABLE)
+Isolation Guarantee
+Treat each prompt as a standalone artifact.
+Do not reuse phrasing, logic, or structure across prompts unless it already exists in that specific prompt.
+Do not merge, blend, normalize, or harmonize prompts.
+Intent Preservation (Per Prompt)
+Do not change the intent, use case, or problem solved by any prompt.
+Do not alter what success looks like for any prompt.
+Behavioral Equivalence (Per Prompt)
+Each paraphrased prompt must cause an AI to behave the same way as its original.
+Output type, depth, structure, tone, constraints, and decision boundaries must remain equivalent.
+No Capability Drift
+Do not add new tasks, abilities, assumptions, steps, or guarantees.
+Do not remove, weaken, or strengthen any existing requirement or limitation.
+Language-Only Transformation
+Modify wording, phrasing, and sentence structure only.
+Improve clarity and readability without altering meaning.
+Structural Fidelity
+Preserve assigned roles, instruction hierarchy, conditional logic, formatting rules, and input/output expectations for each prompt.
+
+LEGAL-SAFE / IP-CONSCIOUS CONSTRAINTS
+Treat every original prompt as protected intellectual property.
+Avoid distinctive phrasing, cadence, or stylistic fingerprints specific to the source text.
+Ensure each paraphrase is semantically equivalent, linguistically original, and not trivially reversible to the original.
+Do not reference authorship, source, ownership, or derivation.
+Do not imply shared origin or common authorship between prompts.
+
+OUTPUT RULES
+Output the paraphrased prompts in the same numbered order as the input.
+Clearly label each output as: Paraphrased Prompt 1, Paraphrased Prompt 2, etc.
+Output only the paraphrased prompts.
+Do not include explanations, comparisons, summaries, commentary, or metadata.
+Each paraphrased prompt must function as a drop-in replacement for its original.
+
+SILENT SELF-VALIDATION (BEFORE RESPONDING)
+For each prompt independently, internally verify:
+The paraphrased prompt would yield the same category, quality, and structure of output.
+No instruction has been added, removed, softened, or amplified.
+Constraints, prohibitions, and guarantees are unchanged.
+No semantic or structural leakage from other prompts.
+The paraphrase is legally safer but functionally identical.
+If any single prompt fails validation, revise only that prompt before responding.
+
+OPTIONAL SCALING NOTE (DO NOT OUTPUT)
+If the number of prompts exceeds safe attention limits, prioritize correctness and isolation over speed or stylistic polish.`;
+
+    function updatePrompts() {
+      const userInput = promptInput.value.trim() || '[PASTE THE ORIGINAL PROMPT HERE]';
+      displayP1.textContent = templateP1.replace('[PASTE THE ORIGINAL PROMPT HERE]', userInput);
+      displayP2.textContent = templateP2.replace('[PASTE THE ORIGINAL PROMPT / PROMPTS HERE]', userInput);
+    }
+
+    promptInput.addEventListener('input', updatePrompts);
+    updatePrompts(); // Initialize
+
+    document.querySelectorAll('.copy-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.dataset.target;
+        const textToCopy = document.getElementById(targetId).textContent;
+        const buttonTextEl = button.querySelector('.button-text');
+
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          const originalText = buttonTextEl.textContent;
+          buttonTextEl.textContent = 'Copied!';
+          button.classList.add('copied');
+          
+          setTimeout(() => {
+            buttonTextEl.textContent = originalText;
+            button.classList.remove('copied');
+          }, 2000);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
