@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Comment Hijack GPT Prompts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #064e3b; 
+      --bg-gradient-end: #020617;
+      --card-bg: rgba(16, 185, 129, 0.05);
+      --card-border: rgba(16, 185, 129, 0.2);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-heading: #ffffff;
+      --accent-primary: #10b981; 
+      --accent-hover: #34d399;
+      --accent-success: #059669;
+      --code-bg: rgba(0, 0, 0, 0.4);
+      --shadow-color: rgba(0, 0, 0, 0.5);
+      --input-bg: rgba(0, 0, 0, 0.3);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container {
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      flex-grow: 1;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+    .ai-tab {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 24px;
+      background-color: var(--accent-primary);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+    .ai-tab:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    }
+
+    /* Input Grid */
+    .input-section {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 40px;
+      box-shadow: 0 10px 40px var(--shadow-color);
+      backdrop-filter: blur(12px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .full-width { grid-column: span 2; }
+    label {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--accent-primary);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+    }
+    textarea { min-height: 80px; resize: vertical; }
+    input:focus, textarea:focus { outline: none; border-color: var(--accent-primary); }
+
+    /* Routine Steps */
+    .routine-header {
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 30px;
+      color: var(--text-heading);
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 10px;
+    }
+    .step-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 25px;
+      transition: border-color 0.3s ease;
+    }
+    .step-card:hover { border-color: var(--accent-primary); }
+    .step-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .time-badge {
+      font-size: 0.75rem;
+      background: rgba(255,255,255,0.1);
+      padding: 4px 10px;
+      border-radius: 4px;
+      color: var(--text-secondary);
+    }
+    .instruction-text {
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+      color: var(--text-primary);
+    }
+    .prompt-box {
+      background-color: var(--code-bg);
+      padding: 15px;
+      border-radius: 10px;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem;
+      color: #ecfdf5;
+      margin: 15px 0;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      white-space: pre-wrap;
+    }
+    .copy-btn {
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      padding: 8px 16px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .copy-btn.copied { background-color: var(--accent-success); }
+    
+    .breadcrumb-list {
+        list-style: none;
+        margin: 10px 0;
+        padding-left: 15px;
+    }
+    .breadcrumb-list li {
+        position: relative;
+        margin-bottom: 5px;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+    }
+    .breadcrumb-list li::before {
+        content: "•";
+        color: var(--accent-primary);
+        position: absolute;
+        left: -15px;
+    }
+
+    footer {
+        margin-top: 40px;
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 0.8rem;
+        padding-bottom: 40px;
+    }
+
+    @media (max-width: 600px) {
+      .input-section { grid-template-columns: 1fr; }
+      .full-width { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Prompt for AI COMMENT HIJACK GPT</h1>
+      <a href="https://chatgpt.com/g/g-69295269a72c8191856e6ee4c4153a1a-ai-comment-hijack" target="_blank" class="ai-tab">
+        OPEN THE AI COMMENT HIJACK GPT
+      </a>
+    </header>
+
+    <div class="input-section">
+      <div class="input-group">
+        <label for="postInput">Paste the Post</label>
+        <textarea id="postInput" placeholder="Content of the original post..."></textarea>
+      </div>
+      <div class="input-group">
+        <label for="nicheInput">Your Niche</label>
+        <input type="text" id="nicheInput" placeholder="e.g. Personal Branding">
+      </div>
+      <div class="input-group">
+        <label for="commentInput">Their Comment</label>
+        <textarea id="commentInput" placeholder="Someone else's comment..."></textarea>
+      </div>
+      <div class="input-group">
+        <label for="microBustInput">Post or Comment for Micro-Bust</label>
+        <textarea id="microBustInput" placeholder="Specific text for Micro-Bust prompt..."></textarea>
+      </div>
+    </div>
+
+    <div class="routine-header">THE 5-MINUTE DAILY ROUTINE</div>
+
+    <!-- Step 1 -->
+    <div class="step-card">
+      <div class="step-title">
+        1. Find 3 Rising Posts
+        <span class="time-badge">60 seconds</span>
+      </div>
+      <p class="instruction-text">Locate high-engagement posts in your niche before they peak.</p>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step-card">
+      <div class="step-title">
+        2. Drop 1 Threadpoint Per Post
+        <span class="time-badge">90 seconds</span>
+      </div>
+      <p class="instruction-text">Pick the best and paste under each post.</p>
+      <pre id="prompt2" class="prompt-box"></pre>
+      <button class="copy-btn" data-target="prompt2">Copy Prompt</button>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step-card">
+      <div class="step-title">
+        3. Reply to 1 Person
+        <span class="time-badge">30 seconds</span>
+      </div>
+      <p class="instruction-text">Subtle interaction to push your Threadpoint to the top.</p>
+      <pre id="prompt3" class="prompt-box"></pre>
+      <button class="copy-btn" data-target="prompt3">Copy Prompt</button>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step-card">
+      <div class="step-title">
+        4. Post One Breadcrumb
+        <span class="time-badge">30 seconds</span>
+      </div>
+      <p class="instruction-text">CTA without link. Use ONE of these options (no links or pressure):</p>
+      <ul class="breadcrumb-list">
+        <li>“Quick skim of my profile.”</li>
+        <li>“Broke the tweak down earlier today.”</li>
+        <li>“Mentioned what we changed on my profile.”</li>
+        <li>“We tested this last week - notes there.”</li>
+      </ul>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="step-card">
+      <div class="step-title">
+        5. End With a Micro-Burst
+        <span class="time-badge">60 seconds</span>
+      </div>
+      <p class="instruction-text">Finish with a subtle spike of curiosity or motion.</p>
+      <pre id="prompt5" class="prompt-box"></pre>
+      <button class="copy-btn" data-target="prompt5">Copy Prompt</button>
+    </div>
+
+    <footer>
+        <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const postIn = document.getElementById('postInput');
+    const nicheIn = document.getElementById('nicheInput');
+    const commentIn = document.getElementById('commentInput');
+    const bustIn = document.getElementById('microBustInput');
+
+    const templateP2 = `Write me 3 Threadpoint-style hijack comments for this post: [paste post]\nPlatform: X.\nNiche: [niche].\nTone: normal.\nGoal: profile clicks.`;
+    
+    const templateP3 = `Reply to this in a subtle, natural, curiosity-driven way: [their comment]`;
+    
+    const templateP5 = `You are an expert in Micro-Burst writing for comment hijacking.\n\nYour task is to generate a Micro-Burst for the following post or comment.\n\nINPUT:\n[PASTE THE POST OR COMMENT HERE]\n\nRULES:\n- The Micro-Burst must be anchored to the input (do not generalize).\n- Identify the assumption the author is making.\n- Hint at a missing or misordered factor without naming it.\n- Do NOT explain the insight.\n- Do NOT ask a question.\n- Do NOT include a CTA.\n- Length: 6–12 words.\n\nOUTPUT:\nReturn ONLY the Micro-Burst line.`;
+
+    function update() {
+      const post = postIn.value.trim() || '[paste post]';
+      const niche = nicheIn.value.trim() || '[niche]';
+      const comment = commentIn.value.trim() || '[their comment]';
+      const bust = bustIn.value.trim() || '[PASTE THE POST OR COMMENT HERE]';
+
+      document.getElementById('prompt2').textContent = templateP2.replace('[paste post]', post).replace('[niche]', niche);
+      document.getElementById('prompt3').textContent = templateP3.replace('[their comment]', comment);
+      document.getElementById('prompt5').textContent = templateP5.replace('[PASTE THE POST OR COMMENT HERE]', bust);
+    }
+
+    [postIn, nicheIn, commentIn, bustIn].forEach(el => el.addEventListener('input', update));
+    update();
+
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const text = document.getElementById(btn.dataset.target).textContent;
+        navigator.clipboard.writeText(text).then(() => {
+          const original = btn.textContent;
+          btn.textContent = 'Copied!';
+          btn.classList.add('copied');
+          setTimeout(() => {
+            btn.textContent = original;
+            btn.classList.remove('copied');
+          }, 2000);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
