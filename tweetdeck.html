@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Keyword & Columns for TweetDeck</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --input-bg: #111827;
+      --code-bg: rgba(0, 0, 0, 0.4);
+      --shadow-color: rgba(0, 0, 0, 0.3);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 40px; }
+    h1 { font-size: 2.2rem; font-weight: 700; color: var(--text-heading); margin-bottom: 10px; }
+    .subtitle { color: var(--text-secondary); font-size: 1.1rem; }
+
+    /* Input Section */
+    .input-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 40px;
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+    }
+    .input-group { display: flex; flex-direction: column; }
+    .input-group label { font-weight: 600; margin-bottom: 4px; color: var(--accent-primary); }
+    .input-group .desc { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 8px; }
+    textarea {
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 12px;
+      color: white;
+      font-family: inherit;
+      resize: vertical;
+      min-height: 80px;
+    }
+    textarea:focus { outline: 2px solid var(--accent-primary); border-color: transparent; }
+
+    /* Prompt Cards */
+    .prompt-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 32px var(--shadow-color);
+      display: flex;
+      flex-direction: column;
+    }
+    .prompt-card h2 { font-size: 1.3rem; margin-bottom: 15px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; }
+    .prompt-text {
+      background: var(--code-bg);
+      padding: 20px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem;
+      border: 1px solid var(--card-border);
+      margin-bottom: 15px;
+    }
+    .dynamic-val { color: var(--accent-primary); font-weight: 700; font-style: normal; }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      background: var(--accent-primary);
+      color: var(--bg-gradient-end);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .copy-button:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .copy-button.copied { background: var(--accent-success); }
+    .icon { width: 16px; height: 16px; }
+
+    footer { text-align: center; margin-top: 40px; color: var(--text-secondary); font-size: 0.85rem; }
+
+    @media (max-width: 768px) {
+      .input-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Keyword & Columns for TweetDeck</h1>
+    <p class="subtitle">Fill the fields below to customize your AI prompts.</p>
+  </header>
+
+  <!-- Inputs Section -->
+  <section class="input-grid">
+    <div class="input-group">
+      <label>Product type:</label>
+      <p class="desc">e.g., guide, template, workflow, SaaS, course</p>
+      <textarea id="in-type" placeholder="guide"></textarea>
+    </div>
+    <div class="input-group">
+      <label>Who it is for:</label>
+      <p class="desc">Describe the target user in one sentence</p>
+      <textarea id="in-who" placeholder="Freelance writers struggling to find clients"></textarea>
+    </div>
+    <div class="input-group">
+      <label>Primary problem it solves:</label>
+      <p class="desc">Core frustration or failure state</p>
+      <textarea id="in-primary" placeholder="Spending 10 hours a week on cold emails with 0 replies"></textarea>
+    </div>
+    <div class="input-group">
+      <label>Secondary problems it touches:</label>
+      <p class="desc">2-3 related struggles</p>
+      <textarea id="in-secondary" placeholder="Inconsistent income, low confidence, fear of high-ticket pitching"></textarea>
+    </div>
+    <div class="input-group">
+      <label>What they've already tried:</label>
+      <p class="desc">It's important</p>
+      <textarea id="in-tried" placeholder="Upwork bidding, general LinkedIn networking, generic email templates"></textarea>
+    </div>
+    <div class="input-group">
+      <label>What success looks like:</label>
+      <p class="desc">Outcome, not features</p>
+      <textarea id="in-success" placeholder="Landing 3 premium clients a month without cold calling"></textarea>
+    </div>
+  </section>
+
+  <!-- Prompts Section -->
+  <main>
+    <!-- Prompt 1 -->
+    <div class="prompt-card">
+      <h2>TWEETDECK KEYWORD BLOCK GENERATOR</h2>
+      <div id="prompt1" class="prompt-text">You are an expert in X (Twitter) platform mechanics, audience interception, and the Comment Hijack / Threadpoint strategy.
+
+DEFINITION (READ CAREFULLY):
+The Comment Hijack / Threadpoint strategy works by:
+* Intercepting attention inside replies to existing posts (not publishing original posts)
+* Targeting moments where people express confusion, failure, doubt, or contradiction
+* Using short, curiosity-driven replies (Threadpoints) to trigger profile clicks
+* Avoiding selling, teaching, links, or promotion in public replies
+
+This strategy depends on finding posts written by people who:
+* Are speaking from first-hand experience
+* Have tried something that did not work
+* Feel something is missing or misordered
+* Are open to reframing, not confident or resolved
+
+Your task is to generate TweetDeck search keyword blocks that surface EXACTLY these moments.
+Do NOT generate general discussion keywords, third-person commentary, or marketing language.
+
+PRODUCT CONTEXT:
+Product type: <span class="dynamic-val" id="out-type">[Product Type]</span>
+Who it is for: <span class="dynamic-val" id="out-who">[Who it is for]</span>
+Primary problem it solves: <span class="dynamic-val" id="out-primary">[Primary problem it solves]</span>
+Secondary problems it touches: <span class="dynamic-val" id="out-secondary">[Secondary problems it touches]</span>
+What the user has already tried (and failed at): <span class="dynamic-val" id="out-tried">[What the user has already tried]</span>
+What success would look like for them: <span class="dynamic-val" id="out-success">[What success would look like for them]</span>
+
+PLATFORM CONTEXT:
+Platform: X (Twitter)
+Use case: Creating TweetDeck search columns for comment hijacking
+Tone to detect: lived experience, frustration, uncertainty, contradiction
+Avoid surfacing: hype, advice-giving, news, promotion, or confident authority posts
+
+TASK:
+Generate keyword lists for TweetDeck search columns using FOUR distinct blocks.
+Each block must contain ONLY 2-3 items.
+All keywords must reflect how real users naturally talk on X.
+
+1. PRIMARY KEYWORDS
+* Phrases that signal the core problem or tension
+* Common in posts like "this did not work", "what am I missing", "why is this failing"
+* Avoid abstract or educational phrasing
+
+2. FIRST-PERSON SIGNALS
+* Phrases that confirm the author is talking about their own experience
+* Casual and native to X
+* Avoid third-person or instructional language
+
+3. NICHE CONTEXT ANCHORS
+* Vocabulary that quietly identifies the target niche
+* Filters relevance without sounding promotional
+* Words the audience already uses to describe their work
+
+4. HIGH-NOISE EXCLUSIONS
+* Keywords that frequently pollute searches with irrelevant niches
+* Industries, topics, or contexts that hijack attention
+* Format exclusions with a leading minus sign (-keyword)
+
+OUTPUT FORMAT (STRICT - DO NOT DEVIATE):
+PRIMARY KEYWORDS:
+* keyword
+* keyword
+* keyword
+
+FIRST-PERSON SIGNALS:
+* keyword
+* keyword
+* keyword
+
+NICHE CONTEXT ANCHORS:
+* keyword
+* keyword
+* keyword
+
+HIGH-NOISE EXCLUSIONS:
+* -keyword
+* -keyword
+* -keyword
+
+HANDOFF INSTRUCTION (CRITICAL):
+* Do NOT include explanations, examples, or commentary.
+* Do NOT rename sections.
+* Do NOT add extra blocks.
+* The next prompt will automatically consume this output as its input.
+* This output must be clean, complete, and ready for immediate downstream use.
+
+FINAL QUALITY CHECK (INTERNAL):
+Before finalizing, verify:
+* These keywords sound like real potential buyers speaking.
+* They surface uncertainty or friction, not confidence.
+* They would make a curiosity-driven reply feel natural.</div>
+      <button class="copy-button" data-target="prompt1">
+        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+        <span class="btn-text">Copy Prompt 1</span>
+      </button>
+    </div>
+
+    <!-- Prompt 2 -->
+    <div class="prompt-card">
+      <h2>TweetDeck Search String + Column Name Generator</h2>
+      <div id="prompt2" class="prompt-text">You are an expert in X (Twitter) search syntax, TweetDeck column design, and the Comment Hijack / Threadpoint strategy.
+
+ASSUMPTION:
+In the immediately preceding message, you generated four keyword blocks in this exact structure:
+- PRIMARY KEYWORDS
+- FIRST-PERSON SIGNALS
+- NICHE CONTEXT ANCHORS
+- HIGH-NOISE EXCLUSIONS
+
+Use those blocks directly. Do NOT ask for them again.
+
+STRATEGY CONTEXT:
+The Comment Hijack / Threadpoint strategy works by:
+- Replying to existing posts (not publishing original posts)
+- Targeting moments of confusion, failure, doubt, or contradiction
+- Using short, curiosity-driven replies to trigger profile clicks
+- Avoiding selling, teaching, links, or promotion in public replies
+
+IMPORTANT CONSTRAINT:
+Assume TweetDeck supports an unlimited number of columns.
+Therefore:
+- Do not merge unrelated signals
+- Do not generalize or broaden keyword intent
+- Each column must detect ONE clear psychological state only
+
+TASK:
+1. Treat the previously generated keyword blocks as the basis for ONE dedicated TweetDeck column.
+2. Assemble a single TweetDeck search string using EXACTLY this format:
+
+(PRIMARY KEYWORDS joined with OR)
+(FIRST-PERSON SIGNALS joined with OR)
+(NICHE CONTEXT ANCHORS joined with OR)
+HIGH-NOISE EXCLUSIONS (space-separated, with minus signs)
+
+3. Ensure:
+- Correct parentheses and OR logic
+- Copy-paste readiness for TweetDeck
+- No rewriting of keywords unless required for valid syntax
+- Precision over volume
+
+4. Generate a clear TweetDeck column name that:
+- Describes the specific psychological state being detected
+- Reflects why the author is posting (failure, doubt, contradiction, update, etc.)
+- Is short (2–5 words)
+- Uses neutral, operational language (not marketing language)
+
+OUTPUT FORMAT (STRICT):
+Return the result in EXACTLY this structure:
+
+COLUMN NAME:
+&lt;column name&gt;
+
+SEARCH STRING:
+&lt;full search string&gt;
+
+FINAL QUALITY CHECK:
+Before finalizing, internally verify:
+- Does this column isolate a single mental or emotional state?
+- Would most surfaced posts feel written by real potential buyers?
+- Would replying with a curiosity-driven Threadpoint feel natural here?</div>
+      <button class="copy-button" data-target="prompt2">
+        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+        <span class="btn-text">Copy Prompt 2</span>
+      </button>
+    </div>
+  </main>
+
+  <footer>
+    <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+  </footer>
+</div>
+
+<script>
+  // Real-time update logic
+  const mappings = [
+    { input: 'in-type', output: 'out-type', default: '[Product Type]' },
+    { input: 'in-who', output: 'out-who', default: '[Who it is for]' },
+    { input: 'in-primary', output: 'out-primary', default: '[Primary problem it solves]' },
+    { input: 'in-secondary', output: 'out-secondary', default: '[Secondary problems it touches]' },
+    { input: 'in-tried', output: 'out-tried', default: '[What the user has already tried]' },
+    { input: 'in-success', output: 'out-success', default: '[What success would look like for them]' }
+  ];
+
+  mappings.forEach(map => {
+    const inputEl = document.getElementById(map.input);
+    const outputEl = document.getElementById(map.output);
+    
+    inputEl.addEventListener('input', () => {
+      outputEl.textContent = inputEl.value.trim() || map.default;
+    });
+  });
+
+  // Copy button logic
+  document.querySelectorAll('.copy-button').forEach(button => {
+    button.addEventListener('click', () => {
+      const targetId = button.getAttribute('data-target');
+      const text = document.getElementById(targetId).textContent;
+      const btnText = button.querySelector('.btn-text');
+      const originalText = btnText.textContent;
+
+      navigator.clipboard.writeText(text).then(() => {
+        btnText.textContent = 'Copied!';
+        button.classList.add('copied');
+        setTimeout(() => {
+          btnText.textContent = originalText;
+          button.classList.remove('copied');
+        }, 2000);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
