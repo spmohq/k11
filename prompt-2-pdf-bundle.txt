@@ -1,0 +1,141 @@
+Prompt#1:
+
+Please read and fully understand the prompt content provided below.
+
+I will sell this as a low-ticket digital product on Gumroad.
+It will be delivered as a PDF.
+
+The product may contain:
+- A single prompt, OR
+- Multiple related prompts forming a small bundle or system
+
+Your first step is to analyze the provided prompt content and internally determine:
+- Whether this is best treated as a single prompt or a bundle
+- If a bundle, what unifying theme or capability connects the prompts
+- The most natural product framing (tool, system, kit, framework, bundle, etc.)
+- The most specific and appropriate target buyer
+- The correct tone and language discipline for a paid prompt product
+- What differentiates this product from generic prompt bundles
+
+Do NOT ask me questions.
+Do NOT expose this analysis unless it naturally improves clarity.
+
+The PDF must contain ONLY these 5 sections, in this exact order:
+1. Overall introduction (no title)
+2. The prompt or prompts
+3. How to use this prompt or bundle
+4. Where to use the outcome of the prompt(s) and how
+5. “Before you go” (short, grounded closing note)
+
+Now generate the following:
+
+1. Product Name  
+2. Product description  
+3. PDF Name  
+4. PDF description  
+5. Cover Page text:
+   - Header
+   - Tagline
+   - Optional teaser (only if it adds clarity, not hype)
+   - Author name
+6. Gumroad-ready product name  
+7. Gumroad-ready product description  
+8. Two Gumroad categories best suited for this product
+
+Strict rules:
+- No hype, emojis, inflated promises, or “AI magic” language
+- Never describe this as a “collection of prompts” unless necessary
+- Emphasize outcomes, use-cases, and clarity over quantity
+- Write for a thoughtful, value-conscious buyer
+- Language must feel intentionally designed, not auto-generated
+
+Here is the prompt content:
+
+Prompt Name(s): [Prompt Name or Names]  
+Prompt Description(s): [Prompt Description(s)]  
+Prompt(s): [Prompt or Prompts]
+
+
+Follow-up Prompt#1:
+
+Using the product framing, positioning, and bundle logic already established in the previous step, write the COMPLETE content of the PDF.
+
+Do NOT re-evaluate positioning or audience.
+Assume those decisions are locked.
+
+The PDF must contain ONLY the following five sections, in this exact order, with no section titles:
+
+1. Overall introduction  
+- Calm, grounded, and outcome-oriented  
+- Explain what this tool or bundle helps the reader do  
+- Set realistic expectations  
+
+2. The prompt or prompts  
+- Present the prompt(s) cleanly and clearly  
+- If this is a bundle, separate prompts cleanly without over-explaining  
+- Do not add commentary inside the prompt text  
+
+3. How to use this prompt or bundle  
+- Step-by-step usage  
+- Practical, minimal, and non-technical  
+- Include guidance for adapting outputs  
+
+4. Where to use the outcome of the prompt(s) and how  
+- Specific usage contexts  
+- Explain how to apply, not just where  
+
+5. “Before you go”  
+- Short closing note  
+- Reassuring, grounded, non-marketing  
+
+Strict rules:
+- No hype, no emojis, no inflated promises  
+- No references to Gumroad, pricing, or selling  
+- Language must feel intentional and paid, not verbose  
+- Avoid generic AI advice  
+
+Write clean, readable paragraphs.
+Short sentences. Short sections.
+
+Now write the complete PDF content.
+
+
+Follow-up Prompt#2:
+
+We are writing the PDF content for this prompt product.
+All positioning, audience, tone, and bundle decisions are already locked.
+
+Write ONLY the following section of the PDF:
+
+[INSERT SECTION NUMBER AND NAME]
+
+Rules:
+- Do not reference other sections
+- Do not preview what comes next
+- No titles unless explicitly allowed
+- Calm, precise, non-hype language
+- Assume a thoughtful, value-conscious reader
+
+If this is a bundle, reflect bundle logic naturally without explaining it.
+
+Write the section now.
+
+Follow-up Prompt#3:
+
+Review the PDF content below.
+
+Your task:
+- Remove any hype, vague claims, or generic AI phrasing
+- Tighten language without changing meaning
+- Ensure tone is calm, grounded, and professional
+- Ensure the text feels like a paid product, not a free guide
+- Preserve simplicity and clarity
+
+Do NOT add new ideas.
+Do NOT expand length.
+Do NOT summarize.
+
+Return the revised PDF content in full.
+
+Here is the PDF content:
+[PASTE PDF CONTENT]
