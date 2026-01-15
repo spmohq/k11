@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QUORA COMMENT HIJACK / THREADPOINT GENERATOR</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --input-bg: #111827;
+      --code-bg: rgba(0, 0, 0, 0.4);
+      --shadow-color: rgba(0, 0, 0, 0.3);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 40px; }
+    h1 { font-size: 2.2rem; font-weight: 700; color: var(--text-heading); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; }
+    .subtitle { color: var(--accent-primary); font-size: 1.1rem; font-weight: 600; margin-bottom: 30px; }
+
+    /* Input Section */
+    .input-section {
+      margin-bottom: 40px;
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+    }
+    .input-group { display: flex; flex-direction: column; }
+    .input-group label { font-weight: 600; margin-bottom: 10px; color: var(--text-heading); font-size: 1.1rem; }
+    textarea {
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 15px;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      resize: vertical;
+      min-height: 120px;
+      line-height: 1.5;
+    }
+    textarea:focus { outline: 2px solid var(--accent-primary); border-color: transparent; }
+
+    /* Prompt Cards */
+    .prompt-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 32px var(--shadow-color);
+      display: flex; flex-direction: column;
+      backdrop-filter: blur(12px);
+    }
+    .prompt-card h2 { font-size: 1.2rem; margin-bottom: 15px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; color: var(--accent-primary); text-transform: uppercase; }
+    .prompt-text {
+      background: var(--code-bg);
+      padding: 20px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.85rem;
+      border: 1px solid var(--card-border);
+      margin-bottom: 15px;
+      line-height: 1.5;
+      color: #e5e7eb;
+    }
+    .dynamic-val { 
+      color: var(--accent-primary); 
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 10px 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      background: var(--accent-primary);
+      color: var(--bg-gradient-end);
+      border: none; border-radius: 8px;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+    .copy-button:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .copy-button.copied { background: var(--accent-success); }
+    .icon { width: 16px; height: 16px; }
+
+    footer { text-align: center; margin-top: 40px; color: var(--text-secondary); font-size: 0.85rem; padding-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>QUORA COMMENT HIJACK / THREADPOINT GENERATOR</h1>
+    <p class="subtitle">WITH QUORA PROFILE BIO DESIGNER (FOLLOW-UPS)</p>
+  </header>
+
+  <!-- Input Section -->
+  <section class="input-section">
+    <div class="input-group">
+      <label>Paste the Quora Question or Answer here:</label>
+      <textarea id="quoraInput" placeholder="Paste content here..."></textarea>
+    </div>
+  </section>
+
+  <main>
+    <!-- Main Prompt -->
+    <div class="prompt-card">
+      <h2>Main Prompt: Content Interception</h2>
+      <div id="p1" class="prompt-text">You are an expert in attention interception, Quora platform dynamics, and the Comment Hijack / Threadpoint strategy.
+
+DEFINITION (READ CAREFULLY):
+The Comment Hijack / Threadpoint strategy is designed to intercept existing attention instead of creating new posts. On Quora, this means responding to questions or existing answers where readers are already thinking, confused, or uncertain.
+
+The strategy works by:
+* Entering conversations where people express failure, doubt, or curiosity
+* Reframing the situation without fully explaining it
+* Creating curiosity that naturally leads readers to click the author’s profile
+* Avoiding selling, links, pitches, or explicit calls to action
+
+On Quora specifically:
+* Readers expect more depth than X, but still reward clarity over completeness
+* Credibility and tone matter more than cleverness
+* Subtle reframing performs better than mystery-only replies
+
+Your job is NOT to teach fully.
+Your job is to reframe just enough to trigger further interest.
+
+INPUT:
+You will be given a Quora post.
+
+QUORA POST:
+<span class="dynamic-val" id="out1">[PASTE THE QUORA QUESTION OR ANSWER HERE]</span>
+
+TASK:
+Based ONLY on the given Quora post, generate the following four items, all tailored to Quora norms and tone.
+
+1. THREADPOINT
+   Create a concise but credible Threadpoint that includes all of the following elements in order:
+* Hook: signals relevance or implied lived experience
+* Shift: slightly reframes the conversation or assumption
+* Curiosity Trigger: opens a loop without resolving it
+* Breadcrumb: a linkless, non-salesy nudge that makes a profile click feel natural
+
+2. SELF-REPLY COMMENT
+   Write a short follow-up reply to your own Threadpoint that:
+* Extends comment lifespan
+* Adds a small clarification without closing the loop
+* Reinforces credibility without explaining fully
+
+3. REPLY TO ANOTHER COMMENT
+   Write a reply to another user’s comment that:
+* Responds respectfully
+* Gently reframes or adds a missing variable
+* Positions you as a thoughtful peer, not an authority
+* Preserves curiosity
+
+4. MICRO-BURST (QUORA VERSION)
+   Write a Quora-adapted Micro-Burst:
+* 1 to 2 sentences
+* Anchored directly to the original post
+* Highlights a missing or misordered factor
+* Does not explain the solution
+* Does not ask a direct question
+
+RULES:
+* Do not include links
+* Do not pitch, sell, or promote
+* Do not give step-by-step solutions
+* Do not mention strategies, frameworks, or products
+* Everything must feel natural on Quora
+
+OUTPUT FORMAT (STRICT):
+THREADPOINT: <text>
+SELF-REPLY COMMENT: <text>
+REPLY TO ANOTHER COMMENT: <text>
+MICRO-BURST: <text>
+
+FINAL CHECK (INTERNAL):
+Before finalizing, verify:
+* Would this feel like a genuine Quora contribution?
+* Does it reframe without overexplaining?
+* Would a curious reader reasonably click the author’s profile?</div>
+      <button class="copy-button" data-target="p1">
+        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+        <span class="btn-text">Copy Main Prompt</span>
+      </button>
+    </div>
+
+    <!-- Follow-up 1 -->
+    <div class="prompt-card">
+      <h2>Follow-up Prompt #1: Bio Designer</h2>
+      <div id="p2" class="prompt-text">You are an expert in Quora reader psychology, profile-based conversion, and the Comment Hijack / Threadpoint strategy.
+
+ASSUMPTION:
+In the immediately preceding response, you generated Quora-adapted Threadpoints, comments, and a Micro-Burst.
+Use that context implicitly. Do not ask for the post again.
+
+STRATEGY CONTEXT:
+In this strategy, the Quora profile bio is not a resume, pitch, or authority claim.
+Its only job is to absorb curiosity created by comments and signal lived experience without bragging.
+
+TASK:
+Design a Quora profile bio optimized for this strategy.
+
+STRUCTURE REQUIREMENTS:
+Generate the bio using exactly this structure:
+1. Opening Line: One sentence signaling lived experience with the problem.
+2. Reframe Line: One sentence subtly reframing the common assumption.
+3. Positioning Line: One sentence describing what you focus on now.
+4. Soft Curiosity Close: One short sentence or fragment that leaves curiosity open.
+
+RULES:
+* Do not include links
+* Do not include credentials or achievements
+* Do not use marketing language
+* Do not say I help, I teach, I coach, or I sell
+* Do not mention products or systems
+
+OUTPUT FORMAT (STRICT):
+QUORA PROFILE BIO: <full bio text></div>
+      <button class="copy-button" data-target="p2">
+        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+        <span class="btn-text">Copy Follow-up 1</span>
+      </button>
+    </div>
+
+    <!-- Follow-up 2 -->
+    <div class="prompt-card">
+      <h2>Follow-up Prompt #2: Bio Variants</h2>
+      <div id="p3" class="prompt-text">Using the Quora profile bio you just generated, create three distinct variants optimized for the Comment Hijack / Threadpoint strategy.
+
+VARIANTS REQUIRED:
+1. Neutral - balanced, calm, observational
+2. Reflective - introspective, experience-forward
+3. Contrarian - gently challenges common assumptions without sounding argumentative
+
+RULES:
+* Each variant must follow the same four-line structure used previously
+* Do not add new ideas or topics
+* Do not introduce selling language, links, or calls to action
+* Keep tone natural and Quora-appropriate
+
+OUTPUT FORMAT (STRICT):
+NEUTRAL BIO: <text>
+REFLECTIVE BIO: <text>
+CONTRARIAN BIO: <text></div>
+      <button class="copy-button" data-target="p3">
+        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+        <span class="btn-text">Copy Follow-up 2</span>
+      </button>
+    </div>
+  </main>
+
+  <footer>
+    <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+  </footer>
+</div>
+
+<script>
+  // Logic to update the dynamic part of the prompt
+  const quoraInput = document.getElementById('quoraInput');
+  const out1 = document.getElementById('out1');
+
+  quoraInput.addEventListener('input', () => {
+    const val = quoraInput.value.trim() || '[PASTE THE QUORA QUESTION OR ANSWER HERE]';
+    out1.textContent = val;
+  });
+
+  // Copy functionality
+  document.querySelectorAll('.copy-button').forEach(button => {
+    button.addEventListener('click', () => {
+      const targetId = button.getAttribute('data-target');
+      const textToCopy = document.getElementById(targetId).innerText;
+      const btnText = button.querySelector('.btn-text');
+      const originalText = btnText.textContent;
+
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        btnText.textContent = 'Copied!';
+        button.classList.add('copied');
+        setTimeout(() => {
+          btnText.textContent = originalText;
+          button.classList.remove('copied');
+        }, 2000);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
