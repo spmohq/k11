@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PROMPT ANALYZER</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --input-bg: #111827;
+      --code-bg: rgba(0, 0, 0, 0.4);
+      --shadow-color: rgba(0, 0, 0, 0.3);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 40px; }
+    h1 { font-size: 2.2rem; font-weight: 700; color: var(--text-heading); margin-bottom: 10px; }
+    .subtitle { color: var(--text-secondary); font-size: 1.1rem; }
+
+    /* Input Section */
+    .input-section {
+      margin-bottom: 40px;
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+    }
+    .input-group { display: flex; flex-direction: column; }
+    .input-group label { font-weight: 600; margin-bottom: 10px; color: var(--accent-primary); font-size: 1.1rem; }
+    textarea {
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 15px;
+      color: white;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      resize: vertical;
+      min-height: 150px;
+      line-height: 1.5;
+    }
+    textarea:focus { outline: 2px solid var(--accent-primary); border-color: transparent; }
+
+    /* Prompt Cards */
+    .prompt-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 32px var(--shadow-color);
+      display: flex; flex-direction: column;
+      backdrop-filter: blur(12px);
+    }
+    .prompt-card h2 { font-size: 1.3rem; margin-bottom: 15px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; }
+    .prompt-text {
+      background: var(--code-bg);
+      padding: 20px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem;
+      border: 1px solid var(--card-border);
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+    .dynamic-val { 
+      color: var(--accent-primary); 
+      font-weight: 600; 
+      background: rgba(34, 211, 238, 0.1);
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      background: var(--accent-primary);
+      color: var(--bg-gradient-end);
+      border: none; border-radius: 8px;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      transition: all 0.2s;
+    }
+    .copy-button:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .copy-button.copied { background: var(--accent-success); }
+    .icon { width: 16px; height: 16px; }
+
+    footer { text-align: center; margin-top: 40px; color: var(--text-secondary); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>PROMPT ANALYZER</h1>
+    <p class="subtitle">Deep structural analysis and automatic repair logic.</p>
+  </header>
+
+  <!-- Input Section -->
+  <section class="input-section">
+    <div class="input-group">
+      <label>Paste the AI Prompt to be analyzed:</label>
+      <textarea id="promptInput" placeholder="Paste the prompt text here..."></textarea>
+    </div>
+  </section>
+
+  <main>
+    <!-- Prompt 1 -->
+    <div class="prompt-card">
+      <h2>PROMPT 1 — PROMPT ANALYZER WITH CONFIDENCE SCORING</h2>
+      <div id="promptContent1" class="prompt-text">Act as a senior prompt strategist responsible for conceptual authority, a computational linguist specializing in analytical and technical precision, and an AI workflow architect focused on practical execution, working in tight synergy to analyze a provided AI prompt; your task is to deeply examine the supplied prompt and return a rigorously structured response that answers four specific questions—what outputs are explicitly or implicitly requested, what contextual situation or purpose the prompt establishes, what exact inputs, assumptions, or reference bases the prompt relies on, and what constraints, rules, limitations, or boundaries are imposed—presenting each answer as a clearly separated bullet list with concise but substantive points, and appending a confidence score from 0 to 100 to every individual bullet to indicate how strongly the point is supported by the prompt text itself; reason deliberately from the text rather than inference or guesswork, explicitly labeling ambiguity where present instead of resolving it, maintaining a neutral, analytical, expert tone, and avoiding paraphrase, filler, restatement, or generic commentary; apply disciplined prompt analysis methods, distinguish clearly between explicit and implied elements without elevating implied intent to the same certainty as explicit instructions, and prioritize precision, completeness, and high signal density, ensuring the response reflects nuanced judgment and professional-grade insight rather than surface-level description, with no introductory framing, no conclusions, and no formatting beyond the four bullet lists themselves. <span class="dynamic-val" id="injectedPrompt">{{AI_PROMPT}}</span></div>
+      <button class="copy-button" data-target="promptContent1">
+        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+        <span class="btn-text">Copy Prompt 1</span>
+      </button>
+    </div>
+
+    <!-- Prompt 2 -->
+    <div class="prompt-card">
+      <h2>PROMPT 2 — AUTO-REPAIR FOLLOW-UP (SELF-TRIGGERING)</h2>
+      <div id="promptContent2" class="prompt-text">Act as a senior prompt engineer with strategic authority, an AI systems analyst with technical rigor, and a precision editor with executional mastery, working in tight synergy to evaluate the immediately preceding analysis response you produced and determine whether prompt repair is required; first, scan all confidence scores across the four bullet lists and proceed with repair only if one or more bullets fall below the defined low-confidence threshold of 70, otherwise output nothing; if repair is triggered, extract the original analyzed prompt from the prior context and isolate only the elements corresponding to low-confidence bullets, using their content as the sole basis for revision; revise the original prompt to resolve ambiguity, contradictions, missing context, or underspecified constraints strictly in those low-confidence areas, preserving the original intent, scope, tone, and desired outcomes exactly and leaving all high-confidence elements unchanged; do not introduce new goals, roles, formats, or creative expansions not already implied by the source prompt, and do not optimize beyond clarity, consistency, and executability; produce a single, fully repaired version of the prompt written as one uninterrupted paragraph in precise, professional language with explicit instructions and constraints, ensuring that if the repaired prompt were re-analyzed it would yield high confidence across all dimensions, and output only the repaired prompt with no explanations, labels, headings, or additional text.</div>
+      <button class="copy-button" data-target="promptContent2">
+        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+        <span class="btn-text">Copy Prompt 2</span>
+      </button>
+    </div>
+  </main>
+
+  <footer>
+    <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+  </footer>
+</div>
+
+<script>
+  // Dynamic Input Logic
+  const promptInput = document.getElementById('promptInput');
+  const injectedPrompt = document.getElementById('injectedPrompt');
+
+  promptInput.addEventListener('input', () => {
+    injectedPrompt.textContent = promptInput.value.trim() || '{{AI_PROMPT}}';
+  });
+
+  // Copy Button Logic
+  document.querySelectorAll('.copy-button').forEach(button => {
+    button.addEventListener('click', () => {
+      const targetId = button.getAttribute('data-target');
+      const textToCopy = document.getElementById(targetId).innerText; // Use innerText to get clean text without HTML span markers
+      const btnText = button.querySelector('.btn-text');
+      const originalText = btnText.textContent;
+
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        btnText.textContent = 'Copied!';
+        button.classList.add('copied');
+        setTimeout(() => {
+          btnText.textContent = originalText;
+          button.classList.remove('copied');
+        }, 2000);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
