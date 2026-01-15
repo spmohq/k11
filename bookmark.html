@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>My Bookmarks</title>
+
+<style>
+/* ---------- CSS VARIABLES ---------- */
+:root {
+    --bg: #ffffff;
+    --text: #222;
+    --muted: #666;
+    --border: #eaeaea;
+    --card-bg: #ffffff;
+}
+
+[data-theme="dark"] {
+    --bg: #0f0f0f;
+    --text: #f1f1f1;
+    --muted: #aaa;
+    --border: #2a2a2a;
+    --card-bg: #161616;
+}
+
+/* ---------- RESET ---------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* ---------- LAYOUT ---------- */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 24px 16px 48px;
+}
+
+/* ---------- HEADER ---------- */
+header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+header h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+header p {
+    font-size: 1rem;
+    color: var(--muted);
+}
+
+/* ---------- CONTROLS ---------- */
+.controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.controls input {
+    flex: 1;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-size: 0.95rem;
+    background: var(--card-bg);
+    color: var(--text);
+}
+
+.controls button {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text);
+}
+
+/* ---------- GRID ---------- */
+.category-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+@media (min-width: 900px) {
+    .category-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ---------- CATEGORY CARD ---------- */
+.category-box {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    background-color: var(--card-bg);
+}
+
+.category-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+/* ---------- LINKS ---------- */
+ul {
+    list-style: none;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+a {
+    text-decoration:: none;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.95rem;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <header>
+        <h1>My Bookmarks</h1>
+        <p>Fast access to important links</p>
+    </header>
+
+    <!-- SEARCH + DARK MODE -->
+    <div class="controls">
+        <input type="text" id="search" placeholder="Search links or categories…" />
+        <button id="toggleTheme">🌙</button>
+    </div>
+
+    <!-- CATEGORIES -->
+    <section class="category-grid" id="grid">
+
+        <div class="category-box">
+            <div class="category-title">Writing & Publishing</div>
+            <ul>
+                <li><a href="https://medium.com" target="_blank">Medium</a></li>
+                <li><a href="https://substack.com" target="_blank">Substack</a></li>
+                <li><a href="https://quora.com" target="_blank">Quora</a></li>
+            </ul>
+        </div>
+
+        <div class="category-box">
+            <div class="category-title">Tools & Utilities</div>
+            <ul>
+                <li><a href="https://chat.openai.com" target="_blank">ChatGPT</a></li>
+                <li><a href="https://notion.so" target="_blank">Notion</a></li>
+                <li><a href="https://drive.google.com" target="_blank">Google Drive</a></li>
+            </ul>
+        </div>
+
+        <div class="category-box">
+            <div class="category-title">Learning & Research</div>
+            <ul>
+                <li><a href="https://coursera.org" target="_blank">Coursera</a></li>
+                <li><a href="https://edx.org" target="_blank">edX</a></li>
+                <li><a href="https://scholar.google.com" target="_blank">Google Scholar</a></li>
+            </ul>
+        </div>
+
+    </section>
+
+</div>
+
+<script>
+/* ---------- AUTO CATEGORY COLORS ---------- */
+document.querySelectorAll('.category-title').forEach((title, i) => {
+    const hue = (i * 137.5) % 360; // golden-angle distribution
+    title.style.color = `hsl(${hue}, 70%, 45%)`;
+});
+
+/* ---------- SEARCH FILTER ---------- */
+const searchInput = document.getElementById('search');
+searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase();
+
+    document.querySelectorAll('.category-box').forEach(box => {
+        const text = box.innerText.toLowerCase();
+        box.style.display = text.includes(query) ? '' : 'none';
+    });
+});
+
+/* ---------- DARK MODE ---------- */
+const toggleBtn = document.getElementById('toggleTheme');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const savedTheme = localStorage.getItem('theme');
+
+if (savedTheme) {
+    document.documentElement.setAttribute('data-theme', savedTheme);
+} else if (prefersDark) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+}
+
+toggleBtn.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+});
+</script>
+
+</body>
+</html>
