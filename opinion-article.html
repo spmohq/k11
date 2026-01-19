@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Opinion Article Genie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --input-bg: #374151;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .container { max-width: 1000px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 40px; }
+    h1 { font-size: 2.8rem; font-weight: 800; color: var(--text-heading); letter-spacing: -1.5px; }
+    
+    .input-section {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-bottom: 50px;
+    }
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 25px;
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      margin-bottom: 30px;
+    }
+    .input-group { margin-bottom: 20px; }
+    .input-label {
+      display: block; font-weight: 700; margin-bottom: 8px;
+      color: var(--accent-primary); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1.5px;
+    }
+    textarea {
+      width: 100%; height: 100px; background-color: var(--input-bg);
+      border: 1px solid var(--card-border); border-radius: 10px;
+      padding: 15px; color: #fff; font-family: inherit; font-size: 0.95rem; resize: vertical;
+    }
+    textarea:focus { outline: none; border-color: var(--accent-primary); }
+
+    .prompt-header {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;
+    }
+    .prompt-title { font-size: 1.2rem; font-weight: 800; color: var(--text-heading); }
+    .tag { background: rgba(34, 211, 238, 0.2); color: var(--accent-primary); padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; margin-right: 10px; }
+
+    .prompt-box {
+      background-color: var(--code-bg); padding: 20px; border-radius: 10px;
+      white-space: pre-wrap; word-wrap: break-word; font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem; color: var(--text-primary); border: 1px solid var(--card-border);
+      margin-bottom: 15px; max-height: 500px; overflow-y: auto;
+    }
+    .copy-button {
+      background-color: var(--accent-primary); color: var(--bg-gradient-end);
+      border: none; border-radius: 6px; padding: 8px 16px; font-weight: 700;
+      font-size: 0.8rem; cursor: pointer; transition: 0.3s; display: inline-flex;
+      align-items: center; gap: 6px;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
+    .copy-button.copied { background-color: var(--accent-success); }
+
+    footer { text-align: center; padding: 60px 0; color: var(--text-secondary); opacity: 0.6; }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Opinion Article Genie</h1>
+    </header>
+
+    <!-- DYNAMIC INPUT FIELDS -->
+    <div class="input-section card">
+      <div class="input-group">
+        <label class="input-label">Central opinion or observation</label>
+        <textarea id="in-idea" placeholder="Paste your single core idea here..."></textarea>
+      </div>
+      <div class="input-group">
+        <label class="input-label">Context or backdrop</label>
+        <textarea id="in-context" placeholder="Describe the environment or shift this idea operates within..."></textarea>
+      </div>
+      <div class="input-group">
+        <label class="input-label">Intended reader</label>
+        <textarea id="in-reader" placeholder="Describe who this is for..."></textarea>
+      </div>
+      <div class="input-group">
+        <label class="input-label">V1 Article (For Evolution)</label>
+        <textarea id="in-v1" placeholder="Paste the complete V1 article here..."></textarea>
+      </div>
+      <div class="input-group">
+        <label class="input-label">V2 Article (For Audit)</label>
+        <textarea id="in-v2" placeholder="Paste the complete V2 article here..."></textarea>
+      </div>
+    </div>
+
+    <main>
+      <!-- PROMPT #1 -->
+      <div class="card">
+        <div class="prompt-header">
+          <div class="prompt-title"><span class="tag">PROMPT #1</span> Quiet Shift Opinion Engine (V1)</div>
+          <button class="copy-button" onclick="copyText('p1', this)">Copy Prompt</button>
+        </div>
+        <div id="p1" class="prompt-box">PURPOSE:
+Generate a single, standalone Medium.com article that expresses a calm opinion about where value is quietly shifting and how to notice it without chasing trends. The article must feel native to Medium, non-hype, reader-centric, and enduring.
+
+CORE SERIES PROMISE (DO NOT STATE VERBATIM IN OUTPUT):
+I write calm opinions about where value is quietly shifting and how to notice it without chasing trends.
+
+USER-PROVIDED INPUTS (REPLACE ALL PLACEHOLDERS):
+
+* Central opinion or observation: [PASTE YOUR SINGLE CORE IDEA HERE]
+* Context or backdrop: [DESCRIBE THE ENVIRONMENT OR SHIFT THIS IDEA OPERATES WITHIN]
+* Intended reader: [DESCRIBE WHO THIS IS FOR]
+
+OUTPUT REQUIREMENTS:
+
+* Produce ONE complete, standalone Medium article
+* No references to this prompt, a series, or previous articles
+* No hype, no urgency, no calls-to-action
+* Calm, thoughtful, observant tone throughout
+* Clarity over cleverness at all times
+
+ARTICLE STRUCTURE (FOLLOW EXACTLY):
+
+TITLE:
+* Name the shift, not the outcome
+* Avoid numbers, promises, or urgency language
+* Must remain relevant over time
+
+SUBTITLE:
+* Explain why this observation matters now
+* Anchor to context without making predictions
+
+OPENING (HOOK):
+* Begin by gently challenging a common assumption or blind spot
+* Reader-centric: focus on what the reader may be overlooking
+* No anecdotes unless absolutely necessary
+
+FRAMING PARAGRAPH:
+* Clearly state what this article is and is not
+* Reduce expectations intentionally (no selling, no forecasting)
+* Emphasize observation over advice
+
+SECTION 1: GUIDANCE
+(Where value is quietly shifting and why it works now)
+* Describe what is being overlooked
+* Explain the underlying mechanism causing the shift
+* Connect timing to broader acceleration or system change
+* Focus on signals and patterns, not roles, tools, or tactics
+
+SECTION 2: RESOLUTION
+(How to notice without chasing)
+* Encourage a mindset shift (e.g., looking sideways instead of forward)
+* Introduce one simple mental lens or heuristic the reader can reuse
+* Reinforce clarity, patience, and orientation over speed or motivation
+
+CLOSING PARAGRAPH:
+* Restate the core idea in simpler, quieter language
+* End without escalation, summary lists, or calls-to-action
+
+OPTIONAL RESOURCE (IF TRULY ADDITIVE):
+* Resource name or description: [OPTIONAL – LEAVE BLANK IF NONE]
+* Frame as a map or lens, not a solution or recommendation
+
+FINAL QUALITY CHECK (INTERNAL):
+* Does the article lower urgency rather than increase it?
+* Does it focus on movement of value, not extraction of value?
+* Does it help the reader see more clearly, not act faster?
+* Would this still feel relevant a year from now?
+
+If all checks pass, output the article.</div>
+      </div>
+
+      <!-- PROMPT #2 -->
+      <div class="card">
+        <div class="prompt-header">
+          <div class="prompt-title"><span class="tag">PROMPT #2</span> Evolution (V2)</div>
+          <button class="copy-button" onclick="copyText('p2', this)">Copy Prompt</button>
+        </div>
+        <div id="p2" class="prompt-box">PURPOSE:
+Refine, tighten, and elevate a first-draft Medium article created with the Quiet Shift Opinion Engine, without changing its core idea, tone, or intent. This is a clarity-and-alignment pass, not a rewrite for style or engagement.
+
+USER-PROVIDED INPUTS (REPLACE ALL PLACEHOLDERS):
+
+* Full first-draft article text: [PASTE THE COMPLETE V1 ARTICLE HERE]
+
+NON-NEGOTIABLES:
+* Do NOT introduce new ideas, examples, claims, or sections
+* Do NOT increase hype, urgency, or motivation language
+* Do NOT add calls-to-action, summaries, or conclusions that were not already present
+* Preserve the original calm, thoughtful voice
+* Preserve the single core idea exactly
+
+REFINEMENT GOALS:
+* Increase clarity without increasing length
+* Reduce cognitive load for the reader
+* Improve flow, precision, and calm authority
+* Strengthen Medium-native readability
+
+EVOLUTION PASSES (APPLY ALL, IN ORDER):
+PASS 1: CLARITY COMPRESSION
+PASS 2: STRUCTURAL DISCIPLINE
+PASS 3: TONE CALIBRATION
+PASS 4: READER-CENTRIC ALIGNMENT
+PASS 5: ENDURANCE CHECK
+
+OUTPUT FORMAT:
+1. REFINED ARTICLE
+2. EVOLUTION NOTES (AFTER THE ARTICLE):
+
+FINAL INTERNAL CHECK:
+* Did urgency decrease?
+* Did clarity increase?
+* Is the core idea unchanged?</div>
+      </div>
+
+      <!-- PROMPT #3 -->
+      <div class="card">
+        <div class="prompt-header">
+          <div class="prompt-title"><span class="tag">PROMPT #3</span> Trust Audit (V3)</div>
+          <button class="copy-button" onclick="copyText('p3', this)">Copy Prompt</button>
+        </div>
+        <div id="p3" class="prompt-box">PURPOSE:
+Audit a near-final Medium article to detect and correct risks that reduce reader trust, long-term credibility, or Medium Partner Program payout quality. This is a diagnostic and corrective pass focused on trust, restraint, and platform alignment.
+
+USER-PROVIDED INPUTS (REPLACE ALL PLACEHOLDERS):
+
+* Full refined article text: [PASTE THE COMPLETE V2 ARTICLE HERE]
+
+NON-NEGOTIABLES:
+* Do NOT introduce new ideas, claims, examples, or sections
+* Do NOT increase urgency, motivation, or emotional pressure
+* Do NOT add calls-to-action, prompts to follow, clap, comment, or subscribe
+* Do NOT optimize for virality, SEO, or external conversion
+* Preserve the author’s calm, observant, Medium-native voice
+
+AUDIT OBJECTIVES:
+* Maximize reader trust and perceived intellectual honesty
+* Minimize Medium payout risk signals (clickbait, hype, manipulation)
+* Ensure the article feels generous, restrained, and complete
+
+AUDIT PASSES (RUN ALL):
+PASS 1: TRUST SIGNAL AUDIT
+PASS 2: PAYOUT RISK SCAN
+PASS 3: READER RESPECT CHECK
+PASS 4: GENEROSITY VS EXTRACTION TEST
+PASS 5: ENDURANCE AND TIMELINE STABILITY
+
+OUTPUT FORMAT:
+1. AUDIT SUMMARY
+2. REFINED ARTICLE (POST AUDIT)
+3. RISK REDUCTION NOTES
+
+FINAL INTERNAL CHECK:
+* Does the article feel calmer than before?
+* Does it ask nothing from the reader?
+* Does it feel complete, honest, and restraint driven?</div>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const inputs = {
+      idea: document.getElementById('in-idea'),
+      context: document.getElementById('in-context'),
+      reader: document.getElementById('in-reader'),
+      v1: document.getElementById('in-v1'),
+      v2: document.getElementById('in-v2')
+    };
+
+    const displays = {
+      p1: document.getElementById('p1'),
+      p2: document.getElementById('p2'),
+      p3: document.getElementById('p3')
+    };
+
+    // Templates
+    const t1 = `PURPOSE:
+Generate a single, standalone Medium.com article that expresses a calm opinion about where value is quietly shifting and how to notice it without chasing trends. The article must feel native to Medium, non-hype, reader-centric, and enduring.
+
+CORE SERIES PROMISE (DO NOT STATE VERBATIM IN OUTPUT):
+I write calm opinions about where value is quietly shifting and how to notice it without chasing trends.
+
+USER-PROVIDED INPUTS (REPLACE ALL PLACEHOLDERS):
+
+* Central opinion or observation: {IDEA}
+* Context or backdrop: {CONTEXT}
+* Intended reader: {READER}
+
+OUTPUT REQUIREMENTS:
+* Produce ONE complete, standalone Medium article
+* No references to this prompt, a series, or previous articles
+* No hype, no urgency, no calls-to-action
+* Calm, thoughtful, observant tone throughout
+* Clarity over cleverness at all times
+
+ARTICLE STRUCTURE (FOLLOW EXACTLY):
+
+TITLE:
+* Name the shift, not the outcome
+* Avoid numbers, promises, or urgency language
+* Must remain relevant over time
+
+SUBTITLE:
+* Explain why this observation matters now
+* Anchor to context without making predictions
+
+OPENING (HOOK):
+* Begin by gently challenging a common assumption or blind spot
+* Reader-centric: focus on what the reader may be overlooking
+* No anecdotes unless absolutely necessary
+
+FRAMING PARAGRAPH:
+* Clearly state what this article is and is not
+* Reduce expectations intentionally (no selling, no forecasting)
+* Emphasize observation over advice
+
+SECTION 1: GUIDANCE
+(Where value is quietly shifting and why it works now)
+* Describe what is being overlooked
+* Explain the underlying mechanism causing the shift
+* Connect timing to broader acceleration or system change
+* Focus on signals and patterns, not roles, tools, or tactics
+
+SECTION 2: RESOLUTION
+(How to notice without chasing)
+* Encourage a mindset shift (e.g., looking sideways instead of forward)
+* Introduce one simple mental lens or heuristic the reader can reuse
+* Reinforce clarity, patience, and orientation over speed or motivation
+
+CLOSING PARAGRAPH:
+* Restate the core idea in simpler, quieter language
+* End without escalation, summary lists, or calls-to-action
+
+OPTIONAL RESOURCE (IF TRULY ADDITIVE):
+* Resource name or description: [OPTIONAL – LEAVE BLANK IF NONE]
+* Frame as a map or lens, not a solution or recommendation
+
+FINAL QUALITY CHECK (INTERNAL):
+* Does the article lower urgency rather than increase it?
+* Does it focus on movement of value, not extraction of value?
+* Does it help the reader see more clearly, not act faster?
+* Would this still feel relevant a year from now?
+
+If all checks pass, output the article.`;
+
+    const t2 = `PURPOSE:
+Refine, tighten, and elevate a first-draft Medium article created with the Quiet Shift Opinion Engine, without changing its core idea, tone, or intent. This is a clarity-and-alignment pass, not a rewrite for style or engagement.
+
+USER-PROVIDED INPUTS (REPLACE ALL PLACEHOLDERS):
+
+* Full first-draft article text: {V1}
+
+NON-NEGOTIABLES:
+* Do NOT introduce new ideas, examples, claims, or sections
+* Do NOT increase hype, urgency, or motivation language
+* Do NOT add calls-to-action, summaries, or conclusions that were not already present
+* Preserve the original calm, thoughtful voice
+* Preserve the single core idea exactly
+
+REFINEMENT GOALS:
+* Increase clarity without increasing length
+* Reduce cognitive load for the reader
+* Improve flow, precision, and calm authority
+* Strengthen Medium-native readability
+
+EVOLUTION PASSES (APPLY ALL, IN ORDER):
+PASS 1: CLARITY COMPRESSION
+PASS 2: STRUCTURAL DISCIPLINE
+PASS 3: TONE CALIBRATION
+PASS 4: READER-CENTRIC ALIGNMENT
+PASS 5: ENDURANCE CHECK
+
+OUTPUT FORMAT:
+1. REFINED ARTICLE
+2. EVOLUTION NOTES (AFTER THE ARTICLE):
+
+FINAL INTERNAL CHECK:
+* Did urgency decrease?
+* Did clarity increase?
+* Is the core idea unchanged?`;
+
+    const t3 = `PURPOSE:
+Audit a near-final Medium article to detect and correct risks that reduce reader trust, long-term credibility, or Medium Partner Program payout quality. This is a diagnostic and corrective pass focused on trust, restraint, and platform alignment.
+
+USER-PROVIDED INPUTS (REPLACE ALL PLACEHOLDERS):
+
+* Full refined article text: {V2}
+
+NON-NEGOTIABLES:
+* Do NOT introduce new ideas, claims, examples, or sections
+* Do NOT increase urgency, motivation, or emotional pressure
+* Do NOT add calls-to-action, prompts to follow, clap, comment, or subscribe
+* Do NOT optimize for virality, SEO, or external conversion
+* Preserve the author’s calm, observant, Medium-native voice
+
+AUDIT OBJECTIVES:
+* Maximize reader trust and perceived intellectual honesty
+* Minimize Medium payout risk signals (clickbait, hype, manipulation)
+* Ensure the article feels generous, restrained, and complete
+
+AUDIT PASSES (RUN ALL):
+PASS 1: TRUST SIGNAL AUDIT
+PASS 2: PAYOUT RISK SCAN
+PASS 3: READER RESPECT CHECK
+PASS 4: GENEROSITY VS EXTRACTION TEST
+PASS 5: ENDURANCE AND TIMELINE STABILITY
+
+OUTPUT FORMAT:
+1. AUDIT SUMMARY
+2. REFINED ARTICLE (POST AUDIT)
+3. RISK REDUCTION NOTES
+
+FINAL INTERNAL CHECK:
+* Does the article feel calmer than before?
+* Does it ask nothing from the reader?
+* Does it feel complete, honest, and restraint driven?`;
+
+    function update() {
+      const idea = inputs.idea.value.trim() || "[PASTE YOUR SINGLE CORE IDEA HERE]";
+      const context = inputs.context.value.trim() || "[DESCRIBE THE ENVIRONMENT OR SHIFT THIS IDEA OPERATES WITHIN]";
+      const reader = inputs.reader.value.trim() || "[DESCRIBE WHO THIS IS FOR]";
+      const v1 = inputs.v1.value.trim() || "[PASTE THE COMPLETE V1 ARTICLE HERE]";
+      const v2 = inputs.v2.value.trim() || "[PASTE THE COMPLETE V2 ARTICLE HERE]";
+
+      displays.p1.textContent = t1.replace("{IDEA}", idea).replace("{CONTEXT}", context).replace("{READER}", reader);
+      displays.p2.textContent = t2.replace("{V1}", v1);
+      displays.p3.textContent = t3.replace("{V2}", v2);
+    }
+
+    Object.values(inputs).forEach(input => input.addEventListener('input', update));
+
+    function copyText(id, btn) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
