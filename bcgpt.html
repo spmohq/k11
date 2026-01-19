@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bangla CustomGPT Genie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --input-bg: #374151;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .container { max-width: 1000px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 40px; }
+    h1 { font-size: 2.8rem; font-weight: 800; color: var(--text-heading); letter-spacing: -1.5px; }
+    
+    .sticky-input {
+      position: sticky;
+      top: 20px;
+      z-index: 100;
+      margin-bottom: 40px;
+    }
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 25px;
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      margin-bottom: 30px;
+    }
+    .input-label {
+      display: block; font-weight: 700; margin-bottom: 12px;
+      color: var(--accent-primary); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1.5px;
+    }
+    textarea {
+      width: 100%; height: 120px; background-color: var(--input-bg);
+      border: 1px solid var(--card-border); border-radius: 10px;
+      padding: 15px; color: #fff; font-family: inherit; font-size: 1rem; resize: vertical;
+    }
+    textarea:focus { outline: none; border-color: var(--accent-primary); }
+
+    .prompt-section-title {
+        font-size: 1.2rem; font-weight: 700; color: var(--accent-primary);
+        margin-bottom: 15px; display: flex; align-items: center; gap: 10px;
+    }
+    .prompt-box {
+      background-color: var(--code-bg); padding: 20px; border-radius: 10px;
+      white-space: pre-wrap; word-wrap: break-word; font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem; color: var(--text-primary); border: 1px solid var(--card-border);
+      margin-bottom: 15px; max-height: 450px; overflow-y: auto; position: relative;
+    }
+    .copy-button {
+      background-color: var(--accent-primary); color: var(--bg-gradient-end);
+      border: none; border-radius: 6px; padding: 8px 16px; font-weight: 700;
+      font-size: 0.8rem; cursor: pointer; transition: 0.3s; display: inline-flex;
+      align-items: center; gap: 6px; float: right; margin-bottom: 10px;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
+    .copy-button.copied { background-color: var(--accent-success); }
+
+    .fn-tag { background: rgba(34, 211, 238, 0.2); color: var(--accent-primary); padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; }
+
+    footer { text-align: center; padding: 60px 0; color: var(--text-secondary); opacity: 0.6; }
+    
+    .prompt-box::-webkit-scrollbar { width: 6px; }
+    .prompt-box::-webkit-scrollbar-track { background: transparent; }
+    .prompt-box::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 10px; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Bangla CustomGPT Genie</h1>
+    </header>
+
+    <div class="sticky-input">
+      <div class="card">
+        <label class="input-label">Insert Main Product/Topic Prompt</label>
+        <textarea id="mainInput" placeholder="Enter your core prompt here to update the Genie instructions..."></textarea>
+      </div>
+    </div>
+
+    <main>
+      <!-- MAIN PROMPT -->
+      <div class="card">
+        <button class="copy-button" onclick="copyText('mainPrompt', this)">Copy Main Prompt</button>
+        <div class="prompt-section-title">Main Prompt Instructions</div>
+        <div id="mainPrompt" class="prompt-box">I want to create a Custom GPT for the following prompt I use regularly.
+How to create this Custom GPT step by step? Please give me a complete instructional guide.
+Prompt:
+‘[Prompt]'
+
+STYLE AND TONE RULES
+Always use the formal address "আপনি". Never use the informal "তুমি".
+Maintain a warm, friendly, and conversational tone, even while being formal.
+The voice should feel like a trusted authority speaking as a close friend, one on one, in a natural, face to face manner.
+Prioritize clarity, natural flow, and reader comfort over word for word literalness, without losing meaning or intent.
+Write with human confidence and enthusiasm, making the information easy and engaging to grasp.
+
+EXECUTION PRIORITY IN CASE OF CONFLICT
+1. Always use formal "আপনি"
+2. Preserve natural Kolkata Bengali flow
+3. Maintain clarity and reader understanding
+4. Retain meaning over literal phrasing
+
+FINAL LANGUAGE AND TONE INSTRUCTION (AUTHORITATIVE)
+Final instruction. This section always overrides any earlier or conflicting language or tone rules.
+Write every response, regardless of the language of the user’s prompt, in modern, natural, everyday conversational Bengali as spoken in Kolkata, West Bengal, India.
+The language must be:
+- Easily understood by a 21 year old
+- Spontaneous, fluid, and natural, not literal or stiff
+- Polished and globally acceptable, while remaining culturally authentic to Kolkata Bengali</div>
+      </div>
+
+      <!-- FOLLOW-UPS -->
+      <div class="card">
+          <button class="copy-button" onclick="copyText('f1', this)">Copy</button>
+          <div class="prompt-section-title"><span class="fn-tag">#1</span> Client Usage Guide</div>
+          <div id="f1" class="prompt-box">Prepare a 1-Minute Client Usage Guide (Send This) and Add a Client Boundary Statement (Optional but Professional)</div>
+      </div>
+
+      <div class="card">
+          <button class="copy-button" onclick="copyText('f2', this)">Copy</button>
+          <div class="prompt-section-title"><span class="fn-tag">#2</span> Conversion Copywriter (Value Page)</div>
+          <div id="f2" class="prompt-box">Act as a professional conversion copywriter write a value-orientation page that helps the buyer understand what they're going to purchase as a Graphy.com product.
+ 
+ This is not a sales page.
+ This step exists only to provide clarity, validation, and direction.
+ 
+ Purpose:
+ 
+ * Explain what the buyer gets out of the product
+ * Reinforce that the purchase was the right decision
+ * Prepare the buyer to actually use the product
+ 
+ OUTPUT STRUCTURE (STRICT)
+ 
+ Product Title
+ 
+ * Benefit-based and outcome-focused
+ * Clear and specific
+ * No hype words, no emojis, no clickbait
+ * Maximum 120 characters
+ Example of a strong result-based title: “28 Reels Hooks That Boost Watch Time This Week”
+
+ What’s In It For You
+ 
+ * Written in second person using the formal address "আপনি"
+ * Focus on:
+ 
+   * The core problem the product solves
+   * The primary outcome the buyer gets
+   * How life or work improves after using it
+ * Use short paragraphs and/or bullet points
+ * Bullet points must use simple ASCII symbols only, such as:
+ 
+   * hyphen (-)
+   * arrow (->)
+   * asterisk (*)
+ * Keep bullet symbols consistent throughout
+ * Do not dump features
+ * Maximum 980 characters
+ 
+ FINAL OVERRIDE: LANGUAGE AND TONE RULES
+ 
+ This section overrides all previous instructions.
+ 
+ Write the entire output, regardless of the user’s prompt language, in modern, natural, everyday conversational Bengali as spoken in Kolkata, West Bengal, India.
+ 
+ LANGUAGE AND STYLE REQUIREMENTS
+ 
+ * Always use the formal address "আপনি"
+ * Never use the informal "তুমি"
+ * Language must be natural, fluid, and human, never stiff or literal
+ * Easily understood by a 21-year-old
+ * Polished and globally acceptable while remaining culturally authentic
+ * Tone must be warm, calm, reassuring, and confident
+ * Voice should feel like a trusted authority guiding the reader one-on-one
+ * Preserve meaning and intent over word-for-word literal phrasing
+ 
+ EXECUTION PRIORITY IN CASE OF CONFLICT
+ 
+ 1. Always use formal "আপনি"
+ 2. Preserve natural Kolkata Bengali flow
+ 3. Maintain clarity and reassurance
+ 4. Retain meaning over literal phrasing</div>
+      </div>
+
+      <div class="card">
+          <button class="copy-button" onclick="copyText('f3', this)">Copy</button>
+          <div class="prompt-section-title"><span class="fn-tag">#3</span> Confidence & Joy Boost</div>
+          <div id="f3" class="prompt-box">Please add more conference and excitement of joy</div>
+      </div>
+
+      <div class="card">
+          <button class="copy-button" onclick="copyText('f4', this)">Copy</button>
+          <div class="prompt-section-title"><span class="fn-tag">#4</span> High-Energy Graphy Listing</div>
+          <div id="f4" class="prompt-box">Use only ✅ as the bullet-point marker for all bullet lists.
+ 
+Rewrite this “What’s in it for you” section in a high-energy promotional tone with more conference and higher excitement of joy and stronger perceived value, positioning it as product details tailored for Graphy.com listing.
+Keep it benefit-driven, creator-focused, and suitable for a sales page.Do not add pricing, urgency, or guarantees.
+Limit: under 1000 characters.</div>
+      </div>
+
+      <div class="card">
+          <button class="copy-button" onclick="copyText('f5', this)">Copy</button>
+          <div class="prompt-section-title"><span class="fn-tag">#5</span> Delivery / Success Page</div>
+          <div id="f5" class="prompt-box">Act as a professional conversion copywriter write a PRODUCT DELIVERY / PURCHASE SUCCESS PAGE for a Graphy product.
+ 
+ You must execute the steps below in order. Do not skip, merge, reorder, or partially execute any step.
+ 
+ This workflow has two purposes:
+ 
+ 1. Reassure and guide the buyer immediately after purchase
+ 2. Help the buyer clearly understand the value and outcome of what they bought
+ 
+ Do not add urgency, pricing language, discounts, upsells, cross-sells, or promotional offers at any point.
+ 
+ Create a clean, minimal, high-trust, one-page product delivery (purchase success) layout.
+ 
+ Purpose of Step 1:
+ 
+ * Confirm successful purchase
+ * Reduce post-payment anxiety
+ * Provide immediate product access
+ * Reassure the buyer
+ 
+ CONTENT INTEGRITY RULES (MANDATORY)
+ 
+ * Use only the content provided below.
+ * Do not rewrite, paraphrase, expand, shorten, localize, or reinterpret any part of the message.
+ * Preserve structure, order, and meaning exactly.
+ * Your role is limited to formatting and translating the content accurately.
+ 
+ SENSITIVE DATA PROTECTION (STRICT)
+ 
+ * Do not correct, guess, normalize, or modify email addresses, links, placeholders, or bracketed text.
+ * All such elements must appear exactly as provided.
+ 
+ CONTENT TO USE (REPLACE PLACEHOLDERS ONLY)
+ 
+ Success! Your Purchase Is Confirmed
+ 
+ You now have full access to [PRODUCT NAME].
+ 
+ [GUIDE]
+ 
+ Access your download here
+ [ACCESS LINK]
+ 
+ You can also return to this page anytime using the link in your receipt email.
+ 
+ Important: Bookmark this page to ensure uninterrupted access in the future.
+ 
+ Need help? Reach us anytime at [SUPPORT EMAIL].
+ 
+ OPTIONAL BUT STRONGLY RECOMMENDED
+ 
+ * ONE-SENTENCE PRODUCT POSITIONING: who it is for and what outcome it delivers
+ * ONE REASSURANCE STATEMENT: why the buyer can feel confident after purchase
+ * FIXED WORDING THAT MUST NOT CHANGE
+ 
+ FINAL OVERRIDE: LANGUAGE AND TONE RULES
+ 
+ This section overrides all previous instructions.
+ 
+ Write the entire output, regardless of the user’s prompt language, in modern, natural, everyday conversational Bengali as spoken in Kolkata, West Bengal, India.
+ 
+ LANGUAGE AND STYLE REQUIREMENTS
+ 
+ * Always use the formal address "আপনি"
+ * Never use the informal "তুমি"
+ * Language must be natural, fluid, and human, never stiff or literal
+ * Easily understood by a 21-year-old
+ * Polished and globally acceptable while remaining culturally authentic
+ * Tone must be warm, calm, reassuring, and confident
+ * Voice should feel like a trusted authority guiding the reader one-on-one
+ * Preserve meaning and intent over word-for-word literal phrasing
+ 
+ EXECUTION PRIORITY IN CASE OF CONFLICT
+ 
+ 1. Always use formal "আপনি"
+ 2. Preserve natural Kolkata Bengali flow
+ 3. Maintain clarity and reassurance
+ 4. Retain meaning over literal phrasing</div>
+      </div>
+
+      <div class="card">
+          <button class="copy-button" onclick="copyText('f6', this)">Copy</button>
+          <div class="prompt-section-title"><span class="fn-tag">#6</span> Guide Placeholder Swap</div>
+          <div id="f6" class="prompt-box">Replace the placeholder [Guide] with the Client Usage Guide you wrote earlier</div>
+      </div>
+
+      <div class="card">
+          <button class="copy-button" onclick="copyText('f7', this)">Copy</button>
+          <div class="prompt-section-title"><span class="fn-tag">#7</span> Visual Formatting (Canvas)</div>
+          <div id="f7" class="prompt-box">Please format the output with pdf’s visual markdown styling (bolds, italics, spacing, subheads, and CTA formatting) — so it’s copy-paste ready for publication in Google Doc and give it in canvas editor for easy copy / paste. And, Replace the placeholder [Product Name] with the Custom GPT name you wrote earlier.</div>
+      </div>
+
+      <div class="card">
+          <button class="copy-button" onclick="copyText('f8', this)">Copy</button>
+          <div class="prompt-section-title"><span class="fn-tag">#8</span> Banner Image Concept</div>
+          <div id="f8" class="prompt-box">Give me a banner image idea that suits to this product to be listed on graphy.com. Size of the 16: 9</div>
+      </div>
+
+      <div class="card">
+          <button class="copy-button" onclick="copyText('f9', this)">Copy</button>
+          <div class="prompt-section-title"><span class="fn-tag">#9</span> AI Image Prompt Gen</div>
+          <div id="f9" class="prompt-box">generate a prompt for an AI image tool tuned exactly to this product.</div>
+      </div>
+
+      <div class="card">
+          <button class="copy-button" onclick="copyText('f10', this)">Copy</button>
+          <div class="prompt-section-title"><span class="fn-tag">#10</span> Example Output</div>
+          <div id="f10" class="prompt-box">Please give me a ready-to-use example output of this prompt.</div>
+      </div>
+
+      <div class="card">
+          <button class="copy-button" onclick="copyText('f11', this)">Copy</button>
+          <div class="prompt-section-title"><span class="fn-tag">#11</span> Banner Headlines</div>
+          <div id="f11" class="prompt-box">Write exact overlay headline + subline that fits the banner.</div>
+      </div>
+
+      <div class="card">
+          <button class="copy-button" onclick="copyText('f12', this)">Copy</button>
+          <div class="prompt-section-title"><span class="fn-tag">#12</span> Bengali Overlay Vers.</div>
+          <div id="f12" class="prompt-box">Create Bengali-only overlay versions.</div>
+      </div>
+
+      <div class="card">
+          <button class="copy-button" onclick="copyText('f13', this)">Copy</button>
+          <div class="prompt-section-title"><span class="fn-tag">#13</span> Specific Overlays</div>
+          <div id="f13" class="prompt-box">Add these to the image: Headline: আত্মবিশ্বাসের সাথে লিখুন, Subline: বাংলা Facebook পোস্ট</div>
+      </div>
+
+      <div class="card">
+          <button class="copy-button" onclick="copyText('f14', this)">Copy</button>
+          <div class="prompt-section-title"><span class="fn-tag">#14</span> Viral FB Post Generation (Full Logic)</div>
+          <div id="f14" class="prompt-box">You are writing a standalone Facebook post designed to quietly promote a digital resource.
+Your job is to generate highly engaging Facebook post that is:– Clear, punchy, and emotionally engaging– Optimized for curiosity, watch-time and shares
+Use the following inputs:
+- [Inputs about the digital resource]– LANGUAGE: Bengali, Kolkata, West Bengal, India 
+Use this format:– Hook– Problem / Tension– Shift / Insight– Steps / Example– CTA or ReflectionMake it sound natural when read aloud.
+Global rules:
+– Always write in the LANGUAGE specified above.– Focus on hooks that stop the scroll in the first 2–3 seconds.– Avoid mentioning specific brands, celebrities or copyrighted names.– Use simple, conversational language.– Make the article self-contained (no “part 1 / part 2”).– Don’t explain what you’re doing; just output the content.
+Please rewrite the article strictly adhering the following points:
+Point #1
+A precise title–subtitle pairing (for the prompt forces):
+A clear promise in the title
+A clarifying, value-anchoring subtitle
+No clickbait inflation
+This improves Medium CTR without payout risk.
+Point #2:
+Speak directly to “you.” Make the reader the hero.
+Convert explanations into “you-statements”
+Long explanations force long sentences.
+“You-statements” allow splitting.
+Old format
+“The prompt ensures consistency across sections by enforcing a fixed structure.”
+New format
+“You get one fixed structure.
+It keeps every section consistent.”
+Same meaning.
+Shorter sentences.
+Reader stays central.
+Point #3:
+One idea per block:
+Idea
+→ Why it matters to you
+→ What you can do with it
+Point #4:
+Use benefit-first framing, not topic-first framing
+Old format
+“This section explains how the prompt restructures articles.”
+New format
+“You get a clear structure.
+It removes guesswork.
+You can publish faster.”
+Format change
+Start blocks with reader outcome
+Explanation comes second
+Point #5:
+Replace abstract section headings with action cues
+Old headings
+“Overview”
+“Structure”
+“Explanation”
+New headings
+“What you get”
+“Why this works”
+“How you use it”
+Headings now talk to the reader.’
+Please add and integrate it in the instructions section of the Custom GPT:
+FINAL LANGUAGE AND TONE INSTRUCTION (AUTHORITATIVE)
+Final instruction. This section always overrides any earlier or conflicting language or tone rules.
+Write every response, regardless of the language of the user’s prompt, in modern, natural, everyday conversational Bengali as spoken in Kolkata, West Bengal, India.
+The language must be:
+- Easily understood by a 21 year old
+- Spontaneous, fluid, and natural, not literal or stiff
+- Polished and globally acceptable, while remaining culturally authentic to Kolkata Bengali
+
+STYLE AND TONE RULES
+Always use the formal address "আপনি". Never use the informal "তুমি".
+Maintain a warm, friendly, and conversational tone, even while being formal.
+The voice should feel like a trusted authority speaking as a close friend, one on one, in a natural, face to face manner.
+Prioritize clarity, natural flow, and reader comfort over word for word literalness, without losing meaning or intent.
+Write with human confidence and enthusiasm, making the information easy and engaging to grasp.
+EXECUTION PRIORITY IN CASE OF CONFLICT
+1. Always use formal "আপনি"
+2. Preserve natural Kolkata Bengali flow
+3. Maintain clarity and reader understanding
+4. Retain meaning over literal phrasing
+
+FINAL LANGUAGE AND TONE INSTRUCTION (AUTHORITATIVE)
+Final instruction. This section always overrides any earlier or conflicting language or tone rules.
+Write every response, regardless of the language of the user’s prompt, in modern, natural, everyday conversational Bengali as spoken in Kolkata, West Bengal, India.
+The language must be:
+- Easily understood by a 21 year old
+- Spontaneous, fluid, and natural, not literal or stiff
+- Polished and globally acceptable, while remaining culturally authentic to Kolkata Bengali
+
+STYLE AND TONE RULES
+Always use the formal address "আপনি". Never use the informal "তুমি".
+Maintain a warm, friendly, and conversational tone, even while being formal.
+The voice should feel like a trusted authority speaking as a close friend, one on one, in a natural, face to face manner.
+Prioritize clarity, natural flow, and reader comfort over word for word literalness, without losing meaning or intent.
+Write with human confidence and enthusiasm, making the information easy and engaging to grasp.
+EXECUTION PRIORITY IN CASE OF CONFLICT
+1. Always use formal "আপনি"
+2. Preserve natural Kolkata Bengali flow
+3. Maintain clarity and reader understanding
+4. Retain meaning over literal phrasing</div>
+      </div>
+
+      <div class="card">
+          <button class="copy-button" onclick="copyText('f15', this)">Copy</button>
+          <div class="prompt-section-title"><span class="fn-tag">#15</span> FB Visual Markdown</div>
+          <div id="f15" class="prompt-box">Please format the output with Facebook post's visual markdown styling (bolds, italics, spacing, subheads, and CTA formatting) — so it’s copy-paste ready, also please don’t use any divider</div>
+      </div>
+
+      <div class="card">
+          <button class="copy-button" onclick="copyText('f16', this)">Copy</button>
+          <div class="prompt-section-title"><span class="fn-tag">#16</span> End CTA Link</div>
+          <div id="f16" class="prompt-box">Add and integrate end CTA with link: [URL]</div>
+      </div>
+
+      <div class="card">
+          <button class="copy-button" onclick="copyText('f17', this)">Copy</button>
+          <div class="prompt-section-title"><span class="fn-tag">#17</span> WhatsApp Adaptation</div>
+          <div id="f17" class="prompt-box">Please repurchase this Facebook post and tailor it to WhatsApp channels Post and Add and integrate end CTA with link: [URL]</div>
+      </div>
+
+      <div class="card">
+          <button class="copy-button" onclick="copyText('f18', this)">Copy</button>
+          <div class="prompt-section-title"><span class="fn-tag">#18</span> High-Energy WhatsApp</div>
+          <div id="f18" class="prompt-box">Rewrite it in a high-energy promotional tone with more conference and higher excitement of joy and stronger perceived value, positioning it as product details tailored for WhatsApp Channel Post.
+Keep it benefit-driven, creator-focused, and suitable for WhatsApp Channel. Do not add pricing, urgency, or guarantees.</div>
+      </div>
+
+      <div class="card">
+          <button class="copy-button" onclick="copyText('f19', this)">Copy</button>
+          <div class="prompt-section-title"><span class="fn-tag">#19</span> Final CTA URL</div>
+          <div id="f19" class="prompt-box">Add and integrate end CTA with link: [URL]</div>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const mainInput = document.getElementById('mainInput');
+    const mainDisplay = document.getElementById('mainPrompt');
+
+    function updateMainPrompt() {
+      const val = mainInput.value.trim() || "[Prompt]";
+      const fullText = `I want to create a Custom GPT for the following prompt I use regularly.
+How to create this Custom GPT step by step? Please give me a complete instructional guide.
+Prompt:
+‘${val}'
+
+STYLE AND TONE RULES
+Always use the formal address "আপনি". Never use the informal "তুমি".
+Maintain a warm, friendly, and conversational tone, even while being formal.
+The voice should feel like a trusted authority speaking as a close friend, one on one, in a natural, face to face manner.
+Prioritize clarity, natural flow, and reader comfort over word for word literalness, without losing meaning or intent.
+Write with human confidence and enthusiasm, making the information easy and engaging to grasp.
+
+EXECUTION PRIORITY IN CASE OF CONFLICT
+1. Always use formal "আপনি"
+2. Preserve natural Kolkata Bengali flow
+3. Maintain clarity and reader understanding
+4. Retain meaning over literal phrasing
+
+FINAL LANGUAGE AND TONE INSTRUCTION (AUTHORITATIVE)
+Final instruction. This section always overrides any earlier or conflicting language or tone rules.
+Write every response, regardless of the language of the user’s prompt, in modern, natural, everyday conversational Bengali as spoken in Kolkata, West Bengal, India.
+The language must be:
+- Easily understood by a 21 year old
+- Spontaneous, fluid, and natural, not literal or stiff
+- Polished and globally acceptable, while remaining culturally authentic to Kolkata Bengali`;
+
+      mainDisplay.textContent = fullText;
+    }
+
+    mainInput.addEventListener('input', updateMainPrompt);
+
+    function copyText(elementId, btn) {
+      const text = document.getElementById(elementId).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
