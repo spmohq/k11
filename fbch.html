@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Facebook Comment Hijack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --input-bg: #374151;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .container { max-width: 1000px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 40px; }
+    h1 { font-size: 2.5rem; font-weight: 800; color: var(--text-heading); letter-spacing: -1px; }
+
+    .input-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 25px;
+      margin-bottom: 40px;
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      position: sticky;
+      top: 20px;
+      z-index: 100;
+    }
+    .input-label {
+      display: block; font-weight: 700; margin-bottom: 12px;
+      color: var(--accent-primary); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1.5px;
+    }
+    textarea {
+      width: 100%; height: 120px; background-color: var(--input-bg);
+      border: 1px solid var(--card-border); border-radius: 10px;
+      padding: 15px; color: #fff; font-family: inherit; font-size: 1rem; resize: vertical;
+    }
+    textarea:focus { outline: none; border-color: var(--accent-primary); }
+
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 40px;
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+    }
+    .prompt-header {
+      display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;
+    }
+    .prompt-title { font-size: 1.25rem; font-weight: 700; color: var(--accent-primary); }
+    .prompt-box {
+      background-color: var(--code-bg); padding: 25px; border-radius: 12px;
+      white-space: pre-wrap; word-wrap: break-word; font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem; color: var(--text-primary); border: 1px solid var(--card-border);
+      margin-bottom: 20px; max-height: 600px; overflow-y: auto;
+    }
+    .copy-button {
+      background-color: var(--accent-primary); color: var(--bg-gradient-end);
+      border: none; border-radius: 8px; padding: 10px 20px; font-weight: 700;
+      font-size: 0.9rem; cursor: pointer; transition: 0.3s; display: inline-flex;
+      align-items: center; gap: 8px;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
+    .copy-button.copied { background-color: var(--accent-success); }
+
+    footer { text-align: center; padding: 40px 0; color: var(--text-secondary); opacity: 0.6; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Facebook Comment Hijack</h1>
+    </header>
+
+    <!-- INPUT -->
+    <div class="input-card">
+      <label class="input-label">Insert Facebook Post Content</label>
+      <textarea id="postInput" placeholder="Paste the text of the Facebook post here to generate prompts..."></textarea>
+    </div>
+
+    <main>
+      <!-- PROMPT 1: PUBLIC VERSION -->
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-title">PROMPT 1: PUBLIC POST VERSION</div>
+          <button class="copy-button" onclick="copyText('prompt1Display', this)">Copy Prompt</button>
+        </div>
+        <div id="prompt1Display" class="prompt-box">You are an expert in attention interception, Facebook feed dynamics, and the Comment Hijack / Threadpoint strategy.
+
+DEFINITION (READ CAREFULLY):
+The Comment Hijack / Threadpoint strategy is designed to intercept existing attention instead of creating new posts.
+
+On Facebook, this means leaving strategic comments on posts, reels, or comment threads where people are already reacting emotionally, debating, confused, or seeking validation.
+
+The strategy works by:
+* Entering conversations where people express frustration, disagreement, confusion, or curiosity
+* Reframing the situation without fully explaining it
+* Creating curiosity that naturally leads readers to tap the commenter’s profile
+* Avoiding selling, links, pitches, or explicit calls to action
+
+On Facebook specifically:
+* Readers skim fast and reward relatable clarity over depth
+* Tone matters more than cleverness or intelligence
+* Conversational credibility beats authority
+* Subtle insight performs better than mystery-only comments
+* Comments should feel like a human thought, not a lesson
+
+Your job is NOT to teach fully.
+Your job is to reframe just enough to trigger interest and keep the thread alive.
+
+INPUT:
+You will be given a Facebook post.
+
+FACEBOOK POST:
+[Insert Facebook Post]
+
+TASK:
+Based ONLY on the given Facebook post, generate the following four items, all tailored to Facebook comment norms and tone.
+
+1. THREADPOINT (PRIMARY COMMENT)
+   Create a concise, scroll-stopping comment that includes all of the following elements in order:
+* Hook: Signals relevance, lived experience, or emotional recognition
+* Shift: Gently reframes the dominant assumption or reaction in the post
+* Curiosity Trigger: Opens a loop without resolving it
+* Breadcrumb: A linkless, non-salesy nudge that makes a profile tap feel natural
+
+2. SELF-REPLY COMMENT
+   Write a short follow-up reply to your own Threadpoint that:
+* Extends comment visibility and lifespan
+* Adds a small clarification without closing the loop
+* Reinforces credibility without explaining fully
+* Feels natural as a thinking out loud follow-up
+
+3. REPLY TO ANOTHER COMMENT
+   Write a reply to another user’s comment that:
+* Responds respectfully
+* Acknowledges their point without agreeing fully
+* Introduces a missing variable or perspective
+* Positions you as a thoughtful peer, not an authority
+* Preserves curiosity and conversation flow
+
+4. MICRO-BURST (FACEBOOK VERSION)
+   Write a Facebook-adapted Micro-Burst:
+* 1 short sentence (2 max)
+* Anchored directly to the original post
+* Highlights a missing or misordered factor
+* Does not explain the solution
+* Does not ask a direct question
+* Feels like a natural standalone comment someone would like or reply to
+
+RULES:
+* Do not include links
+* Do not pitch, sell, or promote
+* Do not give step-by-step solutions
+* Do not mention strategies, frameworks, or products
+* Avoid teaching tone
+* Everything must feel native to Facebook comments
+
+OUTPUT FORMAT (STRICT):
+THREADPOINT:
+SELF-REPLY COMMENT:
+REPLY TO ANOTHER COMMENT:
+MICRO-BURST:
+
+FINAL CHECK (INTERNAL):
+* Would this feel like a genuine Facebook comment?
+* Does it sound like a real person, not a content creator?
+* Does it reframe without explaining?
+* Would a curious reader reasonably tap the author’s profile?</div>
+      </div>
+
+      <!-- PROMPT 2: GROUP VERSION -->
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-title">PROMPT 2: GROUP VERSION</div>
+          <button class="copy-button" onclick="copyText('prompt2Display', this)">Copy Prompt</button>
+        </div>
+        <div id="prompt2Display" class="prompt-box">You are an expert in attention interception, Facebook Group dynamics, and the Comment Hijack / Threadpoint strategy.
+
+DEFINITION (READ CAREFULLY):
+The Comment Hijack / Threadpoint strategy is designed to intercept existing attention inside Facebook Groups by contributing thoughtful, non-performative comments to posts where members are already sharing experiences, asking for help, or expressing frustration.
+
+In Groups, visibility comes from trust and relevance, not virality.
+
+The strategy works by:
+* Entering conversations where members express confusion, overwhelm, stuck-ness, or repeated failure
+* Responding like a peer, not a marketer
+* Reframing the situation without solving it
+* Creating curiosity that leads members to check your profile or past comments
+* Avoiding selling, links, pitching, or any hint of self-promotion
+
+On Facebook Groups specifically:
+* Members value lived experience over theory
+* Helpfulness is rewarded, but over-teaching triggers resistance
+* Tone must feel supportive, calm, and human
+* Subtle reframing performs better than bold contrarian takes
+* Moderators penalize promotional or performative comments
+
+Your job is NOT to teach fully.
+Your job is to shift perspective just enough to create clarity and interest without becoming the expert.
+
+INPUT:
+You will be given a Facebook Group post.
+
+FACEBOOK GROUP POST:
+[Insert Facebook Group Post]
+
+TASK:
+Based ONLY on the given Facebook Group post, generate the following four items, all tailored to Facebook Group norms and etiquette.
+
+1. THREADPOINT (PRIMARY GROUP COMMENT)
+   Create a grounded, trust-safe comment that includes all of the following elements in order:
+* Empathy Hook: Signals understanding or shared experience
+* Soft Shift: Gently reframes the problem without contradicting the poster
+* Curiosity Trigger: Opens a loop without offering the solution
+* Social Breadcrumb: A natural, non-obvious signal of depth or experience
+
+2. SELF-REPLY COMMENT
+   Write a short follow-up reply to your own comment that:
+* Extends visibility without gaming the system
+* Adds one clarifying nuance without closing the loop
+* Reinforces credibility through experience, not authority
+* Sounds like a natural afterthought
+
+3. REPLY TO ANOTHER MEMBER
+   Write a reply to another group member’s comment that:
+* Acknowledges their experience
+* Adds a missing variable or angle
+* Keeps the tone collaborative, not corrective
+* Maintains curiosity and discussion
+* Avoids here is what to do language
+
+4. MICRO-BURST (GROUP VERSION)
+   Write a Group-appropriate Micro-Burst:
+* 1 sentence (2 max)
+* Directly tied to the original post
+* Highlights a misalignment, assumption, or overlooked factor
+* Does not explain or resolve
+* Feels safe, thoughtful, and discussion-worthy
+
+RULES (GROUP SAFE):
+* No links
+* No pitching, selling, or indirect promotion
+* No authority framing
+* No step-by-step advice
+* No strategy or framework language
+* No profile mentions
+* Everything must feel member-first
+
+OUTPUT FORMAT (STRICT):
+THREADPOINT:
+SELF-REPLY COMMENT:
+REPLY TO ANOTHER MEMBER:
+MICRO-BURST:
+
+FINAL CHECK (INTERNAL):
+* Would this pass Group moderation?
+* Does it feel like a genuine peer contribution?
+* Does it help without solving?
+* Would a curious member naturally want to see more from this person later?</div>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const postInput = document.getElementById('postInput');
+    const display1 = document.getElementById('prompt1Display');
+    const display2 = document.getElementById('prompt2Display');
+
+    const template1 = `You are an expert in attention interception, Facebook feed dynamics, and the Comment Hijack / Threadpoint strategy.
+
+DEFINITION (READ CAREFULLY):
+The Comment Hijack / Threadpoint strategy is designed to intercept existing attention instead of creating new posts.
+
+On Facebook, this means leaving strategic comments on posts, reels, or comment threads where people are already reacting emotionally, debating, confused, or seeking validation.
+
+The strategy works by:
+* Entering conversations where people express frustration, disagreement, confusion, or curiosity
+* Reframing the situation without fully explaining it
+* Creating curiosity that naturally leads readers to tap the commenter’s profile
+* Avoiding selling, links, pitches, or explicit calls to action
+
+On Facebook specifically:
+* Readers skim fast and reward relatable clarity over depth
+* Tone matters more than cleverness or intelligence
+* Conversational credibility beats authority
+* Subtle insight performs better than mystery-only comments
+* Comments should feel like a human thought, not a lesson
+
+Your job is NOT to teach fully.
+Your job is to reframe just enough to trigger interest and keep the thread alive.
+
+INPUT:
+You will be given a Facebook post.
+
+FACEBOOK POST:
+{POST_CONTENT}
+
+TASK:
+Based ONLY on the given Facebook post, generate the following four items, all tailored to Facebook comment norms and tone.
+
+1. THREADPOINT (PRIMARY COMMENT)
+   Create a concise, scroll-stopping comment that includes all of the following elements in order:
+* Hook: Signals relevance, lived experience, or emotional recognition
+* Shift: Gently reframes the dominant assumption or reaction in the post
+* Curiosity Trigger: Opens a loop without resolving it
+* Breadcrumb: A linkless, non-salesy nudge that makes a profile tap feel natural
+
+2. SELF-REPLY COMMENT
+   Write a short follow-up reply to your own Threadpoint that:
+* Extends comment visibility and lifespan
+* Adds a small clarification without closing the loop
+* Reinforces credibility without explaining fully
+* Feels natural as a thinking out loud follow-up
+
+3. REPLY TO ANOTHER COMMENT
+   Write a reply to another user’s comment that:
+* Responds respectfully
+* Acknowledges their point without agreeing fully
+* Introduces a missing variable or perspective
+* Positions you as a thoughtful peer, not an authority
+* Preserves curiosity and conversation flow
+
+4. MICRO-BURST (FACEBOOK VERSION)
+   Write a Facebook-adapted Micro-Burst:
+* 1 short sentence (2 max)
+* Anchored directly to the original post
+* Highlights a missing or misordered factor
+* Does not explain the solution
+* Does not ask a direct question
+* Feels like a natural standalone comment someone would like or reply to
+
+RULES:
+* Do not include links
+* Do not pitch, sell, or promote
+* Do not give step-by-step solutions
+* Do not mention strategies, frameworks, or products
+* Avoid teaching tone
+* Everything must feel native to Facebook comments
+
+OUTPUT FORMAT (STRICT):
+THREADPOINT:
+SELF-REPLY COMMENT:
+REPLY TO ANOTHER COMMENT:
+MICRO-BURST:
+
+FINAL CHECK (INTERNAL):
+* Would this feel like a genuine Facebook comment?
+* Does it sound like a real person, not a content creator?
+* Does it reframe without explaining?
+* Would a curious reader reasonably tap the author’s profile?`;
+
+    const template2 = `You are an expert in attention interception, Facebook Group dynamics, and the Comment Hijack / Threadpoint strategy.
+
+DEFINITION (READ CAREFULLY):
+The Comment Hijack / Threadpoint strategy is designed to intercept existing attention inside Facebook Groups by contributing thoughtful, non-performative comments to posts where members are already sharing experiences, asking for help, or expressing frustration.
+
+In Groups, visibility comes from trust and relevance, not virality.
+
+The strategy works by:
+* Entering conversations where members express confusion, overwhelm, stuck-ness, or repeated failure
+* Responding like a peer, not a marketer
+* Reframing the situation without solving it
+* Creating curiosity that leads members to check your profile or past comments
+* Avoiding selling, links, pitching, or any hint of self-promotion
+
+On Facebook Groups specifically:
+* Members value lived experience over theory
+* Helpfulness is rewarded, but over-teaching triggers resistance
+* Tone must feel supportive, calm, and human
+* Subtle reframing performs better than bold contrarian takes
+* Moderators penalize promotional or performative comments
+
+Your job is NOT to teach fully.
+Your job is to shift perspective just enough to create clarity and interest without becoming the expert.
+
+INPUT:
+You will be given a Facebook Group post.
+
+FACEBOOK GROUP POST:
+{POST_CONTENT}
+
+TASK:
+Based ONLY on the given Facebook Group post, generate the following four items, all tailored to Facebook Group norms and etiquette.
+
+1. THREADPOINT (PRIMARY GROUP COMMENT)
+   Create a grounded, trust-safe comment that includes all of the following elements in order:
+* Empathy Hook: Signals understanding or shared experience
+* Soft Shift: Gently reframes the problem without contradicting the poster
+* Curiosity Trigger: Opens a loop without offering the solution
+* Social Breadcrumb: A natural, non-obvious signal of depth or experience
+
+2. SELF-REPLY COMMENT
+   Write a short follow-up reply to your own comment that:
+* Extends visibility without gaming the system
+* Adds one clarifying nuance without closing the loop
+* Reinforces credibility through experience, not authority
+* Sounds like a natural afterthought
+
+3. REPLY TO ANOTHER MEMBER
+   Write a reply to another group member’s comment that:
+* Acknowledges their experience
+* Adds a missing variable or angle
+* Keeps the tone collaborative, not corrective
+* Maintains curiosity and discussion
+* Avoids here is what to do language
+
+4. MICRO-BURST (GROUP VERSION)
+   Write a Group-appropriate Micro-Burst:
+* 1 sentence (2 max)
+* Directly tied to the original post
+* Highlights a misalignment, assumption, or overlooked factor
+* Does not explain or resolve
+* Feels safe, thoughtful, and discussion-worthy
+
+RULES (GROUP SAFE):
+* No links
+* No pitching, selling, or indirect promotion
+* No authority framing
+* No step-by-step advice
+* No strategy or framework language
+* No profile mentions
+* Everything must feel member-first
+
+OUTPUT FORMAT (STRICT):
+THREADPOINT:
+SELF-REPLY COMMENT:
+REPLY TO ANOTHER MEMBER:
+MICRO-BURST:
+
+FINAL CHECK (INTERNAL):
+* Would this pass Group moderation?
+* Does it feel like a genuine peer contribution?
+* Does it help without solving?
+* Would a curious member naturally want to see more from this person later?`;
+
+    function updatePrompts() {
+      const content = postInput.value.trim() || "[Insert Facebook Post]";
+      display1.textContent = template1.replace("{POST_CONTENT}", content);
+      display2.textContent = template2.replace("{POST_CONTENT}", content);
+    }
+
+    postInput.addEventListener('input', updatePrompts);
+
+    function copyText(elementId, btn) {
+      const text = document.getElementById(elementId).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
