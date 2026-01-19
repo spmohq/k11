@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Facebook Post to Announce A Blog Post</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --input-bg: #374151;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 40px; }
+    h1 { font-size: 2.5rem; font-weight: 800; color: var(--text-heading); letter-spacing: -1px; }
+
+    .input-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+    }
+    .input-group { margin-bottom: 20px; }
+    .input-group:last-child { margin-bottom: 0; }
+    .input-label {
+      display: block; font-weight: 700; margin-bottom: 8px;
+      color: var(--accent-primary); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px;
+    }
+    input[type="text"], textarea {
+      width: 100%; background-color: var(--input-bg);
+      border: 1px solid var(--card-border); border-radius: 8px;
+      padding: 12px; color: #fff; font-family: inherit; font-size: 1rem;
+    }
+    textarea { height: 120px; resize: vertical; }
+    input:focus, textarea:focus { outline: none; border-color: var(--accent-primary); }
+
+    .result-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 30px;
+      position: relative;
+    }
+    .result-header {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;
+    }
+    .platform-tag {
+      background: rgba(34, 211, 238, 0.2); color: var(--accent-primary);
+      padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700;
+    }
+    .prompt-box {
+      background-color: var(--code-bg); padding: 20px; border-radius: 10px;
+      white-space: pre-wrap; word-wrap: break-word; font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem; color: var(--text-primary); border: 1px solid var(--card-border);
+      margin-bottom: 15px; max-height: 400px; overflow-y: auto;
+    }
+    .copy-button {
+      background-color: var(--accent-primary); color: var(--bg-gradient-end);
+      border: none; border-radius: 6px; padding: 8px 16px; font-weight: 700;
+      font-size: 0.85rem; cursor: pointer; transition: 0.3s; display: inline-flex;
+      align-items: center; gap: 6px;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
+    .copy-button.copied { background-color: var(--accent-success); }
+
+    footer { text-align: center; padding: 40px 0; color: var(--text-secondary); opacity: 0.6; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Facebook Post to Announce A Blog Post</h1>
+    </header>
+
+    <!-- DYNAMIC INPUTS -->
+    <div class="input-card">
+      <div class="input-group">
+        <label class="input-label">Blog Title</label>
+        <input type="text" id="blogTitle" placeholder="e.g., 5 Ways to Scale Your Freelance Business">
+      </div>
+      <div class="input-group">
+        <label class="input-label">Blog Body / Summary</label>
+        <textarea id="blogBody" placeholder="Paste the key points or the full body of the blog post here..."></textarea>
+      </div>
+    </div>
+
+    <main>
+      <!-- PROMPT 1 -->
+      <div class="result-card">
+        <div class="result-header">
+          <span class="platform-tag">PROMPT 1: FACEBOOK TIMELINE</span>
+          <button class="copy-button" onclick="copyText('fbDisplay', this)">Copy Prompt</button>
+        </div>
+        <div id="fbDisplay" class="prompt-box">Please write a Facebook profile timeline post to promote the blog post below.
+
+The post should clearly explain what’s in this blog post for you in a way that feels practical, relatable, and useful to Indian creators, freelancers, solopreneurs, and small business owners.
+
+Tone: confident, positive, and conversational. Friendly and motivating, not salesy or exaggerated.
+
+Writing guidelines:
+
+* Focus on real benefits such as clarity, time-saving, better results, and fewer mistakes
+* Use simple, everyday English that feels natural to Indian Facebook users
+* Use short lines and spacing for easy mobile reading
+* Avoid hype words, slang, or emojis except bullet points
+* Use only the checkmark symbol as the bullet-point marker for all bullet lists
+
+Platform fit:
+
+* Written as a personal post, not a brand announcement
+* Should feel like helpful advice shared with your network
+
+Call to action:
+
+* End with a soft, non-pushy CTA that invites curiosity, for example: If this sounds useful, the full post is worth a read.
+
+Character limit: under 1000 characters.
+
+Blog Post:
+Title: [title]
+Body: [body]</div>
+      </div>
+
+      <!-- PROMPT 2 -->
+      <div class="result-card">
+        <div class="result-header">
+          <span class="platform-tag">PROMPT 2: WHATSAPP CHANNEL</span>
+          <button class="copy-button" onclick="copyText('waDisplay', this)">Copy Prompt</button>
+        </div>
+        <div id="waDisplay" class="prompt-box">Please write a WhatsApp Channel post to promote the blog post below.
+
+The post should quickly and clearly explain what the reader will gain from reading the blog post, in a way that feels practical, helpful, and relevant to Indian creators, freelancers, solopreneurs, and small business owners.
+
+Tone: calm, confident, and friendly. Informative, not promotional.
+
+Writing guidelines:
+
+* Start with a clear, benefit-led opening line
+* Focus on real outcomes such as clarity, saved time, fewer mistakes, and better decisions
+* Use short lines and simple language for mobile reading
+* Avoid hype, emojis, and sales language
+* Use only the checkmark symbol as the bullet-point marker for all bullet lists
+
+Platform fit:
+
+* Should feel like a useful update shared on a WhatsApp Channel
+* Direct and respectful of the reader’s time
+
+Call to action:
+
+* End with a soft, low-pressure CTA, for example: Read the full post here if this is useful.
+
+Character limit: under 700 characters.
+
+Blog Post:
+Title: [title]
+Body: [body]</div>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const blogTitle = document.getElementById('blogTitle');
+    const blogBody = document.getElementById('blogBody');
+    const fbDisplay = document.getElementById('fbDisplay');
+    const waDisplay = document.getElementById('waDisplay');
+
+    const fbTemplate = `Please write a Facebook profile timeline post to promote the blog post below.
+
+The post should clearly explain what’s in this blog post for you in a way that feels practical, relatable, and useful to Indian creators, freelancers, solopreneurs, and small business owners.
+
+Tone: confident, positive, and conversational. Friendly and motivating, not salesy or exaggerated.
+
+Writing guidelines:
+
+* Focus on real benefits such as clarity, time-saving, better results, and fewer mistakes
+* Use simple, everyday English that feels natural to Indian Facebook users
+* Use short lines and spacing for easy mobile reading
+* Avoid hype words, slang, or emojis except bullet points
+* Use only the checkmark symbol as the bullet-point marker for all bullet lists
+
+Platform fit:
+
+* Written as a personal post, not a brand announcement
+* Should feel like helpful advice shared with your network
+
+Call to action:
+
+* End with a soft, non-pushy CTA that invites curiosity, for example: If this sounds useful, the full post is worth a read.
+
+Character limit: under 1000 characters.
+
+Blog Post:
+Title: {TITLE}
+Body: {BODY}`;
+
+    const waTemplate = `Please write a WhatsApp Channel post to promote the blog post below.
+
+The post should quickly and clearly explain what the reader will gain from reading the blog post, in a way that feels practical, helpful, and relevant to Indian creators, freelancers, solopreneurs, and small business owners.
+
+Tone: calm, confident, and friendly. Informative, not promotional.
+
+Writing guidelines:
+
+* Start with a clear, benefit-led opening line
+* Focus on real outcomes such as clarity, saved time, fewer mistakes, and better decisions
+* Use short lines and simple language for mobile reading
+* Avoid hype, emojis, and sales language
+* Use only the checkmark symbol as the bullet-point marker for all bullet lists
+
+Platform fit:
+
+* Should feel like a useful update shared on a WhatsApp Channel
+* Direct and respectful of the reader’s time
+
+Call to action:
+
+* End with a soft, low-pressure CTA, for example: Read the full post here if this is useful.
+
+Character limit: under 700 characters.
+
+Blog Post:
+Title: {TITLE}
+Body: {BODY}`;
+
+    function updatePrompts() {
+      const titleText = blogTitle.value.trim() || "[title]";
+      const bodyText = blogBody.value.trim() || "[body]";
+
+      fbDisplay.textContent = fbTemplate.replace("{TITLE}", titleText).replace("{BODY}", bodyText);
+      waDisplay.textContent = waTemplate.replace("{TITLE}", titleText).replace("{BODY}", bodyText);
+    }
+
+    blogTitle.addEventListener('input', updatePrompts);
+    blogBody.addEventListener('input', updatePrompts);
+
+    function copyText(elementId, btn) {
+      const text = document.getElementById(elementId).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
