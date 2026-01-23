@@ -1,0 +1,352 @@
+Prompt:
+
+You are a Facebook Ads strategist strictly following Hernan Vazquez’s
+“Rapid Launch in 10 Minutes” framework.
+
+Your task is to PLAN and NAME one Facebook Ads campaign for launch.
+Do NOT include any scaling steps or optimization advice.
+
+Follow these rules strictly:
+- One campaign only
+- Ad set–level budgets (no Advantage Campaign Budget)
+- Exactly three ad sets:
+  1) Interests
+  2) Lookalikes
+  3) Broad
+- Advantage+ Audiences ON
+- Automatic placements
+- Creative testing > targeting
+- Image ads only
+- 5 images × 2 headlines = 10 ads per ad set
+
+Do NOT add extra strategies, theories, or alternatives.
+
+–––––––––––––––––
+STEP 1: FUNNEL TYPE DECISION (MANDATORY)
+–––––––––––––––––
+Before planning anything, determine the Funnel type by answering
+this question:
+
+“What is the FIRST action a user must take immediately after clicking the ad?”
+
+Use ONLY the following mapping:
+- Buy immediately → Acquisition
+- Register for training/webinar → Webinar
+- Submit email for a free resource → Lead Magnet
+- Purchase a low-ticket book → Book Funnel
+- Apply or book a call → Application
+
+State the Funnel type explicitly before continuing.
+If the provided inputs conflict with this decision, correct the Funnel type.
+
+–––––––––––––––––
+INPUTS I WILL PROVIDE
+–––––––––––––––––
+1. Objective (Sales or Leads):
+2. Destination URL:
+3. Offer name:
+4. Conversion event:
+5. Country:
+6. Daily budget per ad set:
+7. Core interests (comma-separated):
+8. Available lookalike sources (e.g. buyers, leads, email list):
+9. Number of images available (default 5):
+10. Headline labels (default HL-A, HL-B):
+
+–––––––––––––––––
+WHAT YOU MUST OUTPUT
+–––––––––––––––––
+A) Funnel type (based on the decision question)
+B) Campaign name (exact naming format)
+C) Ad set names (3 only, clearly labeled)
+D) Audience setup summary for each ad set
+E) Ad naming structure for all 10 ads
+F) Final checklist before publishing
+
+–––––––––––––––––
+NAMING RULES
+–––––––––––––––––
+- Campaign name format:
+  OBJECTIVE | Funnel | Offer | Cold | Month-Year
+
+- Ad set name format:
+  AUDIENCE TYPE | Country | Conversion Event | Budget
+
+- Ad name format:
+  IMG-X | HL-Y
+
+–––––––––––––––––
+OUTPUT FORMAT RULES
+–––––––––––––––––
+- Use plain text only
+- Use numbered sections
+- Do NOT use emojis
+- Do NOT use markdown
+- Do NOT explain theory
+- Be concise and operational
+
+
+
+Inputs:
+
+INPUTS:
+1. Objective: Sales
+3. Offer name: AI Prompt Toolkit
+4. Conversion event: Purchase
+5. Country: United States
+6. Daily budget per ad set: $20
+7. Core interests: Frank Kern, Marie Forleo, Brendon Burchard
+8. Available lookalike sources: Buyers, Email List
+9. Number of images available: 5
+10. Headline labels: HL-A, HL-B
+
+
+
+
+---
+
+Funnel Identification:
+
+## First: What “Funnel type” actually means (in this course)
+
+In **Hernan Vazquez’s framework**, *funnel type* does **NOT** mean:
+
+* Awareness / Consideration / Conversion
+* TOFU / MOFU / BOFU
+* Complex customer journeys
+
+In this course, **funnel type simply means**:
+
+> **What is the FIRST action the user is asked to take after clicking the ad?**
+
+That’s it. Nothing more.
+
+---
+
+## The 5 Funnel Types You’ll Actually Use
+
+Below are the only funnel types that matter for naming and setup.
+
+---
+
+### 1️⃣ Acquisition Funnel (MOST COMMON)
+
+**How to recognize it**
+
+* Ad → Sales page → Buy now
+* User can purchase immediately
+* No required opt-in before buying
+
+**Typical URLs**
+
+* /checkout
+* /order
+* /buy
+
+**Examples**
+
+* Digital product
+* Course
+* Software
+* Membership
+* E-commerce product
+
+**What you write in the prompt**
+
+```
+Funnel type: Acquisition
+```
+
+---
+
+### 2️⃣ Webinar Funnel
+
+**How to recognize it**
+
+* Ad → Registration page
+* User must sign up for a webinar
+* Selling happens later (live or automated)
+
+**Typical URLs**
+
+* /webinar
+* /register
+* /training
+
+**Examples**
+
+* High-ticket coaching
+* Consulting offers
+* Authority-based sales
+
+**What you write in the prompt**
+
+```
+Funnel type: Webinar
+```
+
+---
+
+### 3️⃣ Lead Magnet Funnel
+
+**How to recognize it**
+
+* Ad → Free thing
+* Email is required
+* No selling on first page
+
+**Typical URLs**
+
+* /free
+* /download
+* /optin
+
+**Examples**
+
+* PDF
+* Checklist
+* Free guide
+* Email course
+
+**What you write in the prompt**
+
+```
+Funnel type: Lead Magnet
+```
+
+---
+
+### 4️⃣ Book Funnel (Low-Ticket Entry)
+
+**How to recognize it**
+
+* Ad → Book page
+* User pays small amount (shipping or low price)
+* Upsells happen after
+
+**Typical URLs**
+
+* /book
+* /order-book
+
+**Examples**
+
+* Physical book
+* Low-ticket intro product
+
+**What you write in the prompt**
+
+```
+Funnel type: Book Funnel
+```
+
+---
+
+### 5️⃣ Application / Appointment Funnel
+
+**How to recognize it**
+
+* Ad → Application or calendar
+* User applies or books a call
+* Sales happens later
+
+**Typical URLs**
+
+* /apply
+* /schedule
+* /book-call
+
+**Examples**
+
+* High-ticket services
+* Agencies
+* Consulting
+
+**What you write in the prompt**
+
+```
+Funnel type: Application
+```
+
+---
+
+## The 10-Second Decision Rule (Use This Every Time)
+
+Ask yourself ONE question:
+
+> “What does the user do FIRST after clicking the ad?”
+
+| First Action             | Funnel Type |
+| ------------------------ | ----------- |
+| Buy now                  | Acquisition |
+| Register for training    | Webinar     |
+| Give email for free item | Lead Magnet |
+| Buy cheap book           | Book Funnel |
+| Apply / book call        | Application |
+
+If you can answer that, you’ve identified the funnel type correctly.
+
+---
+
+## Example (Your Likely Use Case)
+
+If you are:
+
+* Selling a **ChatGPT prompt product**
+* Sending traffic directly to a sales page
+* Asking people to buy immediately
+
+Then your correct input is:
+
+```
+Funnel type: Acquisition
+```
+
+Not:
+
+* Conversion funnel
+* Cold traffic funnel
+* Direct response funnel
+
+Those sound smart — but they’re **not used in this framework**.
+
+---
+
+## Why This Matters for Campaign Naming (Important)
+
+This part of the campaign name:
+
+```
+SALES | Acquisition | Offer | Cold | Date
+```
+
+Exists ONLY to tell you later:
+
+* What kind of page this campaign is sending traffic to
+* What conversion event to expect
+* How fast results should appear
+
+It is **for clarity**, not strategy.
+
+---
+
+## Common Mistakes (Avoid These)
+
+❌ Writing:
+
+* “Sales Funnel”
+* “Conversion Funnel”
+* “Cold Funnel”
+
+✅ Writing:
+
+* Acquisition
+* Webinar
+* Lead Magnet
+* Book Funnel
+* Application
+
+---
+
+
+
