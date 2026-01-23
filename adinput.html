@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ad Input</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 60px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .container { max-width: 800px; margin: 0 auto; width: 100%; }
+    header { text-align: center; margin-bottom: 40px; }
+    h1 { font-size: 2.8rem; font-weight: 800; color: var(--text-heading); letter-spacing: -1px; }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 35px;
+      box-shadow: 0 12px 40px 0 var(--shadow-color);
+    }
+    .prompt-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 15px;
+      display: block;
+    }
+    
+    .prompt-box-content {
+      background-color: var(--code-bg); padding: 25px; border-radius: 12px;
+      white-space: pre-wrap; word-wrap: break-word; font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem; color: var(--text-primary); border: 1px solid var(--card-border);
+      margin-bottom: 25px; max-height: 600px; overflow-y: auto; line-height: 1.6;
+    }
+    .copy-button {
+      width: 100%;
+      background-color: var(--accent-primary); color: var(--bg-gradient-end);
+      border: none; border-radius: 10px; padding: 14px; font-weight: 700;
+      font-size: 1rem; cursor: pointer; transition: 0.3s; display: flex;
+      justify-content: center; align-items: center; gap: 10px;
+    }
+    .copy-button:hover { 
+      background-color: var(--accent-hover); 
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(34, 211, 238, 0.3);
+    }
+    .copy-button.copied { background-color: var(--accent-success); }
+
+    .icon { width: 20px; height: 20px; }
+    .copied-icon { display: none; }
+    .copy-button.copied .copy-icon { display: none; }
+    .copy-button.copied .copied-icon { display: inline-block; }
+
+    footer { text-align: center; margin-top: 60px; color: var(--text-secondary); opacity: 0.6; font-size: 0.9rem; }
+
+    /* Scrollbar Styling */
+    .prompt-box-content::-webkit-scrollbar { width: 6px; }
+    .prompt-box-content::-webkit-scrollbar-track { background: transparent; }
+    .prompt-box-content::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 10px; }
+
+    @media (max-width: 600px) { h1 { font-size: 2rem; } .card { padding: 20px; } }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Ad Input</h1>
+    </header>
+
+    <main>
+      <div class="card">
+        <span class="prompt-label">Ad Information Template</span>
+        <div id="inputForm" class="prompt-box-content">INSTRUCTIONS FOR USER: Copy this entire form, fill in every section clearly, and paste it back.
+Do not skip fields. If a field does not apply, write “N/A”.
+
+Prompt:
+
+1. Product Name
+[Exact product name as it should appear in ads]
+
+2. Target Audience
+[Who exactly this product is for — demographics, role, situation, awareness level]
+
+3. Angle
+[Primary hook or perspective used to attract attention — problem-first, outcome-first, mechanism-based, etc.]
+
+4. Positioning
+[How this product is positioned relative to alternatives or the market — unique promise, category, differentiation]
+
+5. 30-Second Pitch (Verbatim)
+[Paste the exact 30-second spoken pitch. Do not summarize.]
+
+6. Landing Page / Sales Page URL
+[Full URL including https:// ]
+
+🔍 OPTIONAL (Recommended but Not Required)
+
+7. Traffic Type
+[Cold / Warm / Retargeting]
+
+8. Ad Objective
+[Leads / Sales / App installs / Webinar registrations, etc.]
+
+9. Tone Preference
+[Direct / Conversational / Authority / Friendly / Aggressive / Neutral]
+
+10. Compliance or Claim Restrictions (if any)
+[e.g., No income claims, no guarantees, regulated niche, etc.]
+
+✅ CONFIRMATION (MANDATORY)
+
+I confirm that:
+
+The above information is accurate.
+I do not want features or benefits invented.
+All ad copy must stay aligned with these inputs.
+
+Confirmation: YES</div>
+        
+        <button class="copy-button" onclick="copyText('inputForm', this)">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+          </svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          <span class="btn-text">Copy Template</span>
+        </button>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function copyText(elementId, btn) {
+      const text = document.getElementById(elementId).textContent;
+      const btnText = btn.querySelector('.btn-text');
+      const originalText = btnText.textContent;
+
+      navigator.clipboard.writeText(text).then(() => {
+        btnText.textContent = 'Copied!';
+        btn.classList.add('copied');
+        
+        setTimeout(() => {
+          btnText.textContent = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    }
+  </script>
+</body>
+</html>
