@@ -1,0 +1,18 @@
+Prompt#1:
+
+Please read the uploaded documents and the “Instructions” given below and answer the following question.
+
+If I want to add and integrate in the instructions for the GPT: “Please write this with a lively, promotional tone that feels joyful, exciting, and confident—perfect for grabbing attention and keeping the message upbeat. I don't want it to be 'hype', 'inflated', 'unrealistic promises' and 'emotional pressure'.” will it break the principles provided in the uploaded documents?
+
+Instructions:
+
+[Instructions Here]
+
+Prompt#2:
+
+Exactly where in the "instructions", provided in me previous prompt, should I add it and in which manner?:
+Maintain a lively, confident, and upbeat promotional energy while strictly avoiding hype, inflated claims, unrealistic promises, or emotional pressure.
+
+Prompt#3:
+
+Show how the output changes with vs without this line (side-by-side).
