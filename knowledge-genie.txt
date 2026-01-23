@@ -1,0 +1,61 @@
+Prompt#1:
+
+INSTRUCTION
+
+Read and fully understand all uploaded documents.
+
+These documents contain transcripts from a three-lesson video course covering:
+
+- Facebook Ad Campaign setup and management
+- Facebook Ad creation
+- Ad formatting and Ad Creative design
+
+TASK
+
+Extract every important concept, rule, step, and best practice taught in the transcripts.
+
+Present the output using the following structure and rules:
+
+- Use clear section headings that reflect the original lesson flow
+- Under each heading, list short, atomic bullet points (one idea per bullet)
+- Maintain the exact instructional sequence used in the course
+- Use explicit, searchable keywords (e.g., -campaign objective-, -ad set budget-, -audience targeting-, -creative format-, -CTA-, -placements-)
+- Avoid vague language; prefer specific terms used in the course
+
+FORMAT RULES
+
+- No summaries, conclusions, or interpretations
+- No paraphrasing that removes technical meaning
+- No emojis, storytelling, or filler text
+- Bullets should be concise and self-contained
+- Do not merge steps or skip intermediate actions
+
+OUTPUT PURPOSE
+
+This output will be stored in the Knowledge field of a private Custom GPT and must be optimized for:
+
+- Fast semantic retrieval
+- Accurate step-by-step recall
+- Precise answer generation without hallucination
+
+
+Prompt#2:
+
+Reformat for Knowledge field ingestion
+
+Prompt#3:
+
+May make a pdf with it and upload in the knowledge section of my Private GPT?
+
+Prompt#4:
+
+Generate the clean PDF
+Use the exact content
+Make it Knowledge-parser safe
+Give you a download link ready to upload
+
+Prompt#5:
+
+Are these instructions for the Custom GPT compatible with the PDF you created for the Knowledge section of my Custom GPT?
+
+Instructions: [Insert instructions here]
