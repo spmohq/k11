@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>A-A-P-P</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 60px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .container { max-width: 850px; margin: 0 auto; width: 100%; }
+    header { text-align: center; margin-bottom: 40px; }
+    h1 { font-size: 2.8rem; font-weight: 800; color: var(--text-heading); letter-spacing: -1px; }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 35px;
+      box-shadow: 0 12px 40px 0 var(--shadow-color);
+    }
+    .prompt-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 15px;
+      display: block;
+    }
+    
+    .prompt-box-content {
+      background-color: var(--code-bg); padding: 25px; border-radius: 12px;
+      white-space: pre-wrap; word-wrap: break-word; font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem; color: var(--text-primary); border: 1px solid var(--card-border);
+      margin-bottom: 25px; max-height: 600px; overflow-y: auto; line-height: 1.6;
+    }
+    .copy-button {
+      width: 100%;
+      background-color: var(--accent-primary); color: var(--bg-gradient-end);
+      border: none; border-radius: 10px; padding: 14px; font-weight: 700;
+      font-size: 1rem; cursor: pointer; transition: 0.3s; display: flex;
+      justify-content: center; align-items: center; gap: 10px;
+    }
+    .copy-button:hover { 
+      background-color: var(--accent-hover); 
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(34, 211, 238, 0.3);
+    }
+    .copy-button.copied { background-color: var(--accent-success); }
+
+    .icon { width: 20px; height: 20px; }
+    .copied-icon { display: none; }
+    .copy-button.copied .copy-icon { display: none; }
+    .copy-button.copied .copied-icon { display: inline-block; }
+
+    footer { text-align: center; margin-top: 60px; color: var(--text-secondary); opacity: 0.6; font-size: 0.9rem; }
+
+    /* Scrollbar Styling */
+    .prompt-box-content::-webkit-scrollbar { width: 6px; }
+    .prompt-box-content::-webkit-scrollbar-track { background: transparent; }
+    .prompt-box-content::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 10px; }
+
+    @media (max-width: 600px) { h1 { font-size: 2rem; } .card { padding: 20px; } }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>A-A-P-P</h1>
+    </header>
+
+    <main>
+      <div class="card">
+        <span class="prompt-label">Target Audience & Pitch Strategy Prompt</span>
+        <div id="strategyPrompt" class="prompt-box-content">Please read the uploaded document to understand how my custom GPT is created, how it works, and what it ultimately provides to its users.
+
+Next, browse the following URL and read it carefully to understand what information about the product is available and what visitors will know and learn from this product page:
+[URL]
+
+Then generate the followings to sell this custom GPT as a digital product:
+
+1, Product name: 
+2, Target audiences: 
+3, Angle for each Target audience:
+4, Positioning for each Target audience:
+5, 30-second pitch for each Target audience:
+
+Special Instruction: Write every response, regardless of the language of the user’s prompt, in modern, natural, everyday conversational Bengali as spoken in Kolkata, West Bengal, India.
+
+STYLE AND TONE RULES
+Always use the formal address "আপনি". Never use the informal "তুমি".
+Maintain a warm, friendly, and conversational tone, even while being formal.
+The voice should feel like a trusted authority speaking as a close friend, one on one, in a natural, face to face manner.
+Prioritize clarity, natural flow, and reader comfort over word for word literalness, without losing meaning or intent.
+Write with human confidence and enthusiasm, making the information easy and engaging to grasp.
+
+EXECUTION PRIORITY IN CASE OF CONFLICT
+1. Always use formal "আপনি"
+2. Preserve natural Kolkata Bengali flow
+3. Maintain clarity and reader understanding
+4. Retain meaning over literal phrasing
+
+FINAL LANGUAGE AND TONE INSTRUCTION (AUTHORITATIVE)
+Final instruction. This section always overrides any earlier or conflicting language or tone rules.
+Write every response, regardless of the language of the user’s prompt, in modern, natural, everyday conversational Bengali as spoken in Kolkata, West Bengal, India.
+The language must be:
+- Easily understood by a 21 year old
+- Spontaneous, fluid, and natural, not literal or stiff
+- Polished and globally acceptable, while remaining culturally authentic to Kolkata Bengali</div>
+        
+        <button class="copy-button" onclick="copyText('strategyPrompt', this)">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+          </svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          <span class="btn-text">Copy Strategy Prompt</span>
+        </button>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function copyText(elementId, btn) {
+      const text = document.getElementById(elementId).textContent;
+      const btnText = btn.querySelector('.btn-text');
+      const originalText = btnText.textContent;
+
+      navigator.clipboard.writeText(text).then(() => {
+        btnText.textContent = 'Copied!';
+        btn.classList.add('copied');
+        
+        setTimeout(() => {
+          btnText.textContent = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    }
+  </script>
+</body>
+</html>
