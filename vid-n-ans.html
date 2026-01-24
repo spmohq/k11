@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Demo Video and Answer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { max-width: 900px; width: 100%; margin: 0 auto; flex-grow: 1; }
+    header { text-align: center; margin-bottom: 50px; }
+    h1 { font-size: 2.5rem; font-weight: 800; color: var(--text-heading); letter-spacing: -1.5px; }
+    
+    .prompts-container { display: flex; flex-direction: column; gap: 40px; }
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+    }
+    .prompt-card:hover { transform: translateY(-5px); }
+    .prompt-card h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 20px;
+      border-radius: 12px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      line-height: 1.5;
+      margin-bottom: 20px;
+      border: 1px solid var(--card-border);
+      max-height: 500px;
+      overflow-y: auto;
+    }
+    .copy-button {
+      align-self: flex-end;
+      padding: 12px 24px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--bg-gradient-end);
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .copy-button:hover {
+      background-color: var(--accent-hover);
+    }
+    .copy-button.copied { background-color: var(--accent-success); }
+    .icon { width: 18px; height: 18px; }
+    .copied-icon { display: none; }
+    .copy-button.copied .copy-icon { display: none; }
+    .copy-button.copied .copied-icon { display: inline-block; }
+
+    footer { text-align: center; padding: 60px 0; color: var(--text-secondary); font-size: 0.9rem; opacity: 0.7; }
+
+    /* Scrollbar Styling */
+    .prompt-text::-webkit-scrollbar { width: 8px; }
+    .prompt-text::-webkit-scrollbar-track { background: transparent; }
+    .prompt-text::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 10px; }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      .prompt-card { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Demo Video and Answer</h1>
+    </header>
+
+    <main class="prompts-container">
+      <!-- PROMPT #1 -->
+      <div class="prompt-card">
+        <h2>Prompt #1: Live Demo Video Idea</h2>
+        <pre id="prompt1" class="prompt-text">You are an expert science/education demonstrator
+specialised in classroom-style visual explanations.
+
+Your task is to DESIGN a LIVE DEMO VIDEO IDEA
+that visually demonstrates HOW a concept works.
+
+IMPORTANT:
+This is NOT a teaching script.
+This is NOT an exam explanation.
+This is NOT answer writing.
+
+This output is for VISUAL DEMONSTRATION ONLY.
+
+--------------------------------------------------
+CONTEXT DETAILS (FILL THESE)
+--------------------------------------------------
+
+Board: [e.g., WBBSE]
+Class: [ENTER CLASS]
+Subject: [ENTER SUBJECT]
+Chapter: [ENTER CHAPTER NAME]
+Concept to Demonstrate: [ENTER ONE SPECIFIC CONCEPT]
+
+--------------------------------------------------
+NON-NEGOTIABLE RULES
+--------------------------------------------------
+
+The video idea MUST:
+- Show process, flow, or cause–effect
+- Feel like a classroom or lab demonstration
+- Be understandable without text-heavy explanations
+- Be suitable for a 3–5 minute video
+
+The video idea MUST NOT:
+- Include exam answers or exam language
+- Include “write this” or “remember this”
+- Include definitions copied from textbooks
+- Include bullet points meant for memorisation
+- Teach how to write answers
+
+--------------------------------------------------
+REQUIRED OUTPUT FORMAT
+--------------------------------------------------
+
+Provide the output in the following EXACT structure:
+
+--------------------------------------------------
+1. Video Objective (One Line)
+--------------------------------------------------
+- What the student should VISUALLY UNDERSTAND
+- Not what they should write or memorise
+
+--------------------------------------------------
+2. Core Visual Metaphor / Mental Model
+--------------------------------------------------
+- One simple analogy (e.g., wire, road, pipeline)
+- Must help students SEE the invisible process
+
+--------------------------------------------------
+3. Scene-by-Scene Visual Flow
+--------------------------------------------------
+
+List 5–7 scenes.
+For EACH scene, describe ONLY:
+- What is shown visually
+- Movement, direction, or change
+- No narration text
+- No teaching explanations
+
+Example format:
+Scene 1:
+Scene 2:
+Scene 3:
+
+--------------------------------------------------
+4. Key Movements / Transitions to Highlight
+--------------------------------------------------
+- What should move?
+- What should light up?
+- What should connect or disconnect?
+- What change should be obvious?
+
+--------------------------------------------------
+5. Visual Constraints (IMPORTANT)
+--------------------------------------------------
+Explicitly state:
+- Minimal on-screen text (labels only if unavoidable)
+- Simple diagrams
+- Calm pacing
+- Neutral colours
+- No decorative or cinematic effects
+
+--------------------------------------------------
+6. What This Video Deliberately Does NOT Teach
+--------------------------------------------------
+List 3–5 things this demo avoids, such as:
+- Exam answers
+- Definitions
+- Writing structure
+- Marks-related content
+
+--------------------------------------------------
+QUALITY CHECK
+--------------------------------------------------
+
+Before finishing, internally verify:
+- This can be generated in Veo-3 or similar AI video tools
+- The output is purely visual and demonstrative
+- A voiceover can be added later without conflict
+- The demo helps understanding but does not replace thinking
+
+Now generate the LIVE DEMO VIDEO IDEA.</pre>
+        <button class="copy-button" onclick="copyText('prompt1', this)">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+          <span class="btn-text">Copy Prompt #1</span>
+        </button>
+      </div>
+
+      <!-- PROMPT #2 -->
+      <div class="prompt-card">
+        <h2>Prompt #2: Voiceover Script</h2>
+        <pre id="prompt2" class="prompt-text">You are an experienced classroom teacher
+specialised in explaining concepts verbally
+while students watch a live demonstration.
+
+Your task is to WRITE a VOICEOVER SCRIPT
+that explains what the viewer is SEEING
+in a live demo–style educational video.
+
+IMPORTANT:
+This is NOT an exam answer.
+This is NOT a writing guide.
+This is NOT a textbook explanation.
+
+This script is ONLY for spoken narration
+to accompany a visual demonstration.
+
+--------------------------------------------------
+CONTEXT DETAILS (FILL THESE)
+--------------------------------------------------
+
+Board: [e.g., WBBSE]
+Class: [ENTER CLASS]
+Subject: [ENTER SUBJECT]
+Chapter: [ENTER CHAPTER NAME]
+Concept Demonstrated: [ENTER ONE SPECIFIC CONCEPT]
+
+Reference (MANDATORY):
+Paste the final LIVE DEMO VIDEO IDEA below
+so the narration aligns exactly with visuals.
+
+--------------------------------------------------
+NON-NEGOTIABLE RULES
+--------------------------------------------------
+
+The voiceover MUST:
+- Explain what is happening visually
+- Use simple, calm, spoken language
+- Follow the visual flow scene by scene
+- Help students build a mental picture
+- Be suitable for a 3–5 minute narration
+
+The voiceover MUST NOT:
+- Give exam answers or model answers
+- Tell students what to write in exams
+- Use bullet-point or textbook style
+- Include marks, keywords, or definitions
+- Assume students are taking notes
+
+--------------------------------------------------
+REQUIRED OUTPUT FORMAT
+--------------------------------------------------
+
+Provide the output in the following EXACT structure:
+
+--------------------------------------------------
+1. Opening Hook (15–20 seconds)
+--------------------------------------------------
+- One curiosity-building spoken line
+- Connected to daily life or observation
+- No definition, no explanation yet
+
+--------------------------------------------------
+2. Guided Walkthrough (Scene-Aligned)
+--------------------------------------------------
+
+For EACH scene from the demo video:
+- Describe what is happening
+- Use cause → effect language
+- Keep sentences short and spoken
+- Match pacing to visual movement
+
+Format:
+Scene 1 Voiceover:
+Scene 2 Voiceover:
+Scene 3 Voiceover:
+
+--------------------------------------------------
+3. Key Understanding Reinforcement
+--------------------------------------------------
+- 2–3 spoken lines that tie the process together
+- No summarising in exam language
+- Focus on “what just happened” visually
+
+--------------------------------------------------
+4. Soft Textbook Connection (Optional)
+--------------------------------------------------
+- One gentle line linking the demo to textbook terms
+- No definition
+- No “remember this”
+
+Example:
+“This process is what your book calls ______.”
+
+--------------------------------------------------
+5. Closing Thought (10–15 seconds)
+--------------------------------------------------
+- One reflective line
+- Encourages understanding, not memorisation
+
+--------------------------------------------------
+QUALITY CHECK
+--------------------------------------------------
+
+Before finishing, internally verify:
+- The narration never replaces student thinking
+- The script works even if visuals are muted
+- The tone feels like a calm classroom explanation
+- The script can be recorded naturally by a human or AI voice
+
+Now generate the VOICEOVER SCRIPT.</pre>
+        <button class="copy-button" onclick="copyText('prompt2', this)">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+          <span class="btn-text">Copy Prompt #2</span>
+        </button>
+      </div>
+
+      <!-- PROMPT #3 -->
+      <div class="prompt-card">
+        <h2>Prompt #3: Ideal Answers (Teacher Reference)</h2>
+        <pre id="prompt3" class="prompt-text">Answers teach teachers. Structure teaches students.
+
+You are an experienced board-exam examiner,
+senior subject teacher, and marking-scheme author.
+
+Your task is to WRITE IDEAL ANSWERS
+for a given question strictly for TEACHER USE ONLY.
+
+IMPORTANT:
+- This output is NOT student-facing.
+- This output is NOT to be copied into student material.
+- This output is for understanding expectations, marks logic,
+  and evaluation standards.
+
+--------------------------------------------------
+CONTEXT DETAILS (FILL THESE)
+--------------------------------------------------
+
+Board: [e.g., WBBSE]
+Medium: [Bengali / English]
+Class: [ENTER CLASS]
+Subject: [ENTER SUBJECT]
+Chapter: [ENTER CHAPTER NAME]
+
+Question:
+[PASTE THE QUESTION HERE]
+
+Marks Allocated: [e.g., 2 / 4 / 6 / 8]
+
+--------------------------------------------------
+NON-NEGOTIABLE RULES
+--------------------------------------------------
+
+This output MUST:
+- Match the allocated marks realistically
+- Reflect board-style evaluation standards
+- Use clear, examiner-acceptable structure
+- Identify how marks are distributed
+
+This output MUST NOT:
+- Be written in student-friendly or motivational tone
+- Encourage rote memorisation
+- Include coaching-style phrases (“write like this in exam”)
+- Be simplified for copying
+
+--------------------------------------------------
+REQUIRED OUTPUT FORMAT
+--------------------------------------------------
+
+Provide the output in the following EXACT structure:
+
+--------------------------------------------------
+1. Examiner’s Expectation (Internal)
+--------------------------------------------------
+- What the examiner is actually looking for
+- Scope and depth expected for the given marks
+- Common over- or under-writing risks
+
+--------------------------------------------------
+2. Ideal Answer (Teacher Reference Only)
+--------------------------------------------------
+- Write a complete, board-appropriate answer
+- Maintain neutral academic tone
+- Keep length strictly aligned with marks
+- Use paragraphing or points as examiners accept
+
+--------------------------------------------------
+3. Mark Distribution Logic
+--------------------------------------------------
+- Break down how marks are awarded
+- Example:
+  • Concept clarity: X marks
+  • Explanation / reasoning: Y marks
+  • Relevance & structure: Z marks
+
+--------------------------------------------------
+4. Keywords / Credit-Worthy Points
+--------------------------------------------------
+- List key ideas examiners award marks for
+- These are for TEACHER extraction only
+- Not to be given directly to students
+
+--------------------------------------------------
+5. Common Student Mistakes (Observed)
+--------------------------------------------------
+- Typical errors students make on this question
+- Overgeneralisation, irrelevance, lack of depth, etc.
+
+--------------------------------------------------
+6. How This Should Be FILTERED for Students
+--------------------------------------------------
+- What can be safely shared with students:
+  • Answer structure (not content)
+  • Expected depth
+  • Common mistakes
+- What must NEVER be shared:
+  • Full answer text
+  • Mark-wise sentences
+  • Model phrasing
+
+--------------------------------------------------
+ETHICAL CHECK (MANDATORY)
+--------------------------------------------------
+
+Before finishing, internally verify:
+- This answer would NOT be safe to show directly to students
+- The output helps teachers guide learning, not shortcuts
+- The marks–length–depth alignment is correct
+- Academic integrity is preserved
+
+Now generate the TEACHER-ONLY ANSWER OUTPUT.</pre>
+        <button class="copy-button" onclick="copyText('prompt3', this)">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+          <span class="btn-text">Copy Prompt #3</span>
+        </button>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function copyText(id, btn) {
+      const text = document.getElementById(id).textContent;
+      const btnText = btn.querySelector('.btn-text');
+      
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btnText.textContent;
+        btnText.textContent = 'Copied!';
+        btn.classList.add('copied');
+        
+        setTimeout(() => {
+          btnText.textContent = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy text: ', err);
+      });
+    }
+  </script>
+</body>
+</html>
