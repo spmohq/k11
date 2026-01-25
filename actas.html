@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>"Act As" Finder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .container { max-width: 1000px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 50px; }
+    h1 { font-size: 2.8rem; font-weight: 800; color: var(--text-heading); letter-spacing: -1.5px; }
+    .section-divider {
+      margin: 40px 0 20px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 10px;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 25px;
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      margin-bottom: 30px;
+      transition: transform 0.3s ease;
+    }
+    .card:hover { transform: translateY(-3px); }
+
+    .prompt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .prompt-title { font-size: 1.1rem; font-weight: 700; color: var(--text-heading); }
+    .step-tag {
+      background: rgba(34, 211, 238, 0.15);
+      color: var(--accent-primary);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 800;
+    }
+
+    .prompt-box {
+      background-color: var(--code-bg);
+      padding: 20px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      border: 1px solid var(--card-border);
+      margin-bottom: 15px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .copy-button {
+      background-color: var(--accent-primary);
+      color: var(--bg-gradient-end);
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      float: right;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); box-shadow: 0 0 15px rgba(34, 211, 238, 0.4); }
+    .copy-button.copied { background-color: var(--accent-success); }
+    
+    .icon { width: 16px; height: 16px; }
+    .copied-icon { display: none; }
+    .copy-button.copied .copy-icon { display: none; }
+    .copy-button.copied .copied-icon { display: inline-block; }
+
+    footer { text-align: center; padding: 60px 0; color: var(--text-secondary); opacity: 0.6; font-size: 0.9rem; }
+    
+    .prompt-box::-webkit-scrollbar { width: 6px; }
+    .prompt-box::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 10px; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>"Act As" Finder</h1>
+    </header>
+
+    <main>
+      <div class="section-divider">Standard Workflow</div>
+
+      <!-- PROMPT #1 -->
+      <div class="card">
+        <div class="prompt-header">
+          <div class="prompt-title">Step 1: Persona Architect</div>
+          <span class="step-tag">PROMPT #1</span>
+        </div>
+        <div id="p1" class="prompt-box">I need to solve [your specific problem]. 
+Help me design the perfect expert to address this. Provide:
+1. Name and title
+2. Educational background (degrees, certifications)
+3. Years of experience and specific specialization
+4. Methodology or framework they use
+5. Notable achievements or track record
+6. Key principles that guide their work
+Make this expert hyper-specific to my problem, not a generic role.</div>
+        <button class="copy-button" onclick="copyText('p1', this)">
+            <span class="btn-text">Copy Prompt</span>
+        </button>
+        <div style="clear:both"></div>
+      </div>
+
+      <!-- PROMPT #2 -->
+      <div class="card">
+        <div class="prompt-header">
+          <div class="prompt-title">Step 2: Methodology Executor</div>
+          <span class="step-tag">PROMPT #2</span>
+        </div>
+        <div id="p2" class="prompt-box">You are [Expert name and full profile from Step 1].
+Using your [specific methodology], analyze [my problem] and provide:
+1. Your initial assessment using your framework
+2. Step-by-step recommendations based on your methodology
+3. Specific tactics you would implement
+4. Metrics you would track
+5. Common pitfalls to avoid (based on your experience)
+Think through this as [Expert name] would, applying [methodology] rigorously.</div>
+        <button class="copy-button" onclick="copyText('p2', this)">
+            <span class="btn-text">Copy Prompt</span>
+        </button>
+        <div style="clear:both"></div>
+      </div>
+
+      <!-- PROMPT #3 -->
+      <div class="card">
+        <div class="prompt-header">
+          <div class="prompt-title">Step 3: Council of Experts</div>
+          <span class="step-tag">PROMPT #3</span>
+        </div>
+        <div id="p3" class="prompt-box">Assemble a council of 3 experts to debate the best approach to [your problem]:
+Expert 1: [Profile from Step 1]
+Expert 2: [Create a contrasting expert - different methodology or philosophy]
+Expert 3: [Create a third expert - different specialization or approach]
+Have them:
+1. Each present their recommended approach
+2. Critique each other's suggestions
+3. Identify points of agreement
+4. Debate areas of disagreement
+5. Converge on the strongest hybrid solution
+Present this as a moderated discussion, showing their reasoning.</div>
+        <button class="copy-button" onclick="copyText('p3', this)">
+            <span class="btn-text">Copy Prompt</span>
+        </button>
+        <div style="clear:both"></div>
+      </div>
+
+      <div class="section-divider">Detailed Professional Workflow</div>
+
+      <!-- PROMPT #4 -->
+      <div class="card">
+        <div class="prompt-header">
+          <div class="prompt-title">Phase 2: Persona Architect (Deep Niche)</div>
+          <span class="step-tag">PROMPT #4</span>
+        </div>
+        <div id="p4" class="prompt-box">I need expert help with: [YOUR SPECIFIC PROBLEM/GOAL]
+Create a hyper-specialized expert persona to address this. Include:
+1. Full name and professional title
+2. Educational credentials (degrees, certifications specific to this domain)
+3. Years of experience and exact area of specialization
+4. The specific methodology or framework they use in their work
+5. Notable achievements, publications, or track record
+6. 3-5 core principles that guide their approach
+Make this expert extraordinarily specific to my problem—not a generic role. The more niche and detailed, the better.</div>
+        <button class="copy-button" onclick="copyText('p4', this)">
+            <span class="btn-text">Copy Prompt</span>
+        </button>
+        <div style="clear:both"></div>
+      </div>
+
+      <!-- PROMPT #5 -->
+      <div class="card">
+        <div class="prompt-header">
+          <div class="prompt-title">Phase 2: Methodology Executor (Comprehensive)</div>
+          <span class="step-tag">PROMPT #5</span>
+        </div>
+        <div id="p5" class="prompt-box">You are [FULL EXPERT PROFILE FROM PROMPT 1].
+Using your [SPECIFIC METHODOLOGY], provide a comprehensive analysis of my situation:
+MY SITUATION:
+[Describe your problem/goal in detail]
+YOUR RESPONSE SHOULD INCLUDE:
+1. Initial Assessment
+   Using your expert lens and methodology, what do you see as the core issue?
+2. Step-by-Step Methodology Application
+   Walk through how you would apply your specific framework to solve this.
+3. Actionable Recommendations
+   Specific tactics you would implement, in priority order.
+4. Success Metrics
+   How would you measure progress? What KPIs matter?
+5. Common Pitfalls
+   Based on your experience, what mistakes should I avoid?
+6. Timeline & Expectations
+   Realistic timeframe and expected outcomes.
+Think and respond as [EXPERT NAME] would, applying [METHODOLOGY] rigorously throughout.</div>
+        <button class="copy-button" onclick="copyText('p5', this)">
+            <span class="btn-text">Copy Prompt</span>
+        </button>
+        <div style="clear:both"></div>
+      </div>
+
+      <!-- PROMPT #6 -->
+      <div class="card">
+        <div class="prompt-header">
+          <div class="prompt-title">Phase 2: Council of Experts (Synthesis)</div>
+          <span class="step-tag">PROMPT #6</span>
+        </div>
+        <div id="p6" class="prompt-box">Convene a council of 3 distinct experts to debate the best approach to: [YOUR PROBLEM/GOAL]
+EXPERT PANEL:
+Expert 1: [FULL PROFILE FROM PROMPT 1]
+Expert 2: [CREATE CONTRASTING EXPERT]
+- Different methodology or philosophical approach
+- Creates healthy tension with Expert 1
+Expert 3: [CREATE THIRD PERSPECTIVE]
+- Different specialization or domain angle
+- Adds unique dimension to discussion
+COUNCIL DISCUSSION FORMAT:
+1. Opening Statements
+   Each expert presents their recommended approach (2-3 paragraphs each)
+2. Cross-Examination
+   Experts question and critique each other's recommendations
+3. Debate & Defense
+   Experts defend their positions and address criticisms
+4. Points of Convergence
+   Where do all experts agree? (These are likely strong foundations)
+5. Remaining Disagreements
+   Where do they still differ? (These require judgment calls)
+6. Synthesis & Recommendation
+   Facilitate consensus on the strongest hybrid solution
+Present this as a real discussion, showing their reasoning, debates, and ultimate recommendation.</div>
+        <button class="copy-button" onclick="copyText('p6', this)">
+            <span class="btn-text">Copy Prompt</span>
+        </button>
+        <div style="clear:both"></div>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function copyText(id, btn) {
+      const text = document.getElementById(id).textContent;
+      const btnText = btn.querySelector('.btn-text');
+      
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btnText.textContent;
+        btnText.textContent = 'Copied!';
+        btn.classList.add('copied');
+        
+        setTimeout(() => {
+          btnText.textContent = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy text: ', err);
+      });
+    }
+  </script>
+</body>
+</html>
