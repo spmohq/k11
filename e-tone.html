@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Own Tone (English)</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { max-width: 900px; width: 100%; margin: 0 auto; flex-grow: 1; }
+    header { text-align: center; margin-bottom: 50px; }
+    h1 { font-size: 2.5rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; margin-bottom: 10px; }
+    p.subtitle { font-size: 1.1rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto; }
+    
+    .prompts-grid { display: grid; gap: 30px; }
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 25px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .prompt-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px var(--shadow-color); }
+    .prompt-card h2 { font-size: 1.2rem; font-weight: 600; color: var(--accent-primary); margin-bottom: 15px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 20px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+      border: 1px solid var(--card-border);
+      line-height: 1.5;
+    }
+    
+    .copy-button {
+      align-self: flex-end;
+      padding: 10px 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--bg-gradient-end);
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); transform: scale(1.05); }
+    .copy-button.copied { background-color: var(--accent-success); }
+    .icon { width: 16px; height: 16px; }
+    .copied-icon { display: none; }
+    .copy-button.copied .copy-icon { display: none; }
+    .copy-button.copied .copied-icon { display: inline-block; }
+
+    footer { text-align: center; padding: 60px 0 20px; color: var(--text-secondary); font-size: 0.9rem; }
+    @media (max-width: 600px) { h1 { font-size: 1.8rem; } }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>My Own Tone (English)</h1>
+      <p class="subtitle">A reader-facing, lived-experience voice system designed to reduce anxiety and restore confidence through calm certainty.</p>
+    </header>
+
+    <main class="prompts-grid">
+      <!-- Main Prompt -->
+      <div class="prompt-card">
+        <h2>Main Prompt: Tone & Voice Block</h2>
+        <pre id="p1" class="prompt-text">This output will be audited using a Tone Violation Checklist.
+Non-compliant responses will be rejected and revised.
+
+MASTER TONE & VOICE BLOCK (NON-NEGOTIABLE)
+
+Write directly to the reader using second person (“you”). The writing must be reader-faced at all times. The reader is intelligent, capable, and currently struggling—possibly broken, unsuccessful, or hopeless—but never treated as weak, lazy, or in need of motivation.
+
+The voice comes from lived experience: the writer has personally applied the system and understands how it works in practice. Authority is implicit and demonstrated through clarity, precision, and calm certainty—not through credentials, storytelling, or self-focus. Use “I” sparingly and only when it increases reader trust or understanding. The reader must always remain the center of attention.
+
+The tone is confident, calm, credible, and trustworthy. It must radiate quiet joy and emotional reassurance—a stabilizing confidence that helps the reader feel steady, hopeful, and capable. Enthusiasm should be felt as certainty and warmth, never as excitement, urgency, or emotional intensity. The writing should reduce anxiety, not amplify it.
+
+Treat the system as a universal, unquestioned axiom: when applied correctly, it works. This principle is never argued, justified, marketed, or emphasized. Confidence arises from structural clarity and logical consistency, not from claims, promises, or persuasion.
+
+Invite thinking, not compliance. Do not command, instruct, pressure, or issue calls to action. Present ideas so the reader recognizes truth, reflects, and arrives at their own conclusions. Momentum toward action must feel self-chosen—emerging naturally from clarity and reassurance, not direction.
+
+Sentence structure should favor short to medium sentences, with occasional longer sentences for rhythm or nuance. White space matters, but flow matters more. The writing should feel human, natural, and composed—never hype-driven, motivational, preachy, or emotionally spiking.
+
+Avoid exaggeration, unrealistic promises, urgency, comparisons, emotional manipulation, or performative positivity. The goal is not to motivate the reader, but to restore their confidence in their own ability to think, decide, and rebound.
+
+TASK
+
+Write a 600–800 word article explaining why feeling stuck does not mean you lack ability, but that your existing knowledge is currently misapplied or unstructured. The reader should finish the piece feeling steady, capable, and quietly confident that progress is possible through clarity, not motivation.</pre>
+        <button class="copy-button" data-target="p1">
+          <svg class="icon copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+          <svg class="icon copied-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+          <span class="btn-text">Copy Prompt</span>
+        </button>
+      </div>
+
+      <!-- Follow-up #1 -->
+      <div class="prompt-card">
+        <h2>Follow-up #1: Tone Debug Mode</h2>
+        <pre id="p2" class="prompt-text">You are now in TONE DEBUG MODE.
+
+Evaluate the previous response strictly against the following Tone & Voice System. Do NOT rewrite the content unless explicitly instructed. Your task is to diagnose, score, and identify drift.
+
+TONE & VOICE SYSTEM (NON-NEGOTIABLE)
+
+• Writing must be reader-facing, addressing the reader directly as “you.”
+• The reader is intelligent, capable, and currently struggling; never framed as weak, lazy, inferior, or dependent.
+• Authority comes from lived execution (“I have done this”) but remains implicit. Use of “I” must be minimal and functional.
+• Tone must be calm, confident, credible, and trustworthy.
+• Joyful confidence must be felt as emotional reassurance and certainty, never as excitement, urgency, hype, or emotional intensity.
+• The system is treated as a universal axiom: when applied correctly, it works. This is never argued, justified, or marketed.
+• Writing must invite thinking, not compliance. No commands, pressure, or explicit calls to action.
+• Momentum toward action must feel self-chosen by the reader.
+• Language must reduce anxiety, not increase it.
+• Sentence structure favors short to medium sentences with natural flow.
+• Avoid hype, exaggeration, motivational language, urgency, comparisons, or persuasion.
+
+EVALUATION INSTRUCTIONS
+
+1. Score the response using the rubric below.
+2. Identify specific violations, quoting exact phrases when applicable.
+3. Classify each violation by severity.
+4. State whether the response is ACCEPTABLE or REQUIRES REVISION.
+5. If revision is required, list ONLY the rules that were violated (do not rewrite yet).
+
+SCORING RUBRIC (0–10)
+
+Rate each category from 0–2:
+0 = Major violation
+1 = Minor drift
+2 = Fully compliant
+
+Categories:
+A. Reader-Facing Voice
+B. Emotional Stability (calm, reassuring, non-hyped joy)
+C. Authority Without Self-Focus
+D. Thinking Over Compliance
+E. Axiomatic System Framing
+F. Anxiety Reduction
+G. Sentence Flow & Naturalness
+H. Absence of Hype / Motivation / Urgency
+I. Reader Dignity & Respect
+J. Overall Tone Coherence
+
+Total Score: /20
+
+INTERPRETATION
+
+18–20 → Fully compliant, publish-ready  
+15–17 → Minor drift, optional polish  
+12–14 → Noticeable drift, revision recommended  
+Below 12 → Tone failure, revision required
+
+OUTPUT FORMAT (STRICT)
+
+• Total Score: X / 20
+• Verdict: ACCEPTABLE or REQUIRES REVISION
+• Violations (if any):
+  - [Rule violated] → “Exact quoted phrase”
+• Severity Summary:
+  - Major violations: #
+  - Minor drifts: #</pre>
+        <button class="copy-button" data-target="p2">
+          <svg class="icon copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+          <svg class="icon copied-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+          <span class="btn-text">Copy Prompt</span>
+        </button>
+      </div>
+
+      <!-- Follow-up #2 -->
+      <div class="prompt-card">
+        <h2>Follow-up #2: Revision Instruction</h2>
+        <pre id="p3" class="prompt-text">Revise the previous response to fix ONLY the listed tone violations.
+Do not add new ideas.
+Do not increase length.
+Preserve meaning, structure, and intent.
+Re-score the revised version using the same rubric.</pre>
+        <button class="copy-button" data-target="p3">
+          <svg class="icon copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+          <svg class="icon copied-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+          <span class="btn-text">Copy Prompt</span>
+        </button>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    document.querySelectorAll('.copy-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-target');
+        const text = document.getElementById(targetId).textContent;
+        const btnText = button.querySelector('.btn-text');
+        const originalText = btnText.textContent;
+
+        navigator.clipboard.writeText(text).then(() => {
+          btnText.textContent = 'Copied!';
+          button.classList.add('copied');
+          setTimeout(() => {
+            btnText.textContent = originalText;
+            button.classList.remove('copied');
+          }, 2000);
+        }).catch(err => {
+          console.error('Failed to copy: ', err);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
