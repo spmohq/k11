@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sentence-Level Prompt Diagnostic</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --input-bg: #111827;
+      --code-bg: rgba(0, 0, 0, 0.4);
+      --shadow-color: rgba(0, 0, 0, 0.3);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 40px; }
+    h1 { font-size: 2.2rem; font-weight: 700; color: var(--text-heading); margin-bottom: 10px; }
+    .subtitle { color: var(--text-secondary); font-size: 1.1rem; max-width: 750px; margin: 0 auto; }
+
+    /* Input Section */
+    .input-section {
+      margin-bottom: 30px;
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+    }
+    .input-group { display: flex; flex-direction: column; }
+    .input-group label { font-weight: 600; margin-bottom: 10px; color: var(--accent-primary); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    textarea {
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 15px;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      min-height: 150px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+    textarea:focus { outline: 2px solid var(--accent-primary); border-color: transparent; }
+
+    /* Prompt Card */
+    .prompt-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 8px 32px var(--shadow-color);
+      display: flex; flex-direction: column;
+      backdrop-filter: blur(12px);
+    }
+    .prompt-card h2 { font-size: 1.1rem; margin-bottom: 15px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; color: var(--text-heading); text-transform: uppercase; }
+    
+    .prompt-text {
+      background: var(--code-bg);
+      padding: 25px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      border: 1px solid var(--card-border);
+      margin-bottom: 20px;
+      line-height: 1.6;
+      color: #e5e7eb;
+    }
+    .dynamic-val { 
+      color: var(--accent-primary); 
+      font-weight: 600; 
+      font-family: 'Source Code Pro', monospace;
+      background: rgba(34, 211, 238, 0.05);
+    }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 12px 24px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      background: var(--accent-primary);
+      color: var(--bg-gradient-end);
+      border: none; border-radius: 8px;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+    .copy-button:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .copy-button.copied { background: var(--accent-success); }
+    .icon { width: 18px; height: 18px; }
+
+    footer { text-align: center; margin-top: 50px; color: var(--text-secondary); font-size: 0.85rem; padding-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Sentence-Level Prompt Diagnostic</h1>
+    <p class="subtitle">Used to rigorously audit and optimize prompts by identifying how each individual sentence causally affects model behavior and output quality.</p>
+  </header>
+
+  <!-- Input Area -->
+  <section class="input-section">
+    <div class="input-group">
+      <label>Insert the prompt to be analyzed</label>
+      <textarea id="promptInput" placeholder="Paste your target prompt here..."></textarea>
+    </div>
+  </section>
+
+  <main>
+    <div class="prompt-card">
+      <h2>Diagnostic Prompt</h2>
+      <div id="promptDisplay" class="prompt-text">Please read the prompt given below.
+I want to use it for [purpose].
+
+Please review each sentence of the prompt individually and analyze the following for each sentence:
+
+1. What is the role and importance of this sentence within the prompt?
+2. What specific impact does this sentence have on the output generated by the prompt?
+3. What are the consequences if this sentence is removed or omitted from the prompt?
+4. Does this sentence create any conflict, redundancy, or misalignment with other sentences in the prompt or with the intended outcome of the prompt?
+
+FAILURE-DETECTION CLAUSE (NON-NEGOTIABLE):
+For each sentence, the analysis must explicitly explain how the model's behavior or output changes because of that sentence.
+If an explanation is generic, surface-level, descriptive only, or could apply to most prompts without modification, label it as "INSUFFICIENT ANALYSIS" and immediately reanalyze the sentence using concrete, mechanism-level reasoning.
+Do not summarize.
+Do not generalize.
+Do not repeat the sentence.
+Focus only on causal impact.
+
+PROMPT:
+<span class="dynamic-val" id="dynamicPrompt">[Insert the prompt here]</span></div>
+      
+      <button class="copy-button" id="copyBtn">
+        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+        <span id="btnText">Copy Prompt</span>
+      </button>
+    </div>
+  </main>
+
+  <footer>
+    <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+  </footer>
+</div>
+
+<script>
+  const promptInput = document.getElementById('promptInput');
+  const dynamicPrompt = document.getElementById('dynamicPrompt');
+  const copyBtn = document.getElementById('copyBtn');
+  const btnText = document.getElementById('btnText');
+  const promptDisplay = document.getElementById('promptDisplay');
+
+  // Handle live text replacement
+  promptInput.addEventListener('input', () => {
+    dynamicPrompt.textContent = promptInput.value.trim() || '[Insert the prompt here]';
+  });
+
+  // Handle Copy functionality
+  copyBtn.addEventListener('click', () => {
+    // innerText captures the text exactly as rendered in the UI
+    navigator.clipboard.writeText(promptDisplay.innerText).then(() => {
+      const originalText = btnText.textContent;
+      btnText.textContent = 'Copied!';
+      copyBtn.classList.add('copied');
+      
+      setTimeout(() => {
+        btnText.textContent = originalText;
+        copyBtn.classList.remove('copied');
+      }, 2000);
+    }).catch(err => {
+      console.error('Copy failed: ', err);
+    });
+  });
+</script>
+
+</body>
+</html>
