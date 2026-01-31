@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prompt for PDF</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .container { max-width: 1000px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 50px; }
+    h1 { font-size: 2.5rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; }
+    
+    .section-header {
+      margin: 40px 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent-primary);
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 1px;
+      font-size: 1.2rem;
+    }
+
+    .prompts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+      gap: 25px;
+    }
+
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 20px;
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .prompt-card h3 {
+      font-size: 1rem;
+      color: var(--text-heading);
+      margin-bottom: 12px;
+    }
+
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 15px;
+      border-radius: 8px;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 15px;
+      border: 1px solid var(--card-border);
+      white-space: pre-wrap;
+    }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 8px 16px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      background-color: var(--accent-primary);
+      color: var(--bg-gradient-end);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); transform: scale(1.03); }
+    .copy-button.copied { background-color: var(--accent-success); }
+
+    footer { text-align: center; padding: 60px 0 20px; color: var(--text-secondary); font-size: 0.85rem; }
+
+    @media (max-width: 600px) {
+      .prompts-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Prompt for PDF</h1>
+    </header>
+
+    <main>
+      <!-- Section 1 -->
+      <div class="section-header">Ideation and Research</div>
+      <div class="prompts-grid">
+        <div class="prompt-card">
+          <h3>1. Title Creation for PDFs</h3>
+          <pre id="p1" class="prompt-text">Please create a title for my PDF around [INSERT NICHE/OFFER]. This PDF solves [INSERT PAIN POINT]. It’s important that you keep a tangible number/data point within the title. Provide 5 options.</pre>
+          <button class="copy-button" data-target="p1">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>2. Identify Key Problems</h3>
+          <pre id="p2" class="prompt-text">Please list out 5-10 problems most people have when it comes to [NICHE]. Go deep and specific with this.</pre>
+          <button class="copy-button" data-target="p2">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>3. Researching Statistics</h3>
+          <pre id="p3" class="prompt-text">Please for this problem under the [NICHE] - [ENTER PROBLEM HERE]. Give me 5-10 well-researched stats and data points that back this as a real problem for people. Ensure you include URL links to your research for referencing.</pre>
+          <button class="copy-button" data-target="p3">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>4. Customer Desires & Pain Points</h3>
+          <pre id="p4" class="prompt-text">Write a detailed list of customers’ pain points, problems, and deep emotional desires for [NICHE/PAIN POINT]. Imagine their private journal entries, capturing their daily struggles and aspirations.</pre>
+          <button class="copy-button" data-target="p4">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>5. Overview of Niche Research</h3>
+          <pre id="p5" class="prompt-text">Using research, provide a brief overview of the niche, customer avatar, and key triggers, combining marketing angles, hooks, and customer emotions.</pre>
+          <button class="copy-button" data-target="p5">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>6. Marketing Angles and Hooks</h3>
+          <pre id="p6" class="prompt-text">Using research, come up with as many marketing angles and hooks as possible. Include tangible facts, stats, and data relevant to [NICHE/PAIN POINT]. Ensure they fit TikTok-style messaging.</pre>
+          <button class="copy-button" data-target="p6">Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- Section 2 -->
+      <div class="section-header">Content Creation</div>
+      <div class="prompts-grid">
+        <div class="prompt-card">
+          <h3>7. Outline Creation</h3>
+          <pre id="p7" class="prompt-text">Create an outline for a PDF guide about [NICHE] that solves [MAIN PAIN POINT]. This should cover every aspect and include zero filler.</pre>
+          <button class="copy-button" data-target="p7">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>8. Detailed Section Writing</h3>
+          <pre id="p8" class="prompt-text">Write the content for [SECTION] from a PDF guide about [NICHE]. Use stats, personal storytelling, and data to back up claims.</pre>
+          <button class="copy-button" data-target="p8">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>9. Video Captions Creation</h3>
+          <pre id="p9" class="prompt-text">Write 60 captions for 5-second TikTok videos to promote a PDF titled [PDF TITLE]. Captions should use frameworks such as curiosity hooks and highlight benefits.</pre>
+          <button class="copy-button" data-target="p9">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>10. TikTok Text Overlays</h3>
+          <pre id="p10" class="prompt-text">Create text overlays for short TikTok videos. Use engaging, curiosity-driven language that fits the [NICHE] and encourages viewers to click the bio link.</pre>
+          <button class="copy-button" data-target="p10">Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- Section 3 -->
+      <div class="section-header">TikTok Content</div>
+      <div class="prompts-grid">
+        <div class="prompt-card">
+          <h3>11. Viral Video Topics</h3>
+          <pre id="p11" class="prompt-text">Suggest 10 viral TikTok video topics for [NICHE]. Focus on creating content that grabs attention in the first 2 seconds.</pre>
+          <button class="copy-button" data-target="p11">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>12. Trending Sounds Search</h3>
+          <pre id="p12" class="prompt-text">List 5 trending TikTok sounds suitable for content about [NICHE]. Include their use cases.</pre>
+          <button class="copy-button" data-target="p12">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>13. Batch Recording Plan</h3>
+          <pre id="p13" class="prompt-text">Create a plan to batch record 30 TikTok videos for [NICHE], including suggested scripts and visuals.</pre>
+          <button class="copy-button" data-target="p13">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>14. Framework for TikTok Hooks</h3>
+          <pre id="p14" class="prompt-text">Write 10 hooks for TikTok videos promoting [PDF TITLE]. Make them curiosity-driven and data-backed.</pre>
+          <button class="copy-button" data-target="p14">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>15. Call to Action Phrases</h3>
+          <pre id="p15" class="prompt-text">Write 10 compelling call-to-action lines for TikTok captions promoting digital products.</pre>
+          <button class="copy-button" data-target="p15">Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- Section 4 -->
+      <div class="section-header">Sales Pages</div>
+      <div class="prompts-grid">
+        <div class="prompt-card">
+          <h3>16. Headline Ideas</h3>
+          <pre id="p16" class="prompt-text">Generate 10 headline ideas for a sales page about [PDF TITLE]. Make them data-driven and curiosity-inducing.</pre>
+          <button class="copy-button" data-target="p16">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>17. Sales Copy (PAS Framework)</h3>
+          <pre id="p17" class="prompt-text">Write a persuasive paragraph for a sales page. Use the problem-agitate-solution framework for [NICHE/PAIN POINT].</pre>
+          <button class="copy-button" data-target="p17">Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- Section 5 -->
+      <div class="section-header">Scaling and Strategy</div>
+      <div class="prompts-grid">
+        <div class="prompt-card">
+          <h3>18. Scaling Content Creation</h3>
+          <pre id="p18" class="prompt-text">Suggest 5 strategies to scale TikTok content creation for [NICHE]. Include examples of expanding to multiple accounts or content formats.</pre>
+          <button class="copy-button" data-target="p18">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>19. Account Optimization</h3>
+          <pre id="p19" class="prompt-text">Create a checklist for optimizing TikTok and Instagram accounts for selling PDFs.</pre>
+          <button class="copy-button" data-target="p19">Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- Section 6 -->
+      <div class="section-header">Additional Strategy</div>
+      <div class="prompts-grid">
+        <div class="prompt-card">
+          <h3>20. Productive Daily Actions</h3>
+          <pre id="p20" class="prompt-text">Write a daily checklist for creators selling PDFs online, focusing on posting schedules, engagement, and content analysis.</pre>
+          <button class="copy-button" data-target="p20">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>21. Iterative Testing Process</h3>
+          <pre id="p21" class="prompt-text">Provide a framework for testing and iterating on TikTok content to identify high-performing formats.</pre>
+          <button class="copy-button" data-target="p21">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>22. Customer Avatar Insights</h3>
+          <pre id="p22" class="prompt-text">Write a detailed customer avatar for [NICHE], focusing on their challenges, goals, and preferred content style.</pre>
+          <button class="copy-button" data-target="p22">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>23. Digital Product Ideas</h3>
+          <pre id="p23" class="prompt-text">Suggest 10 digital product ideas for beginners looking to monetize a small audience.</pre>
+          <button class="copy-button" data-target="p23">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>24. PDF Topics Research</h3>
+          <pre id="p24" class="prompt-text">List 10 engaging topics for PDFs targeting [NICHE/PAIN POINT].</pre>
+          <button class="copy-button" data-target="p24">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>25. TikTok Trends Analysis</h3>
+          <pre id="p25" class="prompt-text">Analyze current TikTok trends for [NICHE] and suggest how they can be incorporated into content.</pre>
+          <button class="copy-button" data-target="p25">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>26. 30-Day Content Calendar</h3>
+          <pre id="p26" class="prompt-text">Design a 30-day TikTok content calendar for promoting [PDF TITLE].</pre>
+          <button class="copy-button" data-target="p26">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>27. Customer Engagement Prompts</h3>
+          <pre id="p27" class="prompt-text">Write 10 questions or polls for TikTok stories that engage customers about [NICHE].</pre>
+          <button class="copy-button" data-target="p27">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>28. PDF Design Templates</h3>
+          <pre id="p28" class="prompt-text">Suggest design layouts for PDFs related to [NICHE], including ideal color schemes and fonts.</pre>
+          <button class="copy-button" data-target="p28">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>29. Email Marketing Hooks</h3>
+          <pre id="p29" class="prompt-text">Write 5 subject lines and preview text for emails promoting [PDF TITLE].</pre>
+          <button class="copy-button" data-target="p29">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>30. TikTok SEO Keywords</h3>
+          <pre id="p30" class="prompt-text">List 10 SEO keywords for TikTok captions and hashtags for [NICHE].</pre>
+          <button class="copy-button" data-target="p30">Copy Prompt</button>
+        </div>
+        <div class="prompt-card">
+          <h3>31. Community Growth Plan</h3>
+          <pre id="p31" class="prompt-text">Suggest a strategy for building an engaged community around [NICHE] using TikTok and Instagram.</pre>
+          <button class="copy-button" data-target="p31">Copy Prompt</button>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    document.querySelectorAll('.copy-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-target');
+        const text = document.getElementById(targetId).textContent;
+        const originalText = button.textContent;
+
+        navigator.clipboard.writeText(text).then(() => {
+          button.textContent = 'Copied!';
+          button.classList.add('copied');
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+          }, 2000);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
