@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Layers & Touches – Decision Table</title>
+
+  <style>
+    :root {
+      --border: #e0e0e0;
+      --bg-header: #f6f7f9;
+      --bg-row: #ffffff;
+      --bg-mobile: #fafafa;
+      --text-dark: #1f2937;
+      --text-muted: #4b5563;
+      --accent: #10b981;
+    }
+
+    body {
+      margin: 0;
+      padding: 16px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--text-dark);
+      background: #ffffff;
+    }
+
+    h1 {
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+    }
+
+    p.intro {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background: var(--bg-header);
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    th {
+      font-weight: 600;
+    }
+
+    .check {
+      color: var(--accent);
+      font-weight: 700;
+      text-align: center;
+    }
+
+    /* =========================
+       MOBILE OPTIMIZED VIEW
+       ========================= */
+    @media (max-width: 768px) {
+
+      table, thead, tbody, th, tr {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tr {
+        background: var(--bg-mobile);
+        margin-bottom: 16px;
+        border: 1px solid var(--border);
+        padding: 12px;
+      }
+
+      td {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        border: none;
+        padding: 6px 0;
+        font-size: 0.9rem;
+      }
+
+      td.layer {
+        display: none;
+      }
+
+      td span.label {
+        color: var(--text-muted);
+        font-weight: 600;
+        width: 45%;
+      }
+
+      td span.value {
+        width: 55%;
+      }
+
+      td.layers-merged {
+        display: flex;
+      }
+    }
+
+    .final-note {
+      margin-top: 24px;
+      padding: 14px;
+      border-left: 4px solid var(--accent);
+      background: #f0fdf4;
+      font-size: 0.95rem;
+    }
+
+    .final-note p {
+      margin: 6px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>FINAL TABLE — What to Use, When</h1>
+<p class="intro">
+  This table helps decide which Touch to use for each type of content.
+  Truth, Thinking, and Language layers are always active.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type of Content</th>
+      <th>Truth Layer</th>
+      <th>Thinking Layer</th>
+      <th>Language Layer</th>
+      <th>Touch to Use</th>
+      <th>Why</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <!-- Awareness -->
+    <tr>
+      <td><span class="label">Type:</span> <span class="value">Facebook / Instagram awareness post</span></td>
+      <td class="layer check">✓</td>
+      <td class="layer check">✓</td>
+      <td class="layer check">✓</td>
+      <td class="layers-merged"><span class="label">Layers:</span> <span class="value">Truth + Thinking + Language</span></td>
+      <td><span class="label">Touch:</span> <span class="value">Touch 1</span></td>
+      <td><span class="label">Why:</span> <span class="value">Build recognition, no selling</span></td>
+    </tr>
+
+    <!-- Educational social -->
+    <tr>
+      <td><span class="label">Type:</span> <span class="value">Educational social post</span></td>
+      <td class="layer check">✓</td>
+      <td class="layer check">✓</td>
+      <td class="layer check">✓</td>
+      <td class="layers-merged"><span class="label">Layers:</span> <span class="value">Truth + Thinking + Language</span></td>
+      <td><span class="label">Touch:</span> <span class="value">Touch 2</span></td>
+      <td><span class="label">Why:</span> <span class="value">Explain the problem clearly</span></td>
+    </tr>
+
+    <!-- WhatsApp explanation -->
+    <tr>
+      <td><span class="label">Type:</span> <span class="value">WhatsApp explanation message</span></td>
+      <td class="layer check">✓</td>
+      <td class="layer check">✓</td>
+      <td class="layer check">✓</td>
+      <td class="layers-merged"><span class="label">Layers:</span> <span class="value">Truth + Thinking + Language</span></td>
+      <td><span class="label">Touch:</span> <span class="value">Touch 2</span></td>
+      <td><span class="label">Why:</span> <span class="value">Bridge toward understanding</span></td>
+    </tr>
+
+    <!-- Blog -->
+    <tr>
+      <td><span class="label">Type:</span> <span class="value">Blog post (problem-focused)</span></td>
+      <td class="layer check">✓</td>
+      <td class="layer check">✓</td>
+      <td class="layer check">✓</td>
+      <td class="layers-merged"><span class="label">Layers:</span> <span class="value">Truth + Thinking + Language</span></td>
+      <td><span class="label">Touch:</span> <span class="value">Touch 2</span></td>
+      <td><span class="label">Why:</span> <span class="value">Slow, detailed explanation</span></td>
+    </tr>
+
+    <!-- Sales page -->
+    <tr>
+      <td><span class="label">Type:</span> <span class="value">Sales page</span></td>
+      <td class="layer check">✓</td>
+      <td class="layer check">✓</td>
+      <td class="layer check">✓</td>
+      <td class="layers-merged"><span class="label">Layers:</span> <span class="value">Truth + Thinking + Language</span></td>
+      <td><span class="label">Touch:</span> <span class="value">Touch 2 + Touch 3</span></td>
+      <td><span class="label">Why:</span> <span class="value">Explain first, then allow action</span></td>
+    </tr>
+
+    <!-- Gumroad -->
+    <tr>
+      <td><span class="label">Type:</span> <span class="value">Gumroad product page</span></td>
+      <td class="layer check">✓</td>
+      <td class="layer check">✓</td>
+      <td class="layer check">✓</td>
+      <td class="layers-merged"><span class="label">Layers:</span> <span class="value">Truth + Thinking + Language</span></td>
+      <td><span class="label">Touch:</span> <span class="value">Touch 3</span></td>
+      <td><span class="label">Why:</span> <span class="value">Clear action for ready users</span></td>
+    </tr>
+
+    <!-- WhatsApp broadcast -->
+    <tr>
+      <td><span class="label">Type:</span> <span class="value">WhatsApp broadcast with link</span></td>
+      <td class="layer check">✓</td>
+      <td class="layer check">✓</td>
+      <td class="layer check">✓</td>
+      <td class="layers-merged"><span class="label">Layers:</span> <span class="value">Truth + Thinking + Language</span></td>
+      <td><span class="label">Touch:</span> <span class="value">Touch 3</span></td>
+      <td><span class="label">Why:</span> <span class="value">Direct instruction for action</span></td>
+    </tr>
+
+    <!-- Ads -->
+    <tr>
+      <td><span class="label">Type:</span> <span class="value">Ad copy (ethical)</span></td>
+      <td class="layer check">✓</td>
+      <td class="layer check">✓</td>
+      <td class="layer check">✓</td>
+      <td class="layers-merged"><span class="label">Layers:</span> <span class="value">Truth + Thinking + Language</span></td>
+      <td><span class="label">Touch:</span> <span class="value">Touch 1 or 2</span></td>
+      <td><span class="label">Why:</span> <span class="value">Start trust, not pressure</span></td>
+    </tr>
+
+    <!-- Email -->
+    <tr>
+      <td><span class="label">Type:</span> <span class="value">Email / follow-up message</span></td>
+      <td class="layer check">✓</td>
+      <td class="layer check">✓</td>
+      <td class="layer check">✓</td>
+      <td class="layers-merged"><span class="label">Layers:</span> <span class="value">Truth + Thinking + Language</span></td>
+      <td><span class="label">Touch:</span> <span class="value">Depends on stage</span></td>
+      <td><span class="label">Why:</span> <span class="value">Match reader readiness</span></td>
+    </tr>
+
+  </tbody>
+</table>
+
+<div class="final-note">
+  <p><strong>Final clarity (important):</strong></p>
+  <p>If you skip layers, writing breaks.</p>
+  <p>If you misuse touches, trust breaks.</p>
+  <p>If you respect both, sales become natural.</p>
+</div>
+
+</body>
+</html>
