@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mechanism Plug-in System</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .container { max-width: 850px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 50px; }
+    h1 { font-size: 2.2rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; }
+
+    .how-to-box {
+      background: rgba(34, 211, 238, 0.05);
+      border: 1px solid var(--accent-primary);
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 40px;
+    }
+    .how-to-box h2 { font-size: 1rem; color: var(--accent-primary); margin-bottom: 10px; text-transform: uppercase; }
+    .how-to-box ul { list-style: none; padding-left: 0; font-size: 0.9rem; color: var(--text-secondary); }
+    .how-to-box li { margin-bottom: 5px; }
+
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 30px;
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+    }
+    .prompt-card h3 { font-size: 1.2rem; color: var(--accent-primary); margin-bottom: 15px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; }
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 20px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem;
+      border: 1px solid var(--card-border);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 10px 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      background-color: var(--accent-primary);
+      color: var(--bg-gradient-end);
+      border: none; border-radius: 8px;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .copy-button.copied { background-color: var(--accent-success); }
+    footer { text-align: center; margin-top: 50px; color: var(--text-secondary); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Mechanism Plug-in System</h1>
+    </header>
+
+    <section class="how-to-box">
+      <h2>Available Mechanism Blocks</h2>
+      <ul>
+        <li>• Prerequisite / gap identification</li>
+        <li>• Simplified explanation / translation</li>
+        <li>• Practice / skill building</li>
+        <li>• Step-by-step guidance</li>
+        <li>• Confidence / support</li>
+      </ul>
+      <p style="font-size: 0.85rem; margin-top:10px; color: var(--text-primary);">You don’t “design” again. You select.</p>
+    </section>
+
+    <main>
+      <div class="prompt-card">
+        <h3>One-Line Switch Logic</h3>
+        <pre id="pPlugin" class="prompt-text">MECHANISM PLUG-IN SYSTEM
+(One-Line Switch for All Prompts)
+
+PRODUCT MECHANISM:
+This product helps a mother identify which prerequisite concept a child is missing before understanding a lesson.
+
+PURPOSE
+This system allows you to reuse the SAME prompts while switching the product mechanism using ONE line only.
+Truth Layer and Language Layer remain unchanged.
+Only the Thinking Layer adapts automatically based on the mechanism line.
+
+==================================================
+HOW TO USE (IMPORTANT)
+At the VERY TOP of any prompt, add ONE line:
+PRODUCT MECHANISM: [WRITE ONE CLEAR SENTENCE HERE]
+
+==================================================
+MECHANISM INTERPRETATION RULE (MANDATORY)
+"All explanations, stories, logic, and examples MUST be built ONLY around this mechanism. Do not assume any other mechanism. Do not reuse language from previous mechanisms."
+
+==================================================
+THINKING LAYER – DYNAMIC VERSION
+THINKING LAYER (MECHANISM-DRIVEN)
+* Do NOT assume how the product works.
+* Read the PRODUCT MECHANISM line carefully.
+* Identify:
+  1. What problem exists BEFORE use
+  2. Why it exists ACCORDING TO THE MECHANISM
+  3. How product resolves it USING ONLY THE MECHANISM
+* Build strictly from the mechanism (Diagnostic, Explanatory, Practice, or Guidance).
+
+==================================================
+STANDARD MECHANISM PLUG-INS (READY TO USE)
+---
+MECHANISM A – PREREQUISITE / GAP IDENTIFICATION
+PRODUCT MECHANISM: This product helps a mother identify which prerequisite concept a child is missing before understanding a lesson.
+---
+MECHANISM B – SIMPLIFIED EXPLANATION / TRANSLATION
+PRODUCT MECHANISM: This product explains the same lesson again in simpler language so the child can understand it easily.
+---
+MECHANISM C – PRACTICE / SKILL BUILDING
+PRODUCT MECHANISM: This product helps the child practice a specific skill repeatedly until it becomes easy and confident.
+---
+MECHANISM D – STEP-BY-STEP GUIDANCE
+PRODUCT MECHANISM: This product guides the mother step by step on what to do so the child can study without confusion.
+---
+MECHANISM E – CONFIDENCE / REASSURANCE SUPPORT
+PRODUCT MECHANISM: This product supports the mother emotionally and practically so she feels confident while helping her child.</pre>
+        <button class="copy-button" onclick="copyText('pPlugin', this)">Copy Plugin System</button>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function copyText(id, btn) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const original = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = original;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
