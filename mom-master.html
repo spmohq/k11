@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MASTER MEGA-PROMPT TEMPLATE</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --input-bg: #111827;
+      --code-bg: rgba(0, 0, 0, 0.4);
+      --shadow-color: rgba(0, 0, 0, 0.3);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 40px; }
+    h1 { font-size: 2.2rem; font-weight: 700; color: var(--text-heading); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;}
+    .subtitle { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 20px; }
+    
+    .reference-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--input-bg);
+      color: var(--accent-primary);
+      border: 1px solid var(--accent-primary);
+      padding: 10px 24px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      margin-bottom: 20px;
+    }
+    .reference-btn:hover {
+      background-color: var(--accent-primary);
+      color: var(--bg-gradient-end);
+      transform: translateY(-2px);
+    }
+
+    /* Input Section */
+    .input-section {
+      margin-bottom: 30px;
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+    }
+    .input-group { display: flex; flex-direction: column; }
+    .input-group label { font-weight: 600; margin-bottom: 5px; color: var(--accent-primary); font-size: 1rem; text-transform: uppercase; }
+    .input-group .examples { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 12px; font-style: italic; }
+    textarea {
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 15px;
+      color: white;
+      font-family: inherit;
+      font-size: 0.95rem;
+      min-height: 120px;
+      resize: vertical;
+    }
+    textarea:focus { outline: 2px solid var(--accent-primary); border-color: transparent; }
+
+    /* Prompt Card */
+    .prompt-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 8px 32px var(--shadow-color);
+      display: flex; flex-direction: column;
+      backdrop-filter: blur(12px);
+    }
+    .prompt-card h2 { font-size: 1.1rem; margin-bottom: 15px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; color: var(--text-heading); text-transform: uppercase; }
+    
+    .prompt-text {
+      background: var(--code-bg);
+      padding: 25px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem;
+      border: 1px solid var(--card-border);
+      margin-bottom: 20px;
+      line-height: 1.5;
+      color: #e5e7eb;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+    /* Scrollbar */
+    .prompt-text::-webkit-scrollbar { width: 8px; }
+    .prompt-text::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
+    .prompt-text::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; }
+
+    .dynamic-val { 
+      color: var(--accent-primary); 
+      font-weight: 700; 
+      font-family: 'Inter', sans-serif;
+    }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 12px 24px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      background: var(--accent-primary);
+      color: var(--bg-gradient-end);
+      border: none; border-radius: 8px;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+    .copy-button:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .copy-button.copied { background: var(--accent-success); }
+    .icon { width: 18px; height: 18px; }
+
+    footer { text-align: center; margin-top: 50px; color: var(--text-secondary); font-size: 0.85rem; padding-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>MASTER MEGA-PROMPT TEMPLATE</h1>
+    <p class="subtitle">(Paste once. Reuse forever.)</p>
+    <a href="https://spmohq.github.io/k11/lnt.html" target="_blank" class="reference-btn">
+      <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+      Reference
+    </a>
+  </header>
+
+  <!-- Input Section -->
+  <section class="input-section">
+    <div class="input-group">
+      <label>Task</label>
+      <p class="examples">Examples: 1, Write a Touch-1 Facebook post about prerequisites 2, Write a Touch-2 educational blog post 3, Write a Touch-2 → Touch-3 sales page for my app</p>
+      <textarea id="taskInput" placeholder="[PASTE YOUR ACTUAL CONTENT REQUEST HERE]"></textarea>
+    </div>
+  </section>
+
+  <main>
+    <div class="prompt-card">
+      <h2>Master Prompt</h2>
+      <div id="promptContent" class="prompt-text">==================================================
+READ THIS FIRST (NON-NEGOTIABLE)
+================================
+
+You are writing content for mothers whose children study in English-medium schools.
+
+This audience:
+* Is undereducated
+* Is weak in English
+* Cares deeply about their child’s education
+* Understands through story, situation, and lived experience
+* Needs clarity and instruction, not persuasion or hype
+
+Your job is NOT to use classic marketing.
+Your job is to translate a real, working product into clear understanding.
+
+==================================================
+ALWAYS-ACTIVE WRITING LAYERS (DO NOT SKIP)
+==========================================
+
+TRUTH LAYER — PRODUCT & PROMISE INTEGRITY
+* Write only what the product actually delivers in reality.
+* Do not exaggerate outcomes or promise success, marks, or future guarantees.
+* Dream is allowed ONLY as the real-life impact of real product output.
+* No fear, no urgency, no scarcity, no guilt.
+* Always return agency to the mother.
+* Make it clear that SHE helps the child using the product.
+
+Truth check:
+“If the reader believes this, can the product itself deliver it exactly as written?”
+
+---
+
+THINKING LAYER — HOW UNDERSTANDING IS BUILT
+* Assume the reader cannot follow abstract logic or implied steps.
+* One idea at a time. No compression.
+* Story is mandatory to translate logic into lived experience.
+* Every story MUST clearly explain:
+  • What was missing
+  • Why the lesson felt difficult
+  • How the product addresses that exact gap
+* Understanding must come before belief.
+
+Correct sequence:
+1. Situation recognition
+2. Problem explanation
+3. Mechanism clarity
+4. Practical outcome
+5. Emotional relief
+6. Calm invitation (only if required)
+
+Thinking check:
+“Will the reader understand WHY this works, not just feel that it sounds right?”
+
+---
+
+LANGUAGE LAYER — HOW IT IS SAID
+* Write in modern, everyday Kolkata Bengali.
+* Language must sound natural and easy to a 21-year-old Bengali speaker.
+* Always use the formal address “আপনি”. Never use “তুমি”.
+* Conversational, calm, respectful, face-to-face.
+* No literary or textbook Bengali.
+* Do not speak down to the reader.
+
+Language check:
+“Does this sound like a respectful, clear explanation spoken to an adult mother?”
+
+==================================================
+DECISION FLOW — SELECT THE CORRECT TOUCH
+========================================
+
+First, identify the job of this content by answering:
+“What should the reader be able to do AFTER reading this?”
+
+Then follow the rules below.
+
+---
+
+IF the content’s job is:
+* To help the reader recognize her own problem
+* To make her say “এই সমস্যাটা আমার”
+* WITHOUT mentioning any product or link
+→ USE TOUCH 1: RECOGNITION
+
+Rules for Touch 1:
+* No product mention
+* No CTA
+* No solution selling
+* Only situation, recognition, and relief
+
+---
+
+IF the content’s job is:
+* To explain WHY the problem happens
+* To build understanding
+* To teach, not sell
+* To introduce the idea that a solution exists
+→ USE TOUCH 2: EXPLANATION
+
+Rules for Touch 2:
+* Explain the mechanism clearly
+* Product may be mentioned as a tool/app (optional)
+* No pressure or persuasion
+* CTA not required
+
+---
+
+IF the content’s job is:
+* To help a ready reader take action
+* To show HOW the product helps
+* To give clear next-step instruction
+* To include a link or access point
+→ USE TOUCH 3: ACTION
+
+Rules for Touch 3:
+* Product must be named clearly
+* Explain exactly how the product helps the mother
+* Make it clear the mother herself will help the child
+* Include a clear, instructional CTA + link
+* No urgency, no fear, no manipulation
+
+CTA structure (MANDATORY for Touch 3):
+“এই অ্যাপটার সাহায্যে আপনি নিজেই বুঝতে পারবেন —
+[what the product helps you understand].
+এই অ্যাপটা এখান থেকে ব্যবহার শুরু করতে পারেন:
+[PASTE SALES PAGE URL]”
+
+---
+
+IF the content is:
+* A sales page
+* A landing page
+* A long conversion page
+→ USE TOUCH 2 FIRST, THEN TOUCH 3
+
+Rules:
+* Full explanation before any CTA
+* One optional early CTA allowed ONLY after explaining how the product works
+
+==================================================
+FINAL EXECUTION CHECK (MANDATORY)
+=================================
+
+Before finishing, silently verify:
+1. Truth layer respected
+2. Logic fully visible
+3. Language dignified and clear
+4. Correct touch selected
+5. No mixing of touches unless explicitly allowed
+
+If any one fails → rewrite.
+
+==================================================
+END OF MASTER MEGA-PROMPT
+=========================
+
+NOW DO THE FOLLOWING TASK:
+<span class="dynamic-val" id="outTask">[PASTE YOUR ACTUAL CONTENT REQUEST HERE]</span></div>
+      
+      <button class="copy-button" id="copyBtn">
+        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+        <span id="btnText">Copy Full Prompt</span>
+      </button>
+    </div>
+  </main>
+
+  <footer>
+    <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+  </footer>
+</div>
+
+<script>
+  // Logic to update the dynamic part of the prompt
+  const taskInput = document.getElementById('taskInput');
+  const outTask = document.getElementById('outTask');
+
+  taskInput.addEventListener('input', () => {
+    outTask.textContent = taskInput.value.trim() || '[PASTE YOUR ACTUAL CONTENT REQUEST HERE]';
+  });
+
+  // Copy-to-clipboard functionality
+  const copyBtn = document.getElementById('copyBtn');
+  const btnText = document.getElementById('btnText');
+  const promptContent = document.getElementById('promptContent');
+
+  copyBtn.addEventListener('click', () => {
+    // innerText captures the text exactly as rendered in the UI (including line breaks)
+    navigator.clipboard.writeText(promptContent.innerText).then(() => {
+      const originalText = btnText.textContent;
+      btnText.textContent = 'Copied!';
+      copyBtn.classList.add('copied');
+      
+      setTimeout(() => {
+        btnText.textContent = originalText;
+        copyBtn.classList.remove('copied');
+      }, 2000);
+    }).catch(err => {
+      console.error('Failed to copy: ', err);
+    });
+  });
+</script>
+
+</body>
+</html>
