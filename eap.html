@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Easy Affiliate Promotion</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { max-width: 950px; width: 100%; margin: 0 auto; flex-grow: 1; }
+    header { text-align: center; margin-bottom: 30px; }
+    h1 { font-size: 2.5rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; margin-bottom: 20px; }
+    
+    /* Top Action Buttons */
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .external-link-btn {
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--bg-gradient-end);
+      background-color: var(--accent-primary);
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(34, 211, 238, 0.2);
+    }
+    .external-link-btn:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(34, 211, 238, 0.3);
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin: 40px 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--card-border);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .prompts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 25px;
+    }
+    @media (max-width: 600px) {
+        .prompts-grid { grid-template-columns: 1fr; }
+    }
+
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 25px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .prompt-card h3 { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 12px; text-transform: uppercase; }
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 15px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      margin-bottom: 15px;
+      border: 1px solid var(--card-border);
+      line-height: 1.4;
+    }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 8px 16px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--bg-gradient-end);
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); }
+    .copy-button.copied { background-color: var(--accent-success); }
+    
+    .icon { width: 16px; height: 16px; }
+
+    footer { text-align: center; padding: 60px 0 20px; color: var(--text-secondary); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Easy Affiliate Promotion</h1>
+      <div class="button-group">
+        <a href="https://chatgpt.com/g/g-698a00521bc08191b8ee83b92659bbf9-one-page-money-system" target="_blank" class="external-link-btn">
+          <svg class="icon" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          Single-Page Money Page
+        </a>
+        <a href="https://chatgpt.com/g/g-6994655300f0819183d90edef3e17844-1-click-rewriter-pro" target="_blank" class="external-link-btn">
+          <svg class="icon" fill="currentColor" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+          1-Click Rewriter
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <!-- Section 1 -->
+      <h2 class="section-title">Organic Social Post and Blog Post</h2>
+      <div class="prompts-grid">
+        <div class="prompt-card">
+          <h3>Prompt 1: Initial Parameters</h3>
+          <pre id="s1p1" class="prompt-text">1) URL
+
+2) affiliate offer
+
+3) Organic social
+
+4) under $10
+
+5) fast cash</pre>
+          <button class="copy-button" onclick="copyText('s1p1', this)">Copy</button>
+        </div>
+
+        <div class="prompt-card">
+          <h3>Prompt 2: Pain Point Variant</h3>
+          <pre id="s1p2" class="prompt-text">give me one more organic social post, each based on a different pain point.</pre>
+          <button class="copy-button" onclick="copyText('s1p2', this)">Copy</button>
+        </div>
+
+        <div class="prompt-card">
+          <h3>Prompt 3: Multi-Post Batch</h3>
+          <pre id="s1p3" class="prompt-text">Give me five more organic social posts, each based on a different pain point.</pre>
+          <button class="copy-button" onclick="copyText('s1p3', this)">Copy</button>
+        </div>
+
+        <div class="prompt-card">
+          <h3>Prompt 4: Blog with CTA</h3>
+          <pre id="s1p4" class="prompt-text">Give me one blog post with end CTA</pre>
+          <button class="copy-button" onclick="copyText('s1p4', this)">Copy</button>
+        </div>
+
+        <div class="prompt-card">
+          <h3>Prompt 5: Blog Variants</h3>
+          <pre id="s1p5" class="prompt-text">Give me one more blog post, each based on a different pain point, and with end CTA</pre>
+          <button class="copy-button" onclick="copyText('s1p5', this)">Copy</button>
+        </div>
+      </div>
+
+      <!-- Section 2 -->
+      <h2 class="section-title">Convert to Article</h2>
+      <div class="prompts-grid">
+        <div class="prompt-card">
+          <h3>Prompt 1: Expansion Strategy</h3>
+          <pre id="s2p1" class="prompt-text">1, own this content, 2, Sales-focused; 3, Rewrite + heavy expansion and restructuring: 4, go straight into rewriting</pre>
+          <button class="copy-button" onclick="copyText('s2p1', this)">Copy</button>
+        </div>
+
+        <div class="prompt-card">
+          <h3>Prompt 2: Direct Sales (Bengali)</h3>
+          <pre id="s2p2" class="prompt-text">আরও সরাসরি বিক্রয়ধর্মী</pre>
+          <button class="copy-button" onclick="copyText('s2p2', this)">Copy</button>
+        </div>
+
+        <div class="prompt-card">
+          <h3>Prompt 3: Powerful Closing (Bengali)</h3>
+          <pre id="s2p3" class="prompt-text">শেষ অংশে আরও শক্তিশালী ক্লোজিং যুক্ত</pre>
+          <button class="copy-button" onclick="copyText('s2p3', this)">Copy</button>
+        </div>
+
+        <div class="prompt-card">
+          <h3>Prompt 4: Final Step</h3>
+          <pre id="s2p4" class="prompt-text">Final Assembly</pre>
+          <button class="copy-button" onclick="copyText('s2p4', this)">Copy</button>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function copyText(id, btn) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const original = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = original;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>
