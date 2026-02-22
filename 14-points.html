@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>14 Components Framework</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { max-width: 900px; width: 100%; margin: 0 auto; flex-grow: 1; }
+    header { text-align: center; margin-bottom: 50px; }
+    h1 { font-size: 2.5rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; text-transform: uppercase; }
+    
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 35px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .prompt-card:hover { transform: translateY(-5px); }
+    .prompt-card h2 { font-size: 1.2rem; font-weight: 600; color: var(--accent-primary); margin-bottom: 20px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 25px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      margin-bottom: 25px;
+      border: 1px solid var(--card-border);
+      line-height: 1.6;
+      max-height: 800px;
+      overflow-y: auto;
+    }
+    
+    /* Custom Scrollbar */
+    .prompt-text::-webkit-scrollbar { width: 8px; }
+    .prompt-text::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
+    .prompt-text::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--bg-gradient-end);
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
+    .copy-button.copied { background-color: var(--accent-success); }
+    
+    .icon { width: 18px; height: 18px; }
+    .copied-icon { display: none; }
+    .copy-button.copied .copy-icon { display: none; }
+    .copy-button.copied .copied-icon { display: inline-block; }
+
+    footer { text-align: center; padding: 60px 0 20px; color: var(--text-secondary); font-size: 0.9rem; }
+    @media (max-width: 600px) { h1 { font-size: 2rem; } .prompt-text { font-size: 0.85rem; } }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>14 Components</h1>
+    </header>
+
+    <main>
+      <div class="prompt-card">
+        <h2>Full Framework Prompt</h2>
+        <pre id="frameworkPrompt" class="prompt-text">01, The Logical Flow
+
+A strong structure usually follows:
+
+Diagnose the real issue
+Reframe the problem
+Introduce the governing principle
+Break it into components
+Apply it
+Clarify limits
+
+02, Subtle conversion psychology requirements:
+- Build recognition before instruction
+- Create cognitive tension through unresolved friction
+- Make the reader feel seen before offering structure
+- Introduce the solution as clarification, not a product
+- Frame the bridge page as a continuation of learning, not a purchase
+
+03, Platform feature:
+
+04, Structure:
+
+ARTICLE STRUCTURE (Mandatory)
+
+Story
+Problem (internal friction, not external blame)
+Insight (reframing moment)
+Education (clear, structured, useful breakdown)
+Identity shift (who the reader becomes after applying this)
+Soft CTA (with the link to the Bridge Page at [URL])
+
+05, Title:
+
+Title must follow this format:
+“Clear promise of what the reader will achieve or regain”
+TITLE REQUIREMENTS
+The title must:
+• Clearly communicate the central insight
+• Avoid hype, exaggeration, or emotional manipulation
+• Avoid vague or abstract phrasing
+• Avoid clickbait curiosity framing
+• Be intellectually compelling but calm
+Do not use overly clever or metaphor-only titles.
+
+06, Sub-title:
+
+Sub-title Format:
+
+“A precise explanation of how or why the result happens — including the method, lens, or principle used.”
+
+In other words:
+
+Title = What the reader will achieve or regain.
+Sub-title = Why that outcome becomes possible (through what shift, framework, or insight).
+
+The Sub-title Must:
+
+• Clarify the mechanism behind the promise
+• Introduce the core framework, shift, or principle
+• Add specificity (who it’s for, in what context, under what condition)
+• Remain calm, rational, and intellectually grounded
+• Avoid hype or emotional manipulation
+• Avoid abstract philosophy without application
+
+Structural Templates You Can Use
+
+Mechanism-Based:
+“Through a practical framework for ______.”
+
+Shift-Based:
+“By understanding the hidden pattern behind ______.”
+
+Principle-Based:
+“Using first-principles thinking to navigate ______.”
+
+Audience-Specific:
+“A structured approach for professionals facing ______.”
+
+Constraint-Aware:
+“Without relying on ______ or ______.”
+
+Reframe-Based:
+“Rethinking ______ in a world of ______.”
+
+
+07, Section-title: Section titles must be specific, concise, and compelling. Avoid generic headings. Each title must clearly reflect and deliver the promise of its section. Section titles should read like chapters in a thinking process.
+
+Not emotional hooks.
+Not clever metaphors.
+Not vague philosophy.
+
+08, Opening hook:
+
+09, Step by step:
+
+10, End CTA:
+
+11, Disclaimer:
+
+12, Purpose to achieve:
+[1], what readers must get:
+[2], what I must get: send readers to the bridge page at [URL]
+
+13, Tone:
+
+Determine the tone organically based on the opening hook, structure, and stated purpose. Do not preset or impose a tone. Let the emotional intensity, authority level, and language style naturally align with those elements.
+
+14, Language & Style Directive:
+
+If any stylistic conflict occurs, follow this priority order:
+Preserve natural English flow.
+Maintain clarity and reader understanding.
+Retain intended meaning over literal wording.
+Write in modern, natural, everyday conversational English as spoken in Kolkata, West Bengal, India — but without local slang, regional grammar, or phrasing that could confuse a global audience.
+The language must be easily understood by a 21-year-old.
+Always address the reader directly using “you” and “your.”
+The writing should feel spontaneous, fluid, culturally authentic, and polished — never stiff, overly academic, or mechanically literal.
+Write like a trusted authority speaking one-on-one.
+Vary sentence length and rhythm naturally, mixing short emphasis lines with longer explanatory sentences when it improves clarity and engagement.</pre>
+        
+        <button class="copy-button" id="copyBtn">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M4.5 12.75l6 6 9-13.5" /></svg>
+          <span id="btnText">Copy Prompt</span>
+        </button>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const copyBtn = document.getElementById('copyBtn');
+    const promptText = document.getElementById('frameworkPrompt');
+    const btnText = document.getElementById('btnText');
+
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(promptText.textContent).then(() => {
+        const originalText = btnText.textContent;
+        btnText.textContent = 'Copied!';
+        copyBtn.classList.add('copied');
+        
+        setTimeout(() => {
+          btnText.textContent = originalText;
+          copyBtn.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    });
+  </script>
+
+</body>
+</html>
