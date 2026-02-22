@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Platform Algo - Prompt Library</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { max-width: 950px; width: 100%; margin: 0 auto; flex-grow: 1; }
+    header { text-align: center; margin-bottom: 50px; }
+    h1 { font-size: 2.5rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; text-transform: uppercase; }
+    
+    .prompts-container { display: flex; flex-direction: column; gap: 40px; }
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 30px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .prompt-card:hover { transform: translateY(-5px); }
+    .prompt-card h2 { font-size: 1.1rem; font-weight: 600; color: var(--accent-primary); margin-bottom: 15px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 25px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      margin-bottom: 25px;
+      border: 1px solid var(--card-border);
+      line-height: 1.5;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+    
+    /* Custom Scrollbar */
+    .prompt-text::-webkit-scrollbar { width: 8px; }
+    .prompt-text::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
+    .prompt-text::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 12px 24px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--bg-gradient-end);
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
+    .copy-button.copied { background-color: var(--accent-success); }
+    
+    .icon { width: 18px; height: 18px; }
+    .copied-icon { display: none; }
+    .copy-button.copied .copy-icon { display: none; }
+    .copy-button.copied .copied-icon { display: inline-block; }
+
+    footer { text-align: center; padding: 60px 0 20px; color: var(--text-secondary); font-size: 0.9rem; }
+    @media (max-width: 600px) { h1 { font-size: 2rem; } .prompt-text { font-size: 0.85rem; } }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Platform Algo</h1>
+    </header>
+
+    <main class="prompts-container">
+      
+      <!-- Prompt 1 -->
+      <div class="prompt-card">
+        <h2>Content Goal Options (Reference)</h2>
+        <pre id="p1" class="prompt-text">* Discovery
+  Use when you want maximum reach and new audience exposure.
+  Focus on comments, shares, visibility, and algorithm distribution.
+
+* Authority
+  Use when you want to position yourself as a thinker, expert, or strategist.
+  Focus on clarity, depth, respect, and intellectual engagement.
+
+* Conversion
+  Use when you want inbound leads, direct messages, or sales.
+  Focus on trust, subtle persuasion, and soft bridging to an offer.
+
+* Engagement
+  Use when your page feels inactive and you want higher conversation volume.
+  Focus on relatability, opinion triggers, and low friction commenting.
+
+* Relationship
+  Use when nurturing an existing audience.
+  Focus on emotional connection, transparency, and shared journey.
+
+* Retention
+  Use for newsletters, subscriptions, or communities.
+  Focus on value density and keeping your current audience loyal.
+
+* Community Building
+  Use when you want identity alignment and tribe formation.
+  Focus on shared beliefs and people like us positioning.
+
+* List Growth
+  Use when the primary goal is email or subscriber growth.
+  Focus on curiosity loops, value previews, and soft opt in framing.
+
+* Re engagement
+  Use when your audience has gone quiet or dormant.
+  Focus on relatability, acknowledging silence, and renewed clarity.
+
+* Trust Building
+  Use early in your brand lifecycle.
+  Focus on honesty, proof through experience, and calm confidence.
+
+* Thought Leadership
+  Use when shaping narratives in your niche.
+  Focus on reframing industry norms and strategic insight.
+
+* Launch Warm Up
+  Use before a product or offer release.
+  Focus on problem awareness, future pacing, and subtle buildup.
+
+* Monetization Soft Sell
+  Use on support platforms like Ko fi or Buy Me a Coffee.
+  Focus on appreciation, insider access, and value reinforcement.
+
+* Controlled Polarization
+  Use when you want rapid authority signaling.
+  Focus on strong but defensible opinions.
+  Higher risk level.
+
+* Personal Brand Depth
+  Use when you want multidimensional positioning.
+  Focus on philosophy, values, and worldview.
+
+* Social Proof Amplification
+  Use when highlighting results or wins without bragging.
+  Focus on validation through story rather than screenshots.
+
+If you want to simplify everything strategically:
+
+Discovery = Grow audience
+Authority = Elevate perception
+Relationship = Deepen connection
+Conversion = Monetize
+Retention = Sustain
+
+Everything else is a variation of these five.</pre>
+        <button class="copy-button" data-target="p1">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M4.5 12.75l6 6 9-13.5" /></svg>
+          <span class="btn-text">Copy Context</span>
+        </button>
+      </div>
+
+      <!-- Prompt 2 -->
+      <div class="prompt-card">
+        <h2>Standalone Meta-Prompt Generator</h2>
+        <pre id="p2" class="prompt-text">I want a reusable 6 line aggressive growth template tailored specifically for this platform:
+
+PLATFORM: [Insert platform name]
+
+Optional:
+GOAL: [Discovery / Authority / Conversion]
+If not provided, infer from the platform type.
+
+Instructions:
+
+1. Internally classify the platform as one of the following:
+   Discovery platform (algorithm driven reach focus)
+   Authority platform (depth and retention focus)
+   Relationship or Support platform (trust and conversion focus)
+
+2. Automatically adjust aggression level:
+   Discovery platform: High tension and bold positioning
+   Authority platform: Sharp insight and intellectual dominance
+   Relationship or Support platform: Calm confidence and trust driven persuasion
+
+3. Generate only a reusable 6 line structural template.
+
+The template must:
+* Be algorithm compliant for that platform
+* Optimize for the engagement signals that platform prioritizes
+* Use confident positioning appropriate to platform type
+* Avoid hard selling
+* Avoid exaggerated income claims
+* Avoid spammy engagement bait
+* Avoid unnecessary external links
+
+Output requirements:
+* Exactly 6 lines
+* Each line must include a short instruction in brackets explaining its purpose
+* No examples
+* No explanations
+* No extra commentary
+* Clean and minimal structure
+* Usable daily across topics
+
+Do not generate content.
+Generate only the reusable template.</pre>
+        <button class="copy-button" data-target="p2">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M4.5 12.75l6 6 9-13.5" /></svg>
+          <span class="btn-text">Copy Generator</span>
+        </button>
+      </div>
+
+      <!-- Prompt 3 -->
+      <div class="prompt-card">
+        <h2>Subtle Support Bridge</h2>
+        <pre id="p3" class="prompt-text">There’s more nuance to this than I could include here.
+I’ve written the extended version separately.
+https://buymeacoffee.com/spmukherjee</pre>
+        <button class="copy-button" data-target="p3">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M4.5 12.75l6 6 9-13.5" /></svg>
+          <span class="btn-text">Copy Link Block</span>
+        </button>
+      </div>
+
+      <!-- Prompt 4 -->
+      <div class="prompt-card">
+        <h2>Medium Ending Selector Prompt</h2>
+        <pre id="p4" class="prompt-text">I have written a Medium article.
+
+Article topic summary:
+[Paste 2 to 4 sentences summarizing your article]
+
+Goal:
+Maintain a calm, creator first tone.
+Avoid hard selling.
+Avoid exaggerated claims.
+Avoid pushy calls to action.
+
+Your task:
+
+1. Analyze the topic and tone.
+
+2. Internally classify the article as one of these types:
+   Authority (framework, strategy, strong positioning)
+   Reflection (personal insight, narrative, emotional depth)
+   Soft Continuation (deep tactical breakdown that implies more depth exists)
+   Insider Circle (philosophy, worldview, identity signaling)
+
+3. Choose the most natural ending type.
+
+4. Generate only one ending section between 4 and 8 lines maximum.
+
+5. Keep tone calm, intelligent, and high status.
+
+6. If appropriate, include a subtle Buy Me a Coffee continuation reference.
+
+7. Do not explain your reasoning.
+
+8. Output only the ending.
+
+Buy Me a Coffee link:
+https://buymeacoffee.com/spmukherjee</pre>
+        <button class="copy-button" data-target="p4">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M4.5 12.75l6 6 9-13.5" /></svg>
+          <span class="btn-text">Copy Selector</span>
+        </button>
+      </div>
+
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    document.querySelectorAll('.copy-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-target');
+        const text = document.getElementById(targetId).textContent;
+        const btnText = button.querySelector('.btn-text');
+        const originalText = btnText.textContent;
+
+        navigator.clipboard.writeText(text).then(() => {
+          btnText.textContent = 'Copied!';
+          button.classList.add('copied');
+          
+          setTimeout(() => {
+            btnText.textContent = originalText;
+            button.classList.remove('copied');
+          }, 2000);
+        }).catch(err => {
+          console.error('Failed to copy: ', err);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
