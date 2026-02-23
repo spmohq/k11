@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Logical Analysis - Prompt Library</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { max-width: 950px; width: 100%; margin: 0 auto; flex-grow: 1; }
+    header { text-align: center; margin-bottom: 50px; }
+    h1 { font-size: 2.5rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; text-transform: uppercase; }
+    
+    .prompts-container { display: flex; flex-direction: column; gap: 40px; }
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 30px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .prompt-card:hover { transform: translateY(-5px); }
+    .prompt-card h2 { font-size: 1.2rem; font-weight: 600; color: var(--accent-primary); margin-bottom: 15px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 25px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      margin-bottom: 25px;
+      border: 1px solid var(--card-border);
+      line-height: 1.5;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+    
+    /* Custom Scrollbar */
+    .prompt-text::-webkit-scrollbar { width: 8px; }
+    .prompt-text::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
+    .prompt-text::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 12px 24px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--bg-gradient-end);
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
+    .copy-button.copied { background-color: var(--accent-success); }
+    
+    .icon { width: 18px; height: 18px; }
+    .copied-icon { display: none; }
+    .copy-button.copied .copy-icon { display: none; }
+    .copy-button.copied .copied-icon { display: inline-block; }
+
+    footer { text-align: center; padding: 60px 0 20px; color: var(--text-secondary); font-size: 0.9rem; }
+    @media (max-width: 600px) { h1 { font-size: 2rem; } .prompt-text { font-size: 0.85rem; } }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Logical Analysis</h1>
+    </header>
+
+    <main class="prompts-container">
+      
+      <!-- Prompt 1 -->
+      <div class="prompt-card">
+        <h2>Prompt #1: Step-by-Step Analytical Framework</h2>
+        <pre id="p1" class="prompt-text">1, Problem / issue 
+2, Behavior / Activity
+3, Controlling Principle
+4, Subcomponents of Controlling Principle
+CONSTRAINT MAPPING 
+5, কখন কাজ করবে না কোন অবস্থায় উল্টো ফল দেবে
+6, কেন তখন কাজ করবে না ও কেন সে অবস্থায় উল্টো ফল দেবে
+The core controlling system 
+Where and why the controlling system conflicts with the core control system.
+7, Strategic Adjustment
+
+Additional Point:
+
+ব্যর্থতা কিভাবে আপন বিশ্বাস / the controlling system-র উপর আস্থা ও ভরসাকে বাড়িয়ে তোলে? (সাফল্য বাই ডিফল্ট the controlling system-র উপর এই আস্থা ও ভরসাকে বাড়িয়ে তোলে।)</pre>
+        <button class="copy-button" data-target="p1">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M4.5 12.75l6 6 9-13.5" /></svg>
+          <span class="btn-text">Copy Prompt 1</span>
+        </button>
+      </div>
+
+      <!-- Prompt 2 -->
+      <div class="prompt-card">
+        <h2>Prompt #2: Book Outline Generator</h2>
+        <pre id="p2" class="prompt-text">BOOK OUTLINE GENERATOR PROMPT TEMPLATE (OPTIMIZED STRUCTURE)
+Role: You are a professional nonfiction book architect and structural thinker. Your task is to design a deeply coherent, intellectually rigorous, commercially viable chapter outline based on the framework below.
+Book Topic: [Insert Book Topic Here]
+Core Thesis: Every persistent problem is governed by a controlling principle. Success reinforces trust in that principle. Failure, paradoxically, often strengthens trust in it even more. Understanding this reinforcement loop is the key to meaningful strategic adjustment.
+Framework Structure to Follow:
+Introduction - The Governing Thesis Introduce the central argument of the book. Establish that every persistent problem is governed by a controlling principle operating within structural limits. Explain why both success and failure reinforce belief in that principle. Prepare the reader for systemic rather than surface-level analysis.
+Chapter 1 - The Visible Problem Define and reframe the surface-level issue as an output rather than a root cause.
+Chapter 2 - Behavioral Patterns and Activity Loops Identify recurring behaviors and explain how they create predictable outcomes.
+Chapter 3 - The Controlling Principle Define the governing logic behind the behavior and explain how it produces both success and failure.
+Chapter 4 - Subcomponents and Constraint Mapping Break the controlling principle into structural parts and map its operational limits (environmental, psychological, situational).
+Chapter 5 - When the Principle Reverses Explain the specific conditions under which the principle fails or produces the opposite result.
+Chapter 6 - The Reinforcement Paradox Explain how success reinforces belief by default and how failure often strengthens commitment through rationalization, identity protection, escalation of commitment, and cognitive consistency mechanisms. Treat this as a major intellectual pillar of the book, not a minor subsection.
+Chapter 7 - The Core Controlling System Analyze the deeper belief architecture that sustains and protects the controlling principle. Explain how reinforcement loops harden identity structures and create internal resistance to change. Identify conflict points and internal friction.
+Chapter 8 - Strategic Adjustment Provide a systematic recalibration framework that helps readers detect reinforcement loops, distinguish structural flaws from execution errors, and redesign the controlling system when necessary.
+Conclusion - Structural Awareness and Long-Term Application Synthesize the full framework. Reinforce the governing thesis and the reinforcement paradox. Show how readers can apply the diagnostic model across domains. End with a forward-looking perspective on structural self-correction and adaptive thinking.
+Your Task:
+For each chapter:
+Write a clear and compelling chapter objective.
+Explain the core ideas to be covered.
+Describe the logical progression within the chapter.
+Suggest examples or case study types that would strengthen it.
+Identify the psychological mechanisms involved.
+Show how the chapter connects logically to the next one.
+Ensure conceptual cohesion across the entire book.
+Writing Style Requirements:
+Write in clear, modern, natural English.
+Maintain intellectual depth but avoid unnecessary jargon.
+Structure each chapter explanation in well-organized paragraphs.
+Avoid repetition.
+Ensure strong logical progression.
+Make the outline feel publish-ready and structurally complete.
+Additional Instruction:
+Sequence the chapters so that psychological reinforcement precedes deep belief architecture, creating narrative escalation and intellectual tension.
+Deliver the full chapter-by-chapter outline in a polished, proposal-ready format.
+Additional Structural Directives:
+Define the target reader and intellectual positioning in the Introduction.
+Ensure that each chapter subtly connects back to the Reinforcement Paradox as an underlying driver.
+Increase conceptual depth progressively from Chapter 1 through Chapter 7.
+Avoid generic business clichés or surface-level examples.
+Identify the central tension or contradiction explored in each chapter.
+Maintain analytical precision over motivational tone.</pre>
+        <button class="copy-button" data-target="p2">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M4.5 12.75l6 6 9-13.5" /></svg>
+          <span class="btn-text">Copy Prompt 2</span>
+        </button>
+      </div>
+
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    document.querySelectorAll('.copy-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-target');
+        const text = document.getElementById(targetId).textContent;
+        const btnText = button.querySelector('.btn-text');
+        const originalText = btnText.textContent;
+
+        navigator.clipboard.writeText(text).then(() => {
+          btnText.textContent = 'Copied!';
+          button.classList.add('copied');
+          
+          setTimeout(() => {
+            btnText.textContent = originalText;
+            button.classList.remove('copied');
+          }, 2000);
+        }).catch(err => {
+          console.error('Failed to copy: ', err);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
