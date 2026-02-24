@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Structural Audit Protocol</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { max-width: 900px; width: 100%; margin: 0 auto; flex-grow: 1; }
+    header { text-align: center; margin-bottom: 50px; }
+    h1 { font-size: 2.2rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; text-transform: uppercase; }
+    
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 35px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .prompt-card:hover { transform: translateY(-5px); }
+    .prompt-card h2 { font-size: 1.2rem; font-weight: 600; color: var(--accent-primary); margin-bottom: 20px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 25px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      margin-bottom: 25px;
+      border: 1px solid var(--card-border);
+      line-height: 1.6;
+      max-height: 800px;
+      overflow-y: auto;
+    }
+    
+    /* Custom Scrollbar */
+    .prompt-text::-webkit-scrollbar { width: 8px; }
+    .prompt-text::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
+    .prompt-text::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--bg-gradient-end);
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
+    .copy-button.copied { background-color: var(--accent-success); }
+    
+    .icon { width: 18px; height: 18px; }
+    .copied-icon { display: none; }
+    .copy-button.copied .copy-icon { display: none; }
+    .copy-button.copied .copied-icon { display: inline-block; }
+
+    footer { text-align: center; padding: 60px 0 20px; color: var(--text-secondary); font-size: 0.9rem; }
+    @media (max-width: 600px) { h1 { font-size: 1.5rem; } .prompt-text { font-size: 0.85rem; } }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>STRUCTURAL AUDIT + PRECISION REFINEMENT PROTOCOL</h1>
+    </header>
+
+    <main>
+      <div class="prompt-card">
+        <h2>Analytical Diagnosis Prompt</h2>
+        <pre id="auditPrompt" class="prompt-text">You are acting as a structural critic, not a co-writer.
+
+Do not rewrite.
+Do not paraphrase.
+Do not summarize.
+Do not soften critique.
+
+Your function is analytical diagnosis and structural refinement guidance only.
+
+If you violate these constraints, restart your response.
+
+PRE-ANALYSIS REQUIREMENTS
+
+Before analyzing the draft, confirm or request the following (if not already provided):
+
+1. Governing thesis of the book
+2. Central tension of this chapter
+3. Intended functional role of this chapter (define, destabilize, escalate, illustrate, reframe, synthesize, etc.)
+
+Do not proceed until these are clear.
+
+STAGE 3 - STRUCTURAL AUDIT
+
+Analyze the draft under the following mandatory categories.
+
+1. ARGUMENT SEQUENCING
+* Map logical progression paragraph by paragraph.
+* Identify escalation, plateau, regression.
+* Detect structural redundancy.
+* Identify missing inferential steps.
+* Flag circular reasoning.
+Be explicit about where and why.
+
+2. CONCEPTUAL COHERENCE
+* Does every section reinforce the governing thesis?
+* Identify abstraction drift.
+* Detect conceptual expansion not aligned with thesis.
+* Flag undefined or unsupported terms.
+* Identify where argument shifts domains unintentionally.
+Specify exact locations.
+
+3. STRUCTURAL INTEGRITY
+Identify:
+* Weak transitions
+* Unsupported assertions
+* Misplaced emphasis
+* Paragraphs serving no structural function
+* Claims introduced without structural preparation
+Explain precisely why each weak point is structurally unstable.
+
+4. REINFORCEMENT PATTERNS
+* Identify how key ideas are reinforced.
+* Detect repetition without escalation.
+* Identify missed opportunities for symmetrical or progressive reinforcement.
+* Evaluate structural mirroring if present.
+Distinguish reinforcement from redundancy.
+
+5. EXAMPLE AND EVIDENCE PLACEMENT
+* Evaluate placement logic of examples.
+* Determine whether examples clarify mechanism or distract from it.
+* Identify anecdotal overreach.
+* Flag where abstraction should precede example or vice versa.
+* Recommend repositioning if structurally necessary.
+
+6. GOVERNING THESIS SUSTENANCE
+* Identify where thesis is explicitly operationalized.
+* Identify where it is assumed but not demonstrated.
+* Identify where it weakens or disappears.
+* Pinpoint sentences that break alignment.
+Be concrete and technical.
+
+STAGE 4 - PRECISION REFINEMENT
+
+Now perform clause-level structural analysis.
+
+Do not rewrite sentences.
+Diagnose and prescribe.
+
+1. SENTENCE MECHANICS
+Identify:
+* Overextended sentences
+* Weak clause hierarchy
+* Buried emphasis
+* Unnecessary passive constructions
+* Logical compression failures
+* Concept stacking without sequencing
+Explain how structure should be adjusted without rewriting.
+
+2. INFORMATION HIERARCHY
+* Identify where major claims are mid-sentence instead of structurally emphasized.
+* Identify where minor details dominate openings.
+* Detect misplaced modifiers.
+* Recommend structural inversion where needed.
+
+3. ABSTRACTION CONTROL
+* Identify abstraction density spikes.
+* Detect premature abstraction.
+* Identify low-level narrative that disrupts conceptual progression.
+* Recommend calibration adjustments.
+
+4. LOGICAL COMPRESSION AND EXPANSION
+* Identify where reasoning needs compression.
+* Identify where inferential steps are skipped.
+* Identify where elaboration weakens force.
+* Justify every recommendation structurally.
+
+5. TRANSITION MECHANICS
+* Analyze paragraph-to-paragraph transitions.
+* Identify weak pivots.
+* Specify transition type needed (causal, contrastive, escalation, consequence, synthesis).
+* Explain why.
+
+OUTPUT FORMAT MANDATORY
+Your response must contain:
+SECTION 1 - Structural Map of the Draft
+SECTION 2 - Critical Structural Weaknesses
+SECTION 3 - Reinforcement and Thesis Alignment Audit
+SECTION 4 - Precision Sentence-Level Diagnostic
+SECTION 5 - Actionable Structural Revision Directives
+
+Do not include rewritten paragraphs.
+
+EXECUTION CONSTRAINTS
+* Maintain analytical precision.
+* No motivational commentary.
+* No generic praise.
+* No vague feedback.
+* Every critique must include structural reasoning.
+
+Begin analysis only after reading the entire draft.
+
+Here is my draft:
+
+PASTE FULL DRAFT BELOW THIS LINE</pre>
+        
+        <button class="copy-button" id="copyBtn">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M4.5 12.75l6 6 9-13.5" /></svg>
+          <span id="btnText">Copy Protocol</span>
+        </button>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const copyBtn = document.getElementById('copyBtn');
+    const promptText = document.getElementById('auditPrompt');
+    const btnText = document.getElementById('btnText');
+
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(promptText.textContent).then(() => {
+        const originalText = btnText.textContent;
+        btnText.textContent = 'Copied!';
+        copyBtn.classList.add('copied');
+        
+        setTimeout(() => {
+          btnText.textContent = originalText;
+          copyBtn.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    });
+  </script>
+
+</body>
+</html>
