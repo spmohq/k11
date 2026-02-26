@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tactical GPT Sales Page Generator</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { max-width: 850px; width: 100%; margin: 0 auto; flex-grow: 1; }
+    header { text-align: center; margin-bottom: 50px; }
+    h1 { font-size: 2.2rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; text-transform: uppercase; line-height: 1.2; }
+    
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 35px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .prompt-card:hover { transform: translateY(-5px); }
+    .prompt-card h2 { font-size: 1.2rem; font-weight: 600; color: var(--accent-primary); margin-bottom: 20px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 25px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      margin-bottom: 25px;
+      border: 1px solid var(--card-border);
+      line-height: 1.6;
+      max-height: 700px;
+      overflow-y: auto;
+    }
+
+    /* Custom Scrollbar */
+    .prompt-text::-webkit-scrollbar { width: 8px; }
+    .prompt-text::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
+    .prompt-text::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--bg-gradient-end);
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
+    .copy-button.copied { background-color: var(--accent-success); }
+    
+    .icon { width: 18px; height: 18px; }
+    .copied-icon { display: none; }
+    .copy-button.copied .copy-icon { display: none; }
+    .copy-button.copied .copied-icon { display: inline-block; }
+
+    footer { text-align: center; padding: 60px 0 20px; color: var(--text-secondary); font-size: 0.9rem; }
+    @media (max-width: 600px) { h1 { font-size: 1.6rem; } .prompt-text { font-size: 0.85rem; } }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>- 9 STEP TACTICAL GPT SALES PAGE</h1>
+    </header>
+
+    <main>
+      <div class="prompt-card">
+        <h2>Tactical Sales Framework</h2>
+        <pre id="tacticalPrompt" class="prompt-text">ROLE:
+You are an elite direct-response copywriter specializing in clear, logical, high-conversion tactical sales pages for GPT-based products. Your writing must be structured, persuasive, outcome-focused, and free of hype.
+
+OBJECTIVE:
+Write a complete sales page that strictly follows the 9-step tactical structure below. The product must NOT be sold as "a GPT." It must be sold as an outcome, workflow, or transformation.
+
+CRITICAL RULES:
+* Be outcome focused. Never sell "a GPT."
+* Use clear, grounded language.
+* No hype, no exaggerated income claims, no dramatic promises.
+* Explain exactly how the GPT works in a clear, detailed, step-by-step manner so buyers fully understand the concept before purchasing.
+* Keep tone calm, intelligent, and credible.
+* Remove fluff. Increase logic density.
+
+STRUCTURE - FOLLOW EXACTLY:
+
+1. HEADLINE (Pain + Outcome)
+   Write a strong, clear headline that identifies the specific pain and promises a measurable or tangible outcome.
+   Example format:
+   Turn [specific messy problem] Into [clear desirable outcome] in [specific time frame]
+
+2. SHORT PROBLEM EXPLANATION
+   Briefly explain the real bottleneck. Reframe the problem correctly. Clarify that the issue is not lack of ideas or effort, but lack of structure or workflow.
+
+3. AGITATE FRUSTRATION
+   Expand on the friction:
+* Time drain
+* Cognitive overload
+* Inconsistency
+* Delayed publishing
+  Show consequences without exaggeration.
+
+4. INTRODUCE THE SOLUTION
+   Introduce the system as a structured workflow that removes friction. Position it as a repeatable process, not a magic tool.
+   Clarify what makes it different from:
+* Doing it manually
+* Using generic ChatGPT prompts
+
+5. SHOW HOW IT WORKS (3 STEPS)
+   Provide a detailed step-by-step explanation.
+   For each step include:
+* What the user does
+* What the system does
+* The benefit of that step
+  Make it feel simple, structured, and repeatable.
+
+6. SHOW EXAMPLE OUTPUT
+   Provide a clear before and after example.
+   Show messy input.
+   Show structured output.
+   Explain briefly what changed and why that matters.
+
+7. EXPLAIN WHAT THE BUYER GETS
+   List deliverables clearly.
+   Be concrete.
+   No vague bonuses.
+   Focus on assets and functionality.
+
+8. PRICE
+   State the current price clearly.
+   If relevant, mention future price increase logically (no fake urgency).
+   Reinforce value relative to friction removed.
+
+9. REQUIREMENTS
+   Clearly state what is required.
+   Example:
+* ChatGPT Plus subscription
+* Basic copy and paste ability
+* Time required for first use
+
+MANDATORY ADDITION:
+In the copy, include a section that clearly explains how this GPT works in a detailed step-by-step process so potential buyers fully understand its concept and functionality before making a purchase.
+
+TONE GUIDELINES:
+* Intelligent
+* Structured
+* Calm authority
+* Logical
+* No marketing hype
+* No emotional manipulation
+
+FINAL OUTPUT REQUIREMENT:
+Produce the full sales page in clean text format with clear section spacing.
+Do not include commentary, explanations, or analysis.
+Only output the finished sales page.</pre>
+        
+        <button class="copy-button" id="copyBtn">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M4.5 12.75l6 6 9-13.5" /></svg>
+          <span id="btnText">Copy Prompt</span>
+        </button>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const copyBtn = document.getElementById('copyBtn');
+    const promptText = document.getElementById('tacticalPrompt');
+    const btnText = document.getElementById('btnText');
+
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(promptText.textContent).then(() => {
+        const originalText = btnText.textContent;
+        btnText.textContent = 'Copied!';
+        copyBtn.classList.add('copied');
+        
+        setTimeout(() => {
+          btnText.textContent = originalText;
+          copyBtn.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    });
+  </script>
+
+</body>
+</html>
