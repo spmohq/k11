@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sales Letter Follow-ups</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { max-width: 1200px; width: 100%; margin: 0 auto; flex-grow: 1; }
+    header { text-align: center; margin-bottom: 50px; }
+    h1 { font-size: 2.5rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; text-transform: uppercase; }
+    
+    .prompts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 25px;
+    }
+
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 25px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .prompt-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px var(--shadow-color);
+    }
+    .prompt-card h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent-primary);
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 15px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+      border: 1px solid var(--card-border);
+      line-height: 1.5;
+      flex-grow: 1;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    /* Scrollbar */
+    .prompt-text::-webkit-scrollbar { width: 6px; }
+    .prompt-text::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
+    .prompt-text::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 3px; }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 10px 18px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--bg-gradient-end);
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); transform: scale(1.05); }
+    .copy-button.copied { background-color: var(--accent-success); }
+    
+    .icon { width: 16px; height: 16px; }
+    .copied-icon { display: none; }
+    .copy-button.copied .copy-icon { display: none; }
+    .copy-button.copied .copied-icon { display: inline-block; }
+
+    footer { text-align: center; padding: 60px 0 20px; color: var(--text-secondary); font-size: 0.9rem; }
+    @media (max-width: 600px) { h1 { font-size: 2rem; } }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Sales Letter Follow-ups</h1>
+    </header>
+
+    <main class="prompts-grid">
+      <!-- Prompt 1 -->
+      <div class="prompt-card">
+        <h3>Prompt #1: Data Input</h3>
+        <pre id="p1" class="prompt-text">Product name: [INSERT]
+Primary outcome: [INSERT]
+Target audience: [INSERT]
+Old frustrating method: [INSERT]
+Core functionality of GPT: [INSERT]
+Example input: [INSERT]
+Example output: [INSERT]
+Price: [INSERT]
+Future price (if any): [INSERT]
+Time required to use: [INSERT]
+Bonuses included: [INSERT]</pre>
+        <button class="copy-button" data-target="p1">
+          <span class="btn-text">Copy</span>
+        </button>
+      </div>
+
+      <!-- Prompt 2 -->
+      <div class="prompt-card">
+        <h3>Prompt #2: Profile Bio Cold Traffic</h3>
+        <pre id="p2" class="prompt-text">Add these three sections, tailored to "Community audience but cold traffic (comes from profile bio link)":
+
+1. Micro Bridge At Top
+Right under subtitle:
+If you’ve been following my posts on structuring ideas and publishing consistently, this is the workflow behind them.
+
+2. Usage Authority
+Before “How It Works” add:
+I’ve used this structure to convert scattered notes into consistent long-form content without rewriting from scratch. It evolved from refining my own publishing process.
+
+3. Clear Action Close
+Replace soft ending with:
+If structuring your ideas is the bottleneck between thinking and publishing, this will remove it. Start with your next article.
+
+The Key Insight: Cold ad traffic needs proof. Community cold traffic needs continuity.</pre>
+        <button class="copy-button" data-target="p2">
+          <span class="btn-text">Copy</span>
+        </button>
+      </div>
+
+      <!-- Prompt 3 -->
+      <div class="prompt-card">
+        <h3>Prompt #3: Identity Framing</h3>
+        <pre id="p3" class="prompt-text">Add subtle identity framing to push it to 9.5 and show you where to place CTA buttons for maximum clicks.</pre>
+        <button class="copy-button" data-target="p3">
+          <span class="btn-text">Copy</span>
+        </button>
+      </div>
+
+      <!-- Prompt 4 -->
+      <div class="prompt-card">
+        <h3>Prompt #4: Conversion Critique</h3>
+        <pre id="p4" class="prompt-text">Critique how strong this specific sales letter is conversion-wise.</pre>
+        <button class="copy-button" data-target="p4">
+          <span class="btn-text">Copy</span>
+        </button>
+      </div>
+
+      <!-- Prompt 5 -->
+      <div class="prompt-card">
+        <h3>Prompt #5: Small Tweaks, Big Impact</h3>
+        <pre id="p5" class="prompt-text">Rewrite those recommended sections, with a note for each one to show how small tweaks dramatically increase persuasion.</pre>
+        <button class="copy-button" data-target="p5">
+          <span class="btn-text">Copy</span>
+        </button>
+      </div>
+
+      <!-- Prompt 6 -->
+      <div class="prompt-card">
+        <h3>Prompt #6: Info/Logic Check</h3>
+        <pre id="p6" class="prompt-text">Don't you think it's too short? I have no idea but I feel it contains too less info and logic to buy</pre>
+        <button class="copy-button" data-target="p6">
+          <span class="btn-text">Copy</span>
+        </button>
+      </div>
+
+      <!-- Prompt 7 -->
+      <div class="prompt-card">
+        <h3>Prompt #7: Right-Length Expansion</h3>
+        <pre id="p7" class="prompt-text">Expand this into an ideal “right-length logic-rich” version</pre>
+        <button class="copy-button" data-target="p7">
+          <span class="btn-text">Copy</span>
+        </button>
+      </div>
+
+      <!-- Prompt 8 -->
+      <div class="prompt-card">
+        <h3>Prompt #8: Risk Reversal</h3>
+        <pre id="p8" class="prompt-text">Add subtle risk reversal to push it to 9.8</pre>
+        <button class="copy-button" data-target="p8">
+          <span class="btn-text">Copy</span>
+        </button>
+      </div>
+
+      <!-- Prompt 9 -->
+      <div class="prompt-card">
+        <h3>Prompt #9: Final Full Version</h3>
+        <pre id="p9" class="prompt-text">Give me the exact final full version with risk reversal integrated cleanly</pre>
+        <button class="copy-button" data-target="p9">
+          <span class="btn-text">Copy</span>
+        </button>
+      </div>
+
+      <!-- Prompt 10 -->
+      <div class="prompt-card">
+        <h3>Prompt #10: HTML Button Logic</h3>
+        <pre id="p10" class="prompt-text">design the exact HTML button layout with spacing logic also give me a READY-TO-PASTE HTML + CSS</pre>
+        <button class="copy-button" data-target="p10">
+          <span class="btn-text">Copy</span>
+        </button>
+      </div>
+
+      <!-- Prompt 11 -->
+      <div class="prompt-card">
+        <h3>Prompt #11: Production-Ready HTML</h3>
+        <pre id="p11" class="prompt-text">Convert this into the final production-ready HTML + CSS with CTA placement perfected</pre>
+        <button class="copy-button" data-target="p11">
+          <span class="btn-text">Copy</span>
+        </button>
+      </div>
+
+      <!-- Prompt 12 -->
+      <div class="prompt-card">
+        <h3>Prompt #12: Mobile Sticky Banner</h3>
+        <pre id="p12" class="prompt-text">Please remove the dividers and add a stick banner at the bottom of this page. This page must be 100% mobile friendly</pre>
+        <button class="copy-button" data-target="p12">
+          <span class="btn-text">Copy</span>
+        </button>
+      </div>
+
+      <!-- Prompt 13 -->
+      <div class="prompt-card">
+        <h3>Prompt #13: 10-Component Analysis</h3>
+        <pre id="p13" class="prompt-text">Please analyze how the 10-components are used here. What Would Make It 10/10? Does This Page Feel “Right-Length”?</pre>
+        <button class="copy-button" data-target="p13">
+          <span class="btn-text">Copy</span>
+        </button>
+      </div>
+
+      <!-- Prompt 14 -->
+      <div class="prompt-card">
+        <h3>Prompt #14: Psychological Mapping</h3>
+        <pre id="p14" class="prompt-text">Make it a It 10/10 and then map the exact psychological flow a reader experiences while scrolling</pre>
+        <button class="copy-button" data-target="p14">
+          <span class="btn-text">Copy</span>
+        </button>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    document.querySelectorAll('.copy-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-target');
+        const text = document.getElementById(targetId).textContent;
+        const btnText = button.querySelector('.btn-text');
+        const originalText = btnText.textContent;
+
+        navigator.clipboard.writeText(text).then(() => {
+          btnText.textContent = 'Copied!';
+          button.classList.add('copied');
+          setTimeout(() => {
+            btnText.textContent = originalText;
+            button.classList.remove('copied');
+          }, 2000);
+        }).catch(err => {
+          console.error('Failed to copy: ', err);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
