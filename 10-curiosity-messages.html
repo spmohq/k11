@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WhatsApp Curiosity Messages</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { max-width: 1000px; width: 100%; margin: 0 auto; flex-grow: 1; }
+    header { text-align: center; margin-bottom: 50px; }
+    h1 { font-size: 2.2rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; text-transform: uppercase; }
+    
+    .prompts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 25px;
+    }
+    @media (max-width: 600px) {
+        .prompts-grid { grid-template-columns: 1fr; }
+        h1 { font-size: 1.6rem; }
+    }
+
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 25px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease;
+    }
+    .prompt-card:hover { transform: translateY(-5px); }
+    .prompt-card h3 { font-size: 0.85rem; color: var(--accent-primary); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 15px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 1rem;
+      color: var(--text-primary);
+      margin-bottom: 15px;
+      border: 1px solid var(--card-border);
+      line-height: 1.4;
+    }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 8px 16px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--bg-gradient-end);
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); }
+    .copy-button.copied { background-color: var(--accent-success); }
+    
+    .icon { width: 16px; height: 16px; }
+
+    footer { text-align: center; padding: 60px 0 20px; color: var(--text-secondary); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>10 High-Conversion Curiosity Messages for WhatsApp</h1>
+    </header>
+
+    <main class="prompts-grid">
+      <!-- Prompt 1 -->
+      <div class="prompt-card">
+        <h3>1. Simple Curiosity</h3>
+        <pre id="p1" class="prompt-text">Hi,
+Aap online earning explore kar rahe ho kya? Ek simple mobile-based method share karna tha.</pre>
+        <button class="copy-button" onclick="copyText('p1', this)">Copy Message</button>
+      </div>
+
+      <!-- Prompt 2 -->
+      <div class="prompt-card">
+        <h3>2. Soft Question</h3>
+        <pre id="p2" class="prompt-text">Hello,
+Ek chhota sa sawal tha - kya aap mobile se extra income ke options dekh rahe ho?</pre>
+        <button class="copy-button" onclick="copyText('p2', this)">Copy Message</button>
+      </div>
+
+      <!-- Prompt 3 -->
+      <div class="prompt-card">
+        <h3>3. Relatable Hook</h3>
+        <pre id="p3" class="prompt-text">Hi,
+Main recently ek simple earning method follow kar raha hoon mobile se. Socha aapse pooch loon - aap bhi explore karna chahoge?</pre>
+        <button class="copy-button" onclick="copyText('p3', this)">Copy Message</button>
+      </div>
+
+      <!-- Prompt 4 -->
+      <div class="prompt-card">
+        <h3>4. Interest Check</h3>
+        <pre id="p4" class="prompt-text">Hi,
+Aapko earning group mein dekha tha. Kya aap genuinely online earning mein interested ho?</pre>
+        <button class="copy-button" onclick="copyText('p4', this)">Copy Message</button>
+      </div>
+
+      <!-- Prompt 5 -->
+      <div class="prompt-card">
+        <h3>5. Specific Number</h3>
+        <pre id="p5" class="prompt-text">Hello,
+Agar mobile se daily 300-500 rupaye extra ban sake, to kya aap explore karna chahoge?</pre>
+        <button class="copy-button" onclick="copyText('p5', this)">Copy Message</button>
+      </div>
+
+      <!-- Prompt 6 -->
+      <div class="prompt-card">
+        <h3>6. Low Pressure</h3>
+        <pre id="p6" class="prompt-text">Hi,
+Main ek simple side-income method share karta hoon jo beginners ke liye easy hai. Agar aap interested ho to batana.</pre>
+        <button class="copy-button" onclick="copyText('p6', this)">Copy Message</button>
+      </div>
+
+      <!-- Prompt 7 -->
+      <div class="prompt-card">
+        <h3>7. Friendly Tone</h3>
+        <pre id="p7" class="prompt-text">Hi,
+Aap free time mein mobile use karte ho? Usse thodi extra earning bhi ho sakti hai - interested ho jaanne mein?</pre>
+        <button class="copy-button" onclick="copyText('p7', this)">Copy Message</button>
+      </div>
+
+      <!-- Prompt 8 -->
+      <div class="prompt-card">
+        <h3>8. Problem-Oriented</h3>
+        <pre id="p8" class="prompt-text">Hi,
+Aajkal sab extra income source dhoond rahe hain. Aap bhi kuch online explore kar rahe ho kya?</pre>
+        <button class="copy-button" onclick="copyText('p8', this)">Copy Message</button>
+      </div>
+
+      <!-- Prompt 9 -->
+      <div class="prompt-card">
+        <h3>9. Short and Clean</h3>
+        <pre id="p9" class="prompt-text">Hi,
+Online earning ke ek simple tareeke ke baare mein baat karni thi. Interested?</pre>
+        <button class="copy-button" onclick="copyText('p9', this)">Copy Message</button>
+      </div>
+
+      <!-- Prompt 10 -->
+      <div class="prompt-card">
+        <h3>10. Confidence with Mystery</h3>
+        <pre id="p10" class="prompt-text">Hello,
+Main ek practical mobile-based earning system follow karta hoon. Agar aap genuine interest rakhte ho, to details share kar sakta hoon.</pre>
+        <button class="copy-button" onclick="copyText('p10', this)">Copy Message</button>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function copyText(id, btn) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>
