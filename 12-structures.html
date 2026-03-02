@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>১২টি অ্যাঙ্গেলের সম্পূর্ণ স্ট্রাকচার্ড লিস্ট</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { max-width: 900px; width: 100%; margin: 0 auto; flex-grow: 1; }
+    header { text-align: center; margin-bottom: 50px; }
+    h1 { font-size: 2.2rem; font-weight: 700; color: var(--text-heading); letter-spacing: -0.5px; line-height: 1.2; }
+    
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 35px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .prompt-card:hover { transform: translateY(-5px); }
+    .prompt-card h2 { font-size: 1.2rem; font-weight: 600; color: var(--accent-primary); margin-bottom: 20px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 25px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      margin-bottom: 25px;
+      border: 1px solid var(--card-border);
+      line-height: 1.6;
+      max-height: 700px;
+      overflow-y: auto;
+    }
+    
+    /* Custom Scrollbar */
+    .prompt-text::-webkit-scrollbar { width: 8px; }
+    .prompt-text::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
+    .prompt-text::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--bg-gradient-end);
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
+    .copy-button.copied { background-color: var(--accent-success); }
+    
+    .icon { width: 18px; height: 18px; }
+    .copied-icon { display: none; }
+    .copy-button.copied .copy-icon { display: none; }
+    .copy-button.copied .copied-icon { display: inline-block; }
+
+    footer { text-align: center; padding: 60px 0 20px; color: var(--text-secondary); font-size: 0.9rem; }
+    @media (max-width: 600px) { h1 { font-size: 1.6rem; } .prompt-text { font-size: 0.85rem; } }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>১২টি অ্যাঙ্গেলের সম্পূর্ণ স্ট্রাকচার্ড লিস্ট</h1>
+    </header>
+
+    <main>
+      <div class="prompt-card">
+        <h2>Framework Master List</h2>
+        <pre id="angleList" class="prompt-text">OBJECT FOCUS FRAMEWORK
+Angle: অবজেক্ট ফোকাস
+Narrative Anchor: ভৌত বস্তু
+Primary Driver: নির্দিষ্ট স্পষ্ট বিবরণ
+Emotional Exposure: খুব কম
+Drift Risk: খুব কম
+Best Use: ব্র্যান্ডের মেরুদণ্ড
+Stability Level: সর্বোচ্চ
+বস্তু-নির্ভর, পরোক্ষ আবেগ প্রকাশ
+Purpose: অবস্থাটাকে বস্তুর মধ্যে শোষিত হতে দিন।
+
+Ideal Structure:
+Line 1 - বস্তুর নাম বলুন
+Line 2 - একটি ভৌত বৈশিষ্ট্য বর্ণনা করুন
+Line 3 - বস্তুর সাথে মিথস্ক্রিয়া দেখান
+Line 4 - অসম্পূর্ণতার ইঙ্গিত দিন
+Line 5 - নিরপেক্ষ সমাপ্তি
+
+Template:
+[বস্তু]
+[নির্দিষ্ট বিবরণ]
+[মিথস্ক্রিয়া]
+[অসম্পূর্ণ কাজ]
+[নিঃশব্দ শেষ]
+
+What makes it ideal:
+আবেগ বস্তুর উপর স্থানান্তরিত
+ভৌত উপস্থিতি টোনকে স্থির রাখে
+কোনো অভ্যন্তরীণ ব্যাখ্যা নেই
+
+INTERNAL PAUSE FRAMEWORK
+Angle: ইন্টারনাল পজ
+Narrative Anchor: স্থগিত ক্রিয়া
+Primary Driver: দ্বিধা
+Emotional Exposure: কম
+Drift Risk: খুব কম
+Best Use: মূল পরিচয়ের টোন
+Stability Level: খুব উচ্চ
+বিরতি-নির্ভর, ক্রিয়া-কেন্দ্রিক সংযম
+Purpose: বাড়াবাড়ি ছাড়া ‘প্রায়’-কে ধরুন।
+
+Ideal Structure:
+Line 1 - মাঝখানে ক্রিয়া শুরু
+Line 2 - বাধা আসুক
+Line 3 - শারীরিক স্থিরতা
+Line 4 - সামান্য দেরি
+Line 5 - সম্পূর্ণ হওয়ার আগে থামুন
+
+Template:
+[ক্রিয়া শুরু]
+[অর্ধেক পথে থামে]
+[স্থিরতার বিবরণ]
+[ছোট বিরতি]
+[এখনও নয়]
+
+What makes it ideal:
+দ্বিধাই আবেগের জায়গা নেয়
+কোনো সমাধান নেই
+কোনো ব্যাখ্যা নেই
+
+OBSERVATION FRAMEWORK
+Angle: অবজারভেশন
+Narrative Anchor: পরিবেশ
+Primary Driver: স্থান ও ইন্দ্রিয়গত বিবরণ
+Emotional Exposure: কম
+Drift Risk: কম
+Best Use: পরিবেশগত স্থিতি
+Stability Level: উচ্চ
+পরিবেশ-নির্ভর, ন্যূনতম অভ্যন্তরীণ ভাষা
+Purpose: ঘরকেই টোন বহন করতে দিন।
+
+Ideal Structure:
+Line 1 - পরিবেশের ভিত্তি
+Line 2 - শব্দ বা আলো সম্পর্কিত বিবরণ
+Line 3 - বস্তু বা দেহের অবস্থান
+Line 4 - ছোট আচরণ
+Line 5 - অসমাপ্ত সমাপ্তি
+
+Template:
+[ঘর বা পরিবেশ]
+[শব্দ বা আলোর বিবরণ]
+[বস্তু বা শরীরের অবস্থান]
+[ছোট কাজ]
+[বর্তমান মুহূর্ত]
+
+What makes it ideal:
+পরিবেশের মাধ্যমে আবেগের ইঙ্গিত
+কম আত্মবিশ্লেষণ
+শান্ত ও মাটির কাছাকাছি
+
+AFTERMATH FRAMEWORK
+Angle: আফটারম্যাথ
+Narrative Anchor: ইতিমধ্যেই শেষ হওয়া ঘটনা
+Primary Driver: অবশিষ্ট স্থিরতা
+Emotional Exposure: কম থেকে মাঝারি
+Drift Risk: মাঝারি
+Best Use: সূক্ষ্ম আবেগের দিন
+Stability Level: মাঝারি থেকে উচ্চ
+ঘটনার পরের নীরব অবশিষ্টতা
+Purpose: ছোট কিছু ঘটার পর কী রয়ে যায় তা দেখান।
+
+Ideal Structure:
+Line 1 - কী ঘটেছিল বলুন
+Line 2 - সরল তথ্য
+Line 3 - ঘরের স্থিরতা
+Line 4 - ছোট অবশিষ্ট কাজ
+Line 5 - কোনো প্রতিফলন নয়
+
+Template:
+[ঘটনা ঘটেছে]
+[বিবরণ]
+[ঘরের বিবরণ]
+[ছোট কাজ]
+[কোনো ব্যাখ্যা নয়]
+
+What makes it ideal:
+আবেগ ইঙ্গিতে থাকে
+কোনো অর্থ টেনে আনা হয় না
+পরিষ্কার সমাপ্তি
+
+MICRO INTERACTION FRAMEWORK
+Angle: মাইক্রো ইন্টারঅ্যাকশন
+Narrative Anchor: সামাজিক বিনিময়
+Primary Driver: সংলাপ বা প্রতিক্রিয়া
+Emotional Exposure: মাঝারি
+Drift Risk: মাঝারি
+Best Use: মানবিক বৈচিত্র্য
+Stability Level: মাঝারি
+মিথস্ক্রিয়া-নির্ভর, ন্যূনতম মন্তব্য
+Purpose: বিনিময়ের মাধ্যমে মুড দেখান।
+
+Ideal Structure:
+Line 1 - অন্য ব্যক্তি কথা বলে বা কিছু করে
+Line 2 - আপনার সংক্ষিপ্ত উত্তর
+Line 3 - শারীরিক প্রতিক্রিয়া
+Line 4 - সামান্য দ্বিধা
+Line 5 - অসমাপ্ত শেষ
+
+Template:
+"আপনি বললেন ..."
+"আমি বললাম ..."
+[অঙ্গভঙ্গি]
+[বিরতি]
+[কোনো উপসংহার নয়]
+
+What makes it ideal:
+প্রতিক্রিয়ার মাধ্যমে আবেগ বোঝা যায়
+সম্পর্ক বিশ্লেষণ নেই
+সংলাপ সোজাসাপ্টা থাকে
+
+ROUTINE LOOP FRAMEWORK
+Angle: রুটিন লুপ
+Narrative Anchor: পুনরাবৃত্তি
+Primary Driver: কাজের চক্র
+Emotional Exposure: কম
+Drift Risk: মাঝারি
+Best Use: ধীর একঘেয়ে দিন
+Stability Level: মাঝারি থেকে উচ্চ
+পুনরাবৃত্তি-নির্ভর, চক্রাকার গতি
+Purpose: ব্যাখ্যার বদলে পুনরাবৃত্তিকে কথা বলতে দিন।
+
+Ideal Structure:
+Line 1 - ছোট কাজ
+Line 2 - কাজের পুনরাবৃত্তি
+Line 3 - সামান্য পরিবর্তন
+Line 4 - শারীরিক বিবরণ
+Line 5 - চক্র চলতে থাকে
+
+Template:
+[কাজ]
+[পুনরাবৃত্তি]
+[সামান্য বদল]
+[বিবরণ]
+[আবার বা থামে]
+
+What makes it ideal:
+একঘেয়েমি আত্মবিশ্লেষণকে সরিয়ে দেয়
+আবেগের লেবেল নেই
+যান্ত্রিকভাবে স্থির
+
+INTERRUPTED FLOW FRAMEWORK
+Angle: ইন্টারাপ্টেড ফ্লো
+Narrative Anchor: ছোট বিঘ্ন
+Primary Driver: সামান্য ঘর্ষণ
+Emotional Exposure: মাঝারি
+Drift Risk: মাঝারি
+Best Use: হালকা বিরক্তির দিন
+Stability Level: মাঝারি
+বিঘ্ন-নির্ভর বর্ণনা
+Purpose: নাটক ছাড়া অসমান ছন্দ দেখান।
+
+Ideal Structure:
+Line 1 - চলমান কাজ
+Line 2 - ছোট বাধা
+Line 3 - বিরতি
+Line 4 - আংশিক পুনরারম্ভ
+Line 5 - পুরোপুরি আগের মতো নয়
+
+Template:
+[কাজ চলছে]
+[বাধার বিবরণ]
+[বিরতি]
+[হালকা আবার শুরু]
+[এখনও অস্থির]
+
+What makes it ideal:
+ঘর্ষণ ছোটই থাকে
+কোনো বাড়াবাড়ি নেই
+ক্রিয়া-কেন্দ্রিক টোন
+
+BACKGROUND NOISE FRAMEWORK
+Angle: ব্যাকগ্রাউন্ড নয়েজ
+Narrative Anchor: পরিবেশের শব্দ
+Primary Driver: পুনরাবৃত্ত শব্দ
+Emotional Exposure: কম
+Drift Risk: মাঝারি
+Best Use: ধীর, আবহভিত্তিক পোস্ট
+Stability Level: মাঝারি
+শব্দ-নির্ভর নীরব ক্ষেত্র
+Purpose: শব্দকে মুড ধরে রাখতে দিন।
+
+Ideal Structure:
+Line 1 - শব্দের নাম
+Line 2 - পুনরাবৃত্তি বা বিস্তার
+Line 3 - ছোট প্রতিক্রিয়া
+Line 4 - আবার শব্দ
+Line 5 - নীরব সমাপ্তি
+
+Template:
+[শব্দ]
+[পুনরাবৃত্তি]
+[ছোট প্রতিক্রিয়া]
+[আবার শব্দ]
+[নিঃশব্দ শেষ]
+
+What makes it ideal:
+অভ্যন্তরীণ বিষয়বস্তু কম
+পুনরাবৃত্তির মাধ্যমে আবহ
+কম ঘন বর্ণনা
+
+TIME DRIFT FRAMEWORK
+Angle: টাইম ড্রিফট
+Narrative Anchor: সময়ের অগ্রগতি
+Primary Driver: ছোট পরিবর্তন
+Emotional Exposure: মাঝারি
+Drift Risk: উচ্চ
+Best Use: দেরি সন্ধ্যার টোন
+Stability Level: মাঝারি থেকে কম
+সময়-নির্ভর সূক্ষ্ম সরে যাওয়া
+Purpose: অর্থ না টেনে ধীর গতি ধরুন।
+
+Ideal Structure:
+Line 1 - সময়ের উল্লেখ
+Line 2 - বস্তু অপরিবর্তিত
+Line 3 - সামান্য পরিবর্তন
+Line 4 - ছোট পর্যবেক্ষণ
+Line 5 - এখনও চলছে
+
+Template:
+[সময়ের উল্লেখ]
+[বস্তু]
+[পরিবর্তন]
+[পর্যবেক্ষণ]
+[চলছেই]
+
+What makes it ideal:
+সময়ের ভিত্তি স্পষ্ট
+কোনো অস্তিত্ববাদী মন্তব্য নয়
+শুধু সরল অগ্রগতি
+
+BODY AWARENESS FRAMEWORK
+Angle: বডি অ্যাওয়ারনেস
+Narrative Anchor: শারীরিক অনুভূতি
+Primary Driver: দেহগত বিবরণ
+Emotional Exposure: মাঝারি থেকে উচ্চ
+Drift Risk: উচ্চ
+Best Use: নিয়ন্ত্রিত স্থিরতা
+Stability Level: কম
+অনুভূতি-নির্ভর উপস্থিতি
+Purpose: বিশ্লেষণ ছাড়া মুডকে শরীরে নামিয়ে আনুন।
+
+Ideal Structure:
+Line 1 - ছোট শারীরিক অনুভূতি
+Line 2 - ভঙ্গি
+Line 3 - ঘরের বিবরণ
+Line 4 - সামান্য সমন্বয়
+Line 5 - থেকে যায়
+
+Template:
+[অনুভূতি]
+[ভঙ্গি]
+[ঘরের বিবরণ]
+[সমন্বয়]
+[এখনও আছে]
+
+What makes it ideal:
+শারীরিক, আবেগীয় নয়
+মনস্তাত্ত্বিক লেবেল নেই
+সহজ দেহ-সচেতনতা
+
+DISTANT PRESENCE FRAMEWORK
+Angle: ডিস্ট্যান্ট প্রেজেন্স
+Narrative Anchor: কাছে থেকেও প্রবেশ নয়
+Primary Driver: সম্পর্কের দূরত্ব
+Emotional Exposure: মাঝারি থেকে উচ্চ
+Drift Risk: উচ্চ
+Best Use: মাঝে মাঝে সূক্ষ্ম দূরত্ব
+Stability Level: কম
+দূরত্ব-নির্ভর সম্পর্কের ফ্রেম
+Purpose: যুক্ত না হয়েও কাছে থাকা দেখান।
+
+Ideal Structure:
+Line 1 - কেউ কিছু করছে
+Line 2 - আপনি কাছেই আছেন
+Line 3 - ঘরের বিবরণ
+Line 4 - ছোট স্বীকৃতি
+Line 5 - বাইরে থাকুন
+
+Template:
+[ওরা কিছু করছে]
+[আমি কাছে]
+[ঘরের বিবরণ]
+[ছোট প্রতিক্রিয়া]
+[প্রবেশ নয়]
+
+What makes it ideal:
+দূরত্ব ইঙ্গিতে বোঝা যায়
+সম্পর্কের বিশ্লেষণ নেই
+সূক্ষ্ম সংযম
+
+ALMOST VERSION FRAMEWORK
+Angle: অলমোস্ট ভার্সন
+Narrative Anchor: প্রায় সম্পূর্ণ হওয়া কাজ
+Primary Driver: দমিয়ে রাখা সমাপ্তি
+Emotional Exposure: মাঝারি থেকে উচ্চ
+Drift Risk: উচ্চ
+Best Use: বিরল টানটান দিন
+Stability Level: সর্বনিম্ন
+প্রায়-সম্পূর্ণ সংযম
+Purpose: বাড়াবাড়ি ছাড়া টান ধরে রাখুন।
+
+Ideal Structure:
+Line 1 - কাজ প্রায় শেষ
+Line 2 - ছোট বিবরণ
+Line 3 - পিছিয়ে আসা
+Line 4 - কমিয়ে দেওয়া কাজ
+Line 5 - অসম্পূর্ণ
+
+Template:
+[প্রায় শেষ]
+[বিবরণ]
+[পিছিয়ে আসা]
+[কম কাজ]
+[অসম্পূর্ণ]
+
+What makes it ideal:
+টান নিয়ন্ত্রিত থাকে
+কোনো চূড়ান্ত মুহূর্ত নেই
+আবেগের বাড়াবাড়ি নেই</pre>
+        
+        <button class="copy-button" id="copyBtn">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M4.5 12.75l6 6 9-13.5" /></svg>
+          <span id="btnText">Copy List</span>
+        </button>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const copyBtn = document.getElementById('copyBtn');
+    const listText = document.getElementById('angleList');
+    const btnText = document.getElementById('btnText');
+
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(listText.textContent).then(() => {
+        const originalText = btnText.textContent;
+        btnText.textContent = 'Copied!';
+        copyBtn.classList.add('copied');
+        
+        setTimeout(() => {
+          btnText.textContent = originalText;
+          copyBtn.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    });
+  </script>
+
+</body>
+</html>
