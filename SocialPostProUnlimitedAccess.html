@@ -1,0 +1,837 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Post Pro</title>
+	<style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #924E83;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Title */
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #FFFFFF;
+        }
+
+        /* Form */
+        label {
+            color: #FFFFFF; 
+            font-size: 16px; 
+            font-weight: bold; 
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        select:focus, input:focus {
+            border-color: #EA6256;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #EA6256;
+            color: #FFFFFF;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #EA6256;
+        }
+
+        /* Output Section */
+        .output-section {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .output-section h3 {
+            margin-bottom: 10px;
+            color: #000000;
+        }
+
+        .output-section p, .output-section ul {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .output-section ul {
+            padding-left: 20px;
+            list-style-type: disc;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* Logo */
+        .logo {
+            width: 200px;
+            height: auto;
+            display: block;
+            margin: 0 auto 20px;
+        }
+		.copy-btn {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #EA6256; /* Black background */
+    color: #FFFFFF; /* white text */
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.copy-btn:hover {
+    background-color: #347194; /* Dark gray on hover */
+}
+
+.output-section {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background-color: #ffffff; /* White background */
+    color: #000000; /* Black text */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.output-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.output-section pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background: #f4f4f4; /* Light gray background */
+    padding: 10px;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    color: #333333;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://actionactivated.com/wp-content/uploads/f49bdcf0-dc6a-4c55-ad02-ec8acf38fe10.png" alt="Content Generator Logo" class="logo">
+        <label for="style">Select a Technique:</label>
+		<select id="style" size="10">
+<option value="curiosity_trap">Curiosity Trap</option>
+<option value="unexpected_confession">Unexpected Confession</option>
+<option value="big_lie_exposed">Big Lie Exposed</option>
+<option value="high_stakes_question">High-Stakes Question</option>
+<option value="viral_test">Viral Test</option>
+<option value="fact_bomb">Fact Bomb</option>
+<option value="shock_and_awe">Shock & Awe</option>
+<option value="insider_leak">Insider Leak</option>
+<option value="relatable_pain_point">Relatable Pain Point</option>
+<option value="open_loop_cliffhanger">Open Loop Cliffhanger</option>
+<option value="controversial_truth">Controversial Truth</option>
+<option value="fear_of_missing_out">Fear of Missing Out (FOMO)</option>
+<option value="call_out_hook">Call-Out Hook</option>
+<option value="one_simple_fix">One Simple Fix</option>
+<option value="reverse_expectation">Reverse Expectation</option>
+<option value="pattern_interrupt">Pattern Interrupt</option>
+<option value="mystery_reveal">Mystery Reveal</option>
+<option value="future_prediction">Future Prediction</option>
+<option value="controversial_question">Controversial Question</option>
+<option value="rags_to_riches">Rags to Riches</option>
+<option value="shock_value">Shock Value</option>
+<option value="forbidden_knowledge">Forbidden Knowledge</option>
+<option value="instant_results">Instant Results</option>
+<option value="brutally_honest_take">Brutally Honest Take</option>
+<option value="high_stakes_story">High-Stakes Story</option>
+<option value="social_proof_trigger">Social Proof Trigger</option>
+<option value="hero_vs_villain">Hero vs. Villain</option>
+<option value="breaking_news_effect">Breaking News Effect</option>
+<option value="provocative_comparison">Provocative Comparison</option>
+<option value="hot_take">Hot Take</option>
+<option value="unexpected_success">Unexpected Success</option>
+<option value="micro_vs_macro">Micro vs. Macro</option>
+<option value="fearless_confession">Fearless Confession</option>
+<option value="reframe_reality">Reframe Reality</option>
+<option value="reverse_psychology_hook">Reverse Psychology Hook</option>
+<option value="hidden_in_plain_sight">Hidden in Plain Sight</option>
+<option value="controversial_solution">Controversial Solution</option>
+<option value="high_stakes_mistake">High-Stakes Mistake</option>
+<option value="shockingly_simple">Shockingly Simple</option>
+<option value="taboo_topic">Taboo Topic</option>
+<option value="what_nobody_tells_you">What Nobody Tells You</option>
+<option value="reverse_fear">Reverse Fear</option>
+<option value="unfair_advantage">Unfair Advantage</option>
+<option value="too_good_to_be_true">Too Good to Be True</option>
+<option value="one_decision_away">One Decision Away</option>
+<option value="the_aha_moment">The Aha! Moment</option>
+<option value="the_trap">The Trap</option>
+<option value="challenge_the_norm">Challenge the Norm</option>
+<option value="you_wont_believe_this">You Won’t Believe This</option>
+<option value="most_people_dont_know">Most People Don’t Know</option>
+<option value="your_past_self_vs_your_future_self">Your Past Self vs. Your Future Self</option>
+<option value="the_harsh_truth">The Harsh Truth</option>
+<option value="what_i_wish_i_knew_earlier">What I Wish I Knew Earlier</option>
+<option value="the_most_underrated_thing">The Most Underrated Thing</option>
+<option value="the_final_warning">The Final Warning</option>
+        </select>
+        <label for="keyword">Enter Your Product or Keyword:</label>
+        <input type="text" id="keyword" placeholder="e.g., Forex Trading">
+        <button onclick="generateContent()">GENERATE</button>
+        <div id="output" class="output-section"></div>
+    </div>
+    <footer>
+    <a href="https://www.facebook.com/groups/markhesscustomergroup/" target="_blank" style="text-decoration: none; color: #fff; background-color: #4267B2; padding: 10px 20px; border-radius: 5px; font-weight: bold; display: inline-block; margin-bottom: 10px;">Join My Facebook Group</a>
+    <div>&copy; Social Post Pro - All Rights Reserved - Created by Mark Hess</div>
+</footer>
+
+    <script>
+        const CONTENT_STYLES = {
+		
+    "your_past_self_vs_your_future_self": {
+        "name": "Your Past Self vs. Your Future Self",
+        "summary": "This hook taps into self-reflection and personal growth, making people think about how far they’ve come or how far they still need to go. It creates instant emotional engagement by making the audience compare their current situation to their past or future self.",
+        "examples": [
+            "Imagine if your past self could see you now. Would they be proud?",
+            "Your future self is watching you. Are you making them proud?"
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Your Past Self vs. Your Future Self technique for [keyword]. The first post should challenge the reader to reflect on how much they’ve grown and whether their past self would be proud of where they are now. The second post should encourage the audience to think about their future self and whether they are making decisions that will lead to success. Use motivational and emotional language to create deep engagement. End with a CTA asking the audience to reflect on their progress or share their future goals."
+    },
+    "the_harsh_truth": {
+        "name": "The Harsh Truth",
+        "summary": "This hook delivers an unfiltered, no-BS truth that people might not want to hear but need to. It works because it triggers strong emotions, making people feel called out, validated, or even challenged to prove it wrong.",
+        "examples": [
+            "The harsh truth? Nobody is coming to save you. It’s all on you.",
+            "If you’re still broke, it’s not the economy. It’s your habits."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using The Harsh Truth technique for [keyword]. The first post should deliver a blunt truth that people might find uncomfortable but necessary, forcing them to reflect on their actions. The second post should highlight a hard reality that most people ignore, making it impossible to look away. Use direct and powerful language that grabs attention instantly. End with a CTA that encourages the audience to either accept the truth, challenge it, or share their perspective."
+    },
+    "what_i_wish_i_knew_earlier": {
+        "name": "What I Wish I Knew Earlier",
+        "summary": "This hook plays on the power of hindsight, making the audience feel like they are gaining valuable wisdom without having to go through the same mistakes. It works because people love learning from others’ experiences rather than making their own costly mistakes.",
+        "examples": [
+            "If I could go back in time, I’d tell myself THIS.",
+            "I wish I knew this 5 years ago… it would have saved me so much time and money."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the What I Wish I Knew Earlier technique for [keyword]. The first post should focus on a key lesson learned that would have made a massive difference if known earlier. The second post should highlight a mistake or missed opportunity that could have been avoided with the right knowledge. Use language that makes the audience feel like they’re getting insider wisdom. End with a CTA asking the audience what they wish they knew earlier or if they’ve experienced a similar realization."
+    },
+    "the_most_underrated_thing": {
+        "name": "The Most Underrated Thing",
+        "summary": "This hook taps into the human desire to find hidden gems—things that people overlook but can actually make a huge impact. It works because people love discovering things that others aren’t paying attention to yet.",
+        "examples": [
+            "The most underrated skill for success isn’t talent. It’s this.",
+            "This is the most overlooked factor in making money online."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using The Most Underrated Thing technique for [keyword]. The first post should highlight something that is often ignored but makes a huge difference in success. The second post should expose a factor that people don’t pay attention to but is actually the key to winning. Use curiosity-driven language that makes the audience feel like they’re about to discover something valuable. End with a CTA asking if the audience agrees or if they have their own underrated factors."
+    },
+    "the_final_warning": {
+        "name": "The Final Warning",
+        "summary": "This hook plays on urgency and fear of missing out by making the audience feel like they are running out of time to act. It works because people hate feeling like they missed an opportunity, so they’re more likely to engage immediately.",
+        "examples": [
+            "This is your last chance. After this, it’s too late.",
+            "If you don’t fix this NOW, you’ll regret it later."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using The Final Warning technique for [keyword]. The first post should create urgency by making the audience feel like they are about to miss out on something important. The second post should highlight a critical mistake or issue that people need to fix before it’s too late. Use time-sensitive, direct language to make the post feel urgent. End with a CTA pushing the audience to take immediate action or share their thoughts before time runs out."
+    },
+
+    "the_aha_moment": {
+        "name": "The Aha! Moment",
+        "summary": "This hook taps into the brain’s love for sudden realizations. It works because people are naturally drawn to moments of clarity that completely change how they see something. This technique makes content highly shareable as people love passing on insights that made them think differently.",
+        "examples": [
+            "I struggled with this for years… then I had an Aha! moment that changed everything.",
+            "The second I realized THIS, my entire business took off."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using The Aha! Moment technique for [keyword]. The first post should describe a moment of sudden realization that transformed your thinking, making it compelling and relatable. The second post should set up a problem or frustration and then reveal the game-changing insight that solved it. Use storytelling techniques to create anticipation and an emotional connection. End with a CTA encouraging the audience to share their own Aha! moments or ask for more details."
+    },
+    "the_trap": {
+        "name": "The Trap",
+        "summary": "This hook works by exposing a common mistake or misleading belief that keeps people stuck. It triggers engagement because people either want to confirm they’re not falling for it or they realize they are and want to fix it.",
+        "examples": [
+            "If you're still doing this, you're falling into the same trap I did.",
+            "This is the #1 reason people stay broke… and they don’t even realize it."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using The Trap technique for [keyword]. The first post should expose a widespread mistake, misconception, or hidden obstacle that prevents success, making readers question if they’re guilty of it. The second post should highlight a common but flawed approach that leads people in the wrong direction, forcing them to reconsider their actions. Use suspense-building language to make the audience feel like they need to know what the trap is. End with a CTA inviting readers to comment if they’ve fallen for it or share their thoughts."
+    },
+    "challenge_the_norm": {
+        "name": "Challenge the Norm",
+        "summary": "This hook disrupts traditional thinking by questioning a widely accepted idea or belief. It works because it triggers curiosity and debate, making people feel the need to defend, rethink, or explore a new perspective.",
+        "examples": [
+            "What if everything you’ve been told about success is actually wrong?",
+            "You don’t need to work harder to make more money. In fact, that’s the worst advice ever."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Challenge the Norm technique for [keyword]. The first post should question a widely held belief, making the audience rethink something they’ve accepted as true. The second post should take a bold stance against traditional advice, making readers feel like they’ve been misled. Use powerful, curiosity-driven language that forces engagement. End with a CTA encouraging readers to debate, share their opinions, or rethink their approach."
+    },
+    "you_wont_believe_this": {
+        "name": "You Won’t Believe This",
+        "summary": "This hook leverages pure curiosity by making an event, fact, or story sound so shocking that people feel compelled to read. It works because the brain hates incomplete information, making it a perfect engagement driver.",
+        "examples": [
+            "You won’t believe what happened when I did this for 30 days.",
+            "This guy made $1M in 6 months doing something absolutely crazy."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the You Won’t Believe This technique for [keyword]. The first post should introduce an unbelievable or shocking outcome, making the audience desperate to find out more. The second post should set up a bizarre or unexpected twist that forces people to engage out of pure curiosity. Use suspense-building language that teases the story without giving it away. End with a CTA that asks the audience to guess what happened or comment if they’ve experienced something similar."
+    },
+    "most_people_dont_know": {
+        "name": "Most People Don’t Know",
+        "summary": "This hook plays on exclusivity by making the audience feel like they are about to learn something only a few people understand. It works because people crave rare knowledge and want to feel ‘in the know.’",
+        "examples": [
+            "Most people don’t know this simple trick… but it changes everything.",
+            "99% of people have no idea this even exists."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Most People Don’t Know technique for [keyword]. The first post should introduce a little-known strategy, fact, or tip that makes the reader feel like they are gaining insider knowledge. The second post should hint at a hidden secret that only a small percentage of people have figured out, triggering curiosity. Use enticing, exclusivity-driven language to make the reader feel like they’re getting access to rare information. End with a CTA inviting engagement, such as asking if they already knew this or want to learn more."
+    },
+
+    "what_nobody_tells_you": {
+        "name": "What Nobody Tells You",
+        "summary": "This hook taps into the audience’s desire for insider knowledge by revealing a truth that is rarely discussed. It creates curiosity by making people feel like they’re getting exclusive information that others are unaware of.",
+        "examples": [
+            "What nobody tells you about making six figures… until it’s too late.",
+            "Nobody talks about this part of going viral—but it’s the most important piece."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the What Nobody Tells You technique for [keyword]. The first post should expose an overlooked truth or hidden downside of a popular topic, making readers feel like they’re gaining exclusive knowledge. The second post should highlight a key insight that most people only discover the hard way. Use language that builds intrigue and makes the reader feel like they’re learning something insiders already know. End with a CTA that encourages discussion or asks if anyone else has experienced this."
+    },
+    "reverse_fear": {
+        "name": "Reverse Fear",
+        "summary": "This hook flips a common fear upside down, making the audience rethink what they’re actually afraid of. It’s effective because it disrupts conventional thinking and creates a moment of self-reflection.",
+        "examples": [
+            "You’re afraid of failure… but what if success is actually scarier?",
+            "Most people fear making the wrong decision. But the real danger? Making none at all."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Reverse Fear technique for [keyword]. The first post should challenge a common fear by suggesting that the opposite is actually the bigger threat. The second post should make readers question whether what they’re afraid of is actually preventing them from achieving what they want. Use language that provokes self-reflection and a shift in perspective. End with a CTA asking the audience if they agree or have ever felt the same way."
+    },
+    "unfair_advantage": {
+        "name": "Unfair Advantage",
+        "summary": "This hook plays on the audience’s desire to gain an edge by revealing a hidden advantage they can use to succeed. It works because people are always looking for shortcuts, secret strategies, and ways to level up faster than the competition.",
+        "examples": [
+            "Most people will never succeed at this… unless they know this one trick.",
+            "Want an unfair advantage? Here’s the secret top performers don’t talk about."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Unfair Advantage technique for [keyword]. The first post should introduce a ‘hidden’ or little-known strategy that gives certain people an edge, making readers feel like they’re gaining insider knowledge. The second post should highlight an overlooked factor that separates those who succeed from those who struggle. Use powerful, curiosity-driven language to position the content as a must-know secret. End with a CTA encouraging engagement, such as asking if the audience has ever used this trick or if they want to learn more."
+    },
+    "too_good_to_be_true": {
+        "name": "Too Good to Be True",
+        "summary": "This hook grabs attention by presenting something that sounds unbelievable, forcing readers to stop and investigate. It works because people are naturally skeptical of things that seem too easy, effortless, or rewarding.",
+        "examples": [
+            "I made $10,000 in one day… without working at all.",
+            "This fitness hack lets you eat junk food and still lose weight—seriously."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Too Good to Be True technique for [keyword]. The first post should introduce an outcome that sounds almost unbelievable, making the reader skeptical but intrigued. The second post should highlight a surprising method that produces big results with minimal effort. Use a conversational tone and language that creates an element of disbelief while maintaining credibility. End with a CTA that invites readers to learn how it works or share their thoughts."
+    },
+    "one_decision_away": {
+        "name": "One Decision Away",
+        "summary": "This hook creates urgency and motivation by framing success as something that is just one choice away. It’s powerful because it makes people feel like they are closer than they think to achieving their goals.",
+        "examples": [
+            "You’re one decision away from completely changing your life.",
+            "Your next move could be the one that takes you from struggling to thriving."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the One Decision Away technique for [keyword]. The first post should emphasize how a single choice or action can create a massive turning point, making the audience feel inspired to act. The second post should highlight a specific decision that separates those who succeed from those who stay stuck. Use motivational and urgent language to make the post feel empowering. End with a CTA encouraging readers to commit to their next step or share a decision that changed their life."
+    },
+
+    "hidden_in_plain_sight": {
+        "name": "Hidden in Plain Sight",
+        "summary": "This hook leverages the intrigue of something being overlooked or misunderstood despite being right in front of people. It plays on the brain’s need to uncover hidden truths and makes the audience feel like they are gaining a new perspective on something they’ve missed.",
+        "examples": [
+            "You see this every single day… but I guarantee you’ve never noticed it.",
+            "This simple trick was right in front of me the whole time, but I ignored it for years."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Hidden in Plain Sight technique for [keyword]. The first post should introduce something commonly seen or known but rarely understood correctly, forcing the audience to rethink their perception. The second post should highlight an overlooked strategy, habit, or fact that was hiding in plain sight all along. Use language that makes the reader feel like they’re unlocking a secret. End with a CTA that invites them to comment if they’ve ever noticed it or share with someone who needs to see it."
+    },
+    "controversial_solution": {
+        "name": "Controversial Solution",
+        "summary": "This hook presents an unexpected or even unpopular solution to a common problem, forcing people to engage out of curiosity or disagreement. It works well because it disrupts common assumptions and makes people question their existing beliefs.",
+        "examples": [
+            "The best way to get rich isn’t saving—it’s spending. Here’s why.",
+            "If you want to lose weight fast, STOP working out."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Controversial Solution technique for [keyword]. The first post should introduce a surprising or counterintuitive solution that contradicts common beliefs, forcing the audience to rethink their assumptions. The second post should focus on an unexpected method that achieves better results than traditional advice. Use strong, confident language to position the statement as shocking yet undeniable. End with a CTA encouraging readers to comment with their opinion or ask for an explanation."
+    },
+    "high_stakes_mistake": {
+        "name": "High-Stakes Mistake",
+        "summary": "This hook draws people in by revealing a costly or painful mistake that had major consequences. People are wired to pay attention to failure stories, especially when they can learn from them or relate to them.",
+        "examples": [
+            "I made this ONE mistake, and it cost me $10,000 in a single day.",
+            "I ignored this simple rule… and it almost ruined my entire business."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the High-Stakes Mistake technique for [keyword]. The first post should introduce a personal or industry-related mistake that led to major consequences, making the audience curious about what went wrong. The second post should focus on a commonly ignored or underestimated mistake that causes big problems, positioning it as something people NEED to avoid. Use storytelling techniques to build suspense. End with a CTA that encourages readers to share if they’ve made the same mistake or ask how to prevent it."
+    },
+    "shockingly_simple": {
+        "name": "Shockingly Simple",
+        "summary": "This hook leverages the audience’s love for simplicity by revealing a ridiculously easy method that produces major results. It works because people are drawn to effortless solutions that seem too good to be true.",
+        "examples": [
+            "I doubled my productivity with this one stupidly simple trick.",
+            "Want to get more clients? Do this ONE thing. It’s so easy, it’s almost unfair."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Shockingly Simple technique for [keyword]. The first post should present an extremely simple or effortless action that leads to major results, making it feel like a ‘cheat code.’ The second post should highlight an easy-to-implement strategy that most people overcomplicate. Use clear, concise language that makes the solution feel like common sense but overlooked. End with a CTA encouraging readers to try it and report back or share their own simple hacks."
+    },
+    "taboo_topic": {
+        "name": "Taboo Topic",
+        "summary": "This hook taps into people’s curiosity about things that are rarely discussed, considered inappropriate, or seen as controversial. It works because people are naturally drawn to forbidden, unspoken, or ‘off-limits’ conversations.",
+        "examples": [
+            "No one talks about this part of making money online… but it’s the most important.",
+            "This is the dark side of success that nobody warns you about."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Taboo Topic technique for [keyword]. The first post should introduce a subject that is rarely discussed or seen as controversial, immediately grabbing attention. The second post should hint at an uncomfortable truth that people tend to ignore, making the audience feel like they’re discovering something hidden. Use intrigue-driven language that makes readers feel like they’re getting an inside look at a ‘forbidden’ conversation. End with a CTA that invites discussion, debate, or personal experiences."
+    },
+
+	"unexpected_success": {
+        "name": "Unexpected Success",
+        "summary": "This hook plays on the audience’s curiosity by showcasing an unconventional or accidental success story. People love stories of unexpected wins, underdogs rising, and surprising outcomes, making this a powerful engagement driver.",
+        "examples": [
+            "I accidentally went viral… and here’s what I learned.",
+            "I ignored every piece of ‘good advice’… and it made me successful."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Unexpected Success technique for [keyword]. The first post should highlight a surprising or accidental success story that defies conventional wisdom, making the audience curious about how it happened. The second post should present an outcome that was achieved by doing the opposite of what most people recommend, making the reader question common advice. Use engaging, story-driven language with an element of surprise. End with a CTA that invites the audience to share their thoughts or personal experiences."
+    },
+    "micro_vs_macro": {
+        "name": "Micro vs. Macro",
+        "summary": "This hook contrasts a small, overlooked detail with a massive outcome, triggering curiosity and deeper thinking. People love discovering hidden leverage points that create disproportionate results, making this a great engagement tool.",
+        "examples": [
+            "A 2-second decision changed my entire life. Here’s how.",
+            "One tiny habit that separates millionaires from everyone else."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Micro vs. Macro technique for [keyword]. The first post should highlight a seemingly small action, decision, or mindset shift that led to a massive transformation, creating curiosity. The second post should contrast a minor overlooked detail with a big-picture result, forcing readers to rethink their approach. Use short, punchy sentences and an intriguing setup to maximize engagement. End with a CTA encouraging the audience to reflect, comment, or share."
+    },
+    "fearless_confession": {
+        "name": "Fearless Confession",
+        "summary": "This hook taps into the power of vulnerability and radical honesty. People are drawn to content that feels raw, real, and unfiltered, making this an excellent way to foster deep engagement and relatability.",
+        "examples": [
+            "I used to be completely broke and ashamed to talk about it. Here’s what changed.",
+            "I made a huge mistake that almost cost me everything. Let’s talk about it."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Fearless Confession technique for [keyword]. The first post should reveal a deeply personal struggle or failure, showing vulnerability and authenticity to build connection. The second post should confess to a past mistake, creating an open discussion around growth and lessons learned. Use emotionally compelling language that makes the reader feel like they’re hearing a real, unfiltered story. End with a CTA inviting the audience to share their own experiences or engage with the topic."
+    },
+    "reframe_reality": {
+        "name": "Reframe Reality",
+        "summary": "This hook forces people to see something they thought they understood in a completely new way. It triggers curiosity, discussion, and even disbelief, making it one of the most effective ways to capture attention.",
+        "examples": [
+            "You’ve been thinking about success all wrong. Here’s the real secret.",
+            "What if I told you motivation is actually making you lazy?"
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Reframe Reality technique for [keyword]. The first post should take a widely held belief and completely flip it, making the audience reconsider what they thought they knew. The second post should challenge conventional wisdom with a bold statement that forces readers to think differently. Use short, thought-provoking language that makes the audience feel like they’re discovering a hidden truth. End with a CTA inviting engagement, debate, or personal insights."
+    },
+    "big_lie_exposed": {
+        "name": "Big Lie Exposed",
+        "summary": "This hook thrives on exposing a ‘big lie’ that people have been led to believe. It taps into the audience’s desire to uncover hidden truths and question authority, making it highly engaging and shareable.",
+        "examples": [
+            "The biggest lie you’ve been told about making money online… and what actually works.",
+            "Everything you know about weight loss is wrong. Here’s what really works."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Big Lie Exposed technique for [keyword]. The first post should call out a major misconception that most people believe, immediately grabbing attention. The second post should expose a widely accepted practice or belief as false, forcing the audience to rethink their assumptions. Use strong, confident language to position the post as an eye-opening revelation. End with a CTA inviting discussion, debate, or shares."
+    },
+
+    "social_proof_trigger": {
+        "name": "Social Proof Trigger",
+        "summary": "This hook leverages the power of social proof by highlighting what many people are doing, achieving, or missing out on. It plays on the psychological tendency to follow the crowd, making people feel like they need to join in or risk being left behind. This technique works great for virality, credibility, and engagement spikes.",
+        "examples": [
+            "Thousands of people are already using this hack to save money—are you?",
+            "This trend is blowing up right now, and for a good reason. Here’s why."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Social Proof Trigger technique for [keyword]. The first post should highlight a growing trend, movement, or habit that many people are adopting, making the reader feel like they need to be part of it. The second post should showcase a surprising statistic or viral phenomenon, triggering curiosity and FOMO. Use persuasive, emotionally charged language that implies widespread participation. End with a CTA that encourages readers to engage, share their experience, or take action."
+    },
+    "hero_vs_villain": {
+        "name": "Hero vs. Villain",
+        "summary": "This hook creates instant engagement by framing a narrative around a clear conflict—either by exposing a ‘villain’ (a bad habit, a system, a belief) or positioning the audience as the hero who can overcome it. It works because conflict is inherently engaging, making people want to take a side and react.",
+        "examples": [
+            "The diet industry is LYING to you. Here’s what they don’t want you to know.",
+            "Big corporations keep raising prices… but here’s how YOU can fight back."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Hero vs. Villain technique for [keyword]. The first post should expose a ‘villain’—whether it’s a system, a misconception, or a competitor—making people feel like they need to take a stand. The second post should position the audience as the hero, showing how they can overcome a major challenge or injustice. Use emotionally charged, high-stakes language that taps into anger, frustration, or empowerment. End with a CTA encouraging readers to comment, take action, or share their thoughts."
+    },
+    "breaking_news_effect": {
+        "name": "Breaking News Effect",
+        "summary": "This hook grabs attention by presenting information as urgent, time-sensitive, or newsworthy. The brain is wired to prioritize new information, especially when it feels immediate or exclusive. This is perfect for industry updates, algorithm changes, and viral discussions.",
+        "examples": [
+            "🚨 Instagram just changed its algorithm—here’s what you need to know.",
+            "Biggest shift in online marketing in the last 5 years just happened. Let’s talk about it."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Breaking News Effect technique for [keyword]. The first post should present information as urgent, using language that mimics breaking news headlines. The second post should introduce a major change or trend that people need to be aware of, making it feel time-sensitive. Both posts should use short, impactful sentences that emphasize urgency. End with a CTA encouraging readers to comment, share, or act immediately."
+    },
+    "provocative_comparison": {
+        "name": "Provocative Comparison",
+        "summary": "This hook grabs attention by making an unusual, bold, or controversial comparison between two things that wouldn’t normally be linked. It triggers curiosity and debate, making it great for engagement and virality.",
+        "examples": [
+            "Success is a lot like dating… if you chase too hard, you lose.",
+            "Making money online is no different than going to the gym—here’s why."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Provocative Comparison technique for [keyword]. The first post should compare two seemingly unrelated topics in a way that sparks curiosity and debate. The second post should create a comparison that makes the audience rethink their approach to a problem, presenting it in a new light. Use short, powerful sentences that make the connection irresistible. End with a CTA encouraging discussion, agreement, or alternative comparisons from the audience."
+    },
+    "hot_take": {
+        "name": "Hot Take",
+        "summary": "This hook is designed to spark strong opinions and debates by presenting a bold, sometimes unpopular opinion. People are naturally drawn to controversy, making this an effective way to drive engagement, discussion, and virality.",
+        "examples": [
+            "Unpopular opinion: Waking up at 5 AM doesn’t make you more productive—it just makes you tired.",
+            "Hot take: College degrees are becoming worthless, and here’s why."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Hot Take technique for [keyword]. The first post should introduce a bold, counterintuitive, or unpopular opinion that goes against mainstream beliefs, sparking debate. The second post should challenge a common assumption, forcing readers to rethink their stance. Both posts should use confident, punchy language that invites discussion. End with a CTA directly asking the audience if they agree, disagree, or have a different perspective."
+    },
+
+    "shock_value": {
+        "name": "Shock Value",
+        "summary": "This hook uses an unexpected, extreme, or mind-blowing statement that instantly grabs attention. People are wired to respond to shocking or emotionally charged information, making this one of the most effective ways to stop the scroll and spark conversation. This works especially well for awareness campaigns, viral news, and content designed to evoke strong emotions.",
+        "examples": [
+            "This innocent-looking ingredient is slowly poisoning your body… and it’s in almost everything.",
+            "Facebook has been tracking your private messages for years—here’s how to see what they know about you."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Shock Value technique for [keyword]. The first post should present a shocking, unsettling, or mind-blowing fact that makes readers instantly react. The second post should expose an uncomfortable truth, making people feel compelled to engage, comment, or share. Use concise, emotionally charged language that emphasizes urgency. End each post with a CTA inviting the audience to react, share their opinion, or tag someone who needs to see this."
+    },
+    "forbidden_knowledge": {
+        "name": "Forbidden Knowledge",
+        "summary": "This hook thrives on the allure of secrecy and restricted information. It makes the audience feel like they are gaining access to something hidden, censored, or suppressed. This technique is powerful because people have an innate curiosity about ‘forbidden’ things, and it makes them feel like insiders when they engage.",
+        "examples": [
+            "They don’t want you to know this, but here’s how you can legally erase your debt overnight.",
+            "This was removed from the internet… but I saved a copy. Want to see it?"
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Forbidden Knowledge technique for [keyword]. The first post should hint at information that is censored, suppressed, or hidden from the public, creating a sense of exclusivity. The second post should suggest that this knowledge is hard to find or has been erased, making people feel privileged for seeing it. Use mysterious and slightly rebellious language that makes readers feel like they are uncovering something powerful. End with a CTA encouraging engagement, such as commenting for access or sharing before it ‘disappears.’"
+    },
+    "instant_results": {
+        "name": "Instant Results",
+        "summary": "This hook plays on the audience’s desire for immediate gratification. It promises fast, easy-to-achieve results, making it irresistible to those looking for quick wins. This method is highly effective for productivity hacks, self-improvement, and business growth content.",
+        "examples": [
+            "Try this 10-second trick before bed, and wake up feeling more energized than ever.",
+            "Do this ONE thing today, and you’ll start seeing results within 24 hours."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Instant Results technique for [keyword]. The first post should introduce a simple action that leads to immediate or near-instant improvement, making it seem effortless and highly rewarding. The second post should emphasize a quick transformation that readers can expect if they follow the advice. Both posts should use high-impact, action-oriented language that makes the solution feel urgent and achievable. End with a CTA encouraging readers to try it and share their experience."
+    },
+    "brutally_honest_take": {
+        "name": "Brutally Honest Take",
+        "summary": "This hook uses raw, unfiltered honesty to capture attention. People crave authenticity and bold opinions, so a post that ‘tells it like it is’ often triggers strong engagement. This approach works well for personal branding, disruptive marketing, and calling out industry BS.",
+        "examples": [
+            "Most people will NEVER be successful… because they refuse to accept this one truth.",
+            "Stop wasting time on morning routines. Here’s what ACTUALLY makes you productive."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Brutally Honest Take technique for [keyword]. The first post should expose a hard truth that people might not want to hear but need to, making it impossible to ignore. The second post should challenge a popular belief, debunking it in a way that sparks debate. Use direct, no-nonsense language with a bold, opinionated tone. End with a CTA that invites people to agree, argue, or share their perspective."
+    },
+    "high_stakes_story": {
+        "name": "High-Stakes Story",
+        "summary": "This hook leverages storytelling with extreme stakes, making the audience feel like they must read to the end. It works because our brains are wired to follow compelling narratives, especially when the stakes are high. This method is great for personal experiences, brand storytelling, and marketing case studies.",
+        "examples": [
+            "I almost lost everything overnight. Here’s how I turned it all around.",
+            "I made a single mistake that cost me $50,000… and I’ll never forget it."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the High-Stakes Story technique for [keyword]. The first post should introduce a dramatic, life-changing event that forces readers to stay engaged, wondering what happens next. The second post should focus on a costly mistake or a near-tragic situation that ultimately led to an important lesson. Both posts should use a strong storytelling structure with tension and suspense. End with a CTA that invites the audience to share their thoughts or experiences."
+    },
+    "pattern_interrupt": {
+        "name": "Pattern Interrupt",
+        "summary": "This hook works by disrupting normal scrolling behavior with something unusual, shocking, or unexpected. The brain is wired to filter out familiar patterns, so when something unexpected appears, it forces the audience to stop and pay attention. This method is excellent for grabbing instant engagement on social media.",
+        "examples": [
+            "I just did something so stupid… and it made me $10,000.",
+            "This advice will sound crazy at first, but it might save your life."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Pattern Interrupt technique for [keyword]. The first post should open with an unusual, shocking, or completely unexpected statement that forces the reader to stop scrolling. The second post should take a contrarian approach, stating something that sounds wrong, bizarre, or counterintuitive but turns out to make perfect sense. Use short, punchy sentences and emotional triggers to create a strong impact. End with a CTA that compels readers to engage, comment, or ask for more details."
+    },
+    "mystery_reveal": {
+        "name": "Mystery Reveal",
+        "summary": "This hook thrives on curiosity by introducing an unknown factor and teasing a big reveal. It plays on the audience’s natural desire to ‘fill in the blanks,’ making them eager to keep reading, comment, or engage. This technique is incredibly effective for storytelling, launches, and product reveals.",
+        "examples": [
+            "Something HUGE is happening tomorrow… but I can’t tell you yet. 🤫",
+            "I just discovered the secret to doubling productivity—and it’s NOT what you think."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Mystery Reveal technique for [keyword]. The first post should introduce a ‘hidden’ or ‘secret’ element, building suspense without immediately revealing the full story. The second post should create a sense of exclusivity, hinting at something major that only a select few will get access to. Both posts should maintain an air of mystery, forcing the audience to comment or engage to find out more. End with a CTA encouraging readers to stay tuned, comment, or guess what the reveal might be."
+    },
+    "future_prediction": {
+        "name": "Future Prediction",
+        "summary": "This hook taps into the audience’s curiosity about the future by making a bold prediction about trends, technology, or social behavior. It works because people naturally want to stay ahead of the curve, making them more likely to engage with, debate, or share the content.",
+        "examples": [
+            "In 5 years, [industry] will be unrecognizable. Here’s why.",
+            "The way we work is about to change forever… and most people aren’t ready."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Future Prediction technique for [keyword]. The first post should make a bold claim about an upcoming shift in the industry, technology, or social behavior, making readers curious about what’s coming next. The second post should highlight an overlooked trend or surprising future event, forcing the audience to rethink their expectations. Both posts should use confident, thought-provoking language and challenge conventional assumptions. End with a CTA inviting readers to share their thoughts, agree, or debate."
+    },
+    "controversial_question": {
+        "name": "Controversial Question",
+        "summary": "This hook is designed to spark debates by asking a provocative question that divides opinions. It leverages the brain’s natural tendency to take sides and justify its stance, increasing comments, shares, and heated discussions.",
+        "examples": [
+            "Should billionaires even exist… or should wealth be capped?",
+            "Is college a complete waste of time in 2025? Let’s discuss."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Controversial Question technique for [keyword]. The first post should ask a question that challenges common beliefs or forces people to pick a side, ensuring a polarizing discussion. The second post should frame a provocative question that relates to an ongoing trend, industry, or ethical dilemma. Both posts should be worded in a way that makes people feel compelled to respond and defend their perspective. End with a CTA directly asking readers to share their stance."
+    },
+    "rags_to_riches": {
+        "name": "Rags to Riches",
+        "summary": "This hook capitalizes on the audience’s love for transformation stories. It taps into the emotional power of going from ‘struggle’ to ‘success,’ making it one of the most compelling engagement techniques for storytelling, business, and personal branding.",
+        "examples": [
+            "5 years ago, I was sleeping on my friend’s couch. Today, I run a 7-figure business.",
+            "I started with $100 and turned it into $10,000 in 30 days. Here’s how."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Rags to Riches technique for [keyword]. The first post should focus on a dramatic personal transformation, highlighting a struggle-to-success journey that captivates the reader. The second post should be structured as a step-by-step journey, showing how an obstacle was overcome in a way that feels achievable. Both posts should use strong storytelling elements, emotional triggers, and an inspirational tone. End with a CTA encouraging readers to comment, share, or ask how they can do the same."
+    },
+
+    "controversial_truth": {
+        "name": "Controversial Truth",
+        "summary": "This hook thrives on triggering strong emotions by stating a bold, unpopular, or controversial opinion that goes against the grain. It leverages the brain’s natural resistance to contradiction, making people feel compelled to engage—whether to agree, argue, or debate. This technique is extremely effective for thought leadership, disruptive marketing, and virality.",
+        "examples": [
+            "Most people don’t actually want success… they just want the idea of it.",
+            "The brutal truth: If you're still broke after 3 years in business, you're doing something VERY wrong."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Controversial Truth technique for [keyword]. The first post should take a strong, unconventional stance on a commonly accepted belief, triggering an emotional reaction. The second post should frame the truth in a way that challenges the reader’s self-perception or actions, forcing them to reflect or respond. Use bold and definitive language to make the statement feel undeniable, and end with a CTA that invites discussion or debate."
+    },
+    "fear_of_missing_out": {
+        "name": "Fear of Missing Out (FOMO)",
+        "summary": "This hook leverages scarcity and urgency by making the audience feel like they might be missing out on something valuable, exclusive, or time-sensitive. The fear of being left behind is a powerful psychological driver that increases engagement, clicks, and conversions.",
+        "examples": [
+            "99% of people will ignore this and regret it later. Will you?",
+            "This opportunity will be gone in 24 hours… and you’ll wish you took action."
+        ],
+        "long_prompt": "Write two high-converting social media posts using the Fear of Missing Out (FOMO) technique for [keyword]. The first post should make the audience feel like they are about to miss a rare or exclusive opportunity, increasing their sense of urgency. The second post should frame the fear in a more personal way, making readers reflect on how they would feel if they missed out. Use compelling, time-sensitive language and end with a CTA that encourages immediate engagement, whether it’s clicking, signing up, or commenting."
+    },
+    "call_out_hook": {
+        "name": "Call-Out Hook",
+        "summary": "This hook directly calls out a specific group of people, making them feel personally addressed. It’s highly effective because people naturally want to see if they fit into the category being mentioned. The feeling of being ‘targeted’ leads to higher engagement, as people either identify with the message or feel compelled to respond.",
+        "examples": [
+            "Entrepreneurs, if you’re still relying on word-of-mouth, you’re leaving money on the table.",
+            "To anyone struggling with weight loss: This one mistake is holding you back."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Call-Out Hook technique for [keyword]. The first post should directly address a specific group of people, making them feel personally involved in the message. The second post should call out a particular struggle or mindset that a large audience can relate to. Both posts should be structured in a way that immediately grabs attention and triggers an emotional response. End with a CTA that encourages readers to confirm their identity by commenting, sharing, or engaging."
+    },
+    "one_simple_fix": {
+        "name": "One Simple Fix",
+        "summary": "This hook taps into people's desire for quick solutions by presenting a single, easy-to-implement fix that promises a big impact. It works because audiences are drawn to **low-effort, high-reward** solutions that feel immediately actionable. This method is ideal for productivity hacks, self-improvement, and business tips.",
+        "examples": [
+            "Struggling to wake up early? This one simple trick changed everything.",
+            "If you feel exhausted all day, do this ONE thing before bed tonight."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the One Simple Fix technique for [keyword]. The first post should present a widespread problem and hint at an incredibly easy solution, making the audience feel like they’ve been overcomplicating things. The second post should focus on the outcome, emphasizing how quickly things can change by implementing this ‘one simple trick.’ Use concise, powerful language to drive curiosity and keep the post scannable. End with a CTA encouraging the audience to ask for the fix or share their own experiences."
+    },
+    "reverse_expectation": {
+        "name": "Reverse Expectation",
+        "summary": "This hook plays on surprise by setting up an expected result—then flipping it completely. It’s effective because it disrupts the reader’s predictive thinking, making them curious to understand the twist. This method is perfect for storytelling, unexpected insights, and engaging social experiments.",
+        "examples": [
+            "I started working out to lose weight… but I actually gained 10 pounds. Here’s why.",
+            "I quit social media for a month expecting to be happier. The opposite happened."
+        ],
+        "long_prompt": "Write two engaging social media posts using the Reverse Expectation technique for [keyword]. The first post should set up a common belief or expected outcome before delivering a completely unexpected twist, forcing the audience to rethink their assumptions. The second post should use a personal experience or experiment where the final result is the opposite of what most people would assume. Both posts should maintain an element of suspense, using strong narrative hooks and curiosity-driven storytelling. End with a CTA that invites readers to share their thoughts or ask for more details."
+    },
+
+	"fact_bomb": {
+        "name": "Fact Bomb",
+        "summary": "This hook taps into people's desire to learn something surprising, counterintuitive, or little-known. By presenting an unexpected fact or myth-busting insight, it triggers curiosity and encourages engagement through comments, shares, and discussions. Works well for educational content, expert positioning, and social media virality.",
+        "examples": [
+            "Most people don’t realize that drinking ice water burns calories… but is it actually true?",
+            "Your brain processes negativity five times faster than positivity. Here's how to use that to your advantage."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Fact Bomb technique for [keyword]. The first post should present an unexpected or shocking fact that challenges common beliefs, while the second should reveal a hidden truth that most people overlook. Both posts should use short, impactful sentences to increase shareability and encourage discussions. End with a call to action asking the audience if they knew this fact or how they feel about it."
+    },
+    "shock_and_awe": {
+        "name": "Shock & Awe",
+        "summary": "This hook uses bold, disruptive statements that go against common knowledge to capture attention instantly. It plays on the brain’s tendency to notice unexpected contradictions or extreme statements, making it highly effective for viral content. This approach is great for challenging industry norms, debunking myths, and creating buzz.",
+        "examples": [
+            "If you think hard work makes you successful, you’ve been lied to your whole life.",
+            "The biggest weight loss myth everyone believes—and why it’s ruining your progress."
+        ],
+        "long_prompt": "Write two bold, high-impact social media posts using the Shock & Awe hook for [keyword]. The first post should start with a statement that goes against common beliefs, instantly triggering curiosity or controversy. The second post should present a widely believed myth and then immediately debunk it. Both posts should use strong, emotional language that challenges the reader’s assumptions. End with a question or call-to-action inviting the audience to share their thoughts or reactions."
+    },
+    "insider_leak": {
+        "name": "Insider Leak",
+        "summary": "This hook capitalizes on people's desire for exclusivity by making them feel like they’re gaining access to secret or forbidden knowledge. By framing information as 'insider' or 'behind the scenes,' it increases perceived value and engagement. Works especially well for industry secrets, marketing hacks, and exclusive strategies.",
+        "examples": [
+            "I wasn’t supposed to share this, but here’s the exact strategy influencers use to go viral…",
+            "Top 1% entrepreneurs don’t want you to know this secret about making money online."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Insider Leak technique for [keyword]. The first post should frame the information as an 'industry secret' that only a few people know, while the second should make it feel like an exclusive leak that the reader is privileged to access. Both posts should use language that creates urgency and curiosity, making readers feel like they’re gaining insider knowledge. End with a CTA that encourages the audience to comment or share before ‘the secret’ disappears."
+    },
+    "relatable_pain_point": {
+        "name": "Relatable Pain Point",
+        "summary": "This hook taps into shared frustrations and struggles, making the audience feel understood. It works by mirroring a common experience or problem before transitioning into a potential solution. When executed correctly, this technique builds deep emotional engagement and strengthens audience connection.",
+        "examples": [
+            "Ever feel like no matter how much you sleep, you’re always exhausted? Here’s why.",
+            "Struggling to stay motivated? This simple mindset shift changed everything for me."
+        ],
+        "long_prompt": "Write two engaging social media posts using the Relatable Pain Point technique for [keyword]. The first post should highlight a widespread frustration or struggle that resonates emotionally with the audience, using relatable language. The second post should address a specific problem people commonly face, hinting at a solution. Both posts should use empathetic and conversational tones to build trust and relatability. End each post with a CTA that invites readers to share their experiences or thoughts."
+    },
+    "open_loop_cliffhanger": {
+        "name": "Open Loop Cliffhanger",
+        "summary": "This hook leverages suspense and storytelling to keep readers engaged. By hinting at an exciting or unexpected outcome without revealing it upfront, it creates an irresistible urge to find out more. This is one of the most powerful techniques for increasing engagement, watch time, and content consumption.",
+        "examples": [
+            "I tried waking up at 4 AM for 30 days. The results? Not what I expected…",
+            "I spent $500 on an online course and got scammed… but here’s what I learned."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Open Loop Cliffhanger technique for [keyword]. The first post should use a personal or dramatic story that teases an unexpected result, stopping just before revealing the full outcome. The second post should hint at a surprising experience or mistake, leaving the reader curious to learn more. Both posts should use strong storytelling elements, emotional hooks, and curiosity-driven language to maintain engagement. End with a CTA encouraging the audience to comment, guess the outcome, or ask for the next part."
+    },
+
+	"curiosity_trap": {
+        "name": "Curiosity Trap",
+        "summary": "This hook leverages the Zeigarnik Effect, which makes people feel uncomfortable with incomplete information. It creates an open loop that compels the reader to seek closure by clicking, commenting, or engaging with the content. This method is highly effective for storytelling, personal experiences, shocking revelations, and before-and-after transformations.",
+        "examples": [
+            "They told me weight loss after 40 was impossible… but here’s what happened next.",
+            "I tried waking up at 4 AM for 30 days, and the results? Absolutely shocking!"
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Curiosity Trap technique for [keyword]. Each post should open with an intriguing statement that hints at a surprising outcome, mistake, or revelation. Use suspense-building language to create an open loop, making it impossible for the reader to ignore. Do not reveal the full answer too soon—maintain the curiosity gap for maximum engagement. Structure the posts differently: one should focus on a personal experience or discovery, and the other should create a thought-provoking statement that teases hidden information. Conclude both with a CTA that invites the audience to engage, comment, or ask for the answer."
+    },
+    "unexpected_confession": {
+        "name": "Unexpected Confession",
+        "summary": "This hook triggers cognitive dissonance by making a surprising admission that contradicts conventional wisdom or common beliefs. It works by capturing attention through an unexpected truth, personal realization, or myth-busting statement. When used effectively, this technique can drive deep discussions, high comment engagement, and viral reactions as people rethink their assumptions.",
+        "examples": [
+            "I used to believe eating less was the key to weight loss… until I learned the shocking truth.",
+            "I thought working 80-hour weeks would make me successful, but I was completely wrong."
+        ],
+        "long_prompt": "Write two high-engagement social media posts using the Unexpected Confession hook for [keyword]. The first post should focus on a personal transformation—begin with a bold confession that contradicts popular opinion, walk through what changed your perspective, and end with a surprising lesson. The second post should be more direct, starting with a controversial or contrarian statement that immediately makes readers question what they believe. Use relatable storytelling and emotional triggers to keep the reader engaged. Finish both with a CTA that invites discussion, asking the audience if they’ve ever experienced the same realization or what they think."
+    },
+    "reverse_psychology_hook": {
+        "name": "Reverse Psychology Hook",
+        "summary": "This hook taps into psychological reactance, the natural human tendency to resist being told what to do. By telling the audience NOT to do something, it instantly piques curiosity and makes them more likely to engage. It’s a highly effective strategy for increasing comments, shares, and overall social media virality. Works especially well for contrarian insights, disruptive ideas, and playful brand messaging.",
+        "examples": [
+            "WARNING: Do NOT try this unless you want to double your income in the next 30 days.",
+            "Skip this post if you're happy being average—this is only for those who want massive success."
+        ],
+        "long_prompt": "Write two engaging social media posts using the Reverse Psychology Hook for [keyword]. The first post should take a playful or bold approach, explicitly telling the audience NOT to engage while subtly making it irresistible. The second post should use a more authoritative tone, creating a sense of exclusivity where only a select few should 'dare' to continue reading. Both posts should use curiosity triggers, strong language, and an emotional pull to get people to read and comment. End each post with a CTA that reinforces the ‘reverse psychology’ effect, making readers feel like they must engage to prove something."
+    },
+    "high_stakes_question": {
+        "name": "High-Stakes Question",
+        "summary": "This hook forces the audience to take sides by presenting a tough choice or dilemma. It triggers strong emotional responses, leading to increased engagement through debates and discussions. People naturally want to justify their choices, making this an excellent technique for boosting comments, shares, and reactions. Works well for thought-provoking topics, ethical dilemmas, and brand storytelling.",
+        "examples": [
+            "Would you rather make $100K doing what you love or $500K doing something you hate?",
+            "If you could live forever but never leave your hometown, would you do it?"
+        ],
+        "long_prompt": "Write two engagement-driven social media posts using the High-Stakes Question technique for [keyword]. The first post should present a tough but relatable dilemma that forces people to choose between two options, emphasizing the emotional stakes involved. The second post should take a more controversial approach, framing the question in a way that challenges conventional thinking. Both posts should be structured in a way that invites strong opinions, and the language should be designed to spark debates. Conclude each post with a CTA directly inviting the audience to share their thoughts and explain their choice."
+    },
+    "viral_test": {
+        "name": "Viral Test",
+        "summary": "This hook plays on Competency Bias, challenging the audience’s intelligence, knowledge, or skills. By framing the post as a test that only a small percentage of people can pass, it triggers a competitive reaction, making people eager to participate. This technique works particularly well for interactive content, quizzes, riddles, and challenges that prompt engagement through comments and shares.",
+        "examples": [
+            "Only 2% of people can name all 50 U.S. states in under 30 seconds. Can you?",
+            "If you can answer this math problem correctly, you might be a genius: 8 ÷ 2(2+2) = ?"
+        ],
+        "long_prompt": "Write two viral-style social media posts using the Viral Test technique for [keyword]. The first post should present a challenging question, fact, or puzzle that makes people want to prove themselves. The second post should position the test as something exclusive, using language that suggests only a select few can pass. Both posts should include a clear interactive element, like a direct question or challenge that prompts users to comment their answer. End each post with a CTA that pushes engagement by asking users to tag a friend or share the challenge."
+    }
+
+
+        };
+
+    const STATIC_PROMPTS = {
+    ImageGenerationPrompt: `You are an expert in creating detailed and emotionally resonant prompts for AI image generation software specializing in ultra-realistic visuals that align perfectly with the tone, themes, and emotional core of a social media post. You are also a social media marketing expert with a focus on create high ctr images optimized for social media platforms. Based on the content in the social media posts above, generate 5 distinct and richly descriptive prompts for ultra-realistic images that convey the key messages of the social media posts. Each prompt should focus on crafting immersive, lifelike scenes without including text, logos, or watermarks. Describe each image with exceptional detail, including the environment, atmosphere, lighting, and textures, to ensure the visuals evoke a strong emotional connection. Specify elements such as time of day, color palette, and mood while ensuring the setting, objects, or characters align with the overarching narrative. Incorporate natural human expressions, movements, and interactions where relevant, ensuring every aspect of the image feels authentic and relatable. Provide details on background elements, subtle actions, or symbolic objects that enhance depth and meaning without overwhelming the focal point. Each prompt should result in a unique and captivating image that tells a story and visually represents the emotions, challenges, or aspirations conveyed in the social media post. Ensure diversity in the scenes, highlighting different perspectives, styles, and compositions that evoke a range of emotions and maintain alignment with the core message. The output should prioritize creativity, emotional resonance, and visual sophistication, producing stunning, high-quality images that leave a lasting impression and optimized for high social media click-through rate.`,
+};
+function generateContent() {
+    const style = document.getElementById("style").value; // Selected style
+    const keyword = document.getElementById("keyword").value.trim(); // User input keyword
+    const outputContainer = document.getElementById("output"); // Output container
+
+    if (!keyword) {
+        alert("Please enter a keyword!");
+        return;
+    }
+
+    // Clear previous output
+    outputContainer.innerHTML = "";
+
+    if (style === "randomize") {
+        // Randomize and display 10 techniques
+        const randomStyles = Object.keys(CONTENT_STYLES)
+            .sort(() => Math.random() - 0.5) // Shuffle
+            .slice(0, 10); // Take first 10
+
+        randomStyles.forEach(key => {
+            const randomStyle = CONTENT_STYLES[key];
+            const promptText = randomStyle.long_prompt.replace(/\[keyword\]/g, keyword);
+
+            outputContainer.innerHTML += `
+                <div class="output-section">
+                    <h3>${randomStyle.name}</h3>
+                    <p>${randomStyle.summary.replace(/\[keyword\]/g, keyword)}</p>
+                    <pre>${promptText}</pre>
+                    <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+                </div>
+            `;
+        });
+    } else {
+        // Display a single selected style
+        const selectedStyle = CONTENT_STYLES[style];
+        const promptText = selectedStyle.long_prompt.replace(/\[keyword\]/g, keyword);
+
+        outputContainer.innerHTML = `
+            <div class="output-section">
+                <h3>${selectedStyle.name}</h3>
+                <p>${selectedStyle.summary.replace(/\[keyword\]/g, keyword)}</p>
+                <h4>Examples</h4>
+                <ul>${selectedStyle.examples.map(ex => `<li>${ex.replace(/\[keyword\]/g, keyword)}</li>`).join("")}</ul>
+                <pre>${promptText}</pre>
+                <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+            </div>
+        `;
+    }
+
+    // Add static prompts
+    outputContainer.innerHTML += `
+        ${Object.entries(STATIC_PROMPTS).map(([label, prompt]) => `
+            <div class="output-section">
+                <strong>${label.replace(/Prompt$/, '').replace(/([A-Z])/g, ' $1')}:</strong>
+                <pre>${prompt.replace(/\[keyword\]/g, keyword)}</pre>
+                <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+            </div>
+        `).join("")}
+    `;
+}
+
+// Copy to Clipboard Function
+function copyPrompt(button) {
+    const preElement = button.previousElementSibling; // Get the <pre> element
+    const textToCopy = preElement.innerText;
+
+    navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+            const originalText = button.innerText; // Save original button text
+            button.innerText = "Copied! Let's Go!"; // Update to "Copied!"
+            button.disabled = true; // Disable button temporarily
+
+            setTimeout(() => {
+                button.innerText = originalText; // Revert button text
+                button.disabled = false; // Enable button
+            }, 2000); // Revert after 2 seconds
+        })
+        .catch(err => console.error("Failed to copy text: ", err));
+}
+
+
+</script>
+</body>
+</html>
