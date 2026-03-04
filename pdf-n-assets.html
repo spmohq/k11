@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PDF and Marketing Assets</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { max-width: 950px; width: 100%; margin: 0 auto; flex-grow: 1; }
+    header { text-align: center; margin-bottom: 50px; }
+    h1 { font-size: 2.5rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; text-transform: uppercase; }
+    
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin: 40px 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--card-border);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .prompts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 25px;
+    }
+    @media (max-width: 600px) {
+        .prompts-grid { grid-template-columns: 1fr; }
+    }
+
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 25px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .prompt-card h3 { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 15px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      margin-bottom: 15px;
+      border: 1px solid var(--card-border);
+      line-height: 1.4;
+    }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 8px 16px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--bg-gradient-end);
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); }
+    .copy-button.copied { background-color: var(--accent-success); }
+    
+    .icon { width: 16px; height: 16px; }
+
+    footer { text-align: center; padding: 60px 0 20px; color: var(--text-secondary); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>PDF and Marketing Assets</h1>
+    </header>
+
+    <main>
+      <!-- Section 1 -->
+      <h2 class="section-title">1-Click Rewriter</h2>
+      <div class="prompts-grid">
+        <div class="prompt-card">
+          <h3>Prompt 1: Initial Command</h3>
+          <pre id="s1p1" class="prompt-text">Convert to eBook/Report</pre>
+          <button class="copy-button" onclick="copyText('s1p1', this)">Copy Prompt</button>
+        </div>
+
+        <div class="prompt-card">
+          <h3>Prompt 2: Revision Strategy</h3>
+          <pre id="s1p2" class="prompt-text">1. I will paste different content.
+2. I own this content
+3. Tone I should use: aggressive
+4. How much you should change it: rewrite + heavy expansion and restructuring
+5. You Should first propose a table of contents for the ebook/report, then go straight into rewriting.</pre>
+          <button class="copy-button" onclick="copyText('s1p2', this)">Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- Section 2 -->
+      <h2 class="section-title">1-Page</h2>
+      <div class="prompts-grid">
+        <div class="prompt-card">
+          <h3>Prompt 1: Business Parameters</h3>
+          <pre id="s2p1" class="prompt-text">1) The thing I want to make money from:
+ebook / PDF content
+2) What I'm selling:
+my own product
+3) Traffic source (choose ONE, be specific):
+Organic social
+4) Price range:
+under $10
+5) Goal:
+fast cash</pre>
+          <button class="copy-button" onclick="copyText('s2p1', this)">Copy Prompt</button>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function copyText(id, btn) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>
