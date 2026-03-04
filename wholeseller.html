@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Supplier Discovery Prompt Generator</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --input-bg: #111827;
+      --code-bg: rgba(0, 0, 0, 0.4);
+      --shadow-color: rgba(0, 0, 0, 0.3);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .container { max-width: 950px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 40px; }
+    h1 { font-size: 2rem; font-weight: 700; color: var(--text-heading); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;}
+    
+    /* Input Section */
+    .input-section {
+      margin-bottom: 30px;
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+    }
+    .input-group { display: flex; flex-direction: column; }
+    .input-group label { font-weight: 600; margin-bottom: 10px; color: var(--accent-primary); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    textarea {
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 15px;
+      color: white;
+      font-family: inherit;
+      font-size: 1rem;
+      min-height: 80px;
+      resize: vertical;
+    }
+    textarea:focus { outline: 2px solid var(--accent-primary); border-color: transparent; }
+
+    /* Prompt Card */
+    .prompt-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 8px 32px var(--shadow-color);
+      display: flex; flex-direction: column;
+      backdrop-filter: blur(12px);
+    }
+    .prompt-card h2 { font-size: 1rem; margin-bottom: 15px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; color: var(--text-heading); text-transform: uppercase; }
+    
+    .prompt-text {
+      background: var(--code-bg);
+      padding: 25px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem;
+      border: 1px solid var(--card-border);
+      margin-bottom: 20px;
+      line-height: 1.6;
+      color: #e5e7eb;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+    /* Scrollbar for prompt box */
+    .prompt-text::-webkit-scrollbar { width: 8px; }
+    .prompt-text::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
+    .prompt-text::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; }
+
+    .dynamic-val { 
+      color: var(--accent-primary); 
+      font-weight: 700; 
+      background: rgba(34, 211, 238, 0.1);
+      padding: 0 2px;
+      border-radius: 2px;
+    }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 12px 24px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      background: var(--accent-primary);
+      color: var(--bg-gradient-end);
+      border: none; border-radius: 8px;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+    .copy-button:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .copy-button.copied { background: var(--accent-success); }
+    .icon { width: 18px; height: 18px; }
+
+    footer { text-align: center; margin-top: 50px; color: var(--text-secondary); font-size: 0.85rem; padding-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Supplier Discovery Keyword Generator Prompt</h1>
+  </header>
+
+  <!-- Input Section -->
+  <section class="input-section">
+    <div class="input-group">
+      <label>Product Name</label>
+      <textarea id="productInput" placeholder="Enter your product (e.g. Banarasi Saree, Leather Bags)..."></textarea>
+    </div>
+  </section>
+
+  <main>
+    <div class="prompt-card">
+      <h2>Sourcing Strategy Prompt</h2>
+      <div id="promptDisplay" class="prompt-text">SUPPLIER DISCOVERY MASTER PROMPT TEMPLATE
+
+PURPOSE
+Generate highly effective supplier discovery keywords, search phrases, and sourcing strategies that help locate wholesalers, manufacturers, catalogue distributors, and reseller friendly vendors for a specific product.
+
+PRODUCT
+<span class="dynamic-val" data-field="product">[PRODUCT]</span>
+
+ROLE
+Act as a B2B sourcing analyst and supplier discovery researcher. Think like an experienced Indian reseller, boutique owner, dropshipper, or sourcing agent who is actively searching for suppliers across marketplaces, social networks, messaging platforms, and search engines.
+Prioritize search phrases used by Indian resellers and small online sellers.
+
+INDIAN RESELLER SEARCH CONTEXT
+When generating supplier discovery queries, simulate the search behaviour of Indian resellers who source from Indian wholesale markets and manufacturing hubs. Prioritize phrases such as wholesale, manufacturer, factory price, bulk supplier, catalogue supplier, reseller friendly supplier, low MOQ supplier, and whatsapp catalogue supplier.
+
+Focus on discovering suppliers who share:
+- product catalogues
+- wholesale price lists
+- stock updates
+- new arrivals
+- reseller opportunities
+- whatsapp catalogue groups
+- telegram supplier groups
+
+SUPPLIER HUNTER MODE
+Activate Supplier Hunter Mode.
+When generating supplier discovery queries and strategies, prioritize discovering hidden suppliers and reseller networks rather than obvious retail listings. Focus on uncovering suppliers that are harder to find through normal browsing.
+
+Prioritize discovery of:
+- wholesalers operating through whatsapp catalogues
+- telegram catalogue distributor groups
+- instagram catalogue suppliers
+- reseller network suppliers
+- factory outlet wholesalers
+- small manufacturer showrooms
+- local wholesale distributors
+- oem manufacturers
+- boutique production workshops
+
+Deprioritize searches that lead mainly to retail ecommerce stores or consumer marketplaces.
+
+Prioritize supplier discovery in major Indian wholesale hubs such as: Surat, Delhi, Jaipur, Mumbai, Tiruppur, Kolkata, Ahmedabad.
+
+PLATFORMS TO GENERATE SEARCHES FOR: IndiaMart, Instagram, YouTube, Telegram, Google Search.
+
+SECTION 1 - CORE SUPPLIER DISCOVERY KEYWORDS
+Generate supplier search phrases for each platform under categories: standard wholesale, reseller friendly, catalogue, bulk, low MOQ, manufacturer, whatsapp group discovery, and location based (Surat, Delhi, Jaipur, etc.).
+
+SECTION 2 - INSTAGRAM SUPPLIER DISCOVERY
+Generate instagram keywords, hashtags, and signal phrases (dm for catalogue, resellers welcome, factory price).
+Also generate discovery queries combining product keywords:
+- <span class="dynamic-val" data-field="product">[PRODUCT]</span> reseller friendly
+- <span class="dynamic-val" data-field="product">[PRODUCT]</span> dm for catalogue
+- <span class="dynamic-val" data-field="product">[PRODUCT]</span> wholesale supplier
+- <span class="dynamic-val" data-field="product">[PRODUCT]</span> manufacturer direct
+
+SECTION 3 - INDIAMART SUPPLIER DISCOVERY
+Generate high intent buyer searches. Include product + location queries:
+- Surat wholesale <span class="dynamic-val" data-field="product">[PRODUCT]</span>
+- Delhi wholesale <span class="dynamic-val" data-field="product">[PRODUCT]</span>
+- Jaipur manufacturer <span class="dynamic-val" data-field="product">[PRODUCT]</span>
+- Mumbai wholesale supplier <span class="dynamic-val" data-field="product">[PRODUCT]</span>
+- Tiruppur manufacturer <span class="dynamic-val" data-field="product">[PRODUCT]</span>
+
+SECTION 4 - TELEGRAM SUPPLIER NETWORK DISCOVERY
+Generate group and channel searches. Generate Google queries:
+- site:t.me <span class="dynamic-val" data-field="product">[PRODUCT]</span> wholesale
+- site:t.me <span class="dynamic-val" data-field="product">[PRODUCT]</span> supplier
+- site:t.me <span class="dynamic-val" data-field="product">[PRODUCT]</span> reseller
+
+SECTION 5 - WHATSAPP GROUP DISCOVERY
+Generate Google queries:
+- site:chat.whatsapp.com <span class="dynamic-val" data-field="product">[PRODUCT]</span> wholesale
+- site:chat.whatsapp.com <span class="dynamic-val" data-field="product">[PRODUCT]</span> supplier
+- site:chat.whatsapp.com <span class="dynamic-val" data-field="product">[PRODUCT]</span> reseller
+Also generate quotation searches:
+- "<span class="dynamic-val" data-field="product">[PRODUCT]</span> wholesale" "whatsapp group"
+- "<span class="dynamic-val" data-field="product">[PRODUCT]</span> supplier" "join whatsapp group"
+- "<span class="dynamic-val" data-field="product">[PRODUCT]</span> reseller" "whatsapp group link"
+
+SECTION 6 - YOUTUBE SUPPLIER DISCOVERY
+Generate searches for market tours, contact videos, and supplier vlogs.
+
+SECTION 7 - SUPPLIER LEAD INTELLIGENCE
+Generate lead types and discovery paths (hubs, instagram whistleblower account types).
+
+SECTION 8 - SUPPLIER LEAD SCORING FILTER
+Generate signals that help determine whether a supplier is a real wholesaler or a middleman.
+
+SECTION 9 - SEARCH VARIATION EXPANSION
+Generate multiple variations: <span class="dynamic-val" data-field="product">[PRODUCT]</span> + wholesale/supplier/manufacturer/distributor/bulk/factory price/exporter.
+
+SECTION 10 - QUERY EXPANSION ENGINE
+Generate a very large set of unique discovery searches simulating real reseller behaviour.
+
+OUTPUT STRUCTURE
+Organize as a structured supplier discovery report with platform sections, subsections, and bulleted search phrases (at least 20 per platform).
+
+Now execute for: <span class="dynamic-val" data-field="product">[PRODUCT]</span></div>
+      
+      <button class="copy-button" id="copyBtn">
+        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+        <span id="btnText">Copy Prompt</span>
+      </button>
+    </div>
+  </main>
+
+  <footer>
+    <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+  </footer>
+</div>
+
+<script>
+  const productInput = document.getElementById('productInput');
+  const copyBtn = document.getElementById('copyBtn');
+  const btnText = document.getElementById('btnText');
+  const promptDisplay = document.getElementById('promptDisplay');
+
+  // Live replacement logic
+  productInput.addEventListener('input', () => {
+    const val = productInput.value.trim() || '[PRODUCT]';
+    document.querySelectorAll('.dynamic-val[data-field="product"]').forEach(el => {
+      el.textContent = val;
+    });
+  });
+
+  // Copy functionality
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(promptDisplay.innerText).then(() => {
+      const originalText = btnText.textContent;
+      btnText.textContent = 'Copied!';
+      copyBtn.classList.add('copied');
+      
+      setTimeout(() => {
+        btnText.textContent = originalText;
+        copyBtn.classList.remove('copied');
+      }, 2000);
+    }).catch(err => {
+      console.error('Copy failed: ', err);
+    });
+  });
+</script>
+
+</body>
+</html>
