@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Self-Help PDF Outline Generator</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { max-width: 850px; width: 100%; margin: 0 auto; flex-grow: 1; }
+    header { text-align: center; margin-bottom: 50px; }
+    h1 { font-size: 2.2rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; text-transform: uppercase; line-height: 1.2; }
+    
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 35px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .prompt-card:hover { transform: translateY(-5px); }
+    .prompt-card h2 { font-size: 1.2rem; font-weight: 600; color: var(--accent-primary); margin-bottom: 20px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 25px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      margin-bottom: 25px;
+      border: 1px solid var(--card-border);
+      line-height: 1.6;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    /* Custom Scrollbar */
+    .prompt-text::-webkit-scrollbar { width: 8px; }
+    .prompt-text::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
+    .prompt-text::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--bg-gradient-end);
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
+    .copy-button.copied { background-color: var(--accent-success); }
+    
+    .icon { width: 18px; height: 18px; }
+    .copied-icon { display: none; }
+    .copy-button.copied .copy-icon { display: none; }
+    .copy-button.copied .copied-icon { display: inline-block; }
+
+    footer { text-align: center; padding: 60px 0 20px; color: var(--text-secondary); font-size: 0.9rem; }
+    @media (max-width: 600px) { h1 { font-size: 1.6rem; } .prompt-text { font-size: 0.85rem; } }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Self-Help PDF Outline Generator Prompt Template</h1>
+    </header>
+
+    <main>
+      <div class="prompt-card">
+        <h2>Outline Strategy Prompt</h2>
+        <pre id="outlinePrompt" class="prompt-text">ROLE
+Act as an experienced self-help author, nonfiction editor, and reader psychology specialist. Your task is to create a clear, engaging, and practical outline for a short self-help PDF or report that helps readers understand a specific problem and apply a practical solution.
+
+OBJECTIVE
+Generate a structured outline that helps readers clearly understand a problem and follow a simple framework to solve it.
+
+TOPIC
+[Insert the main problem the PDF will solve]
+
+TARGET READER
+[Describe the reader briefly. Example: beginners starting an online business, people struggling with procrastination, new freelancers, etc.]
+
+DESIRED LENGTH
+Short self-help PDF or lead magnet (approximately 10–30 pages).
+
+TONE
+Determine the tone organically based on the opening hook, structure, and stated purpose.
+Do not preset or impose a tone. Let the emotional intensity, authority level, and language style naturally align with those elements.
+
+LANGUAGE & STYLE DIRECTIVE
+Write in modern, natural, everyday conversational English as spoken in Kolkata, West Bengal, India — but without local slang, regional grammar, or phrasing that could confuse a global audience.
+
+The language must be easily understood by a 21-year-old.
+
+Always address the reader directly using “you” and “your.”
+
+Where appropriate, subtly reflect Kolkata conversational cadence through sentence rhythm and phrasing — without slang, regional grammar, or loss of conservative authority.
+
+STYLISTIC PRIORITY ORDER
+If any stylistic conflict occurs, follow this order:
+
+1. Preserve natural English flow.
+2. Maintain clarity and reader understanding.
+3. Retain intended meaning over literal wording.
+
+WRITING QUALITY REQUIREMENTS
+
+• The writing must feel spontaneous, fluid, culturally authentic, and polished.
+• Avoid stiff, overly academic, robotic, or mechanically literal phrasing.
+• Write like a trusted authority speaking one-on-one.
+• Vary sentence length and rhythm naturally, mixing short emphasis lines with longer explanatory sentences where it improves clarity and engagement.
+• Strengthen weak transitions where necessary.
+
+INSTRUCTIONS
+Create a detailed outline that strictly follows the structure below. Use clear section headings and concise bullet points explaining what each section should contain.
+
+FRAMEWORK STRUCTURE
+
+1. THE PROBLEM
+Show the reader you understand their struggle.
+Include:
+• The common frustrations readers experience
+• Situations where the problem appears in daily life
+• Emotional and practical consequences of the problem
+
+2. WHY MOST ADVICE FAILS
+Explain why typical advice or popular solutions often do not work.
+Include:
+• Common misconceptions
+• Typical mistakes people make when trying to solve the problem
+• Why these approaches fail in real-world situations
+This section should naturally increase reader trust and authority.
+
+3. THE BIG IDEA / FRAMEWORK
+Introduce the main method that solves the problem.
+Include:
+• A clear explanation of the core idea
+• A simple and memorable name for the framework if possible
+• A brief overview of how the framework works
+• Why this approach is different or more effective than common advice
+
+4. THE STEPS
+Break the framework into clear actionable steps.
+Include:
+• 3–5 steps maximum
+• Each step should become its own section
+• A short explanation of what the reader should do in each step
+• Practical examples where useful
+
+5. QUICK ACTION PLAN
+Provide a short action plan readers can apply immediately.
+Include:
+• Simple instructions
+• 3–7 quick actions readers can take today
+• Clear, practical steps that reduce hesitation and encourage action
+
+6. THE NEXT STEP (OPTIONAL BUT RECOMMENDED)
+End the outline with a logical next step for the reader.
+Possible options include:
+• Join an email list
+• Download a checklist or resource
+• Use a tool or template
+• Explore a course or program
+
+OUTPUT FORMAT
+Generate:
+• A compelling title for the PDF
+• The name of the framework (if applicable)
+• The complete structured outline following the six sections above
+• Bullet points explaining what each section should contain.</pre>
+        
+        <button class="copy-button" id="copyBtn">
+          <svg class="icon copy-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /></svg>
+          <svg class="icon copied-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path d="M4.5 12.75l6 6 9-13.5" /></svg>
+          <span id="btnText">Copy Prompt</span>
+        </button>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const copyBtn = document.getElementById('copyBtn');
+    const promptText = document.getElementById('outlinePrompt');
+    const btnText = document.getElementById('btnText');
+
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(promptText.textContent).then(() => {
+        const originalText = btnText.textContent;
+        btnText.textContent = 'Copied!';
+        copyBtn.classList.add('copied');
+        
+        setTimeout(() => {
+          btnText.textContent = originalText;
+          copyBtn.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    });
+  </script>
+
+</body>
+</html>
