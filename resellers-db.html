@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reseller Lead Map Generator</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --input-bg: #111827;
+      --code-bg: rgba(0, 0, 0, 0.4);
+      --shadow-color: rgba(0, 0, 0, 0.3);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 40px; }
+    h1 { font-size: 2rem; font-weight: 700; color: var(--text-heading); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;}
+
+    .input-section {
+      margin-bottom: 30px;
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+    }
+    .input-group { display: flex; flex-direction: column; }
+    .input-group label { font-weight: 600; margin-bottom: 10px; color: var(--accent-primary); font-size: 0.9rem; text-transform: uppercase; }
+    textarea {
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 15px;
+      color: white;
+      font-family: inherit;
+      font-size: 1rem;
+      min-height: 80px;
+      resize: vertical;
+    }
+    textarea:focus { outline: 2px solid var(--accent-primary); border-color: transparent; }
+
+    .prompt-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 8px 32px var(--shadow-color);
+      display: flex; flex-direction: column;
+      backdrop-filter: blur(12px);
+    }
+    .prompt-card h2 { font-size: 1rem; margin-bottom: 15px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; color: var(--text-heading); text-transform: uppercase; }
+    
+    .prompt-text {
+      background: var(--code-bg);
+      padding: 25px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      border: 1px solid var(--card-border);
+      margin-bottom: 20px;
+      line-height: 1.6;
+      color: #e5e7eb;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+    .prompt-text::-webkit-scrollbar { width: 8px; }
+    .prompt-text::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
+    .prompt-text::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; }
+
+    .dynamic-val { color: var(--accent-primary); font-weight: 700; background: rgba(34, 211, 238, 0.1); padding: 0 2px; }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 12px 24px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      background: var(--accent-primary);
+      color: var(--bg-gradient-end);
+      border: none; border-radius: 8px;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+    .copy-button:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .copy-button.copied { background: var(--accent-success); }
+    footer { text-align: center; margin-top: 50px; color: var(--text-secondary); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>RESELLER LEAD MAP GENERATOR PROMPT</h1>
+  </header>
+  <section class="input-section">
+    <div class="input-group">
+      <label>Product Niche</label>
+      <textarea id="nicheInput" placeholder="Enter Niche (e.g. Saree, Jewellery, Home Decor)..."></textarea>
+    </div>
+  </section>
+  <main>
+    <div class="prompt-card">
+      <h2>Lead Mapping Prompt</h2>
+      <div id="promptDisplay" class="prompt-text">PURPOSE
+Generate a comprehensive reseller lead map that helps locate online resellers, reseller communities, and seller networks for a specific product niche.
+
+PRODUCT NICHE
+<span class="dynamic-val" data-field="niche">[PRODUCT NICHE]</span>
+
+ROLE
+Act as a reseller ecosystem researcher. Your task is to identify where online resellers for this product niche are likely to be active and what search queries, hashtags, and community signals can reveal them. Focus on discovering resellers who sell products through: Instagram shops, WhatsApp catalogues, Telegram channels, Meesho stores, and small online boutiques.
+
+TARGET ACCOUNTS
+Focus on: online resellers, home-based sellers, Instagram boutiques, catalogue sellers, dropshippers, and small ecommerce sellers.
+
+TASK
+Generate a Reseller Lead Map containing the following sections:
+
+SECTION 1 – Instagram Reseller Search Queries
+Generate at least 30 search phrases combining the product niche with signals.
+Examples: <span class="dynamic-val" data-field="niche">[PRODUCT NICHE]</span> reseller, <span class="dynamic-val" data-field="niche">[PRODUCT NICHE]</span> online shop, <span class="dynamic-val" data-field="niche">[PRODUCT NICHE]</span> boutique seller.
+
+SECTION 2 – Reseller Hashtag Clusters
+Generate at least 40 hashtags commonly used (product, shop, small business, reseller community).
+Examples: #<span class="dynamic-val" data-field="niche">[PRODUCT NICHE]</span>shop, #onlineshopindia.
+
+SECTION 3 – Reseller Bio Signals
+List common phrases indicating selling (DM to order, COD available, All India shipping).
+
+SECTION 4 – Reseller Community Discovery
+Queries to reveal communities (reseller group India, reseller community WhatsApp).
+
+SECTION 5 – Supplier-Reseller Network Discovery
+Queries for supplier-connected networks (resellers welcome, join reseller program).
+
+SECTION 6 – Platform-Specific Discovery
+Provide discovery strategies for Instagram, WhatsApp groups, Telegram, and Meesho.
+
+SECTION 7 – Network Expansion Strategy
+Explain how to expand by exploring followers, comments, and suggested accounts.
+
+OUTPUT FORMAT
+Section name -> Category -> Bulleted Keywords.
+Goal: Identify hundreds of accounts related to <span class="dynamic-val" data-field="niche">[PRODUCT NICHE]</span>.</div>
+      <button class="copy-button" id="copyBtn">
+        <span id="btnText">Copy Prompt</span>
+      </button>
+    </div>
+  </main>
+  <footer>
+    <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+  </footer>
+</div>
+<script>
+  const nicheInput = document.getElementById('nicheInput');
+  const copyBtn = document.getElementById('copyBtn');
+  const btnText = document.getElementById('btnText');
+  const promptDisplay = document.getElementById('promptDisplay');
+
+  nicheInput.addEventListener('input', () => {
+    const val = nicheInput.value.trim() || '[PRODUCT NICHE]';
+    document.querySelectorAll('.dynamic-val[data-field="niche"]').forEach(el => el.textContent = val);
+  });
+
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(promptDisplay.innerText).then(() => {
+      const originalText = btnText.textContent;
+      btnText.textContent = 'Copied!';
+      copyBtn.classList.add('copied');
+      setTimeout(() => {
+        btnText.textContent = originalText;
+        copyBtn.classList.remove('copied');
+      }, 2000);
+    });
+  });
+</script>
+</body>
+</html>
