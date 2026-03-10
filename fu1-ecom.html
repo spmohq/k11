@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Follow-up Prompts - Seller Growth Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #020617;
+      --bg-gradient-end: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #10b981;
+      --code-bg: #000000;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top, var(--bg-gradient-end), var(--bg-gradient-start));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 60px 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      color: var(--accent-primary);
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .prompt-list {
+      display: grid;
+      gap: 25px;
+    }
+
+    .prompt-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+      transition: border-color 0.3s ease;
+    }
+
+    .prompt-card:hover {
+      border-color: var(--accent-primary);
+    }
+
+    .prompt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .prompt-number {
+      font-weight: 700;
+      font-size: 0.9rem;
+      background: rgba(34, 211, 238, 0.1);
+      color: var(--accent-primary);
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(34, 211, 238, 0.2);
+    }
+
+    .prompt-content {
+      background: var(--code-bg);
+      padding: 20px;
+      border-radius: 10px;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      white-space: pre-wrap;
+      border: 1px solid rgba(255,255,255,0.05);
+      margin-bottom: 15px;
+    }
+
+    .copy-btn {
+      background: var(--accent-primary);
+      color: #0f172a;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .copy-btn.copied {
+      background: var(--accent-success);
+      color: white;
+    }
+
+    .footer {
+      margin-top: 60px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.8rem; }
+      body { padding: 30px 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Follow-up Prompts</h1>
+      <p class="subtitle">Seller Growth Tools Library</p>
+    </header>
+
+    <div class="prompt-list">
+      
+      <!-- Prompt 1 -->
+      <div class="prompt-card">
+        <div class="prompt-header"><span class="prompt-number">Prompt #1</span></div>
+        <div class="prompt-content" id="p1">Act as an ecommerce tool designer.
+
+My audience includes WhatsApp sellers, dropshippers, online retailers, and online suppliers in India.
+
+Suggest 10 AI tools that would help them find suppliers, discover products, and grow their sales.</div>
+        <button class="copy-btn" onclick="copyPrompt('p1', this)">Copy Prompt</button>
+      </div>
+
+      <!-- Prompt 2 -->
+      <div class="prompt-card">
+        <div class="prompt-header"><span class="prompt-number">Prompt #2</span></div>
+        <div class="prompt-content" id="p2">Design a simple AI tool that helps social commerce sellers create product images without photography.</div>
+        <button class="copy-btn" onclick="copyPrompt('p2', this)">Copy Prompt</button>
+      </div>
+
+      <!-- Prompt 3 -->
+      <div class="prompt-card">
+        <div class="prompt-header"><span class="prompt-number">Prompt #3</span></div>
+        <div class="prompt-content" id="p3">Generate 20 lead magnet ideas that would attract WhatsApp sellers and dropshippers to join my WhatsApp list.</div>
+        <button class="copy-btn" onclick="copyPrompt('p3', this)">Copy Prompt</button>
+      </div>
+
+      <!-- Prompt 4 -->
+      <div class="prompt-card">
+        <div class="prompt-header"><span class="prompt-number">Prompt #4</span></div>
+        <div class="prompt-content" id="p4">Suggest free resources that online sellers would message me on WhatsApp to receive.</div>
+        <button class="copy-btn" onclick="copyPrompt('p4', this)">Copy Prompt</button>
+      </div>
+
+      <!-- Prompt 5 -->
+      <div class="prompt-card">
+        <div class="prompt-header"><span class="prompt-number">Prompt #5</span></div>
+        <div class="prompt-content" id="p5">Generate 30 short daily tips for WhatsApp sellers and social commerce sellers.</div>
+        <button class="copy-btn" onclick="copyPrompt('p5', this)">Copy Prompt</button>
+      </div>
+
+      <!-- Prompt 6 -->
+      <div class="prompt-card">
+        <div class="prompt-header"><span class="prompt-number">Prompt #6</span></div>
+        <div class="prompt-content" id="p6">Write practical ecommerce tips that beginner dropshippers should know before choosing a product.</div>
+        <button class="copy-btn" onclick="copyPrompt('p6', this)">Copy Prompt</button>
+      </div>
+
+      <!-- Prompt 7 -->
+      <div class="prompt-card">
+        <div class="prompt-header"><span class="prompt-number">Prompt #7</span></div>
+        <div class="prompt-content" id="p7">Write 10 Click-to-WhatsApp ad ideas promoting a free supplier list for online sellers.</div>
+        <button class="copy-btn" onclick="copyPrompt('p7', this)">Copy Prompt</button>
+      </div>
+
+      <!-- Prompt 8 -->
+      <div class="prompt-card">
+        <div class="prompt-header"><span class="prompt-number">Prompt #8</span></div>
+        <div class="prompt-content" id="p8">Create ad copy for a free AI tool library designed for WhatsApp sellers and dropshippers.</div>
+        <button class="copy-btn" onclick="copyPrompt('p8', this)">Copy Prompt</button>
+      </div>
+
+      <!-- Prompt 9 -->
+      <div class="prompt-card">
+        <div class="prompt-header"><span class="prompt-number">Prompt #9</span></div>
+        <div class="prompt-content" id="p9">What are the biggest problems faced by WhatsApp sellers and social commerce sellers in India?</div>
+        <button class="copy-btn" onclick="copyPrompt('p9', this)">Copy Prompt</button>
+      </div>
+
+      <!-- Prompt 10 -->
+      <div class="prompt-card">
+        <div class="prompt-header"><span class="prompt-number">Prompt #10</span></div>
+        <div class="prompt-content" id="p10">List common mistakes beginner dropshippers make when starting their online business.</div>
+        <button class="copy-btn" onclick="copyPrompt('p10', this)">Copy Prompt</button>
+      </div>
+
+    </div>
+
+    <footer class="footer">
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function copyPrompt(id, btn) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.innerText;
+        btn.innerText = "Copied!";
+        btn.classList.add('copied');
+        
+        setTimeout(() => {
+          btn.innerText = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
