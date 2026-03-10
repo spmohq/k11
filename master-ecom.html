@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Master Prompt - Seller Growth Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #0f172a;
+      --bg-gradient-end: #020617;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --accent-primary: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --accent-success: #22c55e;
+      --code-bg: rgba(0, 0, 0, 0.4);
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 60px 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      background: linear-gradient(to right, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    .prompt-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .prompt-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      transition: transform 0.2s ease;
+    }
+
+    .prompt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .prompt-name {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .prompt-content {
+      background: var(--code-bg);
+      padding: 20px;
+      border-radius: 12px;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      white-space: pre-wrap;
+      border: 1px solid rgba(255,255,255,0.05);
+      margin-bottom: 20px;
+    }
+
+    .copy-btn {
+      background: var(--accent-primary);
+      color: #020617;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      align-self: flex-end;
+    }
+
+    .copy-btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .copy-btn.copied {
+      background: var(--accent-success);
+      color: white;
+    }
+
+    .footer {
+      margin-top: 80px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--card-border);
+      padding-top: 30px;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      body { padding: 40px 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Master Prompt for Seller Growth Tools</h1>
+      <p class="subtitle">Sequential prompts to build and grow your ecommerce platform.</p>
+    </header>
+
+    <div class="prompt-grid">
+      
+      <!-- Prompt 1 -->
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <span class="prompt-name">Prompt #1: System Strategy</span>
+        </div>
+        <div class="prompt-content" id="p1">Act as an ecommerce growth strategist and AI product designer.
+
+Your role is to help build a platform called Seller Growth Tools.
+
+The platform provides AI tools, supplier resources, and growth strategies for social commerce sellers, WhatsApp sellers, dropshippers, online retailers, and online suppliers in India.
+
+Many of these users are beginner or intermediate sellers who want to:
+
+• find reliable suppliers
+• discover profitable products
+• create product images
+• generate ad copy
+• grow their online sales
+
+They often sell through WhatsApp, Instagram, Facebook, or ecommerce marketplaces.
+
+When generating ideas, always focus on:
+
+• practical tools
+• lead magnets
+• growth strategies
+• WhatsApp-based funnels
+• community building
+
+Provide ideas that are simple, scalable, and useful for online sellers.</div>
+        <button class="copy-btn" onclick="copyPrompt('p1', this)">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+          <span>Copy Prompt</span>
+        </button>
+      </div>
+
+      <!-- Prompt 2 -->
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <span class="prompt-name">Prompt #2: AI Tools Suggestions</span>
+        </div>
+        <div class="prompt-content" id="p2">Now suggest 10 AI tools that would help social commerce sellers grow their business.</div>
+        <button class="copy-btn" onclick="copyPrompt('p2', this)">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+          <span>Copy Prompt</span>
+        </button>
+      </div>
+
+      <!-- Prompt 3 -->
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <span class="prompt-name">Prompt #3: Lead Magnets</span>
+        </div>
+        <div class="prompt-content" id="p3">Now Generate lead magnets for my audience.</div>
+        <button class="copy-btn" onclick="copyPrompt('p3', this)">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+          <span>Copy Prompt</span>
+        </button>
+      </div>
+
+      <!-- Prompt 4 -->
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <span class="prompt-name">Prompt #4: WhatsApp Daily Tips</span>
+        </div>
+        <div class="prompt-content" id="p4">Now Create daily tips for WhatsApp sellers.</div>
+        <button class="copy-btn" onclick="copyPrompt('p4', this)">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+          <span>Copy Prompt</span>
+        </button>
+      </div>
+
+      <!-- Prompt 5 -->
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <span class="prompt-name">Prompt #5: Library Expansion</span>
+        </div>
+        <div class="prompt-content" id="p5">Now Design new tools for my Seller Growth Tools library.</div>
+        <button class="copy-btn" onclick="copyPrompt('p5', this)">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+          <span>Copy Prompt</span>
+        </button>
+      </div>
+
+      <!-- Prompt 6 -->
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <span class="prompt-name">Prompt #6: Ad Strategy</span>
+        </div>
+        <div class="prompt-content" id="p6">Now Suggest Click-to-WhatsApp ad ideas.</div>
+        <button class="copy-btn" onclick="copyPrompt('p6', this)">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+          <span>Copy Prompt</span>
+        </button>
+      </div>
+
+    </div>
+
+    <footer class="footer">
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function copyPrompt(id, btn) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = `
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg>
+          <span>Copied!</span>
+        `;
+        btn.classList.add('copied');
+        
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
