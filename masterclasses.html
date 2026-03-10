@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Masterclasses Machine!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #0f172a;
+      --bg-gradient-end: #020617;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --accent-primary: #f59e0b; /* Amber/Gold for Masterclass feel */
+      --accent-hover: #fbbf24;
+      --input-bg: #0f172a;
+      --code-bg: #000000;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--accent-primary);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      backdrop-filter: blur(10px);
+      margin-bottom: 30px;
+    }
+
+    .input-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    label {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    input, select {
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      color: white;
+      padding: 12px 15px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .output-section {
+      margin-top: 20px;
+    }
+
+    .output-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    #promptOutput {
+      background: var(--code-bg);
+      padding: 25px;
+      border-radius: 15px;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem;
+      color: #e2e8f0;
+      white-space: pre-wrap;
+      border: 1px solid rgba(255,255,255,0.05);
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    .copy-btn {
+      background: var(--accent-primary);
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s, background 0.3s;
+    }
+
+    .copy-btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .copy-btn.success {
+      background: #10b981;
+      color: white;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .input-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>AI Masterclasses Machine!</h1>
+      <p class="subtitle">Design high-impact, sellable digital masterclasses in seconds.</p>
+    </header>
+
+    <div class="card">
+      <div class="input-grid">
+        <div class="input-group">
+          <label>1. Masterclass Topic / Niche:</label>
+          <input type="text" id="topic" placeholder="e.g. WhatsApp Marketing" value="WhatsApp Marketing">
+        </div>
+        <div class="input-group">
+          <label>2. Target Audience:</label>
+          <input type="text" id="audience" placeholder="e.g. Small business owners in India" value="Small business owners in India">
+        </div>
+        <div class="input-group full-width">
+          <label>3. Main Transformation / Promise:</label>
+          <input type="text" id="outcome" placeholder="e.g. Setting up an automated sales funnel that generates 10 leads daily" value="Setting up an automated sales funnel that generates 10 leads daily">
+        </div>
+        <div class="input-group">
+          <label>4. Skill Level:</label>
+          <select id="level">
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label>5. Delivery Style:</label>
+          <select id="style">
+            <option value="Practical">Practical</option>
+            <option value="Calm">Calm</option>
+            <option value="Motivational">Motivational</option>
+            <option value="Authority">Authority</option>
+          </select>
+        </div>
+        <div class="input-group full-width">
+          <label>6. Language:</label>
+          <input type="text" id="language" placeholder="e.g. English, Hinglish, Hindi" value="English">
+        </div>
+      </div>
+    </div>
+
+    <div class="output-section">
+      <div class="output-label">
+        <label>Generated Final Prompt:</label>
+        <button class="copy-btn" id="copyBtn">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+          <span id="copyText">Copy Masterclass Prompt</span>
+        </button>
+      </div>
+      <div id="promptOutput"></div>
+    </div>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const inputs = ['topic', 'audience', 'outcome', 'level', 'style', 'language'];
+    const outputArea = document.getElementById('promptOutput');
+    const copyBtn = document.getElementById('copyBtn');
+    const copyText = document.getElementById('copyText');
+
+    function updatePrompt() {
+      const vals = {};
+      inputs.forEach(id => {
+        vals[id] = document.getElementById(id).value || `{${id.toUpperCase()}}`;
+      });
+
+      const fullPrompt = `You are an expert digital educator, instructional designer, and conversion-focused content strategist.
+
+Your job is to generate high-impact, sellable masterclasses that are:
+
+· Short and focused (designed to be delivered in 45–90 minutes total)
+· Clear, structured, and easy to follow
+· Practical and outcome-driven
+· Suitable to be sold as standalone digital products
+· Designed for modern audiences who dislike long, bloated courses
+
+These masterclasses must feel valuable, premium, and actionable, not academic or theoretical.
+
+INPUTS
+
+· MASTERCLASS TOPIC / NICHE: ${vals.topic}
+· TARGET AUDIENCE: ${vals.audience}
+· MAIN TRANSFORMATION / PROMISE: ${vals.outcome}
+· SKILL LEVEL (Beginner / Intermediate / Advanced): ${vals.level}
+· DELIVERY STYLE (Calm / Motivational / Practical / Authority): ${vals.style}
+· LANGUAGE: ${vals.language}
+
+GLOBAL RULES
+
+· Always write in the LANGUAGE specified above.
+· Assume that I may not want to show my face (voiceover-friendly).
+· Maintain conversational tone aligned with the DELIVERY STYLE.
+· Ensure each module’s script length supports a total masterclass duration of 45–90 minutes
+· Avoid fluff, filler, or unnecessary theory.
+· Do NOT reference other courses, books, or copyrighted materials.
+· Do NOT explain what you are doing. Output only the structured masterclass content.
+
+The masterclass should feel like something people would happily pay for, even if short.
+
+MASTERCLASS GENERATION WORKFLOW
+
+Step 1 – Generate Full Masterclass Overview:
+
+· Output the full structure as explained below.
+· Automatically number each module for clarity and organization.
+· The overview includes estimated timing per module (~5–15 minutes each) and total masterclass length (~45–90 minutes).
+
+This stage should not include the full detailed scripts yet — only the structure and main teaching points.
+
+Step 2 – Module-by-Module Script Creation
+
+After presenting the overview, automatically ask: “Would you like me to start writing Module 1 in full?”
+
+When I agree, generate the complete spoken-style instructor script for that module, written as if I (the instructor) am delivering it aloud.
+
+Each module should last about 5–15 minutes when spoken (~600–1,800 words), detailed with examples, transitions, and natural flow.
+
+After finishing each module, ask: “Would you like me to proceed with Module 2?” — and repeat until all modules are generated. 
+
+MASTERCLASS OUTPUT STRUCTURE
+
+Generate the full masterclass using the structure below.
+
+1) Masterclass Title
+
+Create:
+
+· 3 variables of the main compelling title
+· 3 variables of the optional subtitle that highlight the outcome or transformation
+
+The title must:
+
+· Be benefit-driven
+· Reflect one single outcome, which consists of the main transformation/promise
+· Sound sellable
+· Avoid vague wording
+
+2) Masterclass Promise & Positioning (Short Intro)
+
+Write a concise introduction that:
+
+· Clearly states what the masterclass will help the viewer achieve
+· Sets expectations for what will (and will not) be covered
+· Positions the masterclass as focused, efficient, and practical
+
+Keep this section short and sharp.
+
+3) Masterclass Structure Overview
+
+Provide a clear breakdown of the masterclass into modules or lessons.
+
+Guidelines:
+
+· 5 to 7 modules total
+· Each module is designed to be 5–15 minutes
+· Logical progression from problem → insight → action
+
+For each module, include:
+
+· Module title
+· 1–2 sentences explaining what the learner will gain
+
+4) Detailed Module Content
+
+For EACH module, provide:
+
+· Core Teaching Points: 3–5 key ideas, concepts, or steps.
+· Practical Examples or Applications: Realistic use cases or scenarios. Focus on how the learner applies the concept immediately.
+· Common Mistakes or Misconceptions: 1–2 mistakes people often make related to this module. Explain briefly how to avoid them.
+
+5) Integration & Action Section
+
+Create a dedicated section that helps the learner put everything together. Include:
+
+· A simple action plan
+· Suggested next steps
+· How to apply the masterclass in real life or business
+
+This section should reinforce confidence and clarity.
+
+FINAL INSTRUCTION
+
+Generate the entire masterclass following the structure above.
+
+Ensure:
+
+· Logical flow
+· Consistent tone
+· Strong focus on transformation and real results
+
+This must feel like a ready-to-sell masterclass, not an outline or draft.`;
+
+      outputArea.innerText = fullPrompt;
+    }
+
+    // Attach listeners
+    inputs.forEach(id => {
+      document.getElementById(id).addEventListener('input', updatePrompt);
+    });
+
+    // Copy function
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(outputArea.innerText).then(() => {
+        copyText.innerText = "Copied to Clipboard!";
+        copyBtn.classList.add('success');
+        setTimeout(() => {
+          copyText.innerText = "Copy Masterclass Prompt";
+          copyBtn.classList.remove('success');
+        }, 2000);
+      });
+    });
+
+    // Initial load
+    updatePrompt();
+  </script>
+
+</body>
+</html>
