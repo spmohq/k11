@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Article Insight Development Genie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #020617;
+      --bg-gradient-end: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.4);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #10b981;
+      --input-bg: #1e293b;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: fixed linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 60px 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      background: linear-gradient(to bottom right, #fff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: var(--accent-primary);
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .input-card, .output-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      margin-bottom: 30px;
+    }
+
+    .input-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    textarea {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 15px;
+      color: white;
+      font-family: inherit;
+      font-size: 0.95rem;
+      resize: vertical;
+      min-height: 120px;
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    textarea:focus {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.1);
+    }
+
+    .prompt-label {
+        font-size: 1.2rem;
+        color: white;
+        margin-bottom: 20px;
+        font-weight: 700;
+        border-bottom: 1px solid var(--card-border);
+        padding-bottom: 10px;
+    }
+
+    .prompt-content {
+      background: var(--code-bg);
+      padding: 25px;
+      border-radius: 12px;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      white-space: pre-wrap;
+      border: 1px solid rgba(255,255,255,0.05);
+      margin-bottom: 20px;
+      line-height: 1.5;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    .copy-btn {
+      background: rgba(34, 211, 238, 0.1);
+      color: var(--accent-primary);
+      border: 1px solid var(--accent-primary);
+      padding: 12px 28px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: var(--accent-primary);
+      color: #020617;
+    }
+
+    .copy-btn.copied {
+      background: var(--accent-success);
+      border-color: var(--accent-success);
+      color: white;
+    }
+
+    .footer {
+      margin-top: 60px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--card-border);
+      padding-top: 30px;
+    }
+
+    @media (max-width: 850px) {
+        .input-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Article Development Genie</h1>
+      <p class="subtitle">Insight-to-Article & Contrarian Frameworks</p>
+    </header>
+
+    <main>
+      <!-- Inputs Section -->
+      <div class="input-card">
+        <div class="input-grid">
+            <div>
+                <label for="realisation">Your Realisation</label>
+                <textarea id="realisation" placeholder="e.g., Authentic storytelling is more effective than high-production value for small brands."></textarea>
+            </div>
+            <div>
+                <label for="commonBelief">Common Belief</label>
+                <textarea id="commonBelief" placeholder="e.g., You need a professional studio and expensive equipment to build brand authority."></textarea>
+            </div>
+        </div>
+      </div>
+
+      <!-- Prompt 1 Output -->
+      <div class="output-card">
+        <div class="prompt-label">Prompt #1: Insight-to-Article Development</div>
+        <div class="prompt-content" id="p1Display"></div>
+        <button class="copy-btn" onclick="copyText('p1Display', this)">
+          <span>Copy Full Prompt #1</span>
+        </button>
+      </div>
+
+      <!-- Prompt 2 Output -->
+      <div class="output-card">
+        <div class="prompt-label">Prompt #2: Contrarian Insight Development</div>
+        <div class="prompt-content" id="p2Display"></div>
+        <button class="copy-btn" onclick="copyText('p2Display', this)">
+          <span>Copy Full Prompt #2</span>
+        </button>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const realInput = document.getElementById('realisation');
+    const beliefInput = document.getElementById('commonBelief');
+    const p1Display = document.getElementById('p1Display');
+    const p2Display = document.getElementById('p2Display');
+
+    const updatePrompts = () => {
+      const real = realInput.value.trim() || "[Insert your realisation here]";
+      const belief = beliefInput.value.trim() || "[Insert the common belief here]";
+
+      // Template 1
+      const p1Template = `My realisation, which will serve as the central thesis of my article, is this:
+
+${real}
+
+Develop this realisation into a strong article foundation by completing the following steps:
+
+1, Clarify the thesis
+Rewrite the realisation as a clear, sharp thesis statement that expresses the core insight in one or two sentences.
+
+2, Identify the problem
+Explain the core problem, misconception, or blind spot people commonly have regarding this topic.
+
+3, Explain why the problem persists
+Describe the psychological habits, social narratives, incentives, or systems that keep people trapped in this misunderstanding.
+
+4, Introduce the deeper insight
+Show how this realisation reframes the issue and reveals a more accurate way to understand it.
+
+5, Provide a concrete example
+Give one clear real-world example that illustrates how this insight works in practice.
+
+6, Develop the argument
+Explain logically why this insight is valid and why ignoring it leads to confusion, failure, or poor outcomes.
+
+7, Show the implications
+Describe what people would think differently, do differently, or stop doing if they understood this realisation.
+
+8, Suggest article directions
+Provide 3–5 potential article angles or headlines that could be developed from this thesis.
+
+9, Prepare article-ready material
+Write the explanation in clear, structured paragraphs that can easily be expanded into a full article.`;
+
+      // Template 2
+      const p2Template = `Purpose
+This prompt helps transform a simple realization into a strong article foundation by challenging a common belief and replacing it with a deeper insight.
+
+Instructions
+Insert your idea in the placeholders and let the AI develop the thinking structure needed for a compelling article.
+
+Prompt
+
+Most people believe the following about a topic:
+
+${belief}
+
+However, my realisation, which will serve as the thesis of my article, is this:
+
+${real}
+
+Develop this idea into a strong article foundation by completing the following steps:
+
+1. Explain the common belief
+   Describe what most people believe about this topic and why that belief appears reasonable or convincing.
+
+2. Identify the hidden flaw
+   Explain what this common belief overlooks, misunderstands, or fails to consider.
+
+3. Present the contrarian realisation
+   Introduce the deeper insight that challenges the common belief.
+
+4. Explain why the misconception persists
+   Describe the habits, incentives, cultural narratives, social pressures, or psychological biases that keep people believing this flawed idea.
+
+5. Provide a concrete real-world example
+   Show how the common belief fails in practice and how the new insight explains the situation more accurately.
+
+6. Explain the practical implications
+   Describe what people would think differently, do differently, or stop doing if they understood this realisation.
+
+7. Suggest possible article angles
+   Provide 3 to 5 compelling article titles or angles that could be developed from this thesis.
+
+8. Prepare article-ready material
+   Write the explanation in clear, structured paragraphs that can easily be expanded into a full article.
+
+Output Expectation
+The response should produce deep reasoning, clear explanations, and structured paragraphs that can serve as the foundation for an opinion article, feature article, essay, or thought leadership piece.
+
+Optional Extension
+If possible, also identify one powerful takeaway sentence that could serve as the central message or memorable line of the article.`;
+
+      p1Display.innerText = p1Template;
+      p2Display.innerText = p2Template;
+    };
+
+    const copyText = (elementId, btn) => {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = `<span>Copied!</span>`;
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    };
+
+    realInput.addEventListener('input', updatePrompts);
+    beliefInput.addEventListener('input', updatePrompts);
+
+    // Initialize
+    updatePrompts();
+  </script>
+</body>
+</html>
