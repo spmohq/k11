@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Insight to Article Genie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #020617;
+      --bg-gradient-end: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.4);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #10b981;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: fixed linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 60px 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      background: linear-gradient(to bottom right, #fff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: var(--accent-primary);
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .prompt-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 35px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .prompt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .prompt-label {
+      font-weight: 800;
+      font-size: 0.85rem;
+      background: var(--accent-primary);
+      color: #020617;
+      padding: 6px 16px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .prompt-content {
+      background: var(--code-bg);
+      padding: 25px;
+      border-radius: 12px;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      white-space: pre-wrap;
+      border: 1px solid rgba(255,255,255,0.05);
+      margin-bottom: 25px;
+      max-height: 700px;
+      overflow-y: auto;
+    }
+
+    .prompt-content::-webkit-scrollbar { width: 8px; }
+    .prompt-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+
+    .copy-btn {
+      background: rgba(34, 211, 238, 0.1);
+      color: var(--accent-primary);
+      border: 1px solid var(--accent-primary);
+      padding: 12px 28px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: var(--accent-primary);
+      color: #020617;
+    }
+
+    .copy-btn.copied {
+      background: var(--accent-success);
+      border-color: var(--accent-success);
+      color: white;
+    }
+
+    .footer {
+      margin-top: 80px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--card-border);
+      padding-top: 40px;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2.2rem; }
+      .prompt-card { padding: 25px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Insight to Article Genie</h1>
+      <p class="subtitle">Medium Article Construction Dashboard</p>
+    </header>
+
+    <main>
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <span class="prompt-label">Psychological Copywriting Prompt</span>
+        </div>
+        
+        <div class="prompt-content" id="pContent">You are an expert Medium writer, behavioral psychologist, and conversion copywriter.
+
+Your task is to transform the uploaded content into a highly engaging Medium article that educates the reader and naturally leads them toward a clear call to action.
+
+The article must feel like it was written by a thoughtful human writer — not AI.
+
+Use clear language, natural flow, and avoid robotic phrasing.
+
+Write with authority but maintain a conversational tone.
+
+The article should feel insightful, practical, and intellectually satisfying.
+
+---
+
+INPUT CONTENT
+
+Please carefully read and understand the uploaded text.
+The text contains a detailed explanation of an insight, realization, or contrarian idea that the article will be built around.
+
+Do not simply summarize the text.
+
+Instead:
+
+• extract the core insight
+• identify the underlying problem
+• translate the idea into a clear framework
+• guide the reader from confusion to clarity
+
+---
+
+ARTICLE STRUCTURE
+
+Follow the structure below exactly.
+
+Do not show the structure labels in the final article.
+
+Write the article as a natural narrative.
+
+---
+
+1. The Problem (≈300 words)
+
+Goal: Make the reader feel deeply understood.
+
+Use this psychological sequence:
+
+• Start with a familiar situation
+• Show the repeating struggle
+• Reveal the hidden frustration readers rarely admit
+• Explain the cost of the problem
+• End by hinting that common advice is flawed
+
+This hint should create curiosity for the next section.
+
+---
+
+2. Why Most Advice Fails (≈250–350 words)
+
+Goal: Create a belief shift.
+
+Sequence:
+
+• Present the common advice people follow
+• Explain why it sounds convincing
+• Acknowledge its partial truth
+• Reveal the missing mechanism
+• Contrast old thinking with better thinking
+• Transition toward a new perspective
+
+The reader should now feel ready for a better approach.
+
+---
+
+3. The Big Idea / Framework (≈300–400 words)
+
+Goal: Introduce a memorable insight.
+
+The framework section should contain:
+
+• the core insight
+• a powerful reframe of the problem
+• a named framework or mental model
+• a simple conceptual model
+• an explanation of why it works
+• a bridge leading into practical steps
+
+Do not explicitly label these components.
+
+---
+
+4. The Steps
+
+Turn the framework into a practical process.
+
+Provide 3–5 steps.
+
+Each step must include:
+
+Step Title
+(short, action-oriented)
+
+Step Purpose
+(why this step matters)
+
+Step Explanation
+(how to perform the step)
+
+Example or Illustration
+(show how it works)
+
+Micro Result
+(the benefit after completing the step)
+
+---
+
+5. Quick Action Plan (≈100–200 words)
+
+Help the reader start immediately.
+
+Include:
+
+• a reset of expectations
+• a simplified starting point
+• a short checklist
+• the immediate benefit of taking action
+• a transition toward deeper help
+
+---
+
+6. The Next Step (Conversion Section)
+
+Lead the reader toward deeper help.
+
+Structure:
+
+• acknowledge the progress the reader made
+• explain the benefit of deeper support
+• introduce a resource, product, tool, or guide
+• explain how it helps implement the framework
+• give a clear call to action
+
+The CTA should feel helpful, not pushy.
+
+---
+
+WRITING STYLE GUIDELINES
+
+Follow these rules carefully:
+
+• Write for intelligent readers, but keep sentences clear.
+• Avoid corporate jargon and generic AI phrases.
+• Use short paragraphs (2–4 sentences).
+• Use natural rhythm and pacing.
+• Occasionally ask reflective questions to engage the reader.
+• Emphasize insight, clarity, and usefulness.
+
+---
+
+HEADLINE GENERATION
+
+After writing the article, generate the best headline.
+
+Use one of the following proven Medium headline formulas:
+
+1. Problem–Solution
+2. Mistake
+3. Contrarian
+4. Framework
+5. Insight
+6. “Nobody Tells You”
+7. Step-Based
+
+Choose the headline format that best matches the article's core insight.
+
+The headline must:
+
+• spark curiosity
+• promise useful insight
+• hint at a practical outcome
+• feel natural for Medium readers
+
+Avoid clickbait language.
+
+---
+
+OUTPUT FORMAT
+
+1. Headline
+2. Full Medium Article
+3. Optional subheadline</div>
+
+        <button class="copy-btn" onclick="copyPrompt('pContent', this)">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+          <span>Copy Full Prompt</span>
+        </button>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function copyPrompt(id, btn) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = `<span>Copied!</span>`;
+        btn.classList.add('copied');
+        
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
