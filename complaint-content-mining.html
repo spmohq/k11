@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Content Mining System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .sub-header {
+            font-weight: bold;
+            color: #555;
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            border-left: 5px solid #007bff;
+        }
+
+        .input-group {
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ced4da;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .prompt-box {
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            padding: 25px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 15px;
+            margin-bottom: 20px;
+            color: #212529;
+            position: relative;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .copy-prompt-btn {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .copy-prompt-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .copy-code-btn {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .copy-code-btn:hover {
+            background-color: #5a6268;
+        }
+
+        .success-msg {
+            display: none;
+            text-align: center;
+            color: #28a745;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Complaint Content Mining System (High-Intent Audience Research)</h1>
+    
+    <div class="sub-header">
+        MASTER INPUT LINE:<br>
+        Markets: [Insert 10 markets] | Audience: [Who exactly] | Location: [Country/Region] | Language: [Language] | Product Type: [Digital/Physical/Service] | Platform Priority: [e.g., Reddit, X, All] | Pain Focus: [e.g., buying frustration, beginner confusion] | Time Frame: [Recent/Evergreen] | Intent Level: [High / Mixed] | Output Depth: [Basic / Detailed]
+    </div>
+
+    <div class="input-group">
+        <label for="masterInput">Update Prompt Inputs:</label>
+        <input type="text" id="masterInput" oninput="updatePrompt()" placeholder="Paste your inputs here..." value="Markets: Affiliate marketing, weight loss, skincare, personal finance, online learning, fitness, dating, career growth, parenting, mental health | Audience: Beginners | Location: India | Language: English + Bengali | Product Type: Digital products | Platform Priority: Reddit + Quora | Pain Focus: Beginner confusion + not getting results | Time Frame: Recent | Intent Level: High | Output Depth: Detailed">
+    </div>
+
+    <div class="prompt-box" id="promptContent">ROLE:
+Act as a market research expert, social listening analyst, and customer psychology specialist.
+
+OBJECTIVE:
+Identify real, high-intent pain points directly from user-generated complaint posts across social media platforms.
+
+GOAL:
+Find complaint-driven conversations where users are actively expressing frustration, problems, or stuck points related to buying decisions or using products or services.
+
+TARGET PLATFORMS:
+X (formerly Twitter)
+Facebook
+Instagram
+Reddit
+Quora
+
+TASK:
+For each of the 10 high-potential general markets provided below, generate highly effective search strategies to discover real complaint posts.
+
+OUTPUT STRUCTURE (STRICTLY FOLLOW THIS):
+
+For each market:
+
+1. Market Name:
+
+2. Top 10 Search Keywords or Phrases:
+   Focus on natural language complaints, frustration signals, and problem-aware queries.
+
+3. Platform-Specific Search Variations:
+   X:
+   Facebook:
+   Instagram:
+   Reddit:
+   Quora:
+
+4. Common Complaint Angles to Look For:
+   Examples include pricing frustration, confusion, lack of results, time waste, overwhelm, and trust issues.
+
+5. Buyer Intent Signals:
+   Include phrases that indicate urgency, willingness to pay, or desire for a solution.
+
+KEYWORD GUIDELINES:
+
+* Include emotional triggers such as frustrated with, not working, waste of money
+* Include problem-aware phrases such as how to fix, why does this happen
+* Include comparison dissatisfaction such as tried this but did not work
+* Include beginner confusion such as do not understand, too complicated
+
+IMPORTANT RULES:
+
+* Focus only on real user language, not generic keywords
+* Prioritize high-intent, problem-aware conversations
+* Avoid vague or broad terms
+* Make keywords immediately usable in platform search bars
+
+INPUTS:
+<span id="dynamicInputs">Markets: Affiliate marketing, weight loss, skincare, personal finance, online learning, fitness, dating, career growth, parenting, mental health | Audience: Beginners | Location: India | Language: English + Bengali | Product Type: Digital products | Platform Priority: Reddit + Quora | Pain Focus: Beginner confusion + not getting results | Time Frame: Recent | Intent Level: High | Output Depth: Detailed</span></div>
+
+    <div class="btn-container">
+        <button class="btn copy-prompt-btn" onclick="copyPrompt()">Copy Prompt</button>
+        <button class="btn copy-code-btn" onclick="copyCode()">Copy Code</button>
+    </div>
+    <div id="statusMsg" class="success-msg">Copied!</div>
+</div>
+
+<script>
+    function updatePrompt() {
+        const inputVal = document.getElementById('masterInput').value;
+        document.getElementById('dynamicInputs').innerText = inputVal;
+    }
+
+    function copyPrompt() {
+        const text = document.getElementById('promptContent').innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            showStatus('Prompt copied to clipboard!');
+        });
+    }
+
+    function copyCode() {
+        const htmlCode = document.documentElement.outerHTML;
+        navigator.clipboard.writeText(htmlCode).then(() => {
+            showStatus('HTML code copied to clipboard!');
+        });
+    }
+
+    function showStatus(msg) {
+        const status = document.getElementById('statusMsg');
+        status.innerText = msg;
+        status.style.display = 'block';
+        setTimeout(() => {
+            status.style.display = 'none';
+        }, 2000);
+    }
+</script>
+
+</body>
+</html>
