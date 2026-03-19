@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Digital Asset Creation</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { max-width: 1000px; width: 100%; margin: 0 auto; flex-grow: 1; }
+    header { text-align: center; margin-bottom: 30px; }
+    h1 { font-size: 2.5rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; text-transform: uppercase; }
+    
+    /* Utility Buttons */
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+    .util-btn {
+      padding: 12px 20px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--bg-gradient-end);
+      background-color: var(--accent-primary);
+      text-decoration: none;
+      border-radius: 8px;
+      text-align: center;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-transform: uppercase;
+    }
+    .util-btn:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
+
+    /* Instruction Box */
+    .instruction-box {
+      background: rgba(34, 211, 238, 0.05);
+      border-left: 4px solid var(--accent-primary);
+      padding: 25px;
+      margin-bottom: 50px;
+      border-radius: 0 12px 12px 0;
+    }
+    .instruction-box h3 { font-size: 1.1rem; color: var(--accent-primary); margin-bottom: 10px; text-transform: uppercase; }
+    .instruction-box ol { padding-left: 20px; color: var(--text-secondary); font-size: 0.95rem; }
+    .instruction-box li { margin-bottom: 8px; }
+    .instruction-box a { color: var(--accent-primary); text-decoration: none; font-weight: 600; }
+    .instruction-box a:hover { text-decoration: underline; }
+
+    /* Prompt Cards */
+    .prompts-container { display: flex; flex-direction: column; gap: 40px; }
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 30px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      display: flex;
+      flex-direction: column;
+    }
+    .prompt-card h2 { font-size: 1rem; font-weight: 600; color: var(--accent-primary); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 20px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+      border: 1px solid var(--card-border);
+      line-height: 1.5;
+    }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 10px 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--bg-gradient-end);
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      text-transform: uppercase;
+    }
+    .copy-button.copied { background-color: var(--accent-success); }
+    
+    .icon { width: 16px; height: 16px; }
+
+    footer { text-align: center; padding: 60px 0 20px; color: var(--text-secondary); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Digital Asset Creation</h1>
+    </header>
+
+    <nav class="button-grid">
+      <a href="https://spmohq.github.io/k11/reddit-search.html" target="_blank" class="util-btn">Reddit Search</a>
+      <a href="https://spmohq.github.io/k11/niche-genie.html" target="_blank" class="util-btn">Niche Genie</a>
+      <a href="https://spmohq.github.io/k11/dac-steps.html" target="_blank" class="util-btn">Optimized Niche Genie</a>
+      <a href="https://spmohq.github.io/pbiz/digital-asset-creator.html" target="_blank" class="util-btn">Digital Asset Creator</a>
+    </nav>
+
+    <aside class="instruction-box">
+      <h3>Workflow Guide</h3>
+      <ol>
+        <li>Create Search Strings using <a href="https://spmohq.github.io/k11/reddit-search.html" target="_blank">Reddit Search</a></li>
+        <li>Search, find, and select a complaint post via Google.</li>
+        <li>Copy the post along with its title.</li>
+        <li>Identify the "Niche" using <a href="https://spmohq.github.io/k11/niche-genie.html" target="_blank">Niche Genie</a></li>
+        <li>Refine the "Niche" using <a href="https://spmohq.github.io/k11/dac-steps.html" target="_blank">Steps to Digital Asset Creation</a></li>
+        <li>Build the "System" using <a href="https://spmohq.github.io/pbiz/digital-asset-creator.html" target="_blank">Digital Asset Creator</a></li>
+      </ol>
+    </aside>
+
+    <main class="prompts-container">
+      
+      <div class="prompt-card">
+        <h2>Prompt #1: Conversion Strategy</h2>
+        <pre id="p1" class="prompt-text">Which one would be best to make someone buy this instead of just Googling?</pre>
+        <button class="copy-button" onclick="copyText('p1', this)">Copy Prompt</button>
+      </div>
+
+      <div class="prompt-card">
+        <h2>Prompt #2: Format for Sale</h2>
+        <pre id="p2" class="prompt-text">Reformat the above into a sellable ‘Quick Fix’ PDF format.</pre>
+        <button class="copy-button" onclick="copyText('p2', this)">Copy Prompt</button>
+      </div>
+
+      <div class="prompt-card">
+        <h2>Prompt #3: Sellability Audit</h2>
+        <pre id="p3" class="prompt-text">Review and rate the above ‘Quick Fix’ for its sellability.</pre>
+        <button class="copy-button" onclick="copyText('p3', this)">Copy Prompt</button>
+      </div>
+
+      <div class="prompt-card">
+        <h2>Prompt #4: Quality Upgrade</h2>
+        <pre id="p4" class="prompt-text">Instantly Upgrade This to a 9.5/10
+
+Adding</pre>
+        <button class="copy-button" onclick="copyText('p4', this)">Copy Prompt</button>
+      </div>
+
+      <div class="prompt-card">
+        <h2>Prompt #5: Professional PDF Redesign</h2>
+        <pre id="p5" class="prompt-text">Act as a world-class editorial director with authority in premium publishing standards, a senior document engineer specializing in PDF layout systems and typographic hierarchy, and an elite conversion-focused content designer who transforms raw material into polished, reader-centric assets, and take the content of the "Quick Fix" you provided in your last reply — and professionally redesign it into a clean, publication-ready PDF document that reflects the standards of top-tier paid digital products, ensuring the content is not merely reformatted but thoughtfully restructured with clear narrative flow, refined hierarchy, and intentional visual rhythm; think deeply about clarity, readability, and perceived value before producing the output, applying advanced judgment to organize sections, enhance coherence, eliminate redundancy, and elevate phrasing while strictly preserving the original meaning and intent, and use sophisticated yet minimal formatting cues such as strategic headings, spacing, emphasis, and logical segmentation to create a document that feels premium, modern, and effortless to consume on both mobile and desktop screens; maintain a confident, authoritative tone that is professional but not mechanical, avoiding generic filler language, overused templates, or obvious AI patterns, and ensure every line contributes meaningful value, precision, or clarity; enforce high standards of typographic balance, section flow, and cognitive load management so the final result feels intentionally designed rather than automatically generated, and approach the task as if the output will be sold as a high-ticket PDF product where presentation quality directly impacts perceived worth, ensuring the final document is immediately usable, visually elegant, and indistinguishable from the work of a seasoned human expert.</pre>
+        <button class="copy-button" onclick="copyText('p5', this)">Copy Prompt</button>
+      </div>
+
+      <div class="prompt-card">
+        <h2>Prompt #6: Graphy.com Product Description</h2>
+        <pre id="p6" class="prompt-text">Please create a product description for this "Quick Fix" within 1000 characters, tailored to graphy.com digital product, using following the format:
+
+1, HOOK: Bold, 8 words or less
+
+2, Opening paragraph: Identify the pain point or promise the solution quickly.
+
+3, Next paragraph: Explain how it addresses the issue in a practical, approachable way.
+
+4, Inside, you’ll learn/get how to:
+• [Benefit 1: Clear, outcome-focused benefit]
+• [Benefit 2: Another outcome]
+• [Benefit 3: Continue for 4–7 bullets total]
+
+5, Optional paragraph: Quick credibility note about the author.
+
+6, CTA: Strong closing line, bold, same size as hook. 
+Example: Take back your focus—scroll up and click Buy Now today!
+
+Special instruction:
+
+If possible, include 3-5 relevant keywords in your book description!</pre>
+        <button class="copy-button" onclick="copyText('p6', this)">Copy Prompt</button>
+      </div>
+
+      <div class="prompt-card">
+        <h2>Prompt #7: Content Realignment</h2>
+        <pre id="p7" class="prompt-text">Please rewrite this paragraph (from my other product) to align with this exact ‘Quick Fix’:
+
+Warning: Before you purchase, understand that you are buying my workflow, not a guarantee to success. 
+
+With that said, my channel is legit, monetized and earning. If this ever changes, I will stop selling the Protocol. 
+
+Get the exact Internal Documents, Sources and Templates I use to run my channel.
+
+Purchase if you want a workflow, not motivation.
+
+Get the Quick Fix. 👇</pre>
+        <button class="copy-button" onclick="copyText('p7', this)">Copy Prompt</button>
+      </div>
+
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function copyText(id, btn) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    }
+  </script>
+
+</body>
+</html>
