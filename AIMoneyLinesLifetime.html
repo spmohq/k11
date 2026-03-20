@@ -1,0 +1,840 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ai Money Lines</title>
+	<style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #022543;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #F5F7FA;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Title */
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #FFFFFF;
+        }
+
+        /* Form */
+        label {
+            color: #022543; 
+            font-size: 16px; 
+            font-weight: bold; 
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        select:focus, input:focus {
+            border-color: #D83234;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #022543;
+            color: #FFFFFF;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #67C817;
+        }
+
+        /* Output Section */
+        .output-section {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .output-section h3 {
+            margin-bottom: 10px;
+            color: #000000;
+        }
+
+        .output-section p, .output-section ul {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .output-section ul {
+            padding-left: 20px;
+            list-style-type: disc;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* Logo */
+        .logo {
+            width: 350px;
+            height: auto;
+            display: block;
+            margin: 0 auto 20px;
+        }
+		.copy-btn {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #022543; /* Black background */
+    color: #FFFFFF; /* white text */
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.copy-btn:hover {
+    background-color: #67C817; /* Dark gray on hover */
+}
+
+.output-section {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background-color: #ffffff; /* White background */
+    color: #000000; /* Black text */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.output-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.output-section pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background: #f4f4f4; /* Light gray background */
+    padding: 10px;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    color: #333333;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://actionactivated.com/wp-content/uploads/printer-Edited.png" alt="Content Generator Logo" class="logo">
+        <label for="style">Select a Technique:</label>
+		<select id="style" size="10">
+		<option value="all_in_one_transparency">All-in-One AI Money Lines Prompt</option>
+<option value="empathy_based_targeting">Empathy Based Targeting</option>
+<option value="early_stage_honesty">Early-Stage Honesty</option>
+<option value="anti_perfectionism">Anti-Perfectionism</option>
+<option value="delayed_gratification">Delayed Gratification</option>
+<option value="non_codependent_offer">Non-Codependent Offer</option>
+<option value="tool_over_transformation">Tool Over Transformation</option>
+<option value="anti_hype_positioning">Anti-Hype Positioning</option>
+<option value="realistic_scope">Realistic Scope</option>
+<option value="work_in_progress">Work-in-Progress</option>
+<option value="quiet_results">Quiet Results</option>
+<option value="earned_insight">Earned Insight</option>
+<option value="overlooked_basics">Overlooked Basics</option>
+<option value="earned_skepticism">Earned Skepticism</option>
+<option value="shared_struggle">Shared Struggle</option>
+<option value="micro_mission">Micro Mission</option>
+<option value="values_over_virality">Values Over Virality</option>
+<option value="honest_imperfection">Honest Imperfection</option>
+<option value="understated_results">Understated Results</option>
+<option value="scar_tissue_authority">Scar Tissue Authority</option>
+<option value="against_the_grain">Against the Grain</option>
+<option value="bite_sized_benefits">Bite-Sized Benefits</option>
+<option value="quiet_conviction">Quiet Conviction</option>
+<option value="humble_origin_story">Humble Origin Story</option>
+<option value="test_run_energy">Test Run Energy</option>
+<option value="no_expert_badge">No Expert Badge</option>
+<option value="built_for_myself">Built for Myself</option>
+<option value="permission_to_disagree">Permission to Disagree</option>
+<option value="quiet_conviction">Quiet Conviction</option>
+<option value="selective_truth">Selective Truth</option>
+<option value="non_expert_energy">Non-Expert Energy</option>
+<option value="progressive_learning">Progressive Learning</option>
+<option value="anti_guru_energy">Anti-Guru Energy</option>
+<option value="fail_forward_momentum">Fail-Forward Momentum</option>
+<option value="long_game_logic">Long Game Logic</option>
+<option value="quiet_rebuild_energy">Quiet Rebuild Energy</option>
+<option value="calm_before_confidence">Calm Before Confidence</option>
+<option value="decent_but_useful">Decent But Useful</option>
+<option value="bridge_to_better">Bridge to Better</option>
+<option value="simple_but_smart">Simple But Smart</option>
+<option value="clarity_over_certainty">Clarity Over Certainty</option>
+<option value="relatable_underdog">Relatable Underdog</option>
+
+
+        </select>
+        <label for="keyword">Enter Enter Your Niche, Keyword or Pain Point:</label>
+        <input type="text" id="keyword" placeholder="e.g., Forex Trading">
+        <button onclick="generateContent()">GENERATE</button>
+		<div id="output" class="output-section"></div>
+
+<!-- SECONDARY PROMPT TOOL -->
+<hr style="margin: 40px 0;">
+<h2 style="text-align:center; color:#022543;">Refine Any Money Line Into Deeper Content</h2>
+
+<textarea id="userStatement" rows="4" placeholder="Paste in your money line here..." style="width:100%; padding:10px; font-size:16px; border-radius:5px; border:1px solid #ccc;"></textarea>
+<button onclick="generateSecondaryPrompts()">GENERATE CONTENT FOR THIS MONEY LINE</button>
+
+<div id="secondaryOutput" class="output-section"></div>
+
+    </div>
+    <footer>
+    <a href="https://www.facebook.com/groups/markhesscustomergroup/" target="_blank" style="text-decoration: none; color: #fff; background-color: #4267B2; padding: 10px 20px; border-radius: 5px; font-weight: bold; display: inline-block; margin-bottom: 10px;">Join My Facebook Group</a>
+    <div>&copy; Ai Money Lines - All Rights Reserved - Created by Mark Hess</div>
+</footer>
+
+    <script>
+        const CONTENT_STYLES = {
+	all_in_one_transparency: {
+    name: "All-in-One Transparency Generator",
+    summary: "Create a powerful mix of 20 emotionally resonant transparency statements using a blend of 40+ trust-building techniques to lower resistance, disarm skepticism, and build credibility in [keyword].",
+    examples: [
+        "I’m not an expert—I just figured out what finally worked after trying everything else in [keyword].",
+        "You won’t get a shiny breakthrough here—just quiet momentum that actually sticks.",
+        "This wasn’t built to go viral. It was built to feel like someone finally told you the truth about [keyword]."
+    ],
+    long_prompt: "Act as a psychologically strategic copywriter who specializes in lowering resistance and building trust with skeptical, cautious, or burned-out audiences. Generate 20 emotionally resonant transparency statements related to [keyword]. Use a wide variety of credibility-building techniques such as: vulnerability, ethical disclaimers, quiet confidence, early-stage honesty, calm authority, anti-hype positioning, selective truth, realistic expectations, shared struggle, humble origin stories, and progress-over-perfection framing. Each statement should sound like something a real person would say—natural, grounded, and disarming. Avoid cliches, fluff, and overly polished marketing language. Make the tone feel human, warm, and emotionally intelligent. No 'selling.' Just quiet, strategic truth that builds connection and lowers defenses. Vary the tone and technique between each line. Output only the 20 statements."
+},
+	empathy_based_targeting: {
+    name: "Empathy-Based Targeting",
+    summary: "Speak directly to the feelings, frustrations, and identity of people currently struggling with [keyword], making them feel seen and understood without judgment.",
+    examples: [
+        "I used to be the exact kind of person this is meant for—overthinking and overwhelmed by [keyword].",
+        "If you’ve ever felt like you're falling behind while trying to figure out [keyword], you're not alone.",
+        "This was built for people who are tired of pretending they’ve got [keyword] all figured out."
+    ],
+    long_prompt: "Write 20 emotionally resonant, trust-building transparency statements using empathy-based targeting. Each sentence should speak directly to the reader’s emotions and identity as someone struggling with [keyword]. Make them feel seen, understood, and safe without sounding pitiful or preachy. Avoid generalizations—use specific feelings and real talk language."
+},
+early_stage_honesty: {
+    name: "Early-Stage Honesty",
+    summary: "Admit that you’re still early in your journey with [keyword], turning your in-progress status into a trust asset instead of a weakness.",
+    examples: [
+        "I’m still piecing this together—but what I’ve figured out so far has already helped more than I expected.",
+        "This is what’s working right now in the early days. I’ll keep sharing as I learn more.",
+        "No big milestones yet—just small proof that it’s moving in the right direction."
+    ],
+    long_prompt: "Write 20 transparency statements using early-stage honesty to build trust in the [keyword] space. Each sentence should admit you’re still figuring things out or early in the process, while still offering value and sincerity. Avoid apologizing—focus on sharing helpful observations from the beginning stage of your journey."
+},
+anti_perfectionism: {
+    name: "Anti-Perfectionism",
+    summary: "Use your imperfections, rough edges, or 'work-in-progress' state as proof of authenticity, not a liability, in the context of [keyword].",
+    examples: [
+        "This isn’t polished. It’s just real, raw, and finally useful.",
+        "There might be typos—because I care more about helping you than looking perfect.",
+        "If you're expecting slick and flawless, this probably isn’t for you."
+    ],
+    long_prompt: "Write 20 trust-building transparency statements using anti-perfectionism as the theme for [keyword]. Each sentence should acknowledge imperfections, rough drafts, or flaws as part of the value—not something to hide. Keep the tone grounded and confident, not defensive."
+},
+delayed_gratification: {
+    name: "Delayed Gratification",
+    summary: "Set realistic expectations by reminding the audience that results with [keyword] come gradually, not instantly, while still making the journey feel worthwhile.",
+    examples: [
+        "This won’t blow your mind on Day 1—but it might shift everything by Day 7.",
+        "You probably won’t notice anything earth-shattering at first—and that’s the point.",
+        "It’s a slow burn, but the payoff sneaks up on you in the best way."
+    ],
+    long_prompt: "Write 20 transparency statements about delayed gratification in [keyword]. Each sentence should help skeptical or impatient readers reframe slow progress as valuable, worthwhile, or inevitable. Avoid hype—lean into realism and long-term thinking."
+},
+non_codependent_offer: {
+    name: "Non-Codependent Offer",
+    summary: "Make it clear that the offer in [keyword] is meant to empower, not create dependence, and that people are free to outgrow it.",
+    examples: [
+        "You’ll probably outgrow this—and when you do, I’ll be cheering you on.",
+        "This is meant to be a stepping stone, not a forever solution.",
+        "Use this until you don’t need it anymore. That’s the goal."
+    ],
+    long_prompt: "Write 20 emotionally intelligent transparency statements using a non-codependent frame. Each statement should show that the goal of [keyword] is empowerment and independence—not building dependence on the creator or tool. Make the reader feel free, not trapped or sold to."
+},
+tool_over_transformation: {
+    name: "Tool Over Transformation",
+    summary: "Present the offer in [keyword] as a helpful tool—not a life-changing transformation—lowering resistance by avoiding grand promises.",
+    examples: [
+        "This isn’t going to transform your life—but it might make your next step easier.",
+        "I’m not selling a dream. Just a tool that works when you actually use it.",
+        "This is more wrench than wand—but it gets the job done."
+    ],
+    long_prompt: "Write 20 transparency statements that position the [keyword] offer as a useful tool—not a magical transformation. Avoid overpromising. Focus on helping readers see the utility without needing to believe it will 'change everything.' Keep the tone practical, grounded, and confidence-building."
+},
+anti_hype_positioning: {
+    name: "Anti-Hype Positioning",
+    summary: "Acknowledge and reject the exaggerated claims often found in [keyword], using understatement and realism to stand out and earn trust.",
+    examples: [
+        "This won’t 10x your business by Tuesday—but it might actually help.",
+        "No big promises here—just something that works if you give it a shot.",
+        "If you’re tired of overhyped nonsense in [keyword], this might feel like a breath of fresh air."
+    ],
+    long_prompt: "Write 20 trust-building transparency statements using anti-hype positioning for [keyword]. Each line should contrast typical exaggerated claims with realistic, grounded alternatives. Use understatement and sincerity to disarm skepticism without sounding boring or weak."
+},
+realistic_scope: {
+    name: "Realistic Scope",
+    summary: "Clarify what your [keyword] offer can and can’t do, so people feel safe knowing exactly what to expect without false hope.",
+    examples: [
+        "This doesn’t solve everything. It solves one thing really well.",
+        "You’ll still have to do the work—but this might make it suck less.",
+        "This won’t give you all the answers—just the ones I wish I had sooner."
+    ],
+    long_prompt: "Write 20 emotionally intelligent transparency statements using realistic scope framing. Each sentence should set clear, grounded expectations for what the [keyword] offer can do—while still making it feel worth trying. Avoid apologizing. Embrace honesty."
+},
+work_in_progress: {
+    name: "Work-in-Progress",
+    summary: "Use honest admission of imperfection or incompleteness to build relatability and make the offer feel more authentic in [keyword].",
+    examples: [
+        "This isn’t the final version. But it works right now.",
+        "It’s messy. But it’s mine. And it might help you too.",
+        "Still tweaking some parts—but the core of it is solid and already helping."
+    ],
+    long_prompt: "Write 20 transparency statements using the 'work-in-progress' theme for [keyword]. Each line should highlight the value of sharing something before it’s perfect, and invite people to benefit from it anyway. The tone should be real, confident, and humble."
+},
+quiet_results: {
+    name: "Quiet Results",
+    summary: "Highlight the subtle, behind-the-scenes wins that come from using your [keyword] offer—rather than loud, flashy metrics.",
+    examples: [
+        "No viral success stories—just calmer mornings and more control over [keyword].",
+        "It hasn’t made headlines, but it’s made my life easier in ways I didn’t expect.",
+        "Quiet wins are still wins. And this helped me collect more of them."
+    ],
+    long_prompt: "Write 20 transparency statements using quiet results as a theme in [keyword]. Avoid flashy outcomes or hype. Instead, emphasize subtle improvements, quality-of-life gains, or emotional shifts that build believable credibility and connection."
+},
+earned_insight: {
+    name: "Earned Insight",
+    summary: "Present your lessons, methods, or solutions in [keyword] as hard-won from experience—not theory—making them feel more credible and battle-tested.",
+    examples: [
+        "This isn’t something I read in a book—it’s what finally worked after everything else didn’t.",
+        "I didn’t invent this. I just learned it the hard way and want to spare you the same mess.",
+        "This wasn’t theory. It was trial, error, and a lot of frustration turned into something useful."
+    ],
+    long_prompt: "Write 20 trust-building transparency statements using the earned insight theme in [keyword]. Each line should show that your knowledge comes from lived experience and mistakes—not theory or recycled advice. Keep the tone practical, honest, and personal."
+},
+overlooked_basics: {
+    name: "Overlooked Basics",
+    summary: "Confess how long you ignored the fundamentals in [keyword] and how returning to them made all the difference—an honest approach that earns respect and creates 'aha' moments.",
+    examples: [
+        "I spent months chasing hacks before realizing the basics of [keyword] were the real shortcut.",
+        "What finally worked wasn’t fancy—it was the thing I kept skipping because it seemed too simple.",
+        "I used to think I was 'above' the basics. Turns out, I was just avoiding them."
+    ],
+    long_prompt: "Write 20 emotionally resonant transparency statements using the 'overlooked basics' theme for [keyword]. Each sentence should admit how long you ignored the fundamentals and how revisiting them led to breakthrough moments. Focus on humility, clarity, and transformation through simplicity."
+},
+earned_skepticism: {
+    name: "Earned Skepticism",
+    summary: "Speak from the perspective of someone who’s been burned or disappointed by other [keyword] promises—so your readers know you’re not blindly optimistic.",
+    examples: [
+        "I used to fall for every shiny claim in [keyword]—now I question everything. That’s how this was born.",
+        "If you’ve been burned by bad advice before, I get it. That’s exactly why I made this.",
+        "I built this with my guard up—because I’m tired of false promises in [keyword] too."
+    ],
+    long_prompt: "Write 20 trust-building transparency statements using earned skepticism in [keyword]. Each line should reflect past disappointment or hype fatigue, positioning your offer as the grounded alternative. Speak from experience and caution—not bitterness."
+},
+shared_struggle: {
+    name: "Shared Struggle",
+    summary: "Frame your offer in [keyword] as coming from someone who deeply understands the reader’s pain—not because you studied it, but because you lived it.",
+    examples: [
+        "This came from the same frustration you might be feeling right now—I built what I needed.",
+        "I’ve felt stuck, overwhelmed, and unsure where to start in [keyword] too. That’s where this came from.",
+        "I didn’t create this because I mastered [keyword]. I created it because I struggled with it."
+    ],
+    long_prompt: "Write 20 transparency statements using the shared struggle approach in [keyword]. Speak directly to the emotional and practical challenges your audience faces, and show that your offer was born from walking through those same challenges. The tone should be empathetic, grounded, and peer-to-peer."
+},
+micro_mission: {
+    name: "Micro Mission",
+    summary: "Let people know your goal isn’t global domination—it’s simply to help one person get unstuck or feel understood in [keyword], which makes your offer feel sincere and non-threatening.",
+    examples: [
+        "If this helps just one person feel less stuck in [keyword], I’ll consider it a win.",
+        "I didn’t make this to go viral. I made it because someone like me needed it.",
+        "My goal isn’t scale—it’s sincerity. If it resonates with one person, it was worth it."
+    ],
+    long_prompt: "Write 20 emotionally resonant transparency statements using the micro mission theme for [keyword]. Each line should reflect small, sincere goals that prioritize impact over scale. Use calm, humble language to make the offer feel personal and human."
+},
+values_over_virality: {
+    name: "Values Over Virality",
+    summary: "Express that your [keyword] offer wasn’t created to be trendy or go viral, but because it aligns with your values—this positions you as grounded and principled.",
+    examples: [
+        "This wasn’t built for clicks. It was built because it felt right.",
+        "It might not trend—but it aligns with what I actually believe about [keyword].",
+        "This doesn’t follow the hype cycle. It follows my gut."
+    ],
+    long_prompt: "Write 20 trust-building transparency statements using values over virality as the theme in [keyword]. Each statement should position your offer as rooted in principle or purpose, not performance. The tone should be quiet confidence—subtle but powerful."
+},
+honest_imperfection: {
+    name: "Honest Imperfection",
+    summary: "Showcase the flaws, quirks, or rough edges in your [keyword] offer—not as weaknesses, but as proof that it’s human, real, and usable anyway.",
+    examples: [
+        "It’s not flawless—but it works well enough to matter.",
+        "Some parts are still clunky. I’d rather ship it messy than keep it hidden forever.",
+        "It’s imperfect on purpose—because progress matters more than polish."
+    ],
+    long_prompt: "Write 20 transparency statements using honest imperfection for [keyword]. Each line should highlight how flaws or rough edges don’t cancel value—they enhance it. Keep the tone confident, human, and disarmingly honest."
+},
+understated_results: {
+    name: "Understated Results",
+    summary: "Avoid hype by focusing on subtle but meaningful changes that came from using your [keyword] method—quiet proof that still moves the needle.",
+    examples: [
+        "No fireworks—just fewer headaches and more clarity with [keyword].",
+        "The results weren’t dramatic, but they were enough to keep going.",
+        "It didn’t fix everything—but it made [keyword] feel manageable again."
+    ],
+    long_prompt: "Write 20 trust-building transparency statements using understated results in [keyword]. Focus on believable, grounded outcomes that avoid sensationalism while still communicating progress and hope."
+},
+scar_tissue_authority: {
+    name: "Scar Tissue Authority",
+    summary: "Build credibility by showing that your knowledge of [keyword] came through personal struggle—not theory—making your lessons earned, not assumed.",
+    examples: [
+        "I’ve made every mistake I’m warning you about here.",
+        "This isn’t recycled advice—I had to learn it the hard way.",
+        "If it sounds like I know what I’m talking about in [keyword], it’s because I’ve bled for it."
+    ],
+    long_prompt: "Write 20 emotionally resonant transparency statements using scar tissue authority in [keyword]. Each sentence should show that your perspective was formed through failure, pain, or grit—not abstract knowledge. Use language that signals resilience and authenticity, not victimhood."
+},
+against_the_grain: {
+    name: "Against the Grain",
+    summary: "Openly reject mainstream advice or industry norms in [keyword] with calm confidence, positioning your offer as a thoughtful, deliberate alternative.",
+    examples: [
+        "Most people in [keyword] are still chasing tactics I stopped believing in years ago.",
+        "I know this goes against what you’ve probably heard—but it works better because of it.",
+        "This isn’t the popular take. But it’s the one that finally got me results."
+    ],
+    long_prompt: "Write 20 trust-building transparency statements using the against the grain theme for [keyword]. Each line should position your approach as a calm, intelligent rebellion against what’s commonly taught. Avoid arrogance—focus on thoughtful contrarianism backed by personal proof."
+},
+bite_sized_benefits: {
+    name: "Bite-Sized Benefits",
+    summary: "Highlight the small wins or micro-improvements that come from your [keyword] offer, making it feel immediately useful and less intimidating.",
+    examples: [
+        "It didn’t change everything—but it made my mornings easier.",
+        "This helped me stop overthinking just one piece of [keyword]—and that was enough to move forward.",
+        "You might only use 10% of it right away—but even that 10% is a win."
+    ],
+    long_prompt: "Write 20 emotionally resonant transparency statements using the bite-sized benefits theme for [keyword]. Focus on small, specific improvements that show early momentum or quick wins without overselling. Make the reader feel that even minimal use is worthwhile."
+},
+quiet_conviction: {
+    name: "Quiet Conviction",
+    summary: "Share what you believe about [keyword] without shouting, overselling, or trying to prove anything—just calmly standing in your truth.",
+    examples: [
+        "I don’t need everyone to agree with this—it’s simply what I’ve seen work.",
+        "This isn’t loud or flashy. It’s just what I’ve come to believe after doing the work.",
+        "I’m not trying to win anyone over. I just know this helped, and maybe it helps you too."
+    ],
+    long_prompt: "Write 20 trust-building transparency statements using quiet conviction for [keyword]. Each line should express calm, confident belief in your approach or offer—without hype, ego, or need for validation. Let the strength come from stillness, not volume."
+},
+humble_origin_story: {
+    name: "Humble Origin Story",
+    summary: "Tell the understated backstory of how your [keyword] offer came to be—not as a rags-to-riches tale, but a grounded, relatable spark of creation.",
+    examples: [
+        "I didn’t build this in a lab. I built it because I couldn’t find what I needed.",
+        "This started as a few sticky notes on my fridge. Now it’s something that helps people.",
+        "I made this for myself first—because nothing else in [keyword] felt right."
+    ],
+    long_prompt: "Write 20 transparency statements using the humble origin story frame for [keyword]. Focus on the small, relatable beginnings of your offer. Avoid drama—make it feel personal, unpolished, and grounded in a real moment of need."
+},
+test_run_energy: {
+    name: "Test Run Energy",
+    summary: "Frame your [keyword] offer as something you’re still testing or refining, inviting people in early while making it clear it’s evolving with real-world use.",
+    examples: [
+        "This is still a bit experimental—but early signs are promising.",
+        "I’m treating this like a test run. You get access while it’s still raw and real.",
+        "This is version 0.9—not perfect, but already helping."
+    ],
+    long_prompt: "Write 20 transparency statements using test run energy for [keyword]. Each line should frame your offer as an evolving project with useful, imperfect value. Emphasize that early adopters get in while it’s real—not overproduced."
+},
+no_expert_badge: {
+    name: "No Expert Badge",
+    summary: "Openly reject the pressure to be an 'expert' in [keyword] by showing that real value comes from honest experimentation, not inflated credentials.",
+    examples: [
+        "I’m not an expert. Just someone who’s been obsessed with figuring this out.",
+        "No fancy titles here—just hard-earned lessons from messing up a lot.",
+        "I don’t claim authority. I claim persistence and a lot of trial and error."
+    ],
+    long_prompt: "Write 20 transparency statements using the no expert badge theme in [keyword]. Each line should reject traditional credentials and instead highlight curiosity, experimentation, and personal discovery as the foundation of your value. Keep it humble, not insecure."
+},
+built_for_myself: {
+    name: "Built for Myself",
+    summary: "Frame your [keyword] offer as something you created to solve your own problem first—removing the 'salesy' feel by anchoring it in personal utility.",
+    examples: [
+        "This wasn’t built for profit. It was built to fix something that frustrated me.",
+        "I made this to solve my own headache in [keyword]. Turns out, it works for others too.",
+        "Before I shared this, I used it myself every day. That’s where the confidence comes from."
+    ],
+    long_prompt: "Write 20 trust-building transparency statements using the built for myself frame in [keyword]. Each line should make it clear that your offer came from solving your own problem—not chasing a trend. Make it feel honest, personal, and quietly powerful."
+},
+progressive_learning: {
+    name: "Progressive Learning",
+    summary: "Share that the knowledge in your [keyword] offer is part of your ongoing learning journey—not a final answer—inviting others to learn alongside you.",
+    examples: [
+        "This is what I’ve learned *so far*. I’ll keep updating as I go.",
+        "I’m still learning—this is just what’s clicked for me up to now.",
+        "Not the whole picture—just the clearest part I’ve figured out so far."
+    ],
+    long_prompt: "Write 20 transparency statements using the progressive learning theme for [keyword]. Each sentence should show that the offer is part of an evolving journey—not a final authority. Position yourself as a fellow learner who’s slightly ahead, not an expert looking down."
+},
+non_expert_energy: {
+    name: "Non-Expert Energy",
+    summary: "Disarm with confidence by openly saying you’re not a certified expert in [keyword], just someone with real, hard-earned insight people find useful.",
+    examples: [
+        "I’m not a guru—I’m just someone who finally figured out how to make this work.",
+        "No credentials, no titles—just something that helped and might help you too.",
+        "I didn’t go to school for this. I just lived it until it stopped being confusing."
+    ],
+    long_prompt: "Write 20 emotionally resonant transparency statements using the non-expert energy approach in [keyword]. Each sentence should reject the 'expert' label while still offering strong value rooted in real-life experience. The tone should be calm, confident, and grounded."
+},
+selective_truth: {
+    name: "Selective Truth",
+    summary: "Openly admit the specific parts of your [keyword] offer that aren’t for everyone—what it doesn’t include, who it’s not right for, or what it won’t do.",
+    examples: [
+        "This won’t help you if you’re looking for shortcuts—it’s for people ready to put in some effort.",
+        "If you need hand-holding every step of the way, this probably isn’t your thing.",
+        "I didn’t make this for experts. I made it for people just trying to get unstuck."
+    ],
+    long_prompt: "Write 20 transparency statements using the selective truth method for [keyword]. Each line should clarify who the offer is *not* for, what it doesn’t do, or where it might fall short—framed honestly but without apology."
+},
+quiet_conviction: {
+    name: "Quiet Conviction",
+    summary: "Use calm, grounded statements that show confidence in your [keyword] offer without shouting, hyping, or overselling—it’s strong because it doesn’t need to be loud.",
+    examples: [
+        "This isn’t loud or flashy—but I stand by it fully.",
+        "I don’t need to convince you. I’ve seen it work enough times to know.",
+        "It doesn’t shout. But it holds up."
+    ],
+    long_prompt: "Write 20 emotionally grounded transparency statements using the quiet conviction approach in [keyword]. Each sentence should convey confidence without noise—use subtle language that reflects strength without hype, force, or persuasion."
+},
+permission_to_disagree: {
+    name: "Permission to Disagree",
+    summary: "Lower resistance by openly allowing the audience to disagree, question, or walk away—signaling confidence and emotional safety in your [keyword] offer.",
+    examples: [
+        "You don’t have to agree with everything here—just take what helps.",
+        "If this doesn’t feel like the right fit, I totally respect that.",
+        "I’m not here to convince you—just to offer what worked for me in [keyword]."
+    ],
+    long_prompt: "Write 20 trust-building transparency statements using the permission to disagree approach in [keyword]. Each sentence should invite the reader to engage critically, walk away if needed, or adapt the insights to their own path. This signals safety, confidence, and respect."
+},
+anti_guru_energy: {
+    name: "Anti-Guru Energy",
+    summary: "Position your [keyword] offer as the opposite of guru culture—accessible, down-to-earth, and not built on ego or authority signals.",
+    examples: [
+        "This isn’t a 'look at me' play. It’s a 'here’s what worked' share.",
+        "I’m not sitting on a mountain handing out wisdom. I’m in the mud with you.",
+        "You won’t find power poses or fake scarcity here. Just something that actually helped."
+    ],
+    long_prompt: "Write 20 transparency statements using the anti-guru energy theme for [keyword]. Each sentence should distance the offer from self-appointed experts or flashy authority figures, using humility, accessibility, and grounded truth as the appeal."
+},
+fail_forward_momentum: {
+    name: "Fail-Forward Momentum",
+    summary: "Highlight your past failures in [keyword] as essential stepping stones—positioning the offer as a result of learning through pain, not perfection.",
+    examples: [
+        "Every piece of this was born out of something I got wrong first.",
+        "If it seems clear now, it’s because I fumbled through a dozen failed versions.",
+        "This exists because I failed—then paid attention."
+    ],
+    long_prompt: "Write 20 transparency statements using the fail-forward momentum frame for [keyword]. Each line should embrace failure as the foundation for what was created, showing that the offer is built from lessons, not just wins."
+},
+long_game_logic: {
+    name: "Long Game Logic",
+    summary: "Frame your [keyword] approach as one that rewards consistency over time—reassuring people who are tired of quick-fix promises.",
+    examples: [
+        "This isn’t about a breakthrough in a weekend—it’s about traction that sticks.",
+        "You don’t need speed. You need something that still works 6 months from now.",
+        "Shortcuts burned me. This is built for the long game."
+    ],
+    long_prompt: "Write 20 transparency statements using long game logic in [keyword]. Each sentence should promote long-term thinking, stability, and sustainable wins over rapid results or hype. Use calm, clear language that feels responsible and mature."
+},
+quiet_rebuild_energy: {
+    name: "Quiet Rebuild Energy",
+    summary: "Speak to those who are starting over in [keyword]—with calm encouragement and subtle strength that honors rebuilding without shame.",
+    examples: [
+        "If you’re quietly starting over—I made this for you.",
+        "This is for the rebuild. The quiet comeback. The do-over no one sees yet.",
+        "You don’t have to announce your restart. Just begin here."
+    ],
+    long_prompt: "Write 20 emotionally grounded transparency statements using quiet rebuild energy in [keyword]. Speak directly to people restarting after burnout, failure, or quitting. Help them feel safe, seen, and steady without dramatizing the journey."
+},
+calm_before_confidence: {
+    name: "Calm Before Confidence",
+    summary: "Reassure your audience that uncertainty is allowed—that confidence in [keyword] builds through doing, not before starting.",
+    examples: [
+        "I wasn’t confident when I started this. I became confident by continuing.",
+        "You don’t need full belief right now—just a little curiosity and motion.",
+        "Confidence came later. The first step was quiet, shaky, and enough."
+    ],
+    long_prompt: "Write 20 transparency statements using calm before confidence for [keyword]. Normalize the fear or doubt people feel before starting, and show how confidence is a product of action—not a prerequisite. Use soft, empowering language."
+},
+decent_but_useful: {
+    name: "Decent But Useful",
+    summary: "Frame your [keyword] offer as something that’s not amazing—but still worth using because it actually helps in a real, functional way.",
+    examples: [
+        "It’s not life-changing. It’s just useful. And sometimes that’s enough.",
+        "I won’t call it brilliant—but it made a frustrating part of [keyword] easier.",
+        "You won’t rave about it. But you might quietly keep using it every week."
+    ],
+    long_prompt: "Write 20 transparency statements using the 'decent but useful' angle for [keyword]. Each sentence should reject hype and emphasize that the offer is simple, functional, and gets the job done—even if it’s not flashy or elite."
+},
+bridge_to_better: {
+    name: "Bridge to Better",
+    summary: "Present your [keyword] offer as a helpful bridge—something to get people from stuck to moving again, even if it’s not the final destination.",
+    examples: [
+        "This isn’t the final answer. But it’s what helped me move forward when I was frozen.",
+        "Sometimes you just need something to get you unstuck—this is that.",
+        "It’s not the summit—it’s the first foothold that made climbing possible again."
+    ],
+    long_prompt: "Write 20 transparency statements using the bridge to better theme for [keyword]. Each sentence should frame the offer as a transition tool—useful not because it’s perfect, but because it helps people get out of a rut and back into motion."
+},
+simple_but_smart: {
+    name: "Simple But Smart",
+    summary: "Disarm complexity bias by showing that your [keyword] offer is simple—by design—and that simplicity is its strength, not a shortcoming.",
+    examples: [
+        "It’s simple on purpose—because complexity is where most people get stuck.",
+        "This isn’t complicated. That’s exactly why it works.",
+        "I stopped overthinking [keyword] when I started using this."
+    ],
+    long_prompt: "Write 20 transparency statements using the simple but smart theme for [keyword]. Each line should highlight simplicity as a power move—something that saves time, reduces overwhelm, and delivers real results without extra steps."
+},
+clarity_over_certainty: {
+    name: "Clarity Over Certainty",
+    summary: "Acknowledge that your [keyword] offer doesn’t give all the answers, but it brings clarity to the fog—enough to make meaningful next moves.",
+    examples: [
+        "This won’t give you every answer. But it might give you the right question to ask.",
+        "You don’t need certainty. You just need a little clarity to move again.",
+        "This helped me stop spinning and start seeing where I actually was in [keyword]."
+    ],
+    long_prompt: "Write 20 transparency statements using the clarity over certainty theme for [keyword]. Each sentence should help readers feel okay about not having everything figured out, while positioning your offer as a compass—something to make the fog less heavy."
+},
+relatable_underdog: {
+    name: "Relatable Underdog",
+    summary: "Position yourself as someone who *shouldn’t* have figured out [keyword]—but did anyway. This invites identification and trust from everyday readers.",
+    examples: [
+        "I wasn’t supposed to figure this out. But I did—and now I’m handing you the shortcut.",
+        "I didn’t have a head start in [keyword]—just a reason not to quit.",
+        "If someone like me can make this work, so can you."
+    ],
+    long_prompt: "Write 20 transparency statements using the relatable underdog frame for [keyword]. Each sentence should tap into identification and inspire hope, positioning your journey as proof that success is possible even without perfect conditions."
+},
+        };
+
+    const STATIC_PROMPTS = {
+    
+};
+function generateContent() {
+    const style = document.getElementById("style").value; // Selected style
+    const keyword = document.getElementById("keyword").value.trim(); // User input keyword
+    const outputContainer = document.getElementById("output"); // Output container
+
+    if (!keyword) {
+        alert("Please enter a keyword!");
+        return;
+    }
+
+    // Clear previous output
+    outputContainer.innerHTML = "";
+
+    if (style === "randomize") {
+        // Randomize and display 10 techniques
+        const randomStyles = Object.keys(CONTENT_STYLES)
+            .sort(() => Math.random() - 0.5) // Shuffle
+            .slice(0, 10); // Take first 10
+
+        randomStyles.forEach(key => {
+            const randomStyle = CONTENT_STYLES[key];
+            const promptText = randomStyle.long_prompt.replace(/\[keyword\]/g, keyword);
+
+            outputContainer.innerHTML += `
+                <div class="output-section">
+                    <h3>${randomStyle.name}</h3>
+                    <p>${randomStyle.summary.replace(/\[keyword\]/g, keyword)}</p>
+                    <pre>${promptText}</pre>
+                    <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+                </div>
+            `;
+        });
+    } else {
+        // Display a single selected style
+        const selectedStyle = CONTENT_STYLES[style];
+        const promptText = selectedStyle.long_prompt.replace(/\[keyword\]/g, keyword);
+
+        outputContainer.innerHTML = `
+            <div class="output-section">
+                <h3>${selectedStyle.name}</h3>
+                <p>${selectedStyle.summary.replace(/\[keyword\]/g, keyword)}</p>
+                <h4>Examples</h4>
+                <ul>${selectedStyle.examples.map(ex => `<li>${ex.replace(/\[keyword\]/g, keyword)}</li>`).join("")}</ul>
+                <pre>${promptText}</pre>
+                <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+            </div>
+        `;
+    }
+	
+
+
+    // Add static prompts
+    outputContainer.innerHTML += `
+        ${Object.entries(STATIC_PROMPTS).map(([label, prompt]) => `
+            <div class="output-section">
+                <strong>${label.replace(/Prompt$/, '').replace(/([A-Z])/g, ' $1')}:</strong>
+                <pre>${prompt.replace(/\[keyword\]/g, keyword)}</pre>
+                <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+            </div>
+        `).join("")}
+    `;
+}
+
+// Copy to Clipboard Function
+function copyPrompt(button) {
+    const preElement = button.previousElementSibling; // Get the <pre> element
+    const textToCopy = preElement.innerText;
+
+    navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+            const originalText = button.innerText; // Save original button text
+            button.innerText = "Copied! Let's Go!"; // Update to "Copied!"
+            button.disabled = true; // Disable button temporarily
+
+            setTimeout(() => {
+                button.innerText = originalText; // Revert button text
+                button.disabled = false; // Enable button
+            }, 2000); // Revert after 2 seconds
+        })
+        .catch(err => console.error("Failed to copy text: ", err));
+}
+
+function generateSecondaryPrompts() {
+    const statement = document.getElementById("userStatement").value.trim();
+    const secondaryOutput = document.getElementById("secondaryOutput");
+
+    if (!statement) {
+        alert("Please paste a transparency statement!");
+        return;
+    }
+
+    secondaryOutput.innerHTML = `
+    <h3>Suggested Prompts Based on Your Line:</h3>
+
+    <div class="output-section">
+        <strong>💬 Turn It Into a Relatable Micro-Story:</strong>
+        <pre>Transform the following transparency statement into a short, emotionally compelling micro-story: "${statement}" Focus on the real-life feeling behind the line—frustration, relief, breakthrough, humility, or growth—and illustrate it through a moment, experience, or turning point. The goal is to create a 3–5 sentence story that makes the reader *feel* the message in a human way.</pre>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+    </div>
+
+    <div class="output-section">
+        <strong>📧 Use It As a Marketing Email:</strong>
+        <pre>You are an expert email copywriter. Write a compelling email using this trust-based transparency statement as the emotional foundation: "${statement}" Build emotional momentum with honesty, vulnerability, or quiet confidence. The goal is to earn trust, provoke curiosity, and gently pull the reader forward—without selling too early.</pre>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+    </div>
+
+    <div class="output-section">
+        <strong>📱 Build a Scroll-Stopping Social Post:</strong>
+        <pre>Use this line as the foundation for a scroll-stopping 4–6 sentence social media post: "${statement}" Expand on the core insight or emotion in a raw, reflective, or human way. Avoid pitches. Make someone pause and say, “Wow, I needed to hear that.”</pre>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+    </div>
+
+    <div class="output-section">
+        <strong>🧠 Turn It Into 10 Scroll-Stopping Headlines:</strong>
+        <pre>Take this line—"${statement}"—and turn it into 10 emotionally compelling, trust-building headline variations. Use a mix of curiosity, contrast, vulnerability, and insight. Make them sound like real human hooks that stop the scroll and feel different from every other offer in the feed.</pre>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+    </div>
+
+    <div class="output-section">
+        <strong>🕵️ Turn It Into 6 Paragraphs of Blind Sales Copy:</strong>
+        <pre>Use this transparency statement—"${statement}"—as the emotional core of a blind sales pitch. Write 6 short paragraphs that build curiosity, hint at a shift or personal breakthrough, and hold attention without ever naming the product or solution. Use emotional pacing and soft psychological tension to keep them leaning in.</pre>
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+    </div>
+	<div class="output-section">
+    <strong>📝 Expand Into a 1000-Word, Human-Grade Blog Post:</strong>
+    <pre>Turn the following transparency statement into a raw, emotionally intelligent 1000-word blog post that reads like it was written by a thoughtful, self-aware human being—not AI: "${statement}"
+
+Begin with a real-feeling reflection, moment of discomfort, or internal tension. Let it meander naturally into the core insight, using a mix of storytelling, subtle contradiction, quiet emotion, and personal tone. Avoid robotic structure or formulaic headings. Use a blend of short and long sentences, broken thoughts, rhetorical questions, and pauses. Inject occasional imperfection, lived experience, or doubt. Let the conclusion emerge organically—don’t wrap it up too cleanly.
+
+Make the post feel lived-in, honest, and imperfect—but with depth and earned clarity. This should pass AI detection tools easily and connect deeply with a real human reader.</pre>
+    <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+</div>
+<div class="output-section">
+    <strong>📰 Generate 10 Emotionally Powerful Blog Post Titles:</strong>
+    <pre>You just wrote a 1000-word blog post based on this transparency statement: "${statement}"
+
+Now generate 10 different blog post titles that reflect the emotional truth, vulnerability, insight, or turning point inside that post. Use a variety of angles—curiosity, contradiction, insight, fear, reflection, quiet confidence, or relief. Avoid clickbait. Each title should feel like a hook written by a real person with depth, not a generic listicle or AI-generated headline.
+
+Make the titles sound like they belong on a personal blog, thought leadership site, or long-form social post—and make people feel like *they need to read this*.</pre>
+    <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+</div>
+<div class="output-section">
+    <strong>🎯 Turn It Into 3 High-Impact Calls-to-Action:</strong>
+    <pre>Using the following transparency statement: "${statement}", create three distinct 3-sentence calls-to-action. Each CTA should:
+
+1. Begin with a compelling hook that addresses a specific pain point or desire.
+2. Highlight the unique value or benefit, incorporating emotional triggers to build trust.
+3. Conclude with a clear, urgent directive that prompts immediate action.
+
+Ensure each CTA is tailored to resonate with different audience segments, varying in tone and focus to maximize engagement and conversions.</pre>
+    <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+</div>
+<div class="output-section">
+    <strong>🖼️ Generate 3 AI Image Prompts Based on Your Money Line:</strong>
+    <pre>Take the following transparency statement: "${statement}" and create 3 distinct, richly detailed image generation prompts. Each prompt should be ultra-specific and emotionally aligned with the message of the statement.
+
+Prompt 1: A metaphorical or symbolic scene that captures the emotional truth behind the statement (e.g., breakthrough, struggle, rebuilding, clarity, vulnerability, etc.).
+
+Prompt 2: A realistic or cinematic visual that could accompany a blog post or social post based on this line. Focus on lighting, setting, mood, and perspective.
+
+Prompt 3: A conceptual or minimalist image that expresses the core idea in a simple but visually striking way—ideal for use in ads, thumbnails, or quote graphics.
+
+Do not include any text in the images. Include suggestions for visual tone, background, characters (if any), emotions, colors, and environment.</pre>
+    <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+</div>
+
+`;
+
+
+}
+
+
+</script>
+</body>
+</html>
