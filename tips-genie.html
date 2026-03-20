@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tips Post Genie</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --input-bg: #111827;
+      --code-bg: rgba(0, 0, 0, 0.4);
+      --shadow-color: rgba(0, 0, 0, 0.3);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 30px; }
+    h1 { font-size: 2.5rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; text-transform: uppercase; }
+    
+    .header-btn-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    .header-btn {
+      padding: 12px 35px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      background-color: var(--accent-primary);
+      color: var(--bg-gradient-end);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+    }
+    .header-btn:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(34, 211, 238, 0.3);
+    }
+
+    /* Input Styling */
+    .input-wrapper {
+      margin-bottom: 15px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+    }
+    .input-wrapper label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--accent-primary);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+    textarea {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 12px;
+      color: white;
+      font-family: inherit;
+      font-size: 0.95rem;
+      min-height: 80px;
+      resize: vertical;
+    }
+    textarea:focus { outline: 2px solid var(--accent-primary); border-color: transparent; }
+
+    /* Prompt Card */
+    .prompt-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 40px;
+      box-shadow: 0 8px 32px var(--shadow-color);
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(12px);
+    }
+    .prompt-card h2 { font-size: 1rem; margin-bottom: 15px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; color: var(--text-heading); text-transform: uppercase; letter-spacing: 1px;}
+    
+    .prompt-text {
+      background: var(--code-bg);
+      padding: 20px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem;
+      border: 1px solid var(--card-border);
+      margin-bottom: 15px;
+      line-height: 1.5;
+      color: #e5e7eb;
+    }
+    .dynamic-val { color: var(--accent-primary); font-weight: 700; background: rgba(34, 211, 238, 0.1); padding: 0 2px; }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 10px 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      background: var(--accent-primary);
+      color: var(--bg-gradient-end);
+      border: none; border-radius: 8px;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+    .copy-button:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .copy-button.copied { background: var(--accent-success); }
+    .icon { width: 16px; height: 16px; }
+
+    footer { text-align: center; margin-top: 50px; color: var(--text-secondary); font-size: 0.85rem; padding-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Tips Post Genie</h1>
+  </header>
+
+  <div class="header-btn-container">
+    <a href="https://spmohq.github.io/pbiz/make-it-human.html" target="_blank" class="header-btn">
+      <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+      Rewrite
+    </a>
+  </div>
+
+  <main>
+    <!-- Prompt 1 Section -->
+    <div class="input-wrapper">
+        <label>Input for Prompt #1: [Niche/Keyword]</label>
+        <textarea id="in-niche" placeholder="e.g. Handmade Saree Reselling"></textarea>
+    </div>
+    <div class="prompt-card">
+      <h2>Prompt #1: Deep Pain Point Extraction</h2>
+      <div id="p1" class="prompt-text">You are a consumer psychology expert and an expert at uncovering deep psychological pain points. Your task is to identify the most intense the pain points people face with <span class="dynamic-val" data-field="niche">[Niche/Keyword]</span>, dive deep into their frustrations, fears, and struggles. What annoys them or feels too complicated? What intimidates them or makes them hesitate before starting? What do they find time-consuming, overwhelming, or draining? Explore what keeps them from feeling confident, prepared, or capable. What do they wish they understood better or had more support for? What discourages them or makes them second-guess their decisions? Consider their internal conflicts—what fears, insecurities, or emotional barriers hold them back? What unresolved doubts or past failures make them feel stuck, and what hidden regrets or anxieties prevent them from moving forward? What do they find unreliable, intimidating, or inconsistent? What do they feel they’ll never be good enough for, and what makes them feel powerless, judged, or inadequate? Look for the moments when they feel lost, confused, or disconnected. What makes them feel they’re constantly failing or falling short? What do they fear losing, neglecting, or sacrificing? Consider the unspoken struggles—what emotional burdens, fears of rejection, or subconscious doubts weigh them down? What do they feel they’ll never fully heal from, overcome, or achieve? Identify the blind spots, frustrations, and deeper emotional wounds that keep them from progressing, so their pain points are laid bare for a comprehensive understanding. Start with a summary and then create a list of 25 without separating them into sections. Beside each one create an internal dialog quote of what that person could be telling themselves. Use the niche/keyword within the internal dialog to make them directly related to the niche/keyword.</div>
+      <button class="copy-button" data-target="p1"><span class="btn-text">Copy Prompt 1</span></button>
+    </div>
+
+    <!-- Prompt 2 Section -->
+    <div class="input-wrapper">
+        <label>Input for Prompt #2: [Pain Point]</label>
+        <textarea id="in-pain" placeholder="Paste the specific pain point from Prompt 1 output here..."></textarea>
+    </div>
+    <div class="input-wrapper">
+        <label>Input for Prompt #2: [Niche Genie Answer]</label>
+        <textarea id="in-genie" placeholder="Paste the Niche Genie context or summary here..."></textarea>
+    </div>
+    <div class="prompt-card">
+      <h2>Prompt #2: Facebook Short Tips Post</h2>
+      <div id="p2" class="prompt-text">Please write a Social Media "Short Tips" Post, tailored to Facebook, based on the following points:
+
+<span class="dynamic-val" data-field="genie">[Niche Genie Answer]</span>
+
+THEIR STRUGGLE IN THEIR OWN WORDS: <span class="dynamic-val" data-field="pain">[Pain Point]</span></div>
+      <button class="copy-button" data-target="p2"><span class="btn-text">Copy Prompt 2</span></button>
+    </div>
+
+    <!-- Prompt 3 -->
+    <div class="prompt-card">
+      <h2>Prompt #3: Cinematic Visual Strategist</h2>
+      <div id="p3" class="prompt-text">Act as a world-class cinematic visual strategist and prompt engineer trained in dopamine design, identity signaling, psychological priming, and click-magnet image theory. Based on the completed Social Media "Short Tips" Post that was just generated in the previous step, analyze its full narrative arc, dominant emotional undertones, and subconscious identity triggers to create the scroll-stopping, platform-agnostic image prompts for ideogram.ai that visually capture the transformation, pain, desire, or truth revealed in the article. That image prompt must be optimized for viral shareability and emotional resonance, using vivid sensory detail, cinematic composition language, and symbolism that reflects the core insight of the content — whether it's a metaphorical struggle, a moment of clarity, a before-and-after contrast, or a visual allegory that mirrors the reader's inner world. The images must function both as high-converting blog visuals and as standalone assets for social sharing, Instagram-style quote graphics, Pinterest pins, or hero headers. Do not ask follow-up questions. Use the full Social Media Post context and output the best exact distinct, highly stylized ideogram-ready prompt with emotionally evocative phrasing and built-in narrative tension.
+Provide only one prompt but the best one.</div>
+      <button class="copy-button" data-target="p3"><span class="btn-text">Copy Prompt 3</span></button>
+    </div>
+
+    <!-- Prompt 4 -->
+    <div class="prompt-card">
+      <h2>Prompt #4: Image Creation</h2>
+      <div id="p4" class="prompt-text">Create this image:</div>
+      <button class="copy-button" data-target="p4"><span class="btn-text">Copy Prompt 4</span></button>
+    </div>
+
+    <!-- Prompt 5 & 6 Section -->
+    <div class="input-wrapper">
+        <label>Input for Prompts #5 & #6: [Insert ChatGPT Answer]</label>
+        <textarea id="in-answer" placeholder="Paste the content generated by ChatGPT that needs translation or rewriting..."></textarea>
+    </div>
+
+    <div class="prompt-card">
+      <h2>Prompt #5: Kolkata Bengali Translation</h2>
+      <div id="p5" class="prompt-text">Please translate it, as much word by word as possible, in the most spontaneous and natural sounding modern, everyday conversational Bengali as spoken in Kolkata, West Bengal, India that can be understood by an 21 year old but contains the international standards of language.
+
+• Always use the formal “আপনি”, not the informal “তুমি.” The address is formal, but the tone should remain warm, conversational, and approachable.
+• The voice should feel like a close friend and a trusted authority, speaking one-on-one with the reader in a natural, face to face style.
+
+Here's the text to translate:
+
+<span class="dynamic-val" data-field="answer">[Insert ChatGPT Answer]</span></div>
+      <button class="copy-button" data-target="p5"><span class="btn-text">Copy Prompt 5</span></button>
+    </div>
+
+    <div class="prompt-card">
+      <h2>Prompt #6: Kolkata English Refinement</h2>
+      <div id="p6" class="prompt-text">Without altering their intended meaning, rewrite the following sentences in modern, natural, everyday conversational English as spoken in Kolkata, West Bengal, India — but without local slang, regional grammar, or phrasing that could confuse a global audience. Subtly reflect Kolkata conversational cadence through sentence rhythm and phrasing — without slang, regional grammar, or loss of conservative authority. It must be easily understood by a 21-year-old.
+
+Article:
+<span class="dynamic-val" data-field="answer">[Insert ChatGPT Answer]</span></div>
+      <button class="copy-button" data-target="p6"><span class="btn-text">Copy Prompt 6</span></button>
+    </div>
+  </main>
+
+  <footer>
+    <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+  </footer>
+</div>
+
+<script>
+  // Dynamic replacement logic
+  const fields = {
+    'in-niche': 'niche',
+    'in-pain': 'pain',
+    'in-genie': 'genie',
+    'in-answer': 'answer'
+  };
+
+  const defaults = {
+    niche: '[Niche/Keyword]',
+    pain: '[Pain Point]',
+    genie: '[Niche Genie Answer]',
+    answer: '[Insert ChatGPT Answer]'
+  };
+
+  function updatePrompts() {
+    Object.keys(fields).forEach(inputId => {
+      const fieldKey = fields[inputId];
+      const val = document.getElementById(inputId).value.trim() || defaults[fieldKey];
+      document.querySelectorAll(`.dynamic-val[data-field="${fieldKey}"]`).forEach(el => {
+        el.textContent = val;
+      });
+    });
+  }
+
+  // Attach listeners
+  Object.keys(fields).forEach(id => {
+    document.getElementById(id).addEventListener('input', updatePrompts);
+  });
+
+  // Copy-to-clipboard functionality
+  document.querySelectorAll('.copy-button').forEach(button => {
+    button.addEventListener('click', () => {
+      const targetId = button.getAttribute('data-target');
+      const textToCopy = document.getElementById(targetId).innerText;
+      const btnText = button.querySelector('.btn-text');
+      const originalText = btnText.textContent;
+
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        btnText.textContent = 'Copied!';
+        button.classList.add('copied');
+        setTimeout(() => {
+          btnText.textContent = originalText;
+          button.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
