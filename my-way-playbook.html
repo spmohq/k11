@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your Own Playbook</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-color: #ffffff;
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        header p {
+            margin-top: 8px;
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .block {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .block h2 {
+            font-size: 1rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .external-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+
+
+        .link-button {
+            display: block;
+            text-align: center;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: 0.2s;
+        }
+
+        .link-button:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px 10px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border-color);
+}
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>Create Your Own Playbook</h1>
+        <p>... the step-by-step process</p>
+    </header>
+
+    <div class="block">
+        <h2>Step-by-Step Execution</h2>
+
+        <div class="external-links">
+
+            <a class="link-button" href="https://spmohq.github.io/k11/actor-genie.html" target="_blank">
+                Create Actor with a Challenge
+            </a>
+
+            <a class="link-button" href="https://spmohq.github.io/k11/tips-genie.html" target="_blank">
+                Create Pain Point (Use p#1)
+            </a>
+
+            <a class="link-button" href="https://spmohq.github.io/k11/tips-genie.html" target="_blank">
+                Create Social Media Post (Use p#2)
+            </a>
+
+            <a class="link-button" href="https://spmohq.github.io/k11/tips-genie.html" target="_blank">
+                Create Image for the Post (Use p#3)
+            </a>
+
+            <a class="link-button" href="https://spmohq.github.io/k11/tips-genie.html" target="_blank">
+                Rewrite the Post (Use p#6)
+            </a>
+
+            <a class="link-button" href="https://spmohq.github.io/k11/how-to-content-idea-finder.html" target="_blank">
+                Find "How To" Content Ideas
+            </a>
+
+            <a class="link-button" href="https://spmohq.github.io/k11/playbook-outline.html" target="_blank">
+                Generate Playbook Outline
+            </a>
+
+            <a class="link-button" href="https://spmohq.github.io/k11/book-cover-text-genie.html" target="_blank">
+                Generate Cover Page Text
+            </a>
+
+            <a class="link-button" href="https://spmohq.github.io/k11/missings.html" target="_blank">
+                Find Missing Links in Content
+            </a>
+
+        </div>
+    </div>
+
+
+<footer class="footer">
+  <p>
+    Copyright &copy;
+    <script>document.write(new Date().getFullYear())</script>
+    Siva Prasad Mukherjee. All Rights Reserved.
+  </p>
+</footer>
+</div>
+
+
+
+</body>
+</html>
