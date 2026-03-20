@@ -1,0 +1,1194 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attention Hijacker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 50px 20px 30px;
+            background: #ff0000;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 80px;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 20px;
+            letter-spacing: -3px;
+            line-height: 0.9;
+            text-transform: uppercase;
+        }
+
+        .header p {
+            font-size: 18px;
+            color: #ffffff;
+            font-weight: 700;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .ai-menu {
+            background: #000000;
+            padding: 16px;
+            margin-bottom: 50px;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .ai-menu a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 15px;
+            padding: 14px 32px;
+            transition: all 0.2s;
+            background: #ff0000;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .ai-menu a:hover {
+            background: #ffff00;
+            color: #000000;
+        }
+
+        .input-section {
+            background: #ffffff;
+            padding: 40px;
+            margin-bottom: 60px;
+            border: 4px solid #000000;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 16px;
+            align-items: stretch;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 22px 30px;
+            background: #f5f5f5;
+            border: 4px solid #ff0000;
+            color: #000000;
+            font-size: 18px;
+            font-weight: 700;
+            transition: all 0.2s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #000000;
+            background: #ffffff;
+        }
+
+        .input-group input::placeholder {
+            color: #999999;
+        }
+
+        .generate-btn {
+            padding: 22px 50px;
+            background: #ff0000;
+            color: #ffffff;
+            border: none;
+            font-size: 17px;
+            font-weight: 900;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.2s;
+        }
+
+        .generate-btn:hover {
+            background: #000000;
+            color: #ffffff;
+        }
+
+        .generate-btn:active {
+            transform: scale(0.98);
+        }
+
+        .section-header {
+            background: #000000;
+            padding: 35px 40px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 42px;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 14px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .section-header p {
+            font-size: 16px;
+            color: #ffffff;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            font-weight: 600;
+        }
+
+        .prompts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 80px;
+        }
+
+        .prompt-card {
+            background: #ffffff;
+            border: 4px solid #ff0000;
+            padding: 35px;
+            transition: all 0.2s;
+        }
+
+        .prompt-card:hover {
+            border-color: #000000;
+            background: #ffffff;
+        }
+
+        .prompt-number {
+            display: inline-block;
+            background: #ff0000;
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 900;
+            padding: 10px 24px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .prompt-title {
+            font-size: 26px;
+            font-weight: 900;
+            color: #000000;
+            margin-bottom: 18px;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+        }
+
+        .prompt-summary {
+            font-size: 16px;
+            color: #000000;
+            margin-bottom: 24px;
+            line-height: 1.6;
+            font-weight: 600;
+            padding: 20px;
+            background: #f5f5f5;
+            border-left: 5px solid #ff0000;
+        }
+
+        .prompt-text {
+            font-size: 15px;
+            color: #333333;
+            line-height: 1.8;
+            padding: 26px;
+            background: #f5f5f5;
+            margin-bottom: 24px;
+            border: 3px solid #dddddd;
+            font-weight: 500;
+            max-height: 120px;
+            overflow: hidden;
+            position: relative;
+            transition: max-height 0.3s;
+        }
+
+        .prompt-text.expanded {
+            max-height: 1000px;
+        }
+
+        .prompt-text::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, #f5f5f5);
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 0.3s;
+        }
+
+        .prompt-text.expanded::after {
+            opacity: 0;
+        }
+
+        .prompt-actions {
+            display: flex;
+            gap: 14px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 18px 30px;
+            border: none;
+            font-size: 15px;
+            font-weight: 900;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s;
+        }
+
+        .expand-btn {
+            background: #000000;
+            color: #ffffff;
+        }
+
+        .expand-btn:hover {
+            background: #ffff00;
+            color: #000000;
+        }
+
+        .copy-btn {
+            background: #ff0000;
+            color: #ffffff;
+        }
+
+        .copy-btn:hover {
+            background: #000000;
+            color: #ffffff;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .footer {
+            background: #000000;
+            padding: 40px;
+            margin-top: 60px;
+            text-align: center;
+            border: 4px solid #ff0000;
+        }
+
+        .footer a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.2s;
+            display: inline-block;
+            padding: 20px 40px;
+            background: #ff0000;
+        }
+
+        .footer a:hover {
+            background: #ffff00;
+            color: #000000;
+        }
+
+        #toast {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: #ff0000;
+            color: #ffffff;
+            padding: 22px 40px;
+            font-weight: 900;
+            font-size: 17px;
+            transform: translateY(150px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1000;
+            border: 4px solid #000000;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        #toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 48px;
+            }
+
+            .header p {
+                font-size: 16px;
+            }
+
+            .section-header h2 {
+                font-size: 32px;
+            }
+
+            .prompts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .input-group {
+                flex-direction: column;
+            }
+
+            .prompt-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            #toast {
+                left: 20px;
+                right: 20px;
+                bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ATTENTION<br>HIJACKER</h1>
+            <p>Engineered to interrupt scrolling, break patterns, and hijack attention.  </p>
+        </div>
+
+        <div class="ai-menu">
+            <a href="https://chat.openai.com" target="_blank">ChatGPT</a>
+            <a href="https://claude.ai" target="_blank">Claude</a>
+            <a href="https://gemini.google.com" target="_blank">Gemini</a>
+            <a href="https://www.perplexity.ai" target="_blank">Perplexity</a>
+            <a href="https://chat.deepseek.com" target="_blank">DeepSeek</a>
+        </div>
+
+        <div class="input-section">
+            <div class="input-group">
+                <input 
+                    type="text" 
+                    id="keywordInput" 
+                    placeholder="My Product or Offer Is About..."
+                    onkeypress="if(event.key === 'Enter') handleGenerate()"
+                >
+                <button class="generate-btn" onclick="handleGenerate()">
+                    Generate
+                </button>
+            </div>
+        </div>
+
+        <div class="section-header">
+            <h2>Pattern Interrupts</h2>
+            <p>Create hooks that shatter scrolling autopilot and force instant cognitive engagement. These prompts engineer attention spikes through shock, confusion, disruption, and cognitive friction.</p>
+        </div>
+
+        <div class="prompts-grid" id="section1Container">
+            <!-- Prompts will be dynamically inserted here -->
+        </div>
+
+        <div class="section-header">
+            <h2>Curiosity Triggers</h2>
+            <p>Open mental loops that cannot be closed without reading further. These prompts engineer curiosity gaps, forbidden knowledge hints, and unresolved tension that forces continued engagement.</p>
+        </div>
+
+        <div class="prompts-grid" id="section2Container">
+            <!-- Prompts will be dynamically inserted here -->
+        </div>
+
+        <div class="section-header">
+            <h2>Emotional Hijacks</h2>
+            <p>Trigger instant emotional reactions that break through numbness and force engagement. These prompts exploit ego, insecurity, identity, fear, pain, and desire to create attention that feels personal and unavoidable.</p>
+        </div>
+
+        <div class="prompts-grid" id="section3Container">
+            <!-- Prompts will be dynamically inserted here -->
+        </div>
+
+        <div class="section-header">
+            <h2>Dopamine Triggers</h2>
+            <p>Activate reward-seeking circuits with hooks that promise instant gratification, micro-victories, and pleasurable anticipation. These prompts engineer dopamine spikes that override hesitation and create compulsive engagement.</p>
+        </div>
+
+        <div class="prompts-grid" id="section4Container">
+            <!-- Prompts will be dynamically inserted here -->
+        </div>
+
+        <div class="section-header">
+            <h2>Relatability Traps</h2>
+            <p>Create hooks so specific and accurate they make readers feel personally exposed and magnetically understood. These prompts weaponize hyper-specific recognition, secret behaviors, and painfully accurate observations that trap attention through radical relatability.</p>
+        </div>
+
+        <div class="prompts-grid" id="section5Container">
+            <!-- Prompts will be dynamically inserted here -->
+        </div>
+
+        <div class="section-header">
+            <h2>Scroll Momentum Locks</h2>
+            <p>Engineer irresistible forward motion that makes stopping feel uncomfortable. These prompts create narrative rhythm, micro-cliffhangers, and compulsive continuation triggers that lock readers into unstoppable scroll momentum.</p>
+        </div>
+
+        <div class="prompts-grid" id="section6Container">
+            <!-- Prompts will be dynamically inserted here -->
+        </div>
+
+        <div class="footer">
+            <a href="https://www.facebook.com/groups/markhesscustomergroup" target="_blank" rel="noopener noreferrer">
+                Click Here To Join Mark Hess's Private Facebook Group
+            </a>
+        </div>
+    </div>
+
+    <div id="toast">Prompt Copied!</div>
+
+    <script>
+        const promptsData = [
+            {
+                number: 1,
+                title: "Shockline Pattern Interrupt Prompt",
+                summary: "Create opener lines that hit the brain hard enough to freeze scrolling and cause an instant attention spike.",
+                text: "I have a product about [keyword]. Act as an award winning behavioral copywriter and a pattern interruption architect who specializes in hijacking the brain during moments of unconscious scrolling. Generate 10 shockline pattern interrupt hooks that stop the reader instantly by delivering a fast, high voltage cognitive jolt. These hooks must hit with the psychological sharpness of a sudden alarm and create immediate awareness even before the meaning is fully processed. Every line should carry a sense of urgency, threat, or unexpected contrast that snaps the mind out of autopilot and demands full attention in the present moment. Focus on producing hooks that disrupt expectation patterns, interrupt mental rhythms, and create split second shock responses strong enough to freeze scrolling behavior. The goal is a hook that forces an instinctive pause and makes skimming physically impossible."
+            },
+            {
+                number: 2,
+                title: "Brain-Itch Disruption Prompt",
+                summary: "Create hooks that feel uncomfortable, confusing, or incomplete in a way that forces the brain to stop and solve them.",
+                text: "I have a product about [keyword]. Act as a cognitive friction engineer and micro tension specialist who designs lines that trigger unresolved mental pressure. Generate 10 brain itch disruption hooks that create an uncomfortable cognitive gap the reader feels compelled to close. These hooks should feel like incomplete thoughts, strange logical breaks, or mismatched ideas that activate the brain's pattern detection system and force it to search for resolution. Build each line so it produces just enough confusion to stop the scroll without overwhelming the reader. Use psychological tension, implied contradiction, missing context, or partial revelation to create a subtle but persistent mental itch that demands the next line for relief. The goal is to create hooks that force engagement by making the reader feel like something essential is missing and the only way to resolve that tension is to keep reading."
+            },
+            {
+                number: 3,
+                title: "Logic-Break Opener Prompt",
+                summary: "Build hooks that short-circuit the reader's normal thought pattern by presenting something that should not make sense at first glance.",
+                text: "I have a product about [keyword]. Act as a behavioral copywriter and cognitive dissonance specialist who understands how to fracture predictable thought patterns with precision. Generate 10 logic break opener lines engineered to instantly disrupt the brain's expectation pathways. These lines should feel strange, contradictory, impossible, or structurally illogical in a way that forces the mind to slow down and reprocess what it just saw. Use unusual pairings, paradoxical setups, distorted assumptions, or abrupt shifts in meaning that interrupt the reader's mental rhythm. Each hook must create a moment where the brain cannot continue scrolling because it is still trying to reconcile what it just encountered. The goal is to create an opener that feels like a sudden glitch in reality, pulling the reader into conscious focus through a fast burst of cognitive confusion."
+            },
+            {
+                number: 4,
+                title: "Reality Snap Prompt",
+                summary: "Produce hooks that snap the reader out of autopilot and into conscious focus with a jarring statement.",
+                text: "I have a product about [keyword]. Act as an attention disruption expert who specializes in snapping people out of unconscious scrolling using high intensity verbal jolts. Generate 10 reality snap hooks that break mental numbness by confronting the reader with statements that feel raw, blunt, or startlingly direct. These lines must function like a psychological slap that forces instant awareness. Use language that cuts through the haze of passive scrolling and creates a clear sensation of being pulled back into the present moment. Every hook should challenge an assumption, expose a truth, interrupt comfort, or pierce emotional neutrality. The goal is to engineer lines that feel impossible to ignore because they trigger a fast internal shift from passive mode to full alertness."
+            },
+            {
+                number: 5,
+                title: "Impossible-To-Skim Line Prompt",
+                summary: "Create hooks that stand out so strongly that skimming becomes impossible and the reader must look twice.",
+                text: "I have a product about [keyword]. Act as a behavioral copywriter and visual pattern disruption specialist who understands how to create lines that the brain physically cannot skim. Generate 10 impossible to skim hooks engineered to interrupt automatic scanning behavior and force deep processing. These hooks must create a sense of friction and visual unpredictability that pulls the reader into full attention. Use unexpected phrasing, sharp contrast, carefully constructed pauses, and attention grabbing word combinations that bend normal reading flow. Each hook should feel like a break in the mental rhythm that stops the reader from gliding past the line and makes them lock onto the meaning with conscious awareness. The goal is to create lines that anchor the eyes and mind in place through a mix of novelty, interruption, and cognitive pull."
+            },
+            {
+                number: 6,
+                title: "Expectation Flip Prompt",
+                summary: "Produce hooks that take a familiar idea and flip it immediately, creating instant cognitive dissonance.",
+                text: "I have a product about [keyword]. Act as a psychological misdirection expert who specializes in flipping familiar expectations to create rapid attention spikes. Generate 10 expectation flip hooks that begin with something the reader instantly recognizes and then twist it in a way that disrupts their mental pattern. These hooks should create a moment of surprise that forces the reader to reassess what they assumed was coming next. Use contrast, reversal, bait and switch setups, and sudden directional changes that challenge the reader's certainty and pull them deeper into the message. Each line should create a quick mental hiccup where the brain pauses to re-evaluate the new information. The goal is to deliver hooks that feel both familiar and destabilizing, creating an irresistible desire to understand what comes next."
+            },
+            {
+                number: 7,
+                title: "Micro-Confusion Starter Prompt",
+                summary: "Create hooks that introduce just enough confusion to stop the reader without making them frustrated.",
+                text: "I have a product about [keyword]. Act as a cognitive friction architect who specializes in using micro confusion to interrupt unconscious scrolling behavior. Generate 10 micro confusion starter hooks designed to create small but irresistible mental stutters that force the reader to pause. These hooks must introduce just enough ambiguity, contradiction, or incomplete meaning to activate the brain's problem solving instinct without causing frustration. Use subtle mismatches, unexpected phrasing, odd sequencing, or partial logic structures that feel slightly off in a way that demands clarity. Each line should produce a moment where the brain hesitates and switches from passive scanning to active interpretation. The goal is to create hooks that stop momentum through gentle cognitive dissonance that feels intriguing rather than overwhelming."
+            },
+            {
+                number: 8,
+                title: "Pattern-Break Question Prompt",
+                summary: "Build hooks that use questions designed to interrupt autopilot thinking and open a curiosity loop instantly.",
+                text: "I have a product about [keyword]. Act as a behavioral question strategist who understands how to weaponize questions to break patterns and disrupt autopilot scrolling. Generate 10 pattern break questions engineered to feel unusual, intrusive, or psychologically charged enough to force engagement. These questions should interrupt the reader's mental rhythm by challenging assumptions, provoking self evaluation, or introducing surprising angles that do not match typical content. Use questions that feel slightly confrontational, oddly specific, or emotionally pointed so the reader cannot ignore them. Each question must create a moment of internal pause where the reader feels compelled to answer or continue reading. The goal is to design questions that act like sudden spotlights on the mind, snapping the reader back into conscious awareness."
+            },
+            {
+                number: 9,
+                title: "Discomfort Trigger Opener Prompt",
+                summary: "Create hooks that use low-level emotional discomfort to force awareness and focus.",
+                text: "I have a product about [keyword]. Act as an emotional activation specialist who understands how low level discomfort can be used to hijack passive scrolling. Generate 10 discomfort trigger hooks that create a quick emotional spike strong enough to interrupt autopilot behavior. These hooks should feel subtly unsettling by touching on micro fears, tension points, unspoken insecurities, or small truths the reader usually avoids facing. Use language that makes the reader feel exposed, challenged, or momentarily off balance without pushing them into defensiveness. Each line must create a soft emotional jolt that pulls the reader into active awareness and demands their attention. The goal is to create hooks that work like emotional static, interrupting the mind's smooth flow long enough to force engagement with the message."
+            },
+            {
+                number: 10,
+                title: "Scroll-Freeze Statement Prompt",
+                summary: "Produce hooks that freeze scrolling instantly with a bold, direct, or disruptive statement that commands presence.",
+                text: "I have a product about [keyword]. Act as a behavioral interruption expert who designs lines powerful enough to stop scrolling in a single instant. Generate 10 scroll freeze statements that hit with a level of directness and psychological authority that makes the reader halt immediately. These lines should feel unavoidable, commanding, and sharply present, as if the content is speaking directly to the reader with precision. Use language that carries weight, urgency, or intensity so the mind cannot slip past it. Each hook must be crafted to create a moment of absolute stillness where the reader stops moving because the statement demands their full attention. The goal is to produce lines that function like verbal brakes, stopping momentum through forceful clarity and presence."
+            },
+            {
+                number: 11,
+                title: "Curiosity Loop Opener Prompt",
+                summary: "Create hooks that open a mental loop the reader cannot close without reading further.",
+                text: "I have a product about [keyword]. Act as a curiosity architect who specializes in crafting psychological open loops that the mind cannot resist closing. Generate 10 curiosity loop opener lines engineered to create an immediate mental gap that pulls the reader forward. These hooks must initiate a sense of unfinished business by presenting a hint, contradiction, or partial revelation that the brain feels compelled to resolve. Use structure that withholds the key detail, teases an unseen angle, or implies a deeper truth waiting just beyond the next line. Each hook should trigger the brain's drive for pattern completion and make the reader feel a magnetic pull to continue. The goal is to create openers that activate curiosity so strongly that stopping becomes uncomfortable and continuing feels automatic."
+            },
+            {
+                number: 12,
+                title: "Forbidden Question Prompt",
+                summary: "Produce hooks that feel like questions the reader is not supposed to ask, increasing the urge to know what comes next.",
+                text: "I have a product about [keyword]. Act as a behavioral curiosity specialist who understands how taboo and restricted information triggers heightened focus. Generate 10 forbidden question hooks designed to feel like thoughts the reader should not be asking, yet cannot ignore. These questions must carry an edge of secrecy, rule breaking, or emotional danger that makes the mind lean in instinctively. Use angles that suggest withheld truths, concealed motivations, unspoken judgments, or questions people think privately but never voice. Each hook should create an intimate sense of crossing a line or peeking behind a curtain, triggering a desire to know what comes next. The goal is to design questions that feel provocative and off limits, pulling the reader deeper through the power of forbidden curiosity."
+            },
+            {
+                number: 13,
+                title: "Hidden Truth Teaser Prompt",
+                summary: "Create hooks that suggest the reader is about to learn something important that has been kept from them.",
+                text: "I have a product about [keyword]. Act as a psychological revelation specialist who knows how to trigger curiosity by suggesting access to hidden knowledge. Generate 10 hidden truth teaser hooks that imply the reader is about to discover something important, rare, or intentionally concealed. These lines must create a feeling of secret awareness by hinting at information that most people overlook, misunderstand, or have never been allowed to see clearly. Use language that suggests forbidden insight, behind the scenes understanding, or a deeper layer of truth that has been kept out of reach until now. Each hook should create a sense of privilege and exclusivity, making the reader feel chosen or invited into a smaller circle. The goal is to make every line feel like the key to uncovering a truth they were never supposed to know but can no longer ignore."
+            },
+            {
+                number: 14,
+                title: "Mystery Box Opener Prompt",
+                summary: "Produce hooks that feel like the beginning of a mystery the reader must unravel.",
+                text: "I have a product about [keyword]. Act as a narrative intrigue engineer who specializes in crafting psychological openings that feel like the first clue in a mystery. Generate 10 mystery box opener lines that instantly create suspense, unanswered questions, and the promise of unfolding depth. These hooks must feel like the beginning of a story the reader did not expect to enter but now feels compelled to follow. Use setups that imply hidden motives, strange events, unexplained patterns, or the first step into an unknown path. Each line should create a feeling of entering a mystery that cannot yet be understood but demands attention. The goal is to design openers that feel cinematic, atmospheric, and loaded with tension so the reader feels pulled forward with a sense of anticipation."
+            },
+            {
+                number: 15,
+                title: "Unfinished Thought Prompt",
+                summary: "Create hooks that intentionally stop short, forcing the reader to keep going to complete the message.",
+                text: "I have a product about [keyword]. Act as a behavioral persuasion expert who knows how to weaponize unfinished thoughts to create uncontrollable forward pull. Generate 10 unfinished thought hooks that feel like the moment right before a secret is revealed, the breath before a confession, the sentence that stops at the exact second the brain leans in. These hooks must be loaded with tension, emotional charge, and implication, cutting off at the most psychologically sensitive moment so the reader feels physically pulled toward the next line. Use setups that crack open vulnerability, hint at hidden danger, expose a private truth, or suggest a reality shifting insight that is denied at the last instant. Every line should leave the reader suspended between anticipation and hunger, unable to move on until the mental pressure gets released. The goal is to create hooks that feel like the cliffhanger of a confession, the pause before a revelation, and the electric moment before everything changes."
+            },
+            {
+                number: 16,
+                title: "Missing Piece Prompt",
+                summary: "Produce hooks that make the reader feel like they are missing a crucial piece of information.",
+                text: "I have a product about [keyword]. Act as a cognitive tension engineer who understands how to spark craving by making the brain feel like it is one puzzle piece away from total clarity. Generate 10 missing piece hooks that make the reader feel the exact moment when understanding is almost there but not fully formed. These lines must tease the final insight, the connecting thread, the hidden pattern, or the key truth that pulls all the pieces together, while withholding it with surgical precision. Use structures that feel like the last line of a code, the final note of a melody, or the missing click in a lock. Every hook should create a rising pressure in the reader's mind, a sense that the next sentence contains the essential detail that unlocks the entire message. The goal is to produce hooks that make stopping impossible because the psychological itch to complete the pattern is too intense to ignore."
+            },
+            {
+                number: 17,
+                title: "Unanswered Curiosity Spike Prompt",
+                summary: "Create hooks that spark a powerful question in the reader's mind but refuse to answer it immediately.",
+                text: "I have a product about [keyword]. Act as a behavioral curiosity engineer who understands how to plant questions that hijack the mind and refuse to let go. Generate 10 unanswered curiosity spike hooks that raise a powerful, emotionally charged question but deny the reader any form of resolution. These hooks must ignite an instant internal pull by presenting a question that feels intimate, urgent, or slightly dangerous, without giving the answer the brain now craves. Use structures that feel like overheard secrets, half finished confessions, puzzling contradictions, or implications of something bigger unfolding just out of sight. Each line should create a sharp need to continue, as if stopping here would leave something vital unresolved. The goal is to create curiosity spikes that feel like the brain is being yanked forward by a question it cannot comfortably leave unanswered."
+            },
+            {
+                number: 18,
+                title: "Behind the Curtain Prompt",
+                summary: "Produce hooks that make the reader feel like they are about to see something normally hidden or private.",
+                text: "I have a product about [keyword]. Act as a psychological intrigue specialist who designs hooks that feel like slipping past a velvet rope into restricted territory. Generate 10 behind the curtain hooks that suggest the reader is about to witness a secret, insider truth, or forbidden detail that is normally kept hidden. These lines must carry a subtle sense of rule breaking, exclusivity, and confidential access, creating the irresistible thrill of being shown something not meant for the general public. Use hints of concealed motives, quiet conversations, private admissions, or unspoken realities that only insiders get to see. Each hook should make the reader feel like they are being granted privileged access to knowledge that changes everything once revealed. The goal is to engineer hooks that feel forbidden enough to demand attention and too private to scroll past."
+            },
+            {
+                number: 19,
+                title: "Puzzle Piece Opener Prompt",
+                summary: "Create hooks that feel like the first clue in a larger pattern or insight.",
+                text: "I have a product about [keyword]. Act as a cognitive pattern architect who understands how to trigger the human instinct to recognize and complete hidden structures. Generate 10 puzzle piece opener lines that feel like the first clue in a larger, unfolding pattern the reader cannot ignore. These hooks must suggest a deeper truth, a concealed mechanism, or a breadcrumb trail that is only now beginning to reveal itself. Use language that feels like cracking open a code, uncovering the first hint of a secret system, or stumbling onto the opening fragment of a big revelation. Each line should give the reader the sense that they have just encountered the first piece of a puzzle that is waiting for them to assemble. The goal is to activate the mind's pattern seeking machinery so powerfully that continuing feels like the natural, irresistible next step."
+            },
+            {
+                number: 20,
+                title: "Curiosity Tension Builder Prompt",
+                summary: "Produce hooks that tighten curiosity until the reader feels physical pressure to keep reading.",
+                text: "I have a product about [keyword]. Act as a curiosity tension engineer who specializes in creating psychological pressure that intensifies with every word. Generate 10 curiosity tension builder hooks that make the reader feel like they are inches away from understanding something important but not there yet. These lines must heighten anticipation through near resolution, partial clarity, or the sense that the answer is hovering just out of reach. Use structures that tighten suspense, quicken internal pacing, and push the reader into a state where stopping feels like losing progress. Each hook should create an almost physical sensation of being pulled forward as the mind tries to close the loop. The goal is to build so much anticipatory tension that continuing becomes the only comfortable option."
+            },
+            {
+                number: 21,
+                title: "Ego Poke Hijack Prompt",
+                summary: "Create hooks that lightly poke the ego and force the reader to keep going to reclaim their sense of confidence.",
+                text: "I have a product about [keyword]. Act as a behavioral persuasion expert who specializes in ego tension, micro status threats, and identity disruption. Generate 10 ego poke hooks that tap into the reader's quiet need to defend who they think they are. These hooks must deliver a precise, subtle hit to the ego strong enough to activate a response but soft enough to avoid triggering withdrawal. Use language that questions their consistency, challenges their competence, pokes at complacency, or exposes a gap between who they claim to be and how they actually behave. Each line should create a moment where the reader privately thinks, That's not me, and feels compelled to keep going to reclaim their internal sense of identity. The goal is to craft hooks that weaponize ego tension and pull the reader forward through the psychological instinct to maintain self-image."
+            },
+            {
+                number: 22,
+                title: "Insecurity Mirror Prompt",
+                summary: "Build hooks that reflect a hidden insecurity the reader never says out loud, instantly catching their attention.",
+                text: "I have a product about [keyword]. Act as an emotional accuracy specialist who knows how to mirror private insecurities with surgical precision. Generate 10 insecurity mirror hooks that reflect back truths the reader quietly carries but rarely verbalizes. These hooks must feel intimate, personal, and uncomfortably accurate, as if the content is reading their internal dialogue. Use language that exposes subtle self doubts, hidden anxieties, quiet frustrations, or internal contradictions the reader often hides even from themselves. Each line should create an emotional micro wince of recognition that feels too real to ignore. The goal is to produce hooks that make the reader feel seen in a way that is both unsettling and gratifying, forcing them deeper into the content to explore the truth that was just reflected."
+            },
+            {
+                number: 23,
+                title: "Identity Pressure Prompt",
+                summary: "Produce hooks that press on the reader's need to feel like a certain type of person, creating tension they must resolve by reading more.",
+                text: "I have a product about [keyword]. Act as an identity manipulation specialist who understands how to activate the deepest human drive: the need to stay consistent with who we think we are. Generate 10 identity pressure hooks that press directly on the reader's self concept, making them feel an internal demand to continue in order to protect or validate their identity. These hooks must create the sensation that stopping would mean admitting something unflattering about themselves, while continuing reinforces the version of themselves they want to believe in. Use language that challenges their claimed standards, questions their commitment, exposes inconsistencies, or calls forward the person they secretly want to become. Each line should create a subtle but undeniable internal squeeze that makes continuing feel like the only choice that preserves their identity. The goal is to build hooks that turn identity preservation into a magnetic pull toward the next line."
+            },
+            {
+                number: 24,
+                title: "Silent Fear Exposure Prompt",
+                summary: "Create hooks that reveal a quiet fear the reader has been avoiding, triggering an emotional spike.",
+                text: "I have a product about [keyword]. Act as an emotional exposure expert who specializes in revealing the quiet, unspoken fears people carry alone. Generate 10 silent fear exposure hooks that shine light on the fear the reader never voices, hides beneath logic, or distracts themselves from. These hooks must be crafted with surgical emotional accuracy, calling out the truths they privately feel but do not dare articulate. Use language that touches the core fears of failure, inadequacy, wasted potential, disconnection, regret, or being forgotten, but do it with precision subtle enough to bypass defensiveness and hit the raw nerve directly. Each line should create a fast emotional spike that feels like being caught but also understood. The goal is to produce hooks that hit with disarming truth, forcing attention through the shock of recognition and the relief of finally seeing the fear named out loud."
+            },
+            {
+                number: 25,
+                title: "Pain Recognition Hijack Prompt",
+                summary: "Build hooks that name a specific pain point so accurately the reader feels seen and compelled to continue.",
+                text: "I have a product about [keyword]. Act as a behavioral pain mapping specialist who knows how to identify and articulate emotional pain points with laser precision. Generate 10 pain recognition hooks that describe the reader's internal struggle so accurately it feels like you are watching their life from the inside. These lines must capture the exact micro frustrations, quiet disappointments, repeated patterns, and private emotional irritations the reader lives with but rarely verbalizes. Use language that mirrors their real inner experiences with such clarity that they feel instantly recognized, almost exposed. Each hook should strike with painful accuracy, creating the sensation that the content understands them better than most people in their actual life. The goal is to create hooks that forge instant emotional intimacy by naming the pain the reader habitually hides, making them feel compelled to keep reading."
+            },
+            {
+                number: 26,
+                title: "Triggered Curiosity Prompt",
+                summary: "Produce hooks that combine emotion with curiosity so the reader feels both exposed and hungry for answers.",
+                text: "I have a product about [keyword]. Act as a psychological tension engineer who blends emotional charge with curiosity to create irresistible mental pull. Generate 10 triggered curiosity hooks that ignite a strong emotional reaction while simultaneously opening an unanswered question that demands closure. These hooks must create internal friction by exposing a sensitive truth, hinting at a deeper problem, or touching an emotional nerve, while withholding the explanation or solution. Use structures that feel like the moment before a confession, the start of a revelation, or the first line of a story that carries emotional weight. Each hook should make the reader feel both unsettled and intrigued, pulled forward by a mix of vulnerability and the need to know more. The goal is to create hooks that trigger emotion and curiosity at the same time, producing a powerful cognitive hunger to continue."
+            },
+            {
+                number: 27,
+                title: "Emotional Voltage Prompt",
+                summary: "Create hooks that deliver a jolt of emotional electricity strong enough to snap the reader out of their numb scroll.",
+                text: "I have a product about [keyword]. Act as an emotional voltage engineer who specializes in hitting the reader with rapid fire feelings strong enough to break their scrolling trance. Generate 10 emotional voltage hooks that deliver a sharp emotional spike before the reader even has time to interpret the meaning. These lines must create instant limbic activation, pulling the reader out of numb autopilot and into a state of raw emotional awareness. Use language that taps into shock, longing, regret, desire, guilt, pride, or sudden recognition, hitting fast enough to bypass their logic and go straight to their nervous system. Each hook should feel like touching a live wire: sudden, electric, and impossible to ignore. The goal is to create lines that produce emotional activation so fast the reader has no choice but to keep moving forward to understand what just hit them."
+            },
+            {
+                number: 28,
+                title: "Uncomfortable Truth Prompt",
+                summary: "Build hooks that state a truth the reader avoids, creating an emotional tug they cannot escape.",
+                text: "I have a product about [keyword]. Act as a psychological truth revealer who knows how to expose the exact uncomfortable reality the reader quietly avoids. Generate 10 uncomfortable truth hooks that articulate the thing the reader knows deep down but pushes aside because facing it would require change. These hooks must feel like whispered truths, raw realizations, and subtle confrontations that hit harder than direct callouts. Use language that illuminates their avoided patterns, ignored signs, self sabotage cycles, and hidden rationalizations with quiet precision. Each line should create internal tension, the kind that makes the reader feel pinned between recognition and discomfort. The goal is to craft hooks that hit so close to home the reader feels both called out and compelled to continue because the truth finally surfaced."
+            },
+            {
+                number: 29,
+                title: "Desire Tension Prompt",
+                summary: "Produce hooks that pull on something the reader deeply wants but hasn't admitted clearly.",
+                text: "I have a product about [keyword]. Act as a subconscious transcription specialist who can articulate the exact private thoughts people never voice, never post, and never admit aloud. Generate 10 private thought hooks that sound like the reader's real internal monologue, the quiet lines they only hear when the world goes silent. These hooks must feel unsettlingly accurate, almost invasive, as if the content is reading their mind with perfect emotional clarity. Use language that captures suppressed doubts, hidden wishes, quiet resentments, late night worries, and the vulnerable truths they pretend not to notice. Each line should create that eerie jolt of recognition, the feeling of I've thought that before but never said it, not even once. The goal is to produce hooks that hit so personally the reader feels exposed, understood, and compelled to continue because the content has entered territory their own mind rarely visits with honesty."
+            },
+            {
+                number: 30,
+                title: "Shame Flicker Prompt",
+                summary: "Create hooks that give the reader a micro moment of shame or self recognition without making them shut down.",
+                text: "I have a product about [keyword]. Act as an internal conflict profiler who maps the contradictions people live with but avoid confronting. Generate 10 internal conflict hooks that expose the reader's tug of war between what they want and what they do, who they claim to be and who they fear they are, the promises they make and the behaviors they repeat. These hooks must highlight the invisible tension between desire and hesitation, ambition and doubt, clarity and confusion, potential and procrastination. Use language that names the exact push and pull happening in the reader's inner world, the duality they pretend is not there. Each line should create a quiet emotional sting, forcing the reader to acknowledge the contradiction they thought they kept hidden. The goal is to create hooks that make the internal war impossible to ignore, pulling the reader deeper into the content to resolve the cognitive dissonance you just surfaced."
+            },
+            {
+                number: 31,
+                title: "Instant Reward Hit Prompt",
+                summary: "Create hooks that promise a fast emotional or psychological payoff strong enough to override hesitation.",
+                text: "I have a product about [keyword]. Generate 10 instant reward hit hooks that offer a fast emotional payoff. These lines should feel like a quick dopamine hit that pushes the reader forward."
+            },
+            {
+                number: 32,
+                title: "Micro Victory Trigger Prompt",
+                summary: "Build hooks that make the reader feel like they already accomplished something by reading the first line.",
+                text: "I have a product about [keyword]. Generate 10 micro victory trigger hooks that make the reader feel a tiny win instantly. These lines should create a small sensation of progress the moment they see it."
+            },
+            {
+                number: 33,
+                title: "Fast Gratification Opener Prompt",
+                summary: "Produce hooks that give the reader a sense that something satisfying is coming immediately.",
+                text: "I have a product about [keyword]. Generate 10 fast gratification opener hooks that hint at an immediate payoff. These lines should activate the reader's reward-seeking instinct fast."
+            },
+            {
+                number: 34,
+                title: "Anticipation Spike Prompt",
+                summary: "Create hooks that increase dopamine by building pleasurable anticipation before revealing the payoff.",
+                text: "I have a product about [keyword]. Act as a behavioral shame tactician who understands how micro shame — the tiny sting of falling short — can create powerful forward pull. Generate 10 micro shame hooks that expose a small but painful way the reader feels behind, slipping, inconsistent, or not living up to their own expectations. These hooks must be subtle enough to bypass defensiveness but sharp enough to create that quiet pinch of recognition. Use language that touches the soft spots: the promises they break to themselves, the habits they can't seem to fix, the progress they thought they'd make by now but haven't. Each line should create a quick emotional sting, a flash of self awareness that feels uncomfortable but motivating. The goal is to produce hooks that weaponize micro shame as momentum, making the reader feel the need to keep going to restore their internal equilibrium."
+            },
+            {
+                number: 35,
+                title: "Feel It Right Away Prompt",
+                summary: "Build hooks that trigger sensations the reader will imagine in their body instantly.",
+                text: "I have a product about [keyword]. Act as a future pacing strategist who specializes in using anticipated regret to create immediate action. Generate 10 future regret hooks that force the reader to imagine the emotional cost of staying the same, the long term consequences of hesitation, and the pain of looking back wishing they moved sooner. These hooks must make the reader feel the weight of the future version of themselves who is tired of repeating the same patterns, missing the same chances, and facing the same disappointments. Use language that paints vivid emotional snapshots of what life will feel like if they keep delaying or ignoring the change they need. Each line should create a quiet sense of urgency rooted not in panic but in self betrayal avoidance. The goal is to produce hooks that make the reader feel an internal promise forming that they refuse to break again."
+            },
+            {
+                number: 36,
+                title: "Quick Confidence Trigger Prompt",
+                summary: "Produce hooks that give the reader a fast boost of self belief before they even read further.",
+                text: "I have a product about [keyword]. Act as a cognitive pattern revelation expert who understands how to activate the brain's hunger for the missing insight. Generate 10 hidden pattern hooks that make the reader feel like they have overlooked something critical, a subtle truth that has been shaping their situation without them realizing it. These hooks must create the sensation that a major shift is about to happen, not because something new is being introduced but because something old is finally being understood. Use language that hints at long standing blind spots, unnoticed behaviors, invisible influences, and repeating cycles the reader has walked through without connecting the dots. Each line should make the reader feel moments away from a breakthrough, the kind that rewrites how they see everything. The goal is to engineer hooks that make the reader lean in with rising anticipation because they sense a truth they cannot afford to miss."
+            },
+            {
+                number: 37,
+                title: "Rapid Relief Opener Prompt",
+                summary: "Create hooks that promise immediate relief from stress, confusion, or overwhelm.",
+                text: "I have a product about [keyword]. Act as an emotional tension architect who knows how to stretch the reader between two clashing feelings until they can't look away. Generate 10 emotional tension hooks that create inner friction by pulling the reader in two directions at once: desire mixed with fear, confidence mixed with doubt, hope mixed with hesitation, or clarity mixed with confusion. These hooks must hit the emotional fault lines where people feel most torn, activating the exact push and pull that keeps their mind suspended in unresolved tension. Use language that highlights the contrast between who they want to be and who they currently are, what they feel and what they pretend, what they know and what they avoid. Each line should make the reader feel the sharp stretch between two emotional poles, compelling them to continue because the tension demands a release. The goal is to engineer hooks that trap the reader in psychological suspension, where moving forward becomes the only way to resolve the feeling."
+            },
+            {
+                number: 38,
+                title: "Reward Loop Starter Prompt",
+                summary: "Build hooks that create a mental feedback loop where each line feels rewarding and encourages the next.",
+                text: "I have a product about [keyword]. Act as a shadow self interpreter who specializes in speaking directly to the hidden, unpolished, unfiltered parts of a person. Generate 10 shadow self hooks that tap into the aspects of the reader they keep out of sight: their quiet envy, suppressed ambition, concealed resentment, selfish desires, hidden cravings for validation, or impulses they judge in themselves. These hooks must feel raw, taboo, and eerily accurate, as if you are naming the thoughts they edit before admitting even to themselves. Use language that slips past their public identity and lands squarely on the part of them they try to manage, suppress, or hide from others. Each line should create a feeling of forbidden recognition, a sense that the content is seeing a version of the reader they don't show. The goal is to create hooks that feel illicit and emotionally honest, pulling the reader deeper because the truth is too charged to ignore."
+            },
+            {
+                number: 39,
+                title: "Good Feeling Preview Prompt",
+                summary: "Produce hooks that preview a positive emotional state the reader will get if they keep going.",
+                text: "I have a product about [keyword]. Act as a subconscious influence strategist who specializes in guiding decisions through micro suggestions the reader barely notices. Generate 10 subconscious nudge hooks that gently steer the reader's attention, emotion, or intention without triggering resistance or awareness. These hooks must feel soft, natural, and effortless, as if the idea simply appeared in the reader's mind on its own. Use language that plants direction through implication, emotional suggestion, or subtle forward tilt, creating the sensation of being quietly guided toward the next step. Each line should bypass conscious analysis and land directly in the part of the mind that makes fast, intuitive decisions. The goal is to create hooks so smooth and frictionless the reader feels like continuing was their own idea, not something engineered."
+            },
+            {
+                number: 40,
+                title: "Satisfying Payoff Teaser Prompt",
+                summary: "Create hooks that tease a payoff so satisfying the reader does not want to miss it.",
+                text: "I have a product about [keyword]. Act as an emotional rhythm disruptor who knows how to break the reader out of their default reactions and install a new internal pace. Generate 10 emotional pattern break hooks that shift the reader's feeling state in a way they didn't expect, interrupting their usual emotional response loop. These hooks must use contrast, inversion, surprise, or emotional inversion to snap the reader out of their automatic patterns and into a fresh internal tempo. Use language that reroutes their emotional momentum, turning numbness into attention, hesitation into curiosity, frustration into clarity, or apathy into urgency. Each line should make the reader feel an unmistakable internal shift, like their emotional operating system just rebooted. The goal is to craft hooks that create a new emotional rhythm strong enough to carry the reader deeper into the content without effort."
+            },
+            {
+                number: 41,
+                title: "Hyper Specific Relatability Prompt",
+                summary: "Create hooks that are so specific and accurate they make the reader feel exposed in a strangely satisfying way.",
+                text: "I have a product about [keyword]. Act as a behavioral pattern analyst who specializes in exposing the unconscious loops people repeat without noticing. Generate 10 pattern exposure hooks that shine a bright light on a behavior the reader has been running on autopilot, a habit or emotional cycle they fall into without realizing it. These hooks must make the reader feel the shock of sudden clarity, like flipping on a light in a room they never fully entered. Use language that reveals predictable reactions, repeated mistakes, familiar emotional triggers, or self sabotaging loops with pinpoint accuracy. Each line should create a moment of internal recognition where the reader sees themselves clearly, maybe for the first time. The goal is to produce hooks that expose the hidden patterns running their life, compelling them to read on because the truth is no longer in the dark."
+            },
+            {
+                number: 42,
+                title: "Secret Habit Exposure Prompt",
+                summary: "Build hooks that expose a private habit or behavior the reader thought nobody else noticed.",
+                text: "I have a product about [keyword]. Act as an inner conflict specialist who understands the tension between desire and resistance that lives under every major decision. Generate 10 desire conflict hooks that expose the exact tug of war between what the reader deeply wants and the invisible forces that keep them stuck. These hooks must feel like catching the reader mid admission, calling out the conflict they rarely acknowledge. Use language that highlights the push and pull between ambition and fear, confidence and insecurity, longing and avoidance, clarity and hesitation. Each line should bring the internal contradiction to the surface, creating a moment where the reader feels seen and confronted at the same time. The goal is to create hooks that make the reader feel caught in a truth they can no longer run from, driving them forward to resolve the conflict you just exposed."
+            },
+            {
+                number: 43,
+                title: "Embarrassing Truth Mirror Prompt",
+                summary: "Create hooks that reflect an embarrassing truth the reader sees in themselves but avoids admitting.",
+                text: "I have a product about [keyword]. Act as a psychological inflection point strategist who knows how to make a reader feel the exact moment when life pivots. Generate 10 fate shift hooks that make the reader feel like they are standing at a crossroads where one tiny decision could alter the entire trajectory of their identity, future, or emotional reality. These hooks must carry the weight of a before and after moment, the kind that feels small on the surface but massive beneath it. Use language that evokes turning points, internal thresholds, hidden opportunities, or the quiet instant where a person either repeats their past or steps into something new. Each line should create a rising sensation that something important is happening right now, and the reader knows it. The goal is to build hooks that make the reader feel the gravity of a moment that could change everything if they allow it."
+            },
+            {
+                number: 44,
+                title: "Daily Life Snapshot Prompt",
+                summary: "Build hooks that capture a tiny moment from the reader's life so precisely it feels stolen from their day.",
+                text: "I have a product about [keyword]. Act as an emotional truth reflector who specializes in showing people the inner realities they avoid, minimize, or blur. Generate 10 emotional mirror hooks that reveal an inner truth the reader hasn't fully faced but deep down knows is shaping their life. These hooks must land with the quiet sting of recognition, the kind that makes the reader pause because the reflection feels too honest to dismiss. Use language that surfaces overlooked emotions, suppressed realizations, or personal contradictions with clean, unfiltered clarity. Each line should create a moment where the reader sees themselves in a way that feels both confronting and freeing. The goal is to craft hooks that mirror back the unnoticed truth, giving the reader a flash of self awareness that pulls them deeper because they can't unsee what was just revealed."
+            },
+            {
+                number: 45,
+                title: "Pattern Recognition Trigger Prompt",
+                summary: "Create hooks that reveal a behavior pattern the reader repeats without noticing until now.",
+                text: "I have a product about [keyword]. Act as a behavioral friction analyst who specializes in revealing the precise moment where a person's momentum dies. Generate 10 friction point hooks that pinpoint the exact place where the reader gets stuck, stalls out, or loses drive. These hooks must feel like naming the micro moment where forward motion collapses: the hesitation before taking action, the instant a good intention dissolves, the moment their energy drains, or the place where discipline breaks down. Use language that captures the emotional and cognitive snag — the subtle inner resistance that keeps them looping the same patterns. Each line should create the uncomfortable clarity of realizing exactly where things fall apart. The goal is to produce hooks that show the reader the exact friction point sabotaging their progress, making them keep reading because the line hit exactly where they needed awareness most."
+            },
+            {
+                number: 46,
+                title: "If This Is You Prompt",
+                summary: "Produce hooks that make the reader recognize themselves instantly by presenting a behavior that matches them perfectly.",
+                text: "I have a product about [keyword]. Act as an emotional inconsistency profiler who identifies the gap between what people feel and what they actually do. Generate 10 emotional contradiction hooks that expose the mismatched feeling-behavior pairs the reader lives with — wanting change but avoiding action, caring but not showing it, believing they're capable but acting small. These hooks must feel like catching the reader in a quiet moment of honesty, the kind where they realize their behavior is betraying their true emotional state. Use language that highlights the tension between intention and action, desire and avoidance, confidence and doubt, or clarity and inconsistency. Each line should feel like a mirror held up at the exact angle that reveals what they normally overlook. The goal is to craft hooks that make the reader feel both exposed and relieved, pushing them forward because the contradiction can't stay hidden anymore."
+            },
+            {
+                number: 47,
+                title: "Painfully Accurate Prompt",
+                summary: "Build hooks that hit with such accuracy the reader feels slightly uncomfortable but fully engaged.",
+                text: "I have a product about [keyword]. Act as a psychological clarity specialist who knows how to surface insights people overlook about themselves. Generate 10 psychological reveal hooks that expose a truth the reader has been circling around but never clearly seen. These hooks must create the sensation of an internal click, as if a missing piece finally dropped into place. Use language that shines light on unconscious habits, blind spots, overlooked strengths, emotional patterns, or misunderstood motivations with clean accuracy. Each line should produce that unmistakable moment where the reader thinks Wait, that is actually me. The goal is to craft hooks that deliver instant clarity, forcing the reader to lean forward because the new insight feels too sharp and too true to ignore."
+            },
+            {
+                number: 48,
+                title: "Secret Struggle Line Prompt",
+                summary: "Create hooks that call out a struggle the reader deals with privately, making them feel understood.",
+                text: "I have a product about [keyword]. Act as a reality perception engineer who specializes in tilting the way people see their own situations. Generate 10 reality shift hooks that make the reader question the perspective they have been using, the assumptions they take for granted, and the story they have been telling themselves. These hooks must create a mental wobble, a feeling that something they were sure about might not actually be accurate. Use language that repositions their challenges, reframes their habits, flips their interpretation of events, or reveals unexpected angles that change the meaning of what they thought they understood. Each line should produce a subtle but undeniable tilt, as if the reader is seeing their life through a slightly altered lens. The goal is to create hooks that make the reader feel like their internal map just shifted, pulling them deeper because they need to understand what this new angle reveals."
+            },
+            {
+                number: 49,
+                title: "Quiet Pain Reflection Prompt",
+                summary: "Produce hooks that touch on a subtle pain point the reader usually pushes aside.",
+                text: "I have a product about [keyword]. Act as a deep internal state facilitator who specializes in triggering subtle but powerful psychological shifts. Generate 10 inner shift hooks that make the reader feel as if something inside them just moved into a new position, revealing a different emotional or mental alignment. These hooks must create a sensation of personal evolution happening in real time, a quiet but undeniable internal nudge that signals transformation beginning beneath their awareness. Use language that evokes internal expansion, new clarity, tension dissolving, or a pattern clicking into a new shape. Each line should make the reader feel a fresh internal presence or a new sense of self starting to emerge. The goal is to craft hooks that produce an unmistakable inner movement, the kind that feels like the beginning of becoming someone new."
+            },
+            {
+                number: 50,
+                title: "This Is Why You Feel Called Out Prompt",
+                summary: "Build hooks that intentionally make the reader feel exposed, seen, and slightly embarrassed in a way that keeps them locked in.",
+                text: "I have a product about [keyword]. Act as an emotional pressure architect who understands the growing tension people feel when stuck in the same habits and cycles. Generate 10 internal pressure hooks that highlight the emotional buildup that happens when the reader knows they cannot keep living the same way. These hooks must capture the tightness, inner strain, rising urgency, or bottled frustration that grows from delaying change. Use language that brings awareness to the emotional load, the heaviness of inaction, the discomfort of staying the same, and the increasing pressure that demands release. Each line should make the reader feel the weight rising inside them, a pressure so strong they can no longer ignore it. The goal is to create hooks that make the reader feel the intensity of staying the same until they are ready to break through."
+            },
+            {
+                number: 51,
+                title: "Forward Pull Momentum Prompt",
+                summary: "Create hooks that pull the reader forward with a sense of motion they can feel. The content should feel like it is dragging them into the next line.",
+                text: "I have a product about [keyword]. Act as an internal awakening specialist who knows how to trigger sudden moments of awareness that feel like a mental sunrise breaking through fog. Generate 10 internal awakening hooks designed to snap the reader into a higher level of clarity, as if they just opened their eyes to a truth that was sitting right in front of them. These hooks must create a feeling of brightness, illumination, and sudden recognition — the exact sensation of waking up to something they can never unsee again. Use language that reveals overlooked truths, hidden motivations, quiet realizations, or emotional shifts that rise like light over the horizon. Each line should make the reader feel a new form of consciousness turning on inside them. The goal is to craft hooks that awaken the mind instantly and make the reader feel like awareness just clicked into place."
+            },
+            {
+                number: 52,
+                title: "Breadcrumb Trail Prompt",
+                summary: "Build hooks that drop mini clues, creating a trail the reader feels compelled to follow.",
+                text: "I have a product about [keyword]. Act as an identity tension strategist who understands the emotional pressure that builds in the gap between who someone currently is and who they know they are meant to become. Generate 10 identity tension hooks that highlight the quiet but undeniable friction between the reader's present self and their aspirational self. These hooks must feel like a subtle confrontation with their own potential, the uncomfortable awareness that the version they want to be is waiting for them to catch up. Use language that exposes the discrepancy between intention and reality, capability and action, identity and behavior. Each line should make the reader feel the pull toward who they could be and the discomfort of not being there yet. The goal is to create hooks that intensify the desire to close that identity gap right now."
+            },
+            {
+                number: 53,
+                title: "Loop Carryover Prompt",
+                summary: "Create hooks that end with unresolved tension so the reader must move to the next line for closure.",
+                text: "I have a product about [keyword]. Act as a suppressed truth excavator who specializes in pulling forward the exact thoughts people feel but rarely allow themselves to face. Generate 10 suppressed truth hooks that surface a deep internal recognition the reader normally keeps buried or strategically avoids. These hooks must feel sharply revealing, like exposing a truth the reader didn't realize they were hiding from themselves. Use language that taps into quiet fears, unspoken desires, internal contradictions, emotional avoidance, or the unacknowledged truths that shape their behavior beneath awareness. Each line should create a moment where the reader feels seen in a way that is both uncomfortable and relieving, like having a truth named that they didn't want to admit but needed to hear. The goal is to craft hooks that bring the reader face to face with something they already know deep down but haven't confronted until now."
+            },
+            {
+                number: 54,
+                title: "Next Line Hunger Prompt",
+                summary: "Produce hooks that plant micro cravings for the next piece of information.",
+                text: "I have a product about [keyword]. Act as an emotional inevitability engineer who understands how to create the feeling of being pulled forward by something larger than the reader's resistance. Generate 10 emotional gravity hooks that create a sense of irresistible pull, as if the next step is the natural outcome of everything the reader has felt, wanted, or avoided up to this moment. These hooks must evoke momentum, inevitability, destiny, or the magnetic draw of a path that feels like it's already unfolding. Use language that makes the reader feel like they are being carried into the next phase, guided by an emotional current they can't ignore. Each line should create a feeling that moving forward is not a choice but a gravitational pull that has already started. The goal is to craft hooks that make action feel unavoidable in the most compelling way possible."
+            },
+            {
+                number: 55,
+                title: "Narrative Slide Prompt",
+                summary: "Build hooks that make the content feel slippery and easy to consume so scrolling becomes automatic.",
+                text: "I have a product about [keyword]. Act as an identity exposure specialist who knows how to reveal the version of a person they keep just out of sight because it feels too honest, too raw, or too accurate. Generate 10 identity exposure hooks that name the version of the reader they pretend not to be, the hidden self underneath the social mask. These hooks must feel like pulling back a curtain on the truth of their motivations, fears, ambitions, contradictions, or desires — the parts they quietly know are real but keep contained. Use language that creates a moment of internal recognition the reader can't deny, as if you're naming a hidden identity they've been managing instead of embodying. Each line should feel exposed yet precise, like catching a reflection they've avoided meeting. The goal is to craft hooks that confront the reader with who they are beneath the mask in a way that pulls them deeper."
+            },
+            {
+                number: 56,
+                title: "Scrolling Compulsion Prompt",
+                summary: "Create hooks that attach emotional pressure to scrolling, making stopping feel uncomfortable.",
+                text: "I have a product about [keyword]. Act as an emotional equilibrium disruptor who specializes in revealing the mismatch between how people feel inside and what their outer life reflects. Generate 10 emotional imbalance hooks that expose the places where the reader's feelings, results, actions, and identity are out of sync. These hooks must create a productive destabilization — the kind that shakes loose denial and forces clarity. Use language that highlights emotional contradictions, internal misalignment, stalled potential, or the gap between internal truth and external behavior. Each line should make the reader feel that something is off balance and can no longer stay that way. The goal is to craft hooks that unsettle the reader just enough to push them toward correction, alignment, and forward motion."
+            },
+            {
+                number: 57,
+                title: "Flow Lock Prompt",
+                summary: "Build hooks that lock the reader into a narrative rhythm that feels too good to break.",
+                text: "I have a product about [keyword]. Act as an emotional alignment facilitator who specializes in helping people feel their inner world slide into the correct position. Generate 10 emotional alignment hooks that create the sensation of things finally lining up inside the reader, as if scattered feelings, thoughts, and intentions are falling into a clean, unified direction. These hooks must feel grounding, stabilizing, and clarifying, the emotional equivalent of everything clicking into place. Use language that evokes inner settling, restored balance, centeredness, and the relief of feeling aligned with the truth they have been avoiding or resisting. Each line should make the reader feel a calm shift toward internal coherence, the sense that they are finally in position for progress. The goal is to craft hooks that make the reader feel aligned at the deepest emotional level, ready to move forward with clarity."
+            },
+            {
+                number: 58,
+                title: "Continuation Trigger Prompt",
+                summary: "Produce hooks that signal the reader that something important is coming next, forcing momentum.",
+                text: "I have a product about [keyword]. Act as an internal conflict investigator who knows how to reveal the silent war happening inside a person. Generate 10 internal conflict hooks that expose the competing motivations, fears, desires, and impulses battling within the reader. These hooks must make the reader feel the pressure of contradictions that pull them in opposite directions even when they pretend everything is fine. Use language that brings the quiet struggle to the surface, highlighting tension between action and avoidance, courage and doubt, discipline and distraction, ambition and fear. Each line should make the reader feel seen in a way that uncovers the battle they usually keep hidden. The goal is to create hooks that shine a light on the internal war, making the reader crave resolution and forward movement."
+            },
+            {
+                number: 59,
+                title: "Curiosity Cascade Prompt",
+                summary: "Create hooks that build multiple tiny curiosity spikes in a row so the reader keeps moving to satisfy each one.",
+                text: "I have a product about [keyword]. Act as an emotional threshold architect who specializes in building moments where a person feels themselves stepping into a new internal space. Generate 10 emotional doorway hooks that give the reader the unmistakable sensation of crossing from one state of being into another — from confusion into clarity, from hesitation into readiness, from avoidance into awareness. These hooks must feel like a shift in atmosphere, a transition point, a psychological doorway that opens into a deeper version of themselves. Use language that evokes crossing, entering, unlocking, stepping through, or leaving the old behind. Each line should create a subtle but powerful feeling of beginning a new chapter internally. The goal is to craft hooks that make the reader feel they are stepping into a new emotional room and cannot go back the same way they came."
+            },
+            {
+                number: 60,
+                title: "Narrative Cliff Prompt",
+                summary: "Build hooks that feel like micro cliffhangers at the end of each line, pulling the reader through the content like a chain.",
+                text: "I have a product about [keyword]. Act as a quiet obsession engineer who knows how to plant ideas that echo in the reader's mind long after they stop reading. Generate 10 quiet obsession hooks that create a soft but relentless pull, a lingering mental presence that keeps resurfacing no matter what the reader tries to focus on. These hooks must feel sticky, whispery, and persistent — the kind of lines that repeat themselves in the reader's head without permission. Use language that leaves a ghost imprint, a psychological hum, or a soft mental loop that keeps tugging at the reader's attention. Each line should feel like something they cannot quite put down or walk away from. The goal is to craft hooks that build a low-frequency obsession, quietly pulling them back to the product, the idea, or the next step until taking action becomes inevitable."
+            }
+        ];
+
+        function init() {
+            // Section 1 initialization
+            const section1Data = promptsData.filter(p => p.number >= 1 && p.number <= 10);
+            const section1Container = document.getElementById('section1Container');
+            section1Container.innerHTML = section1Data.map((prompt) => {
+                const idx = promptsData.findIndex(p => p.number === prompt.number);
+                return `
+                    <div class="prompt-card">
+                        <div class="prompt-number">#${prompt.number}</div>
+                        <div class="prompt-title">${prompt.title}</div>
+                        <div class="prompt-summary">${prompt.summary}</div>
+                        <div class="prompt-text" data-prompt="${idx}">
+                            ${prompt.text}
+                        </div>
+                        <div class="prompt-actions">
+                            <button class="btn expand-btn" onclick="toggleExpand(${idx})">
+                                Expand
+                            </button>
+                            <button class="btn copy-btn" onclick="copyPrompt(${idx})">
+                                📋 Copy
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Section 2 initialization
+            const section2Data = promptsData.filter(p => p.number >= 11 && p.number <= 20);
+            const section2Container = document.getElementById('section2Container');
+            section2Container.innerHTML = section2Data.map((prompt) => {
+                const idx = promptsData.findIndex(p => p.number === prompt.number);
+                return `
+                    <div class="prompt-card">
+                        <div class="prompt-number">#${prompt.number}</div>
+                        <div class="prompt-title">${prompt.title}</div>
+                        <div class="prompt-summary">${prompt.summary}</div>
+                        <div class="prompt-text" data-prompt="${idx}">
+                            ${prompt.text}
+                        </div>
+                        <div class="prompt-actions">
+                            <button class="btn expand-btn" onclick="toggleExpand(${idx})">
+                                Expand
+                            </button>
+                            <button class="btn copy-btn" onclick="copyPrompt(${idx})">
+                                📋 Copy
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Section 3 initialization
+            const section3Data = promptsData.filter(p => p.number >= 21 && p.number <= 30);
+            const section3Container = document.getElementById('section3Container');
+            section3Container.innerHTML = section3Data.map((prompt) => {
+                const idx = promptsData.findIndex(p => p.number === prompt.number);
+                return `
+                    <div class="prompt-card">
+                        <div class="prompt-number">#${prompt.number}</div>
+                        <div class="prompt-title">${prompt.title}</div>
+                        <div class="prompt-summary">${prompt.summary}</div>
+                        <div class="prompt-text" data-prompt="${idx}">
+                            ${prompt.text}
+                        </div>
+                        <div class="prompt-actions">
+                            <button class="btn expand-btn" onclick="toggleExpand(${idx})">
+                                Expand
+                            </button>
+                            <button class="btn copy-btn" onclick="copyPrompt(${idx})">
+                                📋 Copy
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Section 4 initialization
+            const section4Data = promptsData.filter(p => p.number >= 31 && p.number <= 40);
+            const section4Container = document.getElementById('section4Container');
+            section4Container.innerHTML = section4Data.map((prompt) => {
+                const idx = promptsData.findIndex(p => p.number === prompt.number);
+                return `
+                    <div class="prompt-card">
+                        <div class="prompt-number">#${prompt.number}</div>
+                        <div class="prompt-title">${prompt.title}</div>
+                        <div class="prompt-summary">${prompt.summary}</div>
+                        <div class="prompt-text" data-prompt="${idx}">
+                            ${prompt.text}
+                        </div>
+                        <div class="prompt-actions">
+                            <button class="btn expand-btn" onclick="toggleExpand(${idx})">
+                                Expand
+                            </button>
+                            <button class="btn copy-btn" onclick="copyPrompt(${idx})">
+                                📋 Copy
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Section 5 initialization
+            const section5Data = promptsData.filter(p => p.number >= 41 && p.number <= 50);
+            const section5Container = document.getElementById('section5Container');
+            section5Container.innerHTML = section5Data.map((prompt) => {
+                const idx = promptsData.findIndex(p => p.number === prompt.number);
+                return `
+                    <div class="prompt-card">
+                        <div class="prompt-number">#${prompt.number}</div>
+                        <div class="prompt-title">${prompt.title}</div>
+                        <div class="prompt-summary">${prompt.summary}</div>
+                        <div class="prompt-text" data-prompt="${idx}">
+                            ${prompt.text}
+                        </div>
+                        <div class="prompt-actions">
+                            <button class="btn expand-btn" onclick="toggleExpand(${idx})">
+                                Expand
+                            </button>
+                            <button class="btn copy-btn" onclick="copyPrompt(${idx})">
+                                📋 Copy
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Section 6 initialization
+            const section6Data = promptsData.filter(p => p.number >= 51 && p.number <= 60);
+            const section6Container = document.getElementById('section6Container');
+            section6Container.innerHTML = section6Data.map((prompt) => {
+                const idx = promptsData.findIndex(p => p.number === prompt.number);
+                return `
+                    <div class="prompt-card">
+                        <div class="prompt-number">#${prompt.number}</div>
+                        <div class="prompt-title">${prompt.title}</div>
+                        <div class="prompt-summary">${prompt.summary}</div>
+                        <div class="prompt-text" data-prompt="${idx}">
+                            ${prompt.text}
+                        </div>
+                        <div class="prompt-actions">
+                            <button class="btn expand-btn" onclick="toggleExpand(${idx})">
+                                Expand
+                            </button>
+                            <button class="btn copy-btn" onclick="copyPrompt(${idx})">
+                                📋 Copy
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderPrompts() {
+            const keyword = document.getElementById('keywordInput').value.trim() || '[keyword]';
+            
+            // Section 1
+            const section1Data = promptsData.filter(p => p.number >= 1 && p.number <= 10);
+            const section1Container = document.getElementById('section1Container');
+            section1Container.innerHTML = section1Data.map((prompt) => {
+                const displayText = prompt.text.replace(/\[keyword\]/g, keyword);
+                const idx = promptsData.findIndex(p => p.number === prompt.number);
+                return `
+                    <div class="prompt-card">
+                        <div class="prompt-number">#${prompt.number}</div>
+                        <div class="prompt-title">${prompt.title}</div>
+                        <div class="prompt-summary">${prompt.summary}</div>
+                        <div class="prompt-text" data-prompt="${idx}">
+                            ${displayText}
+                        </div>
+                        <div class="prompt-actions">
+                            <button class="btn expand-btn" onclick="toggleExpand(${idx})">
+                                Expand
+                            </button>
+                            <button class="btn copy-btn" onclick="copyPrompt(${idx})">
+                                📋 Copy
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Section 2
+            const section2Data = promptsData.filter(p => p.number >= 11 && p.number <= 20);
+            const section2Container = document.getElementById('section2Container');
+            section2Container.innerHTML = section2Data.map((prompt) => {
+                const displayText = prompt.text.replace(/\[keyword\]/g, keyword);
+                const idx = promptsData.findIndex(p => p.number === prompt.number);
+                return `
+                    <div class="prompt-card">
+                        <div class="prompt-number">#${prompt.number}</div>
+                        <div class="prompt-title">${prompt.title}</div>
+                        <div class="prompt-summary">${prompt.summary}</div>
+                        <div class="prompt-text" data-prompt="${idx}">
+                            ${displayText}
+                        </div>
+                        <div class="prompt-actions">
+                            <button class="btn expand-btn" onclick="toggleExpand(${idx})">
+                                Expand
+                            </button>
+                            <button class="btn copy-btn" onclick="copyPrompt(${idx})">
+                                📋 Copy
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Section 3
+            const section3Data = promptsData.filter(p => p.number >= 21 && p.number <= 30);
+            const section3Container = document.getElementById('section3Container');
+            section3Container.innerHTML = section3Data.map((prompt) => {
+                const displayText = prompt.text.replace(/\[keyword\]/g, keyword);
+                const idx = promptsData.findIndex(p => p.number === prompt.number);
+                return `
+                    <div class="prompt-card">
+                        <div class="prompt-number">#${prompt.number}</div>
+                        <div class="prompt-title">${prompt.title}</div>
+                        <div class="prompt-summary">${prompt.summary}</div>
+                        <div class="prompt-text" data-prompt="${idx}">
+                            ${displayText}
+                        </div>
+                        <div class="prompt-actions">
+                            <button class="btn expand-btn" onclick="toggleExpand(${idx})">
+                                Expand
+                            </button>
+                            <button class="btn copy-btn" onclick="copyPrompt(${idx})">
+                                📋 Copy
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Section 4
+            const section4Data = promptsData.filter(p => p.number >= 31 && p.number <= 40);
+            const section4Container = document.getElementById('section4Container');
+            section4Container.innerHTML = section4Data.map((prompt) => {
+                const displayText = prompt.text.replace(/\[keyword\]/g, keyword);
+                const idx = promptsData.findIndex(p => p.number === prompt.number);
+                return `
+                    <div class="prompt-card">
+                        <div class="prompt-number">#${prompt.number}</div>
+                        <div class="prompt-title">${prompt.title}</div>
+                        <div class="prompt-summary">${prompt.summary}</div>
+                        <div class="prompt-text" data-prompt="${idx}">
+                            ${displayText}
+                        </div>
+                        <div class="prompt-actions">
+                            <button class="btn expand-btn" onclick="toggleExpand(${idx})">
+                                Expand
+                            </button>
+                            <button class="btn copy-btn" onclick="copyPrompt(${idx})">
+                                📋 Copy
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Section 5
+            const section5Data = promptsData.filter(p => p.number >= 41 && p.number <= 50);
+            const section5Container = document.getElementById('section5Container');
+            section5Container.innerHTML = section5Data.map((prompt) => {
+                const displayText = prompt.text.replace(/\[keyword\]/g, keyword);
+                const idx = promptsData.findIndex(p => p.number === prompt.number);
+                return `
+                    <div class="prompt-card">
+                        <div class="prompt-number">#${prompt.number}</div>
+                        <div class="prompt-title">${prompt.title}</div>
+                        <div class="prompt-summary">${prompt.summary}</div>
+                        <div class="prompt-text" data-prompt="${idx}">
+                            ${displayText}
+                        </div>
+                        <div class="prompt-actions">
+                            <button class="btn expand-btn" onclick="toggleExpand(${idx})">
+                                Expand
+                            </button>
+                            <button class="btn copy-btn" onclick="copyPrompt(${idx})">
+                                📋 Copy
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Section 6
+            const section6Data = promptsData.filter(p => p.number >= 51 && p.number <= 60);
+            const section6Container = document.getElementById('section6Container');
+            section6Container.innerHTML = section6Data.map((prompt) => {
+                const displayText = prompt.text.replace(/\[keyword\]/g, keyword);
+                const idx = promptsData.findIndex(p => p.number === prompt.number);
+                return `
+                    <div class="prompt-card">
+                        <div class="prompt-number">#${prompt.number}</div>
+                        <div class="prompt-title">${prompt.title}</div>
+                        <div class="prompt-summary">${prompt.summary}</div>
+                        <div class="prompt-text" data-prompt="${idx}">
+                            ${displayText}
+                        </div>
+                        <div class="prompt-actions">
+                            <button class="btn expand-btn" onclick="toggleExpand(${idx})">
+                                Expand
+                            </button>
+                            <button class="btn copy-btn" onclick="copyPrompt(${idx})">
+                                📋 Copy
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function handleGenerate() {
+            const keyword = document.getElementById('keywordInput').value.trim();
+            
+            if (!keyword) {
+                alert('Please enter a keyword first!');
+                return;
+            }
+            
+            renderPrompts();
+            showToast('Prompts Generated!');
+        }
+
+        function toggleExpand(idx) {
+            const promptEl = document.querySelector(`[data-prompt="${idx}"]`);
+            const btn = event.target;
+            
+            promptEl.classList.toggle('expanded');
+            btn.textContent = promptEl.classList.contains('expanded') ? 'Collapse' : 'Expand';
+        }
+
+        function copyPrompt(idx) {
+            const keyword = document.getElementById('keywordInput').value.trim() || '[keyword]';
+            const originalText = promptsData[idx].text;
+            const finalText = originalText.replace(/\[keyword\]/g, keyword);
+            
+            navigator.clipboard.writeText(finalText).then(() => {
+                showToast('PROMPT COPIED!');
+            }).catch(err => {
+                console.error('Copy failed:', err);
+                alert('Failed to copy. Please try again.');
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        init();
+    </script>
+</body>
+</html>
