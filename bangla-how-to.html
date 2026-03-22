@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bangla How-to Article Genie</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { max-width: 1200px; width: 100%; margin: 0 auto; flex-grow: 1; }
+    header { text-align: center; margin-bottom: 30px; }
+    h1 { font-size: 2.5rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; text-transform: uppercase; margin-bottom: 20px; }
+    
+    /* GPT Button */
+    .bot-button-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 50px;
+    }
+    .gpt-btn {
+      padding: 12px 35px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      background-color: var(--accent-primary);
+      color: var(--bg-gradient-end);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 15px rgba(34, 211, 238, 0.3);
+      text-transform: uppercase;
+    }
+    .gpt-btn:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(34, 211, 238, 0.4);
+    }
+
+    .prompts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 25px;
+    }
+
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 25px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .prompt-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px var(--shadow-color);
+    }
+    .prompt-card h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent-primary);
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 15px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+      border: 1px solid var(--card-border);
+      line-height: 1.5;
+      flex-grow: 1;
+      max-height: 350px;
+      overflow-y: auto;
+    }
+    /* Scrollbar */
+    .prompt-text::-webkit-scrollbar { width: 6px; }
+    .prompt-text::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
+    .prompt-text::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 3px; }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 10px 18px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--bg-gradient-end);
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); transform: scale(1.05); }
+    .copy-button.copied { background-color: var(--accent-success); }
+    
+    .icon { width: 16px; height: 16px; }
+
+    footer { text-align: center; padding: 60px 0 20px; color: var(--text-secondary); font-size: 0.9rem; }
+    @media (max-width: 600px) { h1 { font-size: 2rem; } .prompts-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Bangla How-to Article</h1>
+    </header>
+
+    <div class="bot-button-container">
+      <a href="https://chat.openai.com/g/g-iznqZS1p6-easy-ai-traffic-writer" target="_blank" class="gpt-btn">
+        <svg class="icon" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657 1.414 1.414L2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"/></svg>
+        Open GPT
+      </a>
+    </div>
+
+    <main class="prompts-grid">
+      <!-- Prompt 1 -->
+      <div class="prompt-card">
+        <h3>1. Natural Bangla Translation</h3>
+        <pre id="p1" class="prompt-text">Please rewrite it in the most spontaneous and natural sounding modern, everyday conversational Bengali as spoken in Kolkata, West Bengal, India that can be understood by an 21 year old but contains the international standards of language.
+
+• Always use the formal “আপনি”, not the informal “তুমি.” The address is formal, but the tone should remain warm, conversational, and approachable.
+• The voice should feel like a close friend and a trusted authority, speaking one-on-one with the reader in a natural, face-to-face style.
+
+Tone: Bold & direct</pre>
+        <button class="copy-button" data-target="p1"><span class="btn-text">Copy</span></button>
+      </div>
+
+      <!-- Prompt 2 -->
+      <div class="prompt-card">
+        <h3>2. Micro-Level Execution Guide</h3>
+        <pre id="p2" class="prompt-text">Sharpen the content adding step-by-step execution guide sections wherever there's room of it.
+
+Do NOT rewrite from scratch.  
+Do NOT change the core meaning.  
+Do NOT remove any important information.  
+
+Your job is to EXPAND and RESTRUCTURE the existing content into micro-level actionable steps for complete beginners.
+
+STRUCTURE RULE:
+- Each step of Chapter 4 must become an independent section
+- Each step must be clearly separated and labeled
+
+STEP FORMAT (MANDATORY):
+
+Step #X: [Start with a command verb + clear action]
+
+What to do:
+- [Clear instruction based on the original content]
+
+Exactly how to do it:
+- Break the action into micro-steps:
+  - Where to go (exact website/page)
+  - What to click (exact button/link name)
+  - What to type (if required)
+  - Do NOT skip transitions (login → dashboard → settings, etc.)
+- Write each instruction as if you are guiding someone in real-time while they are using their phone or computer
+- Use real-time guiding phrases such as:
+  - “Now click on…”
+  - “You’ll see…”
+  - “On your screen…”
+  - “At the top/bottom…”
+  - “Once you do that…”
+  - “Right after that…”
+  - “Make sure you…”
+- Keep instructions sequential and flowing, like live guidance
+
+What you should see:
+- Describe the expected result in real-time language
+- Use phrases like:
+  - “Now your screen should show…”
+  - “You’ll notice that…”
+  - “At this point, you should see…”
+
+AI Prompt for This Step:
+- Provide a ready-to-use prompt specific to this step, if applicable and needed
+- Must include placeholders like [your input]
+- Must NOT be generic
+- Must produce structured, usable output
+- Must support execution (not replace the action)
+
+STRICT RULES:
+- Number each step (Step #1, Step #2, Step #3…)
+- Start each step with a command verb (Open, Click, Type, Select, Scroll, etc.)
+- Assume the reader has zero prior knowledge
+- Break every major action into micro-steps
+- Avoid vague phrases like “log in” or “go to dashboard” — always expand them
+- Maintain a real-time guiding tone throughout, as if the user is following along on their device right now
+
+VOICE ENFORCEMENT RULE (CRITICAL):
+- Write as if you are sitting beside the user and guiding them live
+- Do NOT sound like a manual or documentation
+- Do NOT compress steps into summaries
+- Every instruction must feel immediate, actionable, and visual
+
+IMPORTANT:
+- Do not merge multiple actions into one step
+- Do not skip any step from the original content
+- Only expand and clarify — do not introduce unrelated steps</pre>
+        <button class="copy-button" data-target="p2"><span class="btn-text">Copy</span></button>
+      </div>
+
+      <!-- Prompt 3 -->
+      <div class="prompt-card">
+        <h3>3. Review and Rate</h3>
+        <pre id="p3" class="prompt-text">Please review and rate this content. Especially rate its user utility in terms of their capability building, and content value.</pre>
+        <button class="copy-button" data-target="p3"><span class="btn-text">Copy</span></button>
+      </div>
+
+      <!-- Prompt 4 -->
+      <div class="prompt-card">
+        <h3>4. Viral Potential Upgrade</h3>
+        <pre id="p4" class="prompt-text">upgrade this with stronger hooks, deeper insights, and higher viral potential.</pre>
+        <button class="copy-button" data-target="p4"><span class="btn-text">Copy</span></button>
+      </div>
+
+      <!-- Prompt 5 -->
+      <div class="prompt-card">
+        <h3>5. Pattern Breaker Hook</h3>
+        <pre id="p5" class="prompt-text">The post must start with a stronger, bold and direct "Pattern Breaker" hook -> “Problem + Bold claim”</pre>
+        <button class="copy-button" data-target="p5"><span class="btn-text">Copy</span></button>
+      </div>
+
+      <!-- Prompt 6 -->
+      <div class="prompt-card">
+        <h3>6. Human Feel Audit</h3>
+        <pre id="p6" class="prompt-text">Please review and rate this content. Especially rate its user utility in terms of their capability building, human feel and content value.</pre>
+        <button class="copy-button" data-target="p6"><span class="btn-text">Copy</span></button>
+      </div>
+
+      <!-- Prompt 7 -->
+      <div class="prompt-card">
+        <h3>7. Punchy Opening Opt</h3>
+        <pre id="p7" class="prompt-text">optimize the human feel with: Opening is strong, but could be more punchy + pattern-breaking</pre>
+        <button class="copy-button" data-target="p7"><span class="btn-text">Copy</span></button>
+      </div>
+
+      <!-- Prompt 8 -->
+      <div class="prompt-card">
+        <h3>8. Spontaneity Check</h3>
+        <pre id="p8" class="prompt-text">Please review it and find the lines still feel a bit “crafted” vs spontaneous. Also suggest me how the opening could be more punchy, pattern breaking, and scroll-stopping.</pre>
+        <button class="copy-button" data-target="p8"><span class="btn-text">Copy</span></button>
+      </div>
+
+      <!-- Prompt 9 -->
+      <div class="prompt-card">
+        <h3>9. Final Optimization</h3>
+        <pre id="p9" class="prompt-text">Optimize the post complying all the recommendations you made in your previous prompt. Provide me the final blog post, and the word count of the optimized version.</pre>
+        <button class="copy-button" data-target="p9"><span class="btn-text">Copy</span></button>
+      </div>
+
+      <!-- Prompt 10 -->
+      <div class="prompt-card">
+        <h3>10. Non-Generic Section Titles</h3>
+        <pre id="p10" class="prompt-text">could you please add appropriate section titles? please don't use section title before the hook. These titles should not be generic. Each section title must be attractive and must deliver its promise.</pre>
+        <button class="copy-button" data-target="p10"><span class="btn-text">Copy</span></button>
+      </div>
+
+      <!-- Prompt 11 -->
+      <div class="prompt-card">
+        <h3>11. Psychology Layer</h3>
+        <pre id="p11" class="prompt-text">Please add a little more psychology and a stronger distribution layer to this blog post so that it can easily become a viral, bookmark-worthy guide.</pre>
+        <button class="copy-button" data-target="p11"><span class="btn-text">Copy</span></button>
+      </div>
+
+      <!-- Prompt 12 -->
+      <div class="prompt-card">
+        <h3>12. Mind-Striking Phrases</h3>
+        <pre id="p12" class="prompt-text">Find all the mind striking phrases that increase the curiosity or provide helpful tips in this content. Please provide a bullet list of those words / phrases with an one-line description of why it's mind striking</pre>
+        <button class="copy-button" data-target="p12"><span class="btn-text">Copy</span></button>
+      </div>
+
+      <!-- Prompt 13 -->
+      <div class="prompt-card">
+        <h3>13. Layout Preparation</h3>
+        <pre id="p13" class="prompt-text">Now please show me exactly how the blog post layouts would look (title, subtitle, section formatting, and closing line) — ready to paste into my blog draft editor.  Please don't use horizontal lines or dividers.</pre>
+        <button class="copy-button" data-target="p13"><span class="btn-text">Copy</span></button>
+      </div>
+
+      <!-- Prompt 14 -->
+      <div class="prompt-card">
+        <h3>14. 20 Viral Hooks</h3>
+        <pre id="p14" class="prompt-text">Turn these into 20 ready-to-use viral hook lines that I can directly use in my reels or blog.</pre>
+        <button class="copy-button" data-target="p14"><span class="btn-text">Copy</span></button>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    document.querySelectorAll('.copy-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-target');
+        const text = document.getElementById(targetId).textContent;
+        const btnText = button.querySelector('.btn-text');
+        const originalText = btnText.textContent;
+
+        navigator.clipboard.writeText(text).then(() => {
+          btnText.textContent = 'Copied!';
+          button.classList.add('copied');
+          setTimeout(() => {
+            btnText.textContent = originalText;
+            button.classList.remove('copied');
+          }, 2000);
+        }).catch(err => {
+          console.error('Failed to copy: ', err);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
