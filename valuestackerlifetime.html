@@ -1,0 +1,707 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Value Stacker - The $10K Offer Machine</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cf-orange: #ff6b35;
+            --cf-blue: #0066cc;
+            --cf-dark-blue: #003d7a;
+            --cf-yellow: #ffcc00;
+            --cf-green: #28a745;
+            --cf-red: #dc3545;
+            --cf-dark: #1a1a1a;
+            --cf-light: #f8f9fa;
+            --cf-gray: #6c757d;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #0066cc 0%, #003d7a 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(0, 102, 204, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 3px solid var(--cf-orange);
+            padding: 0.75rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .brand-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--cf-orange);
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+        }
+
+        .brand-icon::after {
+            content: '⚡';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid transparent;
+        }
+
+        .nav-link:hover {
+            color: white;
+            background: var(--cf-orange);
+            border-color: var(--cf-orange);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem 2rem;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            background: white;
+            padding: 4rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            border: 5px solid var(--cf-orange);
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: var(--cf-orange);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 25px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+            border: 3px solid var(--cf-yellow);
+        }
+
+        .header h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 700;
+            color: var(--cf-dark-blue);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header .subtitle {
+            font-size: 1.4rem;
+            color: var(--cf-gray);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .header .cta-text {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--cf-red);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+        }
+
+        /* Steps Container */
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .step-card {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 5px solid var(--cf-blue);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, var(--cf-orange), var(--cf-yellow), var(--cf-orange));
+        }
+
+        .step-card:hover {
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            border-color: var(--cf-orange);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--cf-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 800;
+            font-size: 2rem;
+            color: white;
+            margin-right: 1.5rem;
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
+            border: 5px solid var(--cf-yellow);
+        }
+
+        .step-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--cf-dark-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .step-description {
+            background: var(--cf-light);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            border-left: 6px solid var(--cf-blue);
+            font-size: 1rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        /* Input Sections */
+        .input-section {
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .input-group label {
+            font-weight: 800;
+            color: var(--cf-dark-blue);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            padding: 1.5rem;
+            background: white;
+            border: 3px solid var(--cf-blue);
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-family: inherit;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus {
+            outline: none;
+            border-color: var(--cf-orange);
+            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.2);
+        }
+
+        .input-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Button Styles - ALL IDENTICAL */
+        .btn {
+            background: linear-gradient(135deg, var(--cf-green), #32d74b);
+            color: white;
+            border: 3px solid var(--cf-yellow);
+            padding: 1.5rem 2rem;
+            border-radius: 50px;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+            min-width: 200px;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #218838, #28a745);
+            box-shadow: 0 15px 35px rgba(40, 167, 69, 0.6);
+        }
+
+        .btn-red {
+            background: linear-gradient(135deg, var(--cf-red), #e74c3c);
+            box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
+        }
+
+        .btn-red:hover {
+            background: linear-gradient(135deg, #c82333, #dc3545);
+            box-shadow: 0 15px 35px rgba(220, 53, 69, 0.6);
+        }
+
+        .btn.copied {
+            background: linear-gradient(135deg, #006400, #228B22);
+        }
+
+        .button-row {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        /* Prompt Display */
+        .prompt-container {
+            background: var(--cf-dark);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 3px solid var(--cf-orange);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .prompt-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--cf-orange), var(--cf-yellow), var(--cf-blue));
+        }
+
+        .prompt-text {
+            color: #f8f9fa;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 8rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .prompt-text::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3rem;
+            background: linear-gradient(transparent, var(--cf-dark));
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: relative;
+            pointer-events: none;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 24px;
+            height: 24px;
+            margin: -12px 0 0 -12px;
+            border: 3px solid var(--cf-yellow);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .nav-brand span {
+                font-size: 1.1rem;
+            }
+
+            .nav-links {
+                gap: 0.5rem;
+            }
+
+            .nav-link {
+                font-size: 0.8rem;
+                padding: 0.5rem 1rem;
+            }
+
+            .container {
+                padding: 5rem 1rem 1rem;
+            }
+
+            .header {
+                padding: 3rem 1.5rem;
+            }
+
+            .steps-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .step-card {
+                padding: 2rem;
+            }
+
+            .step-number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .step-title {
+                font-size: 1.8rem;
+            }
+
+            .btn {
+                padding: 1.2rem 1.5rem;
+                font-size: 0.9rem;
+                min-width: 180px;
+            }
+
+            .button-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .button-row .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-icon"></div>
+                <span>Value Stacker</span>
+            </div>
+            <div class="nav-links">
+                <a href="https://chat.openai.com" target="_blank" class="nav-link">ChatGPT</a>
+                <a href="https://claude.ai" target="_blank" class="nav-link">Claude</a>
+                <a href="https://gemini.google.com" target="_blank" class="nav-link">Gemini</a>
+                <a href="https://perplexity.ai" target="_blank" class="nav-link">Perplexity</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <div class="badge">🔥 EXCLUSIVE AI Digital Product MACHINE 🔥</div>
+            <h1>Value Stacker</h1>
+            <p class="subtitle">The ONLY Tool That Transforms ANY Keyword Into A $3,000+ Value Stack + Ready-To-Download Deliverables In Under 60 Seconds!</p>
+            <p class="cta-text">⚠️ WARNING: This Creates An UNFAIR Advantage! ⚠️</p>
+        </div>
+
+        <div class="steps-container">
+            <!-- Step 1 -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Stack Generator</div>
+                </div>
+                
+                <div class="step-description">
+                    <strong>🎯 INSTANT VALUE STACKS:</strong> This creates a stack of 15 INSANE deliverables in your chosen niche. Each item is written in dopamine-charged, sales-page copy that practically SELLS ITSELF. These aren't just stack items—they're ready-to-use sales page blurbs worth $197+ EACH!
+                </div>
+
+                <div class="input-section">
+                    <div class="input-group">
+                        <label for="keyword-input">🚀 Enter Your Keyword or Niche:</label>
+                        <input type="text" id="keyword-input" placeholder="weight loss, copywriting, Tony Robbins, social anxiety..." />
+                        <button class="btn" onclick="generatePrompt(1)">
+                            💰 GENERATE MY $3K STACK NOW! 💰
+                        </button>
+                    </div>
+                </div>
+
+                <div class="prompt-container" id="prompt-container-1" style="display: none;">
+                    <div class="prompt-text" id="prompt1"></div>
+                </div>
+
+                <div class="button-container" id="copy-section-1" style="display: none;">
+                    <button class="btn" onclick="copyPrompt(1)">
+                        <span id="button-text-1">📋 COPY STACK PROMPT</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Asset Generator</div>
+                </div>
+                
+                <div class="step-description">
+                    <strong>🎨 INSTANT DELIVERABLES:</strong> Takes ANY stack item and expands it into a COMPLETE deliverable. We're talking PDF-ready, professional assets that look like you spent WEEKS creating them. Each one is jaw-dropping and instantly valuable!
+                </div>
+
+                <div class="input-section">
+                    <div class="input-group">
+                        <label for="stack-input">💎 Paste Your Chosen Stack Item:</label>
+                        <textarea id="stack-input" placeholder="1. The PROFIT Framework ($297 Value) Description: The underground 5-step system that..."></textarea>
+                        <div class="button-row">
+                            <button class="btn" onclick="generatePrompt(2)">
+                                🎯 CREATE MY ASSET NOW! 🎯
+                            </button>
+                            <button class="btn btn-red" onclick="clearStackInput()">
+                                🗑️ ERASE
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prompt-container" id="prompt-container-2" style="display: none;">
+                    <div class="prompt-text" id="prompt2"></div>
+                </div>
+
+                <div class="button-container" id="copy-section-2" style="display: none;">
+                    <button class="btn" onclick="copyPrompt(2)">
+                        <span id="button-text-2">📋 COPY ASSET PROMPT</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function generatePrompt(stepNumber) {
+            const button = event.target;
+            const originalText = button.textContent;
+            const promptContainer = document.getElementById(`prompt-container-${stepNumber}`);
+            const copySection = document.getElementById(`copy-section-${stepNumber}`);
+            const promptElement = document.getElementById(`prompt${stepNumber}`);
+            
+            // Add loading state
+            button.classList.add('loading');
+            button.textContent = stepNumber === 1 ? '🔥 CREATING YOUR STACK...' : '🎨 BUILDING YOUR ASSET...';
+            
+            setTimeout(() => {
+                if (stepNumber === 1) {
+                    const keywordInput = document.getElementById('keyword-input');
+                    const keyword = keywordInput.value.trim();
+                    
+                    if (!keyword) {
+                        button.classList.remove('loading');
+                        button.textContent = originalText;
+                        alert('🚨 HOLD UP! Enter your keyword first to unleash the magic! 🚨');
+                        keywordInput.focus();
+                        return;
+                    }
+                    
+const promptTemplate = `You are a world-class offer creation strategist. The keyword/niche is: ${keyword}. Create a stack of 15 ultra-valuable, text-only deliverables that can be instantly created with ChatGPT. Deliverables must come from these categories: swipe files, checklists, cheat sheets, fill-in-the-blank templates, prompt packs, named frameworks (with a powerful acronym, but do not use the term “acronym-based” in the output), mini blueprints, scripts, action plans, micro-workbooks, and playbooks. Each item must feel like an advanced, expert-level shortcut or “cheat code” most people have never seen before, and each must be strong enough to stand alone as a premium micro-offer worth $97–$497. Avoid generic or overused ideas unless you give them a rare, insider twist that sparks curiosity and makes the deliverable feel exclusive. At least one item must be a named framework using an acronym, but do not reveal what the letters stand for in the description. Write each description in persuasive, high-energy, hype-driven sales-page style that drips with curiosity, dopamine, and urgency, making the reader feel like they’re discovering a hidden advantage. Tie every item directly to ${keyword} so it feels custom-made, specific, and painfully relevant to the target audience. Format exactly like this: 1. [Item Name] ($197 Value) Description: [High-energy, blind, sales-page style description loaded with curiosity and dopamine triggers].`;
+
+                    
+                    promptElement.textContent = promptTemplate;
+                } else {
+                    const stackInput = document.getElementById('stack-input');
+                    const stackItem = stackInput.value.trim();
+                    
+                    if (!stackItem) {
+                        button.classList.remove('loading');
+                        button.textContent = originalText;
+                        alert('🚨 WAIT! You need to paste a stack item from Step 1 first! 🚨');
+                        stackInput.focus();
+                        return;
+                    }
+                    
+const promptTemplate = `You are an elite content creation engine tasked with producing expert-grade deliverables. The stack item is: ${stackItem}. Expand this into a complete, professional, premium-quality asset that is 4–9 pages of text-only content, crafted to look like it was designed for paid distribution or as a high-ticket bonus. Break the asset into logical sections (overview, core content, examples, applications, advanced tips, conclusion) with detailed, skimmable content packed with practical insights, using headers, subheaders, bullet points, numbered lists, and short paragraphs for clarity. Write in an authoritative, high-energy style that feels like it belongs in a $497 training program or expert consulting package, with no fluff or filler—only useful, premium information. Deliver advanced strategies, insider knowledge, and rare shortcuts most people have never seen, ensuring each page creates “aha” moments. If the deliverable is a checklist, template, or worksheet, include multiple clear fill-in-the-blank sections or step-by-step action fields that are plug-and-play ready for immediate use. Provide a short “How to Apply” guide at the start or end to show exactly how the user can get results fast. Write in a clean, swipe-file inspired format with bold headers, short impactful sentences, and dopamine-charged phrasing that makes the reader feel they’re holding an insider cheat code. Everything written must be actionable, delivering frameworks, formulas, scripts, or exercises that can be put to work immediately. Always err on the side of more content, not less, by including examples, variations, and optional advanced applications to push length and depth toward the 9-page maximum. The final deliverable must be jaw-dropping, practical, professional, and instantly sellable as a standalone premium PDF, training workbook, or exclusive bonus.`;
+
+                    
+                    promptElement.textContent = promptTemplate;
+                }
+                
+                // Remove loading state and show content
+                button.classList.remove('loading');
+                button.textContent = originalText;
+                
+                // Show the prompt container and copy section
+                promptContainer.style.display = 'block';
+                copySection.style.display = 'block';
+                
+                // Smooth scroll to the prompt
+                setTimeout(() => {
+                    promptContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 200);
+                
+            }, 1500);
+        }
+
+        function copyPrompt(stepNumber) {
+            const promptText = document.getElementById(`prompt${stepNumber}`).textContent;
+            const button = document.querySelector(`#button-text-${stepNumber}`).parentElement;
+            const buttonText = document.getElementById(`button-text-${stepNumber}`);
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(promptText).then(() => {
+                // Add success animation
+                button.classList.add('copied');
+                
+                // Change button text with ClickFunnels flair
+                buttonText.innerHTML = stepNumber === 1 ? 
+                    '✅ STACK PROMPT COPIED! GO CRUSH IT! 🚀' : 
+                    '✅ ASSET PROMPT COPIED! TIME TO BUILD! 💎';
+                
+                // Reset button after 4 seconds
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    buttonText.innerHTML = stepNumber === 1 ? 
+                        '📋 COPY STACK PROMPT' : 
+                        '📋 COPY ASSET PROMPT';
+                }, 4000);
+                
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = promptText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                // Still show success message
+                button.classList.add('copied');
+                buttonText.innerHTML = stepNumber === 1 ? 
+                    '✅ STACK PROMPT COPIED! GO CRUSH IT! 🚀' : 
+                    '✅ ASSET PROMPT COPIED! TIME TO BUILD! 💎';
+                
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    buttonText.innerHTML = stepNumber === 1 ? 
+                        '📋 COPY STACK PROMPT' : 
+                        '📋 COPY ASSET PROMPT';
+                }, 4000);
+            });
+        }
+
+        // Clear stack input function
+        function clearStackInput() {
+            const stackInput = document.getElementById('stack-input');
+            const promptContainer = document.getElementById('prompt-container-2');
+            const copySection = document.getElementById('copy-section-2');
+            
+            // Clear the textarea
+            stackInput.value = '';
+            
+            // Hide the prompt and copy sections
+            promptContainer.style.display = 'none';
+            copySection.style.display = 'none';
+            
+            // Focus back to the textarea for easy pasting
+            stackInput.focus();
+        }
+    </script>
+</body>
+</html>
