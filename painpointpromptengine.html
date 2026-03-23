@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pain Point Triggers Prompt Engine</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #000000;
+            color: #F8C05D;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #F8C05D;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            color: #000000;
+        }
+
+        /* Title */
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        /* Form */
+        label {
+            font-size: 16px;
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #F8C05D;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #000000;
+            color: #F8C05D;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #333333;
+        }
+
+        /* Output Section */
+        .output-section {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff;
+            color: #000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .output-section h3 {
+            margin-bottom: 10px;
+        }
+
+        .output-section pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .copy-btn {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #000000;
+            color: #F8C05D;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background-color: #333333;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* Logo */
+        .logo {
+            width: 350px;
+            height: auto;
+            display: block;
+            margin: 0 auto 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://actionactivated.com/wp-content/uploads/painpointsaas.png" alt="Pain Point Engine Logo" class="logo">
+        <h1>Prompt Engine</h1>
+
+        <!-- Step 1: Find Pain Points -->
+        <label for="niche">Enter Your Niche/Keyword:</label>
+        <input type="text" id="niche" placeholder="e.g., Weight Loss">
+        <button onclick="generatePainPoints()">Generate Pain Points</button>
+
+        <!-- Step 2: Create Content -->
+        <label for="painPoint">Paste a Pain Point:</label>
+        <textarea id="painPoint" rows="4" placeholder="Paste a pain point here..."></textarea>
+        <button onclick="generateAllPrompts()">Generate All Prompts</button>
+
+        <!-- Output Section -->
+        <div id="output" class="output-section">
+            <h3>Output:</h3>
+            <div id="outputText">Your pain-point getting prompt will be displayed here in a moment...</div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 Pain Point Triggers Prompt Engine | Crafted With ❤️ for Marketers by Mark Hess
+    </footer>
+
+    <script>
+        function generatePainPoints() {
+            const niche = document.getElementById('niche').value;
+            const output = `You are a consumer psychology expert and an expert at uncovering deep psychological pain points. Your task is to identify the most intense the pain points people face with ${niche}, dive deep into their frustrations, fears, and struggles. What annoys them or feels too complicated? What intimidates them or makes them hesitate before starting? What do they find time-consuming, overwhelming, or draining? Explore what keeps them from feeling confident, prepared, or capable. What do they wish they understood better or had more support for? What discourages them or makes them second-guess their decisions? Consider their internal conflicts—what fears, insecurities, or emotional barriers hold them back? What unresolved doubts or past failures make them feel stuck, and what hidden regrets or anxieties prevent them from moving forward? What do they find unreliable, intimidating, or inconsistent? What do they feel they’ll never be good enough for, and what makes them feel powerless, judged, or inadequate? Look for the moments when they feel lost, confused, or disconnected. What makes them feel they’re constantly failing or falling short? What do they fear losing, neglecting, or sacrificing? Consider the unspoken struggles—what emotional burdens, fears of rejection, or subconscious doubts weigh them down? What do they feel they’ll never fully heal from, overcome, or achieve? Identify the blind spots, frustrations, and deeper emotional wounds that keep them from progressing, so their pain points are laid bare for a comprehensive understanding. Start with a summary and then create a list of 25 without separating them into sections. Beside each one create an internal dialog quote of what that person could be telling themselves. Use the niche/keyword within the internal dialog to make them directly related to the niche/keyword.`;
+
+            const container = document.getElementById('outputText');
+            container.innerHTML = `
+                <pre>${output}</pre>
+                <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling.innerText)">Copy Prompt</button>
+            `;
+        }
+
+        function generateAllPrompts() {
+            const painPoint = document.getElementById('painPoint').value;
+            const prompts = [
+                {
+                    title: "1. Long Form Content Generation",
+                    text: `You are a professional content strategist, expert copywriter, and creative storyteller. Write a 1,000-word blog post based on the following pain point: ${painPoint} and keeping in line with niche/keyword. Begin the post with a direct quote of the pain point, ensuring it resonates immediately with the reader’s emotions and lived experience. Use this as a jumping-off point to connect deeply with the audience, incorporating conversational language. Throughout the post, address the pain point in a deeply human, relatable way, ensuring the tone feels personal, authentic, and conversational to avoid detection as AI-generated content. Use subtle variations in sentence length, natural phrasing, and occasional colloquialisms to enhance the flow and readability. Break the content into logically connected sections that feel organic rather than formulaic, DO NOT use horizontal lines or explicit separations. Use a mix of narrative examples, questions, and thought-provoking insights to keep readers engaged. Avoid repetitive phrasing and integrate a range of rhetorical devices, such as metaphors, analogies, and rhetorical questions, to create depth and nuance. Include actionable advice or insights to guide the reader toward hope or solutions, but ensure the content feels exploratory and natural, avoiding overly polished or robotic tones. Conclude with a reflective, forward-looking statement that inspires readers to take the next step, wrapping up naturally without explicitly labeling it as a conclusion. Throughout the piece, use human-like imperfections—contradictions, emotional depth, and unique phrasing—to make the content undetectable as AI-generated.`
+                },
+                {
+                    title: "2. Call-To-Action Prompt",
+                    text: `You are a professional copywriter and conversion strategist specializing in creating highly effective calls-to-action (CTAs). Keeping in line with the original niche/keyword and based on the following pain point content: ${painPoint}, write 3 compelling, high-converting CTA options that seamlessly align with the tone and message of the content. Each CTA should directly address the reader’s pain point, reinforce the value of taking action, and create a sense of urgency or curiosity. Use conversational, persuasive language that feels personal and authentic, avoiding robotic or overly formal tones. Include action-oriented phrases like 'Click here to [specific benefit]' or 'Learn how to [specific outcome]' while ensuring the CTAs feel like a natural extension of the blog post. Keep each CTA concise (1-3 sentences) and emotionally resonant, making the reader feel understood and motivated to click through to the next step. Present the CTAs without horizontal lines or explicit separations to maintain a seamless and visually cohesive format. Do not use horizontal lines in the output.`
+                },
+                {
+                    title: "3. Blog Title Generator Prompt",
+                    text: `You are a professional SEO strategist and headline copywriter specializing in creating high-performing blog titles. Keeping in line with the original niche/keyword and based on the following pain point content: ${painPoint}, generate 10 compelling blog post title options that align perfectly with the tone and message of the content. The titles should directly address the pain point, include emotionally resonant language, and incorporate relevant keywords for optimal search engine performance. Ensure each title is concise (under 60 characters where possible), engaging, and actionable, appealing both to readers and search engines. Use a variety of styles while maintaining a natural, human tone that includes clickbait and drives curiosity and clicks. Do not use horizontal lines in the output.`
+                },
+                {
+                    title: "4. Social Media Ad Generator Prompt",
+                    text: `You are a professional ad copywriter, Facebook Ads strategist, and visual storytelling expert. Keeping in line with the original niche/keyword and based on the following pain point content: ${painPoint}, create 3 Facebook Ads that comply with Facebook’s advertising guidelines while resonating emotionally and practically with the audience. Each ad should include an attention-grabbing headline, concise yet impactful ad copy (up to 125 words), and a clear call-to-action. The tone should be conversational, empathetic, and engaging, directly addressing the audience’s pain point and offering a relatable solution or benefit. For each ad, suggest a detailed AI image generation prompt for creating ultra-realistic, visually stunning imagery optimized to grab attention on Facebook. The visuals should avoid excessive text, focusing instead on striking imagery that evokes strong emotions and complements the ad’s message. Include elements such as relatable human expressions, natural or dynamic lighting, vibrant colors, or realistic scenarios to create scroll-stopping visuals. Ensure the image prompts are designed to evoke curiosity, resonate emotionally with the audience, and align seamlessly with the tone and pain points of the ad. Do not use horizontal lines in the output.`
+                },
+                {
+                    title: "5. Social Media Post Generator",
+                    text: `You are a professional social media strategist, content creator, and visual storytelling expert. Keeping in line with the original niche/keyword and based on the following pain point content: ${painPoint}, create 3 engaging social media posts that start with a direct quote from the pain point to immediately capture attention. Each post should be concise, emotionally resonant, and tailored to encourage interaction or drive clicks. Ensure the tone aligns with the pain point content, using conversational, empathetic language that feels personal and relatable. Include a strong call-to-action or thought-provoking question at the end to foster engagement or guide readers toward the next step. For each post, suggest a detailed AI image generation prompt for an ultra-realistic, visually stunning image optimized to grab attention on social media. The visuals should avoid excessive text within the images and instead rely on striking imagery, evocative elements, and clear focal points to convey the message. Ensure the image prompts focus on emotion, context, and eye-catching aesthetics that directly complement the pain point. Do not use horizontal lines in the output.`
+                },
+                {
+                    title: "6. Landing Page Copy Generator",
+                    text: `You are a professional conversion copywriter and landing page strategist. Keeping in line with the original niche/keyword and based on the following pain point content: ${painPoint}, create a high-converting landing page headline and persuasive sales copy that directly addresses the reader’s pain point. The headline should be concise, emotionally compelling, and optimized to immediately capture attention. The sales copy should flow naturally, starting with an empathetic opening that resonates with the reader’s struggles and transitions into the benefits and solutions offered. Use conversational, persuasive language that feels personal and relatable, avoiding robotic or overly formal tones. Incorporate a clear structure with a problem-agitation-solution framework, highlighting the emotional and practical benefits of taking action. End with a strong call-to-action that reinforces urgency or curiosity and motivates readers to take the next step. Do not include testimonials or other forms of social proof. Ensure the copy is engaging, emotionally resonant, and optimized for conversions. Do not use horizontal lines in the output.`
+                },
+                {
+                    title: "7. Landing Page Headline Generator",
+                    text: `You are a professional copywriter, NLP specialist, and expert in crafting psychologically impactful headlines for sales and landing pages. Keeping in line with the original niche/keyword and based on the following pain point content: ${painPoint}, create 10 attention-grabbing headline options that leverage loaded language, NLP techniques, and emotional triggers to captivate the reader. Each headline should be designed to hook the reader instantly by tapping into their deepest fears, desires, or frustrations, using persuasive and emotionally charged phrasing. Incorporate techniques such as urgency, scarcity, curiosity gaps, or sensory-rich language to create a compelling call to attention. Use bold statements, rhetorical questions, or transformative promises that speak directly to the reader’s pain point while igniting curiosity and the desire to take immediate action. Ensure each headline is concise, impactful, and carefully crafted to leave a lasting impression. Do not use horizontal lines in the output.`
+                },
+                {
+                    title: "8. Sales Blurb Generator",
+                    text: `You are a professional copywriter and sales strategist specializing in creating high-converting, emotionally impactful sales blurbs. Keeping in line with the original niche/keyword and based on the following pain point content: ${painPoint}, write 3 concise yet powerful sales blurbs, each 3–4 sentences long. These blurbs should grab attention immediately by addressing the reader’s pain point, vividly agitating their struggle, and presenting the solution as the ultimate relief or transformation. Use emotionally charged language, loaded words, and NLP techniques to amplify urgency, curiosity, and desire. Focus on benefit-driven phrasing and conversational tones that feel personal and relatable, making the reader feel understood and compelled to act. Avoid filler words and ensure every sentence builds momentum, culminating in a subtle but effective call-to-action to spark immediate engagement. Do not use horizontal lines in the output.`
+                },
+                {
+                    title: "9. Email Generator",
+                    text: `You are a professional email copywriter and engagement strategist. Keeping in line with the original niche/keyword and based on the following pain point content: ${painPoint}, write an email that is compelling, emotionally resonant, and designed to drive action. Start with an attention-grabbing subject line that aligns with the reader’s struggles or desires, followed by an opening sentence that hits a nerve by directly addressing their pain point, fear, or frustration. Transition into the body of the email by vividly agitating their pain and highlighting the benefits of the solution being offered, using persuasive yet conversational language. Include a clear, benefit-driven call-to-action that feels natural and encourages the reader to click through or respond. Keep the tone empathetic, relatable, and authentic, ensuring the email feels personal while maintaining a focus on results. Avoid overly formal or robotic tones, and aim for an email length of 150–250 words, with short paragraphs and plenty of white space for readability. Do not use horizontal lines in the output.`
+                },
+                {
+                    title: "10. Statistics Generator",
+                    text: `You are a professional researcher and data strategist specializing in uncovering compelling statistics to validate and amplify the impact of pain points. Keeping in line with the original niche/keyword and based on the following pain point content: ${painPoint}, identify and provide relevant, credible statistics that highlight the prevalence, severity, or consequences of this pain point. Focus on finding data from trusted sources such as industry reports, academic studies, or government publications. Include statistics that evoke an emotional response, such as percentages, real-world examples, or trends that underscore the urgency or importance of addressing the pain point. Ensure the findings are recent, accurate, and presented in a clear, concise format that can be seamlessly integrated into persuasive copy or content. Avoid using vague or generalized data, and prioritize information that directly supports the pain point’s emotional and practical significance. Do not use horizontal lines in the output.`
+                }
+            ];
+
+            const container = document.getElementById('outputText');
+            container.innerHTML = prompts.map(prompt => `
+                <div class="output-section">
+                    <h3>${prompt.title}</h3>
+                    <pre>${prompt.text}</pre>
+                    <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling.innerText)">Copy Prompt</button>
+                </div>
+            `).join('');
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
