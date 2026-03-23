@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Lead Magnet Genie</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --input-bg: #111827;
+      --code-bg: rgba(0, 0, 0, 0.4);
+      --shadow-color: rgba(0, 0, 0, 0.3);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .container { max-width: 950px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 30px; }
+    h1 { font-size: 2.5rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; text-transform: uppercase; }
+    
+    .bot-btn-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    .bot-btn {
+      padding: 12px 35px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      background-color: var(--accent-primary);
+      color: var(--bg-gradient-end);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+    }
+    .bot-btn:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(34, 211, 238, 0.3);
+    }
+
+    /* Input Section */
+    .input-section {
+      margin-bottom: 20px;
+      background: var(--card-bg);
+      padding: 25px;
+      border-radius: 16px;
+      border: 1px dashed var(--accent-primary);
+      backdrop-filter: blur(12px);
+    }
+    .input-group { display: flex; flex-direction: column; }
+    .input-group label { font-weight: 600; margin-bottom: 10px; color: var(--accent-primary); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;}
+    textarea {
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 15px;
+      color: white;
+      font-family: inherit;
+      font-size: 0.95rem;
+      min-height: 100px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+    textarea:focus { outline: 2px solid var(--accent-primary); border-color: transparent; }
+
+    /* Prompt Cards */
+    .prompts-container { display: flex; flex-direction: column; gap: 40px; }
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      display: flex; flex-direction: column;
+      backdrop-filter: blur(12px);
+    }
+    .prompt-card h2 { font-size: 1rem; font-weight: 600; color: var(--accent-primary); margin-bottom: 15px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .prompt-text {
+      background: var(--code-bg);
+      padding: 25px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem;
+      border: 1px solid var(--card-border);
+      margin-bottom: 15px;
+      line-height: 1.6;
+      color: #e5e7eb;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+    .prompt-text::-webkit-scrollbar { width: 8px; }
+    .prompt-text::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
+    .prompt-text::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; }
+
+    .dynamic-val { color: var(--accent-primary); font-weight: 700; background: rgba(34, 211, 238, 0.1); padding: 0 2px; }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 12px 24px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      background: var(--accent-primary);
+      color: var(--bg-gradient-end);
+      border: none; border-radius: 8px;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
+    .copy-button.copied { background: var(--accent-success); color: #000; }
+    .icon { width: 18px; height: 18px; }
+
+    footer { text-align: center; margin-top: 50px; color: var(--text-secondary); font-size: 0.85rem; padding-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>My Lead Magnet Genie</h1>
+  </header>
+
+  <div class="bot-btn-container">
+    <a href="https://spmohq.github.io/k11/pee.html" target="_blank" class="bot-btn">
+      <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      Niche Extractor
+    </a>
+  </div>
+
+  <main class="prompts-container">
+    
+    <!-- Input Field for Prompt 1 -->
+    <section class="input-section">
+      <div class="input-group">
+        <label>Enter Target [Audience]</label>
+        <textarea id="audienceInput" placeholder="e.g. Solo-entrepreneurs struggling with content distribution..."></textarea>
+      </div>
+    </section>
+
+    <!-- Prompt 1 -->
+    <div class="prompt-card">
+      <h2>Prompt #1: Deliverable Stack Creator</h2>
+      <div id="p1" class="prompt-text">You are a world-class offer creation strategist. 
+
+The keyword/niche is: <span class="dynamic-val" id="outAudience">[Audience]</span>.
+
+Create a stack of 15 ultra-valuable, text-only deliverables that can be instantly created with ChatGPT. 
+
+Deliverables must come from these categories: swipe files, checklists, cheat sheets, fill-in-the-blank templates, mini blueprints, action plans, and playbooks. 
+
+Each item must feel like an advanced, expert-level shortcut or “cheat code” most people have never seen before, and each must be strong enough to stand alone as a premium micro-offer worth for lead magnet. 
+
+Avoid generic or overused ideas unless you give them a rare, insider twist that sparks curiosity and makes the deliverable feel exclusive. 
+
+At least one item must be an action plan. 
+
+Write each description in persuasive, high-energy, hype-driven sales-page style that drips with curiosity, dopamine, and urgency, making the reader feel like they’re discovering a hidden advantage. 
+
+Tie every item directly to <span class="dynamic-val" id="outAudience2">[Audience]</span> so it feels custom-made, specific, and painfully relevant to the target audience. 
+
+Format exactly like this: 
+
+1. [Item Name] ($197 Value) Description: [High-energy, blind, sales-page style description loaded with curiosity and dopamine triggers]. How does this lead magnet play the role of a lead magnet for the prompt I gave you to review and rate? How to position this lead magnet as a "bridge" to the prompt? What should be the exact strategic positioning and conversion design? What should be the appropriate "call to action" statement" to bridge this lead magnet to the prompt?</div>
+      <button class="copy-button" data-target="p1"><span class="btn-text">Copy Prompt 1</span></button>
+    </div>
+
+    <!-- Input Field for Prompt 2 -->
+    <section class="input-section">
+      <div class="input-group">
+        <label>Enter Selected [Stack] Item</label>
+        <textarea id="stackInput" placeholder="Paste the specific item name and description you want to expand here..."></textarea>
+      </div>
+    </section>
+
+    <!-- Prompt 2 -->
+    <div class="prompt-card">
+      <h2>Prompt #2: Expert Content Engine</h2>
+      <div id="p2" class="prompt-text">You are an elite content creation engine tasked with producing expert-grade deliverables. 
+
+The stack item is: 
+
+<span class="dynamic-val" id="outStack">[Stack]</span>
+
+Expand this into a complete, professional, premium-quality asset that is 4–9 pages of text-only content, crafted to look like it was designed for give away distribution or as a high-ticket bonus.
+
+Break the asset into logical sections (overview, core content, examples, applications, advanced tips, conclusion) with detailed, skimmable content packed with practical insights, using headers, subheaders, bullet points, numbered lists, and short paragraphs for clarity. 
+
+Write in an authoritative, high-energy style that feels like it belongs in a $497 training program or expert consulting package, with no fluff or filler—only useful, premium information. 
+
+Deliver advanced strategies, insider knowledge, and rare shortcuts most people have never seen, ensuring each page creates “aha” moments. 
+
+If the deliverable is a checklist, template, or worksheet, include multiple clear fill-in-the-blank sections or step-by-step action fields that are plug-and-play ready for immediate use. 
+
+Provide a short “How to Apply” guide at the start or end to show exactly how the user can get results fast. 
+
+Write in a clean, swipe-file inspired format with bold headers, short impactful sentences, and dopamine-charged phrasing that makes the reader feel they’re holding an insider cheat code.
+
+Everything written must be actionable, delivering frameworks, formulas, scripts, or exercises that can be put to work immediately. 
+
+Always err on the side of more content, not less, by including examples, variations, and optional advanced applications to push length and depth toward the 9-page maximum. 
+
+The final deliverable must be jaw-dropping, practical, professional, and instantly sellable as a standalone premium PDF, training workbook, or exclusive bonus.</div>
+      <button class="copy-button" data-target="p2"><span class="btn-text">Copy Prompt 2</span></button>
+    </div>
+
+    <!-- Prompt 3 -->
+    <div class="prompt-card">
+      <h2>Prompt #3: Strategic Bridge Audit</h2>
+      <div id="p3" class="prompt-text">How does this pdf play the role of a lead magnet for the prompt I gave you to review and rate? How to position this pdf as a "bridge" to the prompt? What should be the exact strategic positioning and conversion design? What should be the appropriate "call to action" statement" to bridge this pdf to the prompt?</div>
+      <button class="copy-button" data-target="p3"><span class="btn-text">Copy Prompt 3</span></button>
+    </div>
+
+    <!-- Prompt 4 -->
+    <div class="prompt-card">
+      <h2>Prompt #4: Full Funnel Architect</h2>
+      <div id="p4" class="prompt-text">Build a full funnel (lead magnet → email → offer → upsell)</div>
+      <button class="copy-button" data-target="p4"><span class="btn-text">Copy Prompt 4</span></button>
+    </div>
+
+    <!-- Prompt 5 -->
+    <div class="prompt-card">
+      <h2>Prompt #5: Sales Page Copywriter</h2>
+      <div id="p5" class="prompt-text">Write a conversion-optimized sales page for the prompt.</div>
+      <button class="copy-button" data-target="p5"><span class="btn-text">Copy Prompt 5</span></button>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+  </footer>
+</div>
+
+<script>
+  // Dynamic replacement logic
+  const audienceInput = document.getElementById('audienceInput');
+  const stackInput = document.getElementById('stackInput');
+  
+  const outAudience = document.getElementById('outAudience');
+  const outAudience2 = document.getElementById('outAudience2');
+  const outStack = document.getElementById('outStack');
+
+  audienceInput.addEventListener('input', () => {
+    const val = audienceInput.value.trim() || '[Audience]';
+    outAudience.textContent = val;
+    outAudience2.textContent = val;
+  });
+
+  stackInput.addEventListener('input', () => {
+    const val = stackInput.value.trim() || '[Stack]';
+    outStack.textContent = val;
+  });
+
+  // Copy-to-clipboard functionality
+  document.querySelectorAll('.copy-button').forEach(button => {
+    button.addEventListener('click', () => {
+      const targetId = button.getAttribute('data-target');
+      const textToCopy = document.getElementById(targetId).innerText;
+      const btnSpan = button.querySelector('.btn-text');
+      const originalText = btnSpan.textContent;
+
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        btnSpan.textContent = 'Copied!';
+        button.classList.add('copied');
+        
+        setTimeout(() => {
+          btnSpan.textContent = originalText;
+          button.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
