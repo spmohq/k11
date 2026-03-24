@@ -1,0 +1,999 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Radical Keywords</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #00131C;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Title */
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #FFFFFF;
+        }
+
+        /* Form */
+        label {
+            color: #FFFFFF; 
+			font-size: 16px; 
+			font-weight: bold; 
+			display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        select:focus, input:focus {
+            border-color: #fdf46f;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #fdf46f;
+            color: #00131c;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #fdf46f;
+        }
+
+        /* Output Section */
+        .output-section {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .output-section h3 {
+            margin-bottom: 10px;
+            color: #000000;
+        }
+
+        .output-section p, .output-section ul {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .output-section ul {
+            padding-left: 20px;
+            list-style-type: disc;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+		/* Logo */
+		.logo {
+            width: 300px; /* Adjust width */
+            height: auto; /* Maintain aspect ratio */
+            display: block; /* Centers the logo */
+            margin: 0 auto 20px; /* Adds spacing below */
+        }
+    </style>
+
+<style>
+.output-box {
+    background-color: #f8f8f8;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    max-width: 600px; /* Limit width to prevent stretching */
+    word-wrap: break-word; /* Ensure text wraps properly */
+    overflow-wrap: break-word;
+}
+
+pre {
+    white-space: pre-wrap; /* Ensures text wraps instead of stretching */
+    word-wrap: break-word;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    max-width: 100%; /* Keeps it inside container */
+    overflow-x: auto; /* Allows scrolling for long content */
+}
+</style>
+
+</head>
+<body>
+    <div class="container">
+        <img src="https://actionactivated.com/wp-content/uploads/radicalkeywordlogo.png" alt="Content Generator Logo" class="logo">
+    <label for="style">Select Keyword Strategy:</label>
+    <select id="style">
+	<option value="contextual_association_strategy">Contextual Association Strategy</option>
+    <option value="pain_point_mining_strategy">Pain Point Mining Strategy</option>
+    <option value="intent_based_clustering_strategy">Intent-Based Clustering Strategy</option>
+    <option value="feature_benefit_analysis_strategy">Feature-Benefit Analysis Strategy</option>
+    <option value="reverse_engineering_competitors_strategy">Reverse Engineering Competitors Strategy</option>
+	<option value="emotional_trigger_strategy">Emotional Trigger Strategy</option>
+    <option value="role_based_keyword_strategy">Role-Based Keyword Strategy</option>
+    <option value="problem_solution_pairing_strategy">Problem-Solution Pairing Strategy</option>
+    <option value="attribute_expansion_strategy">Attribute Expansion Strategy</option>
+    <option value="scenario_based_keyword_strategy">Scenario-Based Keyword Strategy</option>
+	<option value="trend_surfing_strategy">Trend Surfing Strategy</option>
+    <option value="keyword_mashup_strategy">Keyword Mashup Strategy</option>
+    <option value="geographic_modifier_strategy">Geographic Modifier Strategy</option>
+    <option value="semantic_variance_strategy">Semantic Variance Strategy</option>
+    <option value="chronological_keyword_strategy">Chronological Keyword Strategy</option>
+	<option value="journey_mapping_strategy">Journey Mapping Strategy</option>
+    <option value="comparison_spotlight_strategy">Comparison Spotlight Strategy</option>
+    <option value="seasonal_trend_based_strategy">Seasonal & Trend-Based Strategy</option>
+    <option value="persona_centric_strategy">Persona-Centric Strategy</option>
+    <option value="question_explosion_strategy">Question Explosion Strategy</option>
+	<option value="micro_niche_discovery_strategy">Micro-Niche Discovery Strategy</option>
+    <option value="metaphor_conceptual_keywords_strategy">Metaphor and Conceptual Keywords Strategy</option>
+    <option value="behavioral_trigger_strategy">Behavioral Trigger Strategy</option>
+    <option value="sensory_experience_based_strategy">Sensory and Experience-Based Strategy</option>
+    <option value="workflow_process_based_strategy">Workflow and Process-Based Strategy</option>
+	<option value="buyer_psychology_strategy">Buyer Psychology Strategy</option>
+    <option value="industry_buzzwords_strategy">Industry Buzzwords Strategy</option>
+    <option value="tool_resource_based_strategy">Tool and Resource-Based Strategy</option>
+	<option value="outcome_oriented_strategy">Outcome-Oriented Strategy</option>
+    <option value="problem_reversal_strategy">Problem Reversal Strategy</option>
+    <option value="opposition_debate_strategy">Opposition and Debate Strategy</option>
+    <option value="persona_desires_fears_strategy">Persona Desires and Fears Strategy</option>
+	<option value="transformation_milestone_strategy">Transformation Milestone Strategy</option>
+    <option value="sensationalized_curiosity_strategy">Sensationalized Curiosity Strategy</option>
+    <option value="aspirational_identity_strategy">Aspirational Identity Strategy</option>
+    <option value="reverse_timeline_strategy">Reverse Timeline Strategy</option>
+    <option value="inspirational_storytelling_strategy">Inspirational Storytelling Strategy</option>
+	<option value="paradoxical_thinking_strategy">Paradoxical Thinking Strategy</option>
+    <option value="temporal_opportunity_strategy">Temporal Opportunity Strategy</option>
+    <option value="actionable_insight_strategy">Actionable Insight Strategy</option>
+    <option value="historical_context_strategy">Historical Context Strategy</option>
+    <option value="fantasy_and_aspiration_strategy">Fantasy and Aspiration Strategy</option>
+	<option value="persona_obstacle_strategy">Persona Obstacle Strategy</option>
+    <option value="metaverse_future_vision_strategy">Metaverse and Future Vision Strategy</option>
+    <option value="behavioral_economics_strategy">Behavioral Economics Strategy</option>
+    <option value="gamification_strategy">Gamification Strategy</option>
+    <option value="crisis_recovery_strategy">Crisis and Recovery Strategy</option>
+	<option value="hidden_motivations_strategy">Hidden Motivations Strategy</option>
+   </select>
+		
+        <label for="keyword">Enter Your Keyword:</label>
+        <input type="text" id="keyword" placeholder="e.g., Forex Trading">
+        <button onclick="generateContent()">Generate</button>
+        <div id="output" class="output-section"></div>
+    </div>
+    <footer>
+    <a href="https://www.facebook.com/groups/markhesscustomergroup/" target="_blank" style="text-decoration: none; color: #fff; background-color: #4267B2; padding: 10px 20px; border-radius: 5px; font-weight: bold; display: inline-block; margin-bottom: 10px;">Join My Facebook Group</a>
+    <div>&copy; AI Radical Keywords - All Rights Reserved - Created by Mark Hess</div>
+</footer>
+	<script>
+        // Define the KEYWORD_PROMPT_STYLES object with corrected casing
+        const KEYWORD_PROMPT_STYLES = {
+    contextual_association_strategy: {
+    name: "Contextual Association Strategy",
+    summary: "This strategy identifies keywords by associating the primary keyword with related terms and phrases based on their natural language context. It uses synonyms, industry jargon, and broader category terms to uncover related search intents.",
+    examples: [
+        "Primary keyword: 'Yoga Breathing'",
+        "Contextual associations: 'Pranayama techniques,' 'breathwork for stress,' 'yoga breathing for energy.'"
+    ],
+    keyword_prompt: `Generate a comprehensive list of keywords related to [Keyword] by exploring its synonyms, broader categories, subcategories, and related terms. Use natural language processing techniques to create keyword variations that include benefits, applications, audiences, and problems it solves. Organize the list into sections, such as synonyms, related concepts, long-tail phrases, and question-based keywords. Ensure the list reflects a mix of short-tail and long-tail keywords, including niche-specific phrases and audience-focused terms.`,
+    follow_up_prompt: `Expand the list of keywords for [Keyword] by diving deeper into tangential topics, related industries, and trending phrases. Incorporate emerging concepts, complementary tools or products, and lifestyle-based keywords. Include terms that reflect geographic, demographic, and psychographic differences. Present the list in new categories such as 'emerging trends,' 'regional keywords,' and 'audience-specific queries.' Highlight additional long-tail opportunities based on specific problems or solutions related to the primary keyword.`
+},
+pain_point_mining_strategy: {
+    name: "Pain Point Mining Strategy",
+    summary: "This strategy generates keywords by focusing on the problems, frustrations, and desires of the target audience. It creates a list of search queries based on how users describe their challenges and seek solutions.",
+    examples: [
+        "Primary keyword: 'Weight Loss'",
+        "Pain points: 'Why can’t I lose weight fast?', 'Best diet for slow metabolism,' 'How to stop binge eating.'"
+    ],
+    keyword_prompt: `Identify a wide range of keywords for [Keyword] by focusing on common pain points, frustrations, and desires of the target audience. Generate search queries in the form of questions, problem-solving statements, and emotional phrases that reflect what users search for when they experience issues related to [Keyword]. Include keywords that reflect urgency, like 'how to,' 'why can't,' and 'best way to.' Group the results into pain points, questions, and solution-oriented phrases.`,
+    follow_up_prompt: `Deepen the keyword research for [Keyword] by expanding on specific pain points with variations based on urgency, audience segmentation, and problem complexity. Add keywords that include emotional triggers, negative phrases, and comparisons (e.g., 'why X doesn’t work'). Organize the new keywords into 'emotional queries,' 'technical frustrations,' and 'comparative search phrases' for a more exhaustive list.`
+},
+intent_based_clustering_strategy: {
+    name: "Intent-Based Clustering Strategy",
+    summary: "This strategy organizes keywords based on user intent—informational, navigational, and transactional. It creates keyword clusters that match different stages of the buyer’s journey.",
+    examples: [
+        "Primary keyword: 'Home Gym Equipment'",
+        "Informational: 'What is the best home gym equipment?'",
+        "Navigational: 'Top brands for home gym setups.'",
+        "Transactional: 'Buy affordable home gym equipment.'"
+    ],
+    keyword_prompt: `Generate an extensive list of keywords for [Keyword] by analyzing user intent. Include informational keywords (e.g., 'how to,' 'what is'), navigational keywords (e.g., 'top brands,' 'reviews'), and transactional keywords (e.g., 'buy,' 'best deals'). Organize the keywords into separate clusters for each intent type. Create additional variations that reflect different stages of the buyer's journey, such as 'awareness,' 'consideration,' and 'decision-making.'`,
+    follow_up_prompt: `Expand the intent-based keyword list for [Keyword] by exploring specific audience types, related industries, and alternative buying or research behaviors. Add sub-intent categories, such as 'DIY research,' 'brand comparisons,' and 'cost-saving alternatives.' Generate long-tail variations for each intent type to cover less competitive but highly targeted phrases.`
+},
+feature_benefit_analysis_strategy: {
+    name: "Feature-Benefit Analysis Strategy",
+    summary: "This strategy focuses on uncovering keywords by analyzing the features and benefits of a product, service, or concept. It targets phrases users search for when they want specific advantages or solutions.",
+    examples: [
+        "Primary keyword: 'Electric Cars'",
+        "Features: 'Long battery life, fast charging.'",
+        "Benefits: 'Save on gas, eco-friendly driving.'"
+    ],
+    keyword_prompt: `Create a comprehensive list of keywords for [Keyword] by breaking it into its core features and benefits. For each feature, generate associated search terms, such as technical specs and descriptive phrases. For each benefit, generate solution-focused keywords and emotionally driven phrases. Include both feature-focused queries (e.g., 'specifications of [Keyword]') and benefit-focused queries (e.g., 'why [Keyword] is better').`,
+    follow_up_prompt: `Expand the feature-benefit keyword list for [Keyword] by diving into specific use cases, niche applications, and audience preferences. Include comparisons with competitors, product upgrades, and innovative uses. Organize the expanded list into 'niche features,' 'unique benefits,' and 'comparative advantages' to identify underutilized keyword opportunities.`
+},
+reverse_engineering_competitors_strategy: {
+    name: "Reverse Engineering Competitors Strategy",
+    summary: "This strategy uses hypothetical competitor content to reverse-engineer possible keywords. It focuses on uncovering what related brands or creators might optimize for in their marketing.",
+    examples: [
+        "Primary keyword: 'Online Course Platforms'",
+        "Hypothetical competitor keywords: 'Best platforms for online courses,' 'Teachable vs. Thinkific.'"
+    ],
+    keyword_prompt: `Identify potential keywords for [Keyword] by hypothetically reverse-engineering the strategies of competitors or similar industries. Generate a list of keywords competitors might use, including comparative phrases (e.g., '[Keyword] vs [Competitor]'), 'best [Keyword] for [audience],' and specific features they might highlight. Include long-tail keywords reflecting their product reviews, tutorials, and FAQs. Organize the list into 'competitor comparisons,' 'industry trends,' and 'feature-specific keywords.'`,
+    follow_up_prompt: `Expand the competitor-based keyword list for [Keyword] by exploring indirect competitors, niche alternatives, and related industries. Add keywords that reflect hypothetical competitor branding, audience targeting, and geographic focus. Organize the new list into 'indirect competitor keywords,' 'alternative solutions,' and 'audience-specific queries' for a comprehensive view.`
+},
+emotional_trigger_strategy: {
+    name: "Emotional Trigger Strategy",
+    summary: "This strategy uncovers keywords that resonate emotionally with the target audience. It identifies terms related to hopes, fears, aspirations, and desires, which are often overlooked in traditional keyword research.",
+    examples: [
+        "Primary keyword: 'Home Renovation'",
+        "Emotional triggers: 'Dream home ideas,' 'Avoid renovation nightmares,' 'Affordable luxury upgrades.'"
+    ],
+    keyword_prompt: `Generate a detailed list of keywords for [Keyword] by focusing on emotional triggers and psychological responses. Identify terms that reflect hopes, fears, aspirations, frustrations, and desires related to [Keyword]. Include keywords using emotionally charged words like 'dream,' 'fear,' 'ultimate,' 'worst,' and 'transform.' Organize the keywords into categories such as 'aspirational phrases,' 'fear-based searches,' and 'problem-solving queries.'`,
+    follow_up_prompt: `Expand the emotionally triggered keyword list for [Keyword] by incorporating deeper psychological nuances, such as guilt, pride, envy, or relief. Generate keywords for niche audiences, focusing on specific life stages, demographics, and personal values. Add long-tail variations and organize them into new categories like 'life-changing benefits,' 'emotionally loaded fears,' and 'personal milestones.'`
+},
+role_based_keyword_strategy: {
+    name: "Role-Based Keyword Strategy",
+    summary: "This strategy identifies keywords by focusing on the roles or identities of the target audience, such as professionals, parents, or hobbyists. It generates terms specific to their needs, challenges, and goals.",
+    examples: [
+        "Primary keyword: 'Healthy Eating'",
+        "Roles: 'Healthy eating for busy moms,' 'Meal planning for athletes,' 'Nutrition for office workers.'"
+    ],
+    keyword_prompt: `Create an extensive list of keywords for [Keyword] by focusing on audience roles, identities, and professions. For each role (e.g., parents, professionals, hobbyists), generate keywords that reflect their unique challenges, goals, and situations. Include variations that address specific needs (e.g., 'tips,' 'guides,' 'best practices') and align with their daily lives. Organize the keywords into audience-specific categories like 'profession-focused,' 'lifestyle-based,' and 'interest-driven keywords.'`,
+    follow_up_prompt: `Expand the role-based keyword list for [Keyword] by diving into niche audiences, subcategories, and hybrid roles (e.g., 'working parents,' 'side hustlers'). Include terms reflecting evolving identities, generational shifts, and cultural nuances. Organize the expanded list into 'niche roles,' 'generational keywords,' and 'multi-role searches' for deeper audience targeting.`
+},
+problem_solution_pairing_strategy: {
+    name: "Problem-Solution Pairing Strategy",
+    summary: "This strategy generates keywords by pairing problems users face with solutions they seek. It focuses on terms that mirror real-world scenarios and actionable outcomes.",
+    examples: [
+        "Primary keyword: 'Time Management'",
+        "Problems: 'Struggling to manage time,' 'Procrastination at work.'",
+        "Solutions: 'Time-blocking techniques,' 'Boost productivity with apps.'"
+    ],
+    keyword_prompt: `Generate a comprehensive list of keywords for [Keyword] by identifying common problems and pairing them with potential solutions. Create problem-based keywords (e.g., 'why I struggle with [Keyword]') and solution-based keywords (e.g., 'how to fix [Keyword]'). Include long-tail variations that reflect specific scenarios, step-by-step guides, and success outcomes. Organize the results into categories like 'problem queries,' 'solution-focused terms,' and 'how-to phrases.'`,
+    follow_up_prompt: `Expand the problem-solution keyword list for [Keyword] by adding niche-specific issues and advanced solutions. Explore variations based on user expertise levels, urgency, and desired outcomes. Include comparative keywords (e.g., 'best solution for [Problem]') and organize the expanded list into 'advanced problems,' 'innovative solutions,' and 'comparative queries.'`
+},
+attribute_expansion_strategy: {
+    name: "Attribute Expansion Strategy",
+    summary: "This strategy focuses on dissecting the attributes of a product, service, or concept and using these attributes to generate highly specific and descriptive keywords.",
+    examples: [
+        "Primary keyword: 'Smartphones'",
+        "Attributes: 'Battery life,' 'Camera quality,' 'Durability.'"
+    ],
+    keyword_prompt: `Generate an exhaustive list of keywords for [Keyword] by breaking it into its core attributes, including features, functions, qualities, and characteristics. For each attribute, create related search phrases, such as comparisons, reviews, and technical terms. Include combinations with 'best,' 'top-rated,' 'affordable,' and 'high-performance.' Organize the keywords into categories like 'technical specs,' 'consumer reviews,' and 'feature comparisons.'`,
+    follow_up_prompt: `Expand the attribute-based keyword list for [Keyword] by including secondary and tertiary attributes, complementary products, and usage scenarios. Add keywords for niche applications, emerging features, and attribute-related problems or benefits. Organize the expanded list into 'emerging attributes,' 'use-case keywords,' and 'attribute-specific problems.'`
+},
+scenario_based_keyword_strategy: {
+    name: "Scenario-Based Keyword Strategy",
+    summary: "This strategy creates keywords based on real-life scenarios in which the product, service, or concept might be used. It captures user search behavior in situational contexts.",
+    examples: [
+        "Primary keyword: 'Travel Insurance'",
+        "Scenarios: 'Travel insurance for canceled flights,' 'Best insurance for backpacking in Europe.'"
+    ],
+    keyword_prompt: `Generate a comprehensive list of keywords for [Keyword] by focusing on situational contexts where it might be used. Create keywords based on specific scenarios, such as emergencies, special events, and unique environments. Include phrases like 'best [Keyword] for [Scenario]' and 'how to use [Keyword] in [Situation].' Organize the results into categories like 'emergency use,' 'event-based,' and 'special scenarios.'`,
+    follow_up_prompt: `Expand the scenario-based keyword list for [Keyword] by exploring less common, niche, or extreme scenarios. Include audience-specific contexts, hypothetical situations, and future trends. Add long-tail variations and organize them into 'niche scenarios,' 'unexpected contexts,' and 'rare event keywords' to uncover untapped opportunities.`
+},
+trend_surfing_strategy: {
+    name: "Trend Surfing Strategy",
+    summary: "This strategy focuses on generating keywords by predicting and aligning with emerging trends, buzzwords, and seasonal interests in the niche. It involves imagining current and future trends, cultural shifts, and evolving user behavior to stay ahead of the competition.",
+    examples: [
+        "Primary keyword: 'Sustainable Fashion'",
+        "Trends: 'Eco-friendly wardrobe essentials,' 'Upcycled clothing ideas,' 'Minimalist capsule collections.'"
+    ],
+    keyword_prompt: `Generate a list of keywords for [Keyword] by focusing on emerging trends, buzzwords, and seasonal topics related to its niche. Include culturally relevant phrases, newly popular terms, and phrases inspired by current events or technological advances. Generate a mix of short-tail and long-tail keywords covering trending applications, innovations, and audience demands. Organize the results into 'current trends,' 'seasonal keywords,' and 'future-forward phrases.'`,
+    follow_up_prompt: `Expand the trend-based keyword list for [Keyword] by diving deeper into niche trends, subcultural movements, and cross-industry innovations. Add keywords that anticipate future demand, incorporating speculative terms and 'what’s next' questions. Organize the new keywords into categories like 'micro-trends,' 'cross-industry phrases,' and 'future predictions.'`
+},
+keyword_mashup_strategy: {
+    name: "Keyword Mashup Strategy",
+    summary: "This strategy combines primary keywords with complementary words to create unique and unconventional keyword combinations. It uncovers niche and long-tail opportunities by blending terms that might not traditionally appear together.",
+    examples: [
+        "Primary keyword: 'Fitness Training'",
+        "Mashups: 'Fitness training for gamers,' 'Mindful strength training,' 'Eco-friendly fitness programs.'"
+    ],
+    keyword_prompt: `Generate a detailed list of unique keywords for [Keyword] by combining it with complementary and unexpected terms. Create mashups by pairing [Keyword] with lifestyle themes, professional jargon, hobbies, and cultural trends. Include phrases like 'for [Audience],' 'with [Technique],' and 'using [Tool].' Organize the list into categories such as 'lifestyle mashups,' 'industry-specific combinations,' and 'creative pairings.'`,
+    follow_up_prompt: `Expand the mashup-based keyword list for [Keyword] by exploring unusual or unconventional pairings. Incorporate phrases from niche hobbies, emerging technologies, or highly specific audience demographics. Organize the expanded list into 'niche mashups,' 'experimental combinations,' and 'unexpected pairings' to maximize creative keyword exploration.`
+},
+geographic_modifier_strategy: {
+    name: "Geographic Modifier Strategy",
+    summary: "This strategy generates keywords by adding geographic modifiers to the primary keyword, targeting local or region-specific search intents. It can be used to uncover opportunities for localized SEO and location-based content.",
+    examples: [
+        "Primary keyword: 'Yoga Classes'",
+        "Geographic modifiers: 'Yoga classes in NYC,' 'Best yoga studios in California,' 'Online yoga for Canadians.'"
+    ],
+    keyword_prompt: `Generate a list of location-specific keywords for [Keyword] by incorporating geographic modifiers, such as city names, regions, countries, and cultural or linguistic distinctions. Include variations for local searches, regional trends, and global contexts. Create long-tail phrases like 'best [Keyword] near me,' '[Keyword] in [City/Region],' and 'affordable [Keyword] in [Location].' Organize the keywords into categories such as 'local searches,' 'regional trends,' and 'global keywords.'`,
+    follow_up_prompt: `Expand the geographic keyword list for [Keyword] by diving into hyper-local areas, underserved regions, and culturally specific terms. Add variations for regional dialects, urban vs. rural distinctions, and travel-related searches. Organize the expanded list into 'hyper-local keywords,' 'regional slang phrases,' and 'global opportunities.'`
+},
+semantic_variance_strategy: {
+    name: "Semantic Variance Strategy",
+    summary: "This strategy focuses on generating keywords by exploring semantic variations, using synonyms, alternative phrasing, and reworded intent to uncover a broader range of keyword possibilities.",
+    examples: [
+        "Primary keyword: 'Digital Marketing'",
+        "Semantic variations: 'Online advertising,' 'Internet marketing tips,' 'Web promotion strategies.'"
+    ],
+    keyword_prompt: `Generate a list of keywords for [Keyword] by exploring semantic variations, including synonyms, alternative phrases, and different ways users might describe the same concept. Include terms that vary in tone, formality, and intent (e.g., technical jargon vs. layman’s terms). Organize the list into categories like 'synonyms,' 'alternative phrasing,' and 'intent variations.'`,
+    follow_up_prompt: `Expand the semantic keyword list for [Keyword] by exploring deeper variations in meaning, tone, and context. Add colloquial terms, industry-specific slang, and regionally influenced wording. Include terms that reflect casual queries, formal research, and conversational search intents. Organize the expanded list into 'slang terms,' 'technical phrases,' and 'casual alternatives.'`
+},
+chronological_keyword_strategy: {
+    name: "Chronological Keyword Strategy",
+    summary: "This strategy uncovers keywords by incorporating time-based modifiers, such as trends over time, historical perspectives, and future-focused terms. It captures user intent related to past, present, and future search behavior.",
+    examples: [
+        "Primary keyword: 'Electric Vehicles'",
+        "Time-based keywords: 'History of electric cars,' 'Top EV models in 2024,' 'Future of electric transportation.'"
+    ],
+    keyword_prompt: `Generate a list of keywords for [Keyword] by incorporating time-based modifiers such as historical references, current trends, and future projections. Include phrases like 'history of [Keyword],' 'latest [Keyword],' and 'future of [Keyword].' Organize the list into categories such as 'past-focused,' 'present trends,' and 'future-oriented keywords.'`,
+    follow_up_prompt: `Expand the time-based keyword list for [Keyword] by exploring specific time periods, emerging trends, and future technologies. Include variations like 'what’s new in [Keyword],' 'how [Keyword] has evolved,' and 'predictions for [Keyword] in [Year].' Organize the expanded list into 'specific timeframes,' 'technological advancements,' and 'future possibilities.'`
+},
+journey_mapping_strategy: {
+    name: "Journey Mapping Strategy",
+    summary: "This strategy creates keywords by mapping a user's journey from awareness to decision-making. It identifies keywords users search for at each stage of their research and purchasing process.",
+    examples: [
+        "Primary keyword: 'Fitness Tracker'",
+        "Awareness: 'What is a fitness tracker?'",
+        "Consideration: 'Top fitness tracker features.'",
+        "Decision: 'Best fitness tracker to buy.'"
+    ],
+    keyword_prompt: `Generate a detailed list of keywords for [Keyword] by mapping the user’s journey from awareness to decision-making. Include keywords for each stage: awareness (e.g., 'what is [Keyword]'), consideration (e.g., 'compare [Keyword] options'), and decision (e.g., 'best [Keyword] to buy'). Create additional variations for each stage, focusing on long-tail keywords and common questions users may ask. Organize the keywords into 'awareness stage,' 'consideration stage,' and 'decision stage' categories.`,
+    follow_up_prompt: `Expand the user journey keyword list for [Keyword] by adding advanced stages like post-purchase queries ('how to use [Keyword],' 'problems with [Keyword]') and loyalty-building searches ('upgrades for [Keyword],' 'accessories for [Keyword]'). Include emerging consumer trends, demographic nuances, and geographic relevance. Organize the expanded list into new categories like 'post-purchase queries' and 'brand loyalty searches.'`
+},
+comparison_spotlight_strategy: {
+    name: "Comparison Spotlight Strategy",
+    summary: "This strategy focuses on comparison-based keywords that highlight competing products, alternatives, and brand-specific features. It appeals to users in the consideration phase.",
+    examples: [
+        "Primary keyword: 'Online Learning Platforms'",
+        "Comparisons: 'Udemy vs Coursera,' 'Best alternative to Udemy.'"
+    ],
+    keyword_prompt: `Generate an extensive list of keywords for [Keyword] by focusing on comparisons with competitors, substitutes, and alternatives. Include variations such as '[Keyword] vs [Competitor],' 'alternatives to [Keyword],' and '[Keyword] compared to [Similar Product].' Add long-tail keywords that reflect specific features, benefits, and price comparisons. Organize the keywords into categories like 'direct comparisons,' 'alternatives,' and 'feature-based comparisons.'`,
+    follow_up_prompt: `Expand the comparison keyword list for [Keyword] by including less obvious competitors, niche alternatives, and hybrid comparisons (e.g., 'Is [Keyword] better for [specific audience]?'). Add keywords that highlight regional differences, user reviews, and unique features. Organize the new list into 'niche comparisons,' 'geographic alternatives,' and 'specific audience preferences.'`
+},
+seasonal_trend_based_strategy: {
+    name: "Seasonal & Trend-Based Strategy",
+    summary: "This strategy identifies keywords based on seasonal trends, holidays, and current events. It targets timely opportunities to capitalize on user intent during specific times of the year.",
+    examples: [
+        "Primary keyword: 'Home Decor'",
+        "Seasonal trends: 'Christmas home decor,' 'Summer patio ideas.'",
+        "Current events: 'Home office trends 2024.'"
+    ],
+    keyword_prompt: `Generate a detailed list of keywords for [Keyword] by focusing on seasonal and trend-based variations. Include terms related to holidays, seasons, events, and trending topics in the niche. Create long-tail keywords like '[Keyword] ideas for [Holiday/Season]' or '[Keyword] trends for [Year].' Organize the keywords into categories such as 'seasonal keywords,' 'holiday-related keywords,' and 'trending searches.'`,
+    follow_up_prompt: `Expand the seasonal and trend-based keyword list for [Keyword] by adding variations for micro-seasons, lesser-known holidays, and niche events. Include keywords reflecting global trends, cultural celebrations, and event-based spikes in interest. Organize the list into 'micro-season trends,' 'international holiday searches,' and 'event-based opportunities' to cover more specific queries.`
+},
+persona_centric_strategy: {
+    name: "Persona-Centric Strategy",
+    summary: "This strategy generates keywords by creating detailed audience personas and aligning searches with their unique characteristics, goals, and challenges.",
+    examples: [
+        "Primary keyword: 'Budget Travel'",
+        "Personas: 'Backpackers on a budget,' 'Families seeking affordable vacations.'"
+    ],
+    keyword_prompt: `Generate an exhaustive list of keywords for [Keyword] by aligning with detailed audience personas. Consider personas like [young professionals, parents, students, retirees], and generate keywords specific to their challenges, preferences, and goals. Include terms such as 'best [Keyword] for [persona],' 'how [persona] can use [Keyword],' and 'affordable [Keyword] for [persona].' Organize the keywords into persona-based categories like 'student-focused,' 'family-friendly,' and 'professional-centric searches.'`,
+    follow_up_prompt: `Expand the persona-centric keyword list for [Keyword] by adding niche personas, such as cultural or lifestyle-based groups, and tailoring searches to their specific needs. Include hybrid personas (e.g., 'retired travelers,' 'working parents') and organize them into new categories like 'hybrid personas,' 'lifestyle-specific,' and 'niche audience preferences.'`
+},
+question_explosion_strategy: {
+    name: "Question Explosion Strategy",
+    summary: "This strategy focuses entirely on generating question-based keywords, which are highly valuable for SEO and featured snippets. It targets user curiosity and problem-solving intent.",
+    examples: [
+        "Primary keyword: 'Digital Marketing'",
+        "Questions: 'What is digital marketing?', 'How does digital marketing help small businesses?', 'Why choose digital marketing over traditional?'"
+    ],
+    keyword_prompt: `Generate a detailed list of question-based keywords for [Keyword]. Focus on 'who,' 'what,' 'when,' 'where,' 'why,' and 'how' questions. Include variations for basic definitions, advanced explanations, practical applications, and problem-solving. Add question formats that reflect user curiosity, such as 'What are the benefits of [Keyword]?' and 'How can [Keyword] help me achieve [Goal]?' Organize the results into categories like 'basic questions,' 'advanced queries,' and 'application-based questions.'`,
+    follow_up_prompt: `Expand the question-based keyword list for [Keyword] by diving deeper into hypothetical questions ('What if [Keyword]?'), scenario-based queries ('How to use [Keyword] for [specific situation]?'), and comparative questions ('Why is [Keyword] better than [Alternative]?'). Include emotional and niche-focused questions, organizing the expanded list into 'hypothetical questions,' 'scenario-based queries,' and 'comparative searches.'`
+},
+micro_niche_discovery_strategy: {
+    name: "Micro-Niche Discovery Strategy",
+    summary: "This strategy targets highly specific sub-niches within a broader category, identifying less competitive and deeply targeted keyword opportunities that appeal to focused audiences.",
+    examples: [
+        "Primary keyword: 'Photography'",
+        "Micro-niches: 'Macro photography for beginners,' 'Drone photography for real estate.'"
+    ],
+    keyword_prompt: `Generate a detailed list of keywords for [Keyword] by breaking it down into micro-niches within the broader category. Identify subtopics, specialized techniques, niche audiences, and specific applications. Include terms like 'best [Keyword] for [Micro-Niche],' 'how to use [Keyword] in [specific field],' and '[Keyword] tools for [specific purpose].' Organize the keywords into micro-niche categories such as 'beginner-focused,' 'industry-specific,' and 'advanced techniques.'`,
+    follow_up_prompt: `Expand the micro-niche keyword list for [Keyword] by exploring underserved subcategories, niche problems, and emerging trends. Include variations that reflect niche-specific challenges, advanced techniques, and rare applications. Organize the expanded list into 'emerging niches,' 'niche challenges,' and 'hidden opportunities' for a broader scope of targeted keywords.`
+},
+micro_niche_discovery_strategy: {
+    name: "Micro-Niche Discovery Strategy",
+    summary: "This strategy targets highly specific sub-niches within a broader category, identifying less competitive and deeply targeted keyword opportunities that appeal to focused audiences.",
+    examples: [
+        "Primary keyword: 'Photography'",
+        "Micro-niches: 'Macro photography for beginners,' 'Drone photography for real estate.'"
+    ],
+    keyword_prompt: `Generate a detailed list of keywords for [Keyword] by breaking it down into micro-niches within the broader category. Identify subtopics, specialized techniques, niche audiences, and specific applications. Include terms like 'best [Keyword] for [Micro-Niche],' 'how to use [Keyword] in [specific field],' and '[Keyword] tools for [specific purpose].' Organize the keywords into micro-niche categories such as 'beginner-focused,' 'industry-specific,' and 'advanced techniques.'`,
+    follow_up_prompt: `Expand the micro-niche keyword list for [Keyword] by exploring underserved subcategories, niche problems, and emerging trends. Include variations that reflect niche-specific challenges, advanced techniques, and rare applications. Organize the expanded list into 'emerging niches,' 'niche challenges,' and 'hidden opportunities' for a broader scope of targeted keywords.`
+},
+metaphor_conceptual_keywords_strategy: {
+    name: "Metaphor and Conceptual Keywords Strategy",
+    summary: "This strategy uncovers keywords that use metaphors, analogies, or conceptual thinking to describe the primary keyword, capturing creative and non-literal search phrases.",
+    examples: [
+        "Primary keyword: 'Personal Finance'",
+        "Conceptual keywords: 'Money tree ideas,' 'Navigating financial storms,' 'Building wealth from scratch.'"
+    ],
+    keyword_prompt: `Generate a list of creative and conceptual keywords for [Keyword] by incorporating metaphors, analogies, and symbolic thinking. Use phrases like 'how to [conceptual phrase related to Keyword],' 'why [metaphor related to Keyword],' and '[Keyword] as a [metaphor].' Include keywords that reflect storytelling, figurative language, and conceptual descriptions. Organize the results into categories such as 'metaphor-based,' 'symbolic phrases,' and 'creative analogies.'`,
+    follow_up_prompt: `Expand the conceptual keyword list for [Keyword] by exploring more figurative language, cultural references, and unique storytelling angles. Incorporate idioms, proverbs, and symbolic meanings related to [Keyword]. Organize the expanded list into 'cultural metaphors,' 'storytelling phrases,' and 'unique analogies' for deeper exploration of creative searches.`
+},
+behavioral_trigger_strategy: {
+    name: "Behavioral Trigger Strategy",
+    summary: "This strategy generates keywords by focusing on user behaviors and actions associated with the primary keyword, targeting how users interact with the concept or product.",
+    examples: [
+        "Primary keyword: 'Healthy Eating'",
+        "Behavioral triggers: 'Meal prepping tips,' 'How to stop emotional eating,' 'Tracking calories efficiently.'"
+    ],
+    keyword_prompt: `Generate a comprehensive list of keywords for [Keyword] by focusing on user behaviors and actions related to it. Identify keywords reflecting habits, routines, challenges, and decision-making processes. Include phrases like 'how to start [behavior],' 'best practices for [Keyword],' and 'mistakes to avoid with [Keyword].' Organize the results into categories such as 'action-based searches,' 'habit-related keywords,' and 'behavioral challenges.'`,
+    follow_up_prompt: `Expand the behavioral keyword list for [Keyword] by diving into nuanced user actions, related habits, and behavioral psychology. Add keywords for specific routines, advanced techniques, and problem-solving behaviors. Organize the expanded list into 'advanced behaviors,' 'habit transformation,' and 'psychological triggers' for a more targeted approach.`
+},
+sensory_experience_based_strategy: {
+    name: "Sensory and Experience-Based Strategy",
+    summary: "This strategy focuses on keywords that reflect the sensory or experiential aspects of a product, service, or concept, tapping into how users describe their experiences.",
+    examples: [
+        "Primary keyword: 'Luxury Cars'",
+        "Sensory keywords: 'Smooth driving experience,' 'Luxurious leather interior,' 'Whisper-quiet engine.'"
+    ],
+    keyword_prompt: `Generate a detailed list of keywords for [Keyword] by focusing on sensory and experiential descriptions. Include terms that describe how [Keyword] looks, feels, sounds, smells, or tastes, as well as the emotional impact it provides. Use keywords like '[Keyword] experience,' 'best [Keyword] for [specific sensation],' and 'luxury [Keyword] features.' Organize the keywords into categories such as 'sensory descriptions,' 'emotional experiences,' and 'unique features.'`,
+    follow_up_prompt: `Expand the sensory and experience-based keyword list for [Keyword] by incorporating more descriptive language, user testimonials, and hypothetical scenarios. Include long-tail keywords for specific sensations and experiences, such as 'how [Keyword] makes you feel' or '[Keyword] features for ultimate comfort.' Organize the list into 'advanced sensory phrases,' 'user experience terms,' and 'luxury-focused searches.'`
+},
+workflow_process_based_strategy: {
+    name: "Workflow and Process-Based Strategy",
+    summary: "This strategy generates keywords that reflect workflows, step-by-step processes, and operational guides related to the primary keyword. It’s ideal for targeting users looking for actionable guidance.",
+    examples: [
+        "Primary keyword: 'Content Marketing'",
+        "Workflow-based keywords: 'How to create a content calendar,' 'Step-by-step guide to SEO content writing,' 'Content marketing strategy checklist.'"
+    ],
+    keyword_prompt: `Generate a detailed list of keywords for [Keyword] by focusing on workflows, step-by-step guides, and process-related phrases. Include terms like 'how to do [Keyword],' 'step-by-step process for [Keyword],' and '[Keyword] checklist.' Add variations that reflect tools, templates, and tips for executing [Keyword]. Organize the keywords into categories such as 'process-based queries,' 'workflow tools,' and 'execution tips.'`,
+    follow_up_prompt: `Expand the workflow and process-based keyword list for [Keyword] by including advanced methods, niche processes, and specific tools. Add long-tail keywords for professional workflows, troubleshooting steps, and optimization strategies. Organize the expanded list into 'advanced workflows,' 'niche processes,' and 'optimization guides' for a comprehensive keyword library.`
+},
+buyer_psychology_strategy: {
+    name: "Buyer Psychology Strategy",
+    summary: "This strategy generates keywords that reflect the psychology of buyers, such as urgency, skepticism, or desire. It focuses on emotionally charged and persuasive search terms.",
+    examples: [
+        "Primary keyword: 'Online Courses'",
+        "Buyer psychology keywords: 'Best online course before price increase,' 'Is [Keyword] worth it?,' 'Top-rated courses for beginners.'"
+    ],
+    keyword_prompt: `Generate a detailed list of keywords for [Keyword] by focusing on buyer psychology and emotional triggers. Include terms that reflect urgency (e.g., 'limited time [Keyword] offer'), skepticism (e.g., 'is [Keyword] legit?'), and desire (e.g., 'top-rated [Keyword]'). Add variations for questions, emotional appeals, and value-focused queries. Organize the keywords into categories like 'urgency keywords,' 'skepticism queries,' and 'desire-driven terms.'`,
+    follow_up_prompt: `Expand the buyer psychology keyword list for [Keyword] by adding phrases that reflect buyer hesitation, aspirational goals, and emotional connections. Include terms for different buyer types, like first-time users, experienced buyers, and skeptics. Organize the expanded list into 'buyer hesitation phrases,' 'aspirational terms,' and 'emotional appeals' for deeper insights into buyer intent.`
+},
+industry_buzzwords_strategy: {
+    name: "Industry Buzzwords Strategy",
+    summary: "This strategy uncovers keywords based on trending buzzwords, jargon, and terminology within a specific industry or niche. It captures the language professionals and enthusiasts use.",
+    examples: [
+        "Primary keyword: 'Artificial Intelligence'",
+        "Buzzwords: 'Generative AI tools,' 'AI-powered automation,' 'Neural networks explained.'"
+    ],
+    keyword_prompt: `Generate a comprehensive list of keywords for [Keyword] by incorporating industry-specific buzzwords, jargon, and terminology. Focus on trending phrases, technical terms, and popular abbreviations. Include variations like 'what is [Buzzword],' 'how to use [Buzzword],' and '[Keyword] trends for [Year].' Organize the keywords into categories like 'industry trends,' 'technical jargon,' and 'professional terminology.'`,
+    follow_up_prompt: `Expand the industry buzzword keyword list for [Keyword] by including emerging terms, hybrid jargon, and cross-industry phrases. Add keywords for evolving concepts, newly coined buzzwords, and niche technical terms. Organize the expanded list into 'emerging jargon,' 'hybrid terminology,' and 'niche buzzwords' to reflect the latest trends.`
+},
+tool_resource_based_strategy: {
+    name: "Tool and Resource-Based Strategy",
+    summary: "This strategy focuses on keywords related to tools, resources, and templates that users search for to simplify tasks or achieve specific goals.",
+    examples: [
+        "Primary keyword: 'Project Management'",
+        "Tool-based keywords: 'Best project management software,' 'Free project management templates,' 'Kanban board tools.'"
+    ],
+    keyword_prompt: `Generate a detailed list of keywords for [Keyword] by focusing on tools, resources, and templates related to the topic. Include terms like 'best [Keyword] tools,' 'free [Keyword] resources,' 'how to use [Keyword] software,' and '[Keyword] templates.' Add variations for specific use cases, integrations, and advanced features. Organize the keywords into categories like 'tool reviews,' 'free resources,' and 'template-based searches.'`,
+    follow_up_prompt: `Expand the tool and resource-based keyword list for [Keyword] by including niche tools, premium resources, and uncommon templates. Add terms reflecting user intent for DIY solutions, integrations, and upgrades. Organize the list into 'niche tools,' 'DIY resources,' and 'advanced templates' for more targeted opportunities.`
+},
+outcome_oriented_strategy: {
+    name: "Outcome-Oriented Strategy",
+    summary: "This strategy focuses on keywords related to the specific outcomes users want to achieve with the primary keyword. It identifies goal-driven terms that reflect aspirations and end results.",
+    examples: [
+        "Primary keyword: 'Meditation'",
+        "Outcome keywords: 'Reduce anxiety with meditation,' 'Meditation for better sleep,' 'Achieve mindfulness in 5 minutes.'"
+    ],
+    keyword_prompt: `Generate a comprehensive list of keywords for [Keyword] by focusing on the desired outcomes or results users aim to achieve. Include goal-oriented phrases such as 'how to [achieve goal] with [Keyword],' '[Keyword] for [specific outcome],' and 'ways to reach [goal] using [Keyword].' Organize the results into categories like 'personal benefits,' 'professional outcomes,' and 'lifestyle transformations.'`,
+    follow_up_prompt: `Expand the outcome-oriented keyword list for [Keyword] by diving deeper into niche-specific results, long-term goals, and short-term quick wins. Add phrases that reflect unique aspirations, uncommon use cases, and advanced achievements. Organize the expanded list into 'quick wins,' 'long-term goals,' and 'specialized outcomes' for a broader scope of user intents.`
+},
+problem_reversal_strategy: {
+    name: "Problem Reversal Strategy",
+    summary: "This strategy identifies keywords by flipping problems into positive solutions or reversing challenges into opportunities, targeting users who search for ways to solve their frustrations.",
+    examples: [
+        "Primary keyword: 'Time Management'",
+        "Problem reversal keywords: 'Stop procrastination with time blocking,' 'Turn chaos into productivity,' 'Solve time-wasting habits.'"
+    ],
+    keyword_prompt: `Generate a list of keywords for [Keyword] by reversing common problems and challenges into solutions or opportunities. Focus on phrases like 'how to fix [problem],' 'turn [challenge] into [positive outcome],' and 'overcome [specific obstacle] with [Keyword].' Include long-tail variations that address pain points and their resolutions. Organize the results into categories like 'problem-solving phrases,' 'opportunity-focused keywords,' and 'solution-oriented queries.'`,
+    follow_up_prompt: `Expand the problem reversal keyword list for [Keyword] by diving into specific challenges and creating advanced, niche-oriented solutions. Add variations that reflect emotional relief, professional fixes, and transformational results. Organize the expanded list into 'emotional relief terms,' 'advanced solutions,' and 'niche opportunities' to uncover untapped areas.`
+},
+opposition_debate_strategy: {
+    name: "Opposition and Debate Strategy",
+    summary: "This strategy focuses on keywords related to opposing viewpoints, controversies, and debates around the primary keyword. It targets users searching for pros and cons or counterarguments.",
+    examples: [
+        "Primary keyword: 'Artificial Intelligence'",
+        "Debate keywords: 'Benefits of AI vs risks,' 'Why AI is controversial,' 'Arguments against automation.'"
+    ],
+    keyword_prompt: `Generate a comprehensive list of keywords for [Keyword] by focusing on opposition, debates, and controversies surrounding the topic. Include phrases like 'pros and cons of [Keyword],' 'arguments for and against [Keyword],' and 'why [Keyword] is controversial.' Add long-tail keywords reflecting specific debates, ethical concerns, and contrasting viewpoints. Organize the results into categories like 'pros and cons,' 'controversial topics,' and 'debate-related queries.'`,
+    follow_up_prompt: `Expand the opposition and debate keyword list for [Keyword] by exploring emerging controversies, niche ethical concerns, and unresolved debates. Include keywords reflecting regional or industry-specific arguments, polarizing opinions, and philosophical questions. Organize the expanded list into 'emerging debates,' 'niche controversies,' and 'ethical dilemmas' to offer a broader scope of related searches.`
+},
+persona_desires_fears_strategy: {
+    name: "Persona Desires and Fears Strategy",
+    summary: "This strategy uncovers keywords by focusing on the deeper desires and fears of specific personas, tapping into their emotional and psychological drivers.",
+    examples: [
+        "Primary keyword: 'Online Business'",
+        "Desires: 'Build passive income online,' 'Become your own boss.'",
+        "Fears: 'Avoid scams in online business,' 'Why most online businesses fail.'"
+    ],
+    keyword_prompt: `Generate a list of keywords for [Keyword] by focusing on the desires and fears of specific personas. Include terms reflecting their goals (e.g., 'achieve [desire] with [Keyword]') and concerns (e.g., 'how to avoid [fear] in [Keyword]'). Use emotionally charged language and audience-specific phrases. Organize the keywords into categories like 'desire-driven phrases,' 'fear-based searches,' and 'persona-specific goals.'`,
+    follow_up_prompt: `Expand the persona desires and fears keyword list for [Keyword] by including deeper emotional triggers, niche audiences, and advanced aspirations. Add variations that explore hidden desires, unexpected fears, and aspirational goals for specific demographics. Organize the expanded list into 'hidden desires,' 'deep-seated fears,' and 'advanced persona goals' to uncover unique opportunities.`
+},
+transformation_milestone_strategy: {
+    name: "Transformation Milestone Strategy",
+    summary: "This strategy uncovers keywords that reflect the journey of transformation, emphasizing milestones and achievements that users aim to reach through the primary keyword.",
+    examples: [
+        "Primary keyword: 'Fitness Training'",
+        "Transformation keywords: 'How to run a marathon in 6 months,' 'Lose 10 pounds in 30 days,' 'Beginner to advanced yoga poses.'"
+    ],
+    keyword_prompt: `Generate a detailed list of keywords for [Keyword] by focusing on transformation milestones and progress-related queries. Include terms like '[Keyword] for achieving [specific milestone],' 'step-by-step guide to [goal],' and 'how to reach [level] with [Keyword].' Add variations for different timeframes, skill levels, and desired outcomes. Organize the results into categories like 'beginner milestones,' 'intermediate progress,' and 'advanced achievements.'`,
+    follow_up_prompt: `Expand the transformation milestone keyword list for [Keyword] by diving into niche goals, ambitious challenges, and incremental achievements. Include keywords for long-term transformations, measurable results, and unique aspirations. Organize the expanded list into 'micro-milestones,' 'long-term transformations,' and 'niche progress goals' for comprehensive coverage.`
+},
+sensationalized_curiosity_strategy: {
+    name: "Sensationalized Curiosity Strategy",
+    summary: "This strategy generates keywords that provoke curiosity and excitement by using hyperbole, intriguing language, and unexpected twists to draw users in.",
+    examples: [
+        "Primary keyword: 'Digital Marketing'",
+        "Curiosity keywords: 'The shocking truth about SEO,' 'Digital marketing hacks nobody talks about,' 'What top marketers won't tell you.'"
+    ],
+    keyword_prompt: `Generate a comprehensive list of keywords for [Keyword] by focusing on sensationalized curiosity and intriguing language. Use phrases like 'the shocking truth about [Keyword],' 'what no one tells you about [Keyword],' and '[Keyword] secrets revealed.' Add variations that include hyperbolic language, insider tips, and unexpected twists. Organize the keywords into categories like 'secrets and revelations,' 'controversial topics,' and 'intriguing queries.'`,
+    follow_up_prompt: `Expand the curiosity-driven keyword list for [Keyword] by adding even more provocative and lesser-known angles. Include questions and phrases that highlight little-known facts, debunk myths, and expose hidden truths. Organize the expanded list into 'myth-busting phrases,' 'hidden secrets,' and 'provocative questions' for deeper engagement.`
+},
+aspirational_identity_strategy: {
+    name: "Aspirational Identity Strategy",
+    summary: "This strategy targets keywords that reflect the identities users aspire to achieve, connecting the primary keyword to their self-image and future goals.",
+    examples: [
+        "Primary keyword: 'Public Speaking'",
+        "Identity keywords: 'How to become a motivational speaker,' 'Speak like a TED Talk pro,' 'Confidence tips for introverts.'"
+    ],
+    keyword_prompt: `Generate a list of keywords for [Keyword] by focusing on aspirational identities and self-image. Include terms like 'how to become [aspirational role],' '[Keyword] tips for [specific persona],' and '[Keyword] for achieving [goal-oriented identity].' Add variations for personal growth, professional success, and lifestyle changes. Organize the keywords into categories like 'aspirational roles,' 'identity transformation,' and 'self-improvement goals.'`,
+    follow_up_prompt: `Expand the aspirational identity keyword list for [Keyword] by exploring niche roles, lifestyle aspirations, and cross-disciplinary identities. Add phrases that reflect emerging trends, hybrid professions, and advanced self-optimization goals. Organize the expanded list into 'niche identities,' 'lifestyle aspirations,' and 'hybrid goals' to attract diverse audience segments.`
+},
+reverse_timeline_strategy: {
+    name: "Reverse Timeline Strategy",
+    summary: "This strategy identifies keywords by starting from the end goal and working backward, creating terms that reflect the necessary steps, tools, and skills to achieve a desired outcome.",
+    examples: [
+        "Primary keyword: 'Starting a Business'",
+        "Reverse timeline keywords: 'What you need before launching a business,' 'Essential steps to open a bakery,' 'Skills to learn before becoming an entrepreneur.'"
+    ],
+    keyword_prompt: `Generate a detailed list of keywords for [Keyword] by starting from the end goal and working backward through the steps, skills, and resources needed to achieve it. Include terms like 'what you need to know about [Keyword],' 'how to prepare for [goal],' and 'steps to take before [Keyword].' Organize the keywords into categories like 'end-goal preparation,' 'essential steps,' and 'skill-building queries.'`,
+    follow_up_prompt: `Expand the reverse timeline keyword list for [Keyword] by adding niche-specific steps, advanced preparations, and overlooked prerequisites. Include variations that focus on common mistakes, alternative paths, and unexpected requirements. Organize the expanded list into 'advanced preparation,' 'common pitfalls,' and 'niche-specific timelines' to provide actionable insights.`
+},
+inspirational_storytelling_strategy: {
+    name: "Inspirational Storytelling Strategy",
+    summary: "This strategy uncovers keywords that align with stories of personal success, overcoming challenges, and inspirational journeys tied to the primary keyword.",
+    examples: [
+        "Primary keyword: 'Weight Loss'",
+        "Storytelling keywords: 'How I lost 50 pounds in 6 months,' 'Weight loss success stories,' 'Overcoming emotional eating.'"
+    ],
+    keyword_prompt: `Generate a list of keywords for [Keyword] by focusing on storytelling and personal journeys. Include terms like 'how I achieved [goal] with [Keyword],' '[Keyword] success stories,' and 'overcoming [challenge] with [Keyword].' Add variations that reflect inspirational journeys, transformative results, and emotional appeals. Organize the results into categories like 'personal stories,' 'success journeys,' and 'overcoming challenges.'`,
+    follow_up_prompt: `Expand the storytelling keyword list for [Keyword] by incorporating niche-specific narratives, unique perspectives, and emotional struggles. Include keywords for different demographics, diverse backgrounds, and rare challenges. Organize the expanded list into 'niche stories,' 'emotional journeys,' and 'uncommon success paths' to maximize engagement.`
+},
+paradoxical_thinking_strategy: {
+    name: "Paradoxical Thinking Strategy",
+    summary: "This strategy focuses on keywords that highlight contradictions, unexpected truths, and counterintuitive ideas. It appeals to users seeking unique insights or challenging conventional wisdom.",
+    examples: [
+        "Primary keyword: 'Productivity'",
+        "Paradoxical keywords: 'Why working less makes you more productive,' 'The productivity trap,' 'How breaks boost efficiency.'"
+    ],
+    keyword_prompt: `Generate a detailed list of keywords for [Keyword] by focusing on paradoxical and counterintuitive ideas. Include terms like 'why [common belief] is wrong about [Keyword],' 'unexpected truths about [Keyword],' and 'how [opposite concept] leads to [positive outcome].' Add variations for myths, unconventional techniques, and surprising benefits. Organize the keywords into categories like 'paradoxical truths,' 'counterintuitive techniques,' and 'unexpected insights.'`,
+    follow_up_prompt: `Expand the paradoxical keyword list for [Keyword] by exploring deeper contradictions, hidden patterns, and rarely discussed opposites. Include variations that reflect controversial perspectives, taboo topics, and surprising results. Organize the expanded list into 'hidden paradoxes,' 'uncommon truths,' and 'debunked myths' to uncover unique keyword opportunities.`
+},
+temporal_opportunity_strategy: {
+    name: "Temporal Opportunity Strategy",
+    summary: "This strategy uncovers keywords tied to specific timeframes, trends, and deadlines, capturing searches driven by urgency or seasonal relevance.",
+    examples: [
+        "Primary keyword: 'Tax Planning'",
+        "Temporal keywords: 'Last-minute tax tips,' 'End-of-year tax strategies,' 'Tax deadlines 2024.'"
+    ],
+    keyword_prompt: `Generate a list of keywords for [Keyword] by focusing on temporal opportunities and time-sensitive phrases. Include terms like 'best [Keyword] for [specific time],' 'last-minute [Keyword],' and '[Keyword] trends for [Year].' Add variations that reflect deadlines, annual events, and seasonal needs. Organize the results into categories like 'time-sensitive searches,' 'seasonal trends,' and 'year-specific phrases.'`,
+    follow_up_prompt: `Expand the temporal keyword list for [Keyword] by including overlooked timeframes, micro-seasons, and niche-specific timing needs. Add keywords reflecting long-term planning, immediate actions, and future trends. Organize the expanded list into 'micro-timing opportunities,' 'long-term strategies,' and 'future-focused queries' for a well-rounded keyword library.`
+},
+actionable_insight_strategy: {
+    name: "Actionable Insight Strategy",
+    summary: "This strategy generates keywords by emphasizing practical advice, actionable steps, and real-world applications for the primary keyword.",
+    examples: [
+        "Primary keyword: 'Social Media Marketing'",
+        "Actionable keywords: 'How to grow your Instagram in 30 days,' 'Best tools for scheduling posts,' 'Step-by-step guide to Facebook ads.'"
+    ],
+    keyword_prompt: `Generate a detailed list of keywords for [Keyword] by emphasizing actionable insights and practical advice. Include phrases like 'how to [specific action] with [Keyword],' 'best tools for [Keyword],' and 'step-by-step guide to [Keyword].' Add variations for tips, tricks, and solutions users can immediately apply. Organize the keywords into categories like 'how-to guides,' 'practical tips,' and 'tool recommendations.'`,
+    follow_up_prompt: `Expand the actionable keyword list for [Keyword] by diving into advanced techniques, niche-specific solutions, and time-saving methods. Include keywords for troubleshooting, optimization, and expert-level advice. Organize the expanded list into 'advanced techniques,' 'niche solutions,' and 'quick wins' to cover all actionable queries.`
+},
+historical_context_strategy: {
+    name: "Historical Context Strategy",
+    summary: "This strategy uncovers keywords by connecting the primary keyword to its historical evolution, significant milestones, and past trends.",
+    examples: [
+        "Primary keyword: 'Cryptocurrency'",
+        "Historical keywords: 'History of Bitcoin,' 'How cryptocurrency evolved,' 'Cryptocurrency trends over the years.'"
+    ],
+    keyword_prompt: `Generate a comprehensive list of keywords for [Keyword] by focusing on its historical context, evolution, and past trends. Include terms like 'history of [Keyword],' 'how [Keyword] started,' and '[Keyword] milestones over the years.' Add variations that reflect key events, historical comparisons, and lessons from the past. Organize the keywords into categories like 'historical timelines,' 'evolutionary milestones,' and 'past trends.'`,
+    follow_up_prompt: `Expand the historical keyword list for [Keyword] by including lesser-known events, global perspectives, and cultural impacts. Add phrases reflecting niche historical aspects, forgotten trends, and turning points. Organize the expanded list into 'hidden histories,' 'global evolution,' and 'historical lessons' to provide a deeper understanding of the topic.`
+},
+fantasy_and_aspiration_strategy: {
+    name: "Fantasy and Aspiration Strategy",
+    summary: "This strategy targets keywords that align with users’ dreams, fantasies, and 'what if' scenarios related to the primary keyword.",
+    examples: [
+        "Primary keyword: 'Travel'",
+        "Fantasy keywords: 'Dream destinations for 2024,' 'Bucket list trips,' 'Traveling the world on a budget.'"
+    ],
+    keyword_prompt: `Generate a list of keywords for [Keyword] by focusing on aspirational and fantasy-driven searches. Include terms like 'dream [Keyword] ideas,' 'bucket list [Keyword],' and 'what if you could [do something amazing with Keyword].' Add variations that reflect extraordinary experiences, luxurious possibilities, and once-in-a-lifetime opportunities. Organize the results into categories like 'dream searches,' 'aspirational goals,' and 'fantasy scenarios.'`,
+    follow_up_prompt: `Expand the fantasy and aspiration keyword list for [Keyword] by adding ultra-specific dreams, unique scenarios, and imaginative use cases. Include phrases for luxury options, budget-friendly fantasies, and unconventional dreams. Organize the expanded list into 'luxury fantasies,' 'budget aspirations,' and 'wild possibilities' for comprehensive keyword coverage.`
+},
+persona_obstacle_strategy: {
+    name: "Persona Obstacle Strategy",
+    summary: "This strategy focuses on the specific obstacles or barriers faced by different personas related to the primary keyword. It creates keywords based on challenges users encounter and the solutions they seek.",
+    examples: [
+        "Primary keyword: 'Time Management'",
+        "Persona-specific obstacles: 'Time management tips for working moms,' 'How students can avoid procrastination,' 'Overcoming distractions for remote workers.'"
+    ],
+    keyword_prompt: `Generate a detailed list of keywords for [Keyword] by focusing on obstacles and barriers faced by specific personas. Include phrases like '[Keyword] challenges for [persona],' 'how to overcome [specific problem] with [Keyword],' and 'solutions for [persona-specific challenge] using [Keyword].' Add variations for professional, personal, and lifestyle obstacles. Organize the results into categories like 'persona-specific challenges,' 'common obstacles,' and 'problem-solving queries.'`,
+    follow_up_prompt: `Expand the obstacle-based keyword list for [Keyword] by exploring deeper, niche-specific challenges, and advanced solutions. Include keywords reflecting complex problems, emotional struggles, and hidden barriers. Organize the expanded list into 'niche obstacles,' 'advanced problem-solving,' and 'persona-tailored solutions' for a comprehensive set of actionable keywords.`
+},
+metaverse_future_vision_strategy: {
+    name: "Metaverse and Future Vision Strategy",
+    summary: "This strategy uncovers futuristic and forward-thinking keywords, targeting concepts, trends, and applications that relate to the future of the primary keyword.",
+    examples: [
+        "Primary keyword: 'Education'",
+        "Future-focused keywords: 'How AI will change education,' 'Virtual classrooms in the metaverse,' 'Future trends in online learning.'"
+    ],
+    keyword_prompt: `Generate a comprehensive list of keywords for [Keyword] by focusing on future trends, technologies, and applications. Include terms like 'the future of [Keyword],' 'how [emerging trend] will impact [Keyword],' and '[Keyword] in the metaverse.' Add variations that reflect advancements, speculative ideas, and visionary concepts. Organize the results into categories like 'future trends,' 'emerging technologies,' and 'visionary applications.'`,
+    follow_up_prompt: `Expand the future-focused keyword list for [Keyword] by including cutting-edge concepts, experimental ideas, and speculative trends. Add keywords for disruptive innovations, futuristic scenarios, and game-changing developments. Organize the expanded list into 'disruptive technologies,' 'visionary ideas,' and 'speculative trends' to create a forward-looking keyword library.`
+},
+behavioral_economics_strategy: {
+    name: "Behavioral Economics Strategy",
+    summary: "This strategy uses principles of behavioral economics to uncover keywords that reflect user decision-making processes, biases, and psychological triggers.",
+    examples: [
+        "Primary keyword: 'Online Shopping'",
+        "Behavioral economics keywords: 'Why people impulse buy online,' 'How free shipping influences purchases,' 'Psychological tricks for boosting cart value.'"
+    ],
+    keyword_prompt: `Generate a detailed list of keywords for [Keyword] by incorporating behavioral economics principles, focusing on decision-making, biases, and psychological triggers. Include terms like 'why people choose [Keyword],' 'how [psychological concept] affects [Keyword],' and '[Keyword] tips for influencing decisions.' Add variations for user habits, triggers, and biases. Organize the keywords into categories like 'decision-making queries,' 'behavioral insights,' and 'psychological triggers.'`,
+    follow_up_prompt: `Expand the behavioral economics keyword list for [Keyword] by adding niche behaviors, hidden biases, and advanced decision-making processes. Include keywords for emotional triggers, social proof, and scarcity tactics. Organize the expanded list into 'advanced behavioral insights,' 'hidden psychological triggers,' and 'bias-driven queries' to target deeper user intent.`
+},
+gamification_strategy: {
+    name: "Gamification Strategy",
+    summary: "This strategy focuses on keywords related to gamification and how users engage with interactive, reward-driven experiences in the context of the primary keyword.",
+    examples: [
+        "Primary keyword: 'Fitness Apps'",
+        "Gamification keywords: 'Best fitness apps with rewards,' 'How gamification boosts exercise motivation,' 'Tracking streaks for fitness progress.'"
+    ],
+    keyword_prompt: `Generate a list of keywords for [Keyword] by focusing on gamification and reward-driven engagement. Include terms like 'how to gamify [Keyword],' 'apps with [gamification feature],' and '[Keyword] for achieving rewards.' Add variations that reflect competitive, social, and achievement-oriented experiences. Organize the keywords into categories like 'reward-driven searches,' 'engagement queries,' and 'gamification features.'`,
+    follow_up_prompt: `Expand the gamification keyword list for [Keyword] by diving into niche rewards, advanced gamification tactics, and community-driven challenges. Include keywords for leaderboards, streak tracking, and goal-setting games. Organize the expanded list into 'advanced gamification techniques,' 'community engagement,' and 'reward-specific terms' for comprehensive targeting.`
+},
+crisis_recovery_strategy: {
+    name: "Crisis and Recovery Strategy",
+    summary: "This strategy generates keywords that address crises, setbacks, and recovery paths associated with the primary keyword, helping users navigate difficult situations.",
+    examples: [
+        "Primary keyword: 'Financial Planning'",
+        "Crisis and recovery keywords: 'How to recover from debt,' 'Emergency savings tips,' 'Financial planning during economic downturns.'"
+    ],
+    keyword_prompt: `Generate a comprehensive list of keywords for [Keyword] by focusing on crises, setbacks, and recovery strategies. Include terms like 'how to recover from [problem],' 'emergency tips for [Keyword],' and '[Keyword] during tough times.' Add variations for common mistakes, crisis management, and post-crisis rebuilding. Organize the results into categories like 'crisis management keywords,' 'recovery strategies,' and 'mistake prevention phrases.'`,
+    follow_up_prompt: `Expand the crisis and recovery keyword list for [Keyword] by exploring niche-specific setbacks, advanced recovery methods, and emotional resilience strategies. Include keywords reflecting long-term rebuilding, overcoming adversity, and unique crisis scenarios. Organize the expanded list into 'niche crisis management,' 'long-term recovery,' and 'resilience-building terms' for a deeper understanding of crisis-related user intent.`
+},
+hidden_motivations_strategy: {
+    name: "Hidden Motivations Strategy",
+    summary: "This strategy uncovers keywords that align with users’ subconscious or hidden motivations, going beyond surface-level intent to reveal deeper desires or fears driving their behavior.",
+    examples: [
+        "Primary keyword: 'Self-Improvement'",
+        "Hidden motivation keywords: 'How to stop self-sabotage,' 'Why you procrastinate even when you know better,' 'Unlock your full potential without fear.'"
+    ],
+    keyword_prompt: `Generate a comprehensive list of keywords for [Keyword] by focusing on subconscious motivations, hidden fears, and deeper desires driving user behavior. Include terms like 'why [behavior] happens with [Keyword],' 'hidden reasons for [problem],' and 'how to [achieve goal] without [common fear].' Add variations that tap into emotional, psychological, and unmet needs. Organize the results into categories like 'emotional triggers,' 'subconscious motivators,' and 'hidden desire queries.'`,
+    follow_up_prompt: `Expand the hidden motivation keyword list for [Keyword] by exploring deeper psychological barriers, unresolved fears, and rare aspirations. Include phrases that reflect suppressed emotions, counterproductive habits, and unspoken goals. Organize the expanded list into 'deep emotional triggers,' 'hidden barriers,' and 'aspirational breakthroughs' to fully capture nuanced user intent.`
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        };
+
+        function generateContent() {
+            const style = document.getElementById("style").value;
+            const keyword = document.getElementById("keyword").value;
+            const outputDiv = document.getElementById("output");
+
+            if (!keyword) {
+                alert("Please enter a keyword!");
+                return;
+            }
+
+            // Handle randomization
+            if (style === "randomize") {
+                const randomStyles = Object.keys(KEYWORD_PROMPT_STYLES)
+                    .sort(() => 0.5 - Math.random())
+                    .slice(0, 10);
+                let randomOutput = "";
+                randomStyles.forEach(key => {
+                    const strategy = KEYWORD_PROMPT_STYLES[key];
+                    randomOutput += `
+                        <h3>${strategy.name}</h3>
+                        <p><strong>Summary:</strong> ${strategy.summary.replace(/\[Keyword\]/g, keyword)}</p>
+                        <p><strong>Keyword Prompt:</strong> ${strategy.keyword_prompt.replace(/\[Keyword\]/g, keyword)}</p>
+                        <p><strong>Follow-Up Prompt:</strong> ${strategy.follow_up_prompt.replace(/\[Keyword\]/g, keyword)}</p>
+                    `;
+                });
+                outputDiv.innerHTML = randomOutput;
+                return;
+            }
+
+            // Handle specific style
+            const selectedStyle = KEYWORD_PROMPT_STYLES[style];
+            if (!selectedStyle) {
+                outputDiv.innerHTML = `<p>Invalid strategy selected.</p>`;
+                return;
+            }
+
+            const summary = selectedStyle.summary.replace(/\[Keyword\]/g, keyword);
+            const keywordPrompt = selectedStyle.keyword_prompt.replace(/\[Keyword\]/g, keyword);
+            const followUpPrompt = selectedStyle.follow_up_prompt.replace(/\[Keyword\]/g, keyword);
+
+            outputDiv.innerHTML = `
+                <h3>${selectedStyle.name}</h3>
+                <p><strong>Summary:</strong> ${summary}</p>
+                <p><strong>Keyword Prompt:</strong> ${keywordPrompt}</p>
+                <p><strong>Follow-Up Prompt:</strong> ${followUpPrompt}</p>
+            `;
+        }
+    </script>
+
+<script>
+function generateContent() {
+    const style = document.getElementById('style').value;
+    const keyword = document.getElementById('keyword').value.trim();
+    const outputDiv = document.getElementById('output');
+
+    if (!keyword) {
+        outputDiv.innerHTML = '<p style="color: red;">Please enter a keyword.</p>';
+        return;
+    }
+
+    if (KEYWORD_PROMPT_STYLES[style]) {
+        const prompt = KEYWORD_PROMPT_STYLES[style].keyword_prompt.replaceAll("[Keyword]", keyword);
+        const followUp = KEYWORD_PROMPT_STYLES[style].follow_up_prompt.replaceAll("[Keyword]", keyword);
+
+        outputDiv.innerHTML = `
+            <div class="output-box">
+                <h3>Keyword Prompt:</h3>
+                <pre>${prompt}</pre>
+                <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+            </div>
+            <div class="output-box">
+                <h3>Follow-Up Prompt:</h3>
+                <pre>${followUp}</pre>
+                <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+            </div>
+        `;
+    } else {
+        outputDiv.innerHTML = '<p style="color: red;">Please select a valid keyword strategy.</p>';
+    }
+}
+
+// Copy to Clipboard Function for copying the generated prompts
+function copyPrompt(button) {
+    const preElement = button.previousElementSibling; // Get the <pre> element
+    const textToCopy = preElement.innerText.trim();
+
+    navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+            const originalText = button.innerText; // Save original button text
+            button.innerText = "Copied! Let's Go!"; // Update to "Copied!"
+            button.disabled = true; // Disable button temporarily
+
+            setTimeout(() => {
+                button.innerText = originalText; // Revert button text
+                button.disabled = false; // Enable button
+            }, 2000); // Revert after 2 seconds
+        })
+        .catch(err => console.error("Failed to copy text: ", err));
+}
+</script>
+
+
+<script>
+function generateContent() {
+    const style = document.getElementById('style').value;
+    const keyword = document.getElementById('keyword').value.trim();
+    const outputDiv = document.getElementById('output');
+
+    if (!keyword) {
+        outputDiv.innerHTML = '<p style="color: red;">Please enter a keyword.</p>';
+        return;
+    }
+
+    if (KEYWORD_PROMPT_STYLES[style]) {
+        const strategySummary = KEYWORD_PROMPT_STYLES[style].summary || "No summary available.";
+        const prompt = KEYWORD_PROMPT_STYLES[style].keyword_prompt.replaceAll("[Keyword]", keyword);
+        const followUp = KEYWORD_PROMPT_STYLES[style].follow_up_prompt.replaceAll("[Keyword]", keyword);
+
+        outputDiv.innerHTML = `
+            <div class="output-box">
+                <h3>Strategy Summary:</h3>
+                <p>${strategySummary}</p>
+            </div>
+            <div class="output-box">
+                <h3>Keyword Prompt:</h3>
+                <pre>${prompt}</pre>
+                <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+            </div>
+            <div class="output-box">
+                <h3>Follow-Up Prompt:</h3>
+                <pre>${followUp}</pre>
+                <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+            </div>
+        `;
+    } else {
+        outputDiv.innerHTML = '<p style="color: red;">Please select a valid keyword strategy.</p>';
+    }
+}
+
+// Copy to Clipboard Function for copying the generated prompts
+function copyPrompt(button) {
+    const preElement = button.previousElementSibling; // Get the <pre> element
+    const textToCopy = preElement.innerText.trim();
+
+    navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+            const originalText = button.innerText; // Save original button text
+            button.innerText = "Copied! Let's Go!"; // Update to "Copied!"
+            button.disabled = true; // Disable button temporarily
+
+            setTimeout(() => {
+                button.innerText = originalText; // Revert button text
+                button.disabled = false; // Enable button
+            }, 2000); // Revert after 2 seconds
+        })
+        .catch(err => console.error("Failed to copy text: ", err));
+}
+</script>
+
+
+<script>
+function generateContent() {
+    const style = document.getElementById('style').value;
+    const keyword = document.getElementById('keyword').value.trim();
+    const outputDiv = document.getElementById('output');
+
+    if (!keyword) {
+        outputDiv.innerHTML = '<p style="color: red;">Please enter a keyword.</p>';
+        return;
+    }
+
+    if (KEYWORD_PROMPT_STYLES[style]) {
+        const strategySummary = KEYWORD_PROMPT_STYLES[style].summary || "No summary available.";
+        const examplesArray = KEYWORD_PROMPT_STYLES[style].examples || [];
+        const prompt = KEYWORD_PROMPT_STYLES[style].keyword_prompt.replaceAll("[Keyword]", keyword);
+        const followUp = KEYWORD_PROMPT_STYLES[style].follow_up_prompt.replaceAll("[Keyword]", keyword);
+
+        // Format examples as a list
+        let examplesHTML = "";
+        if (examplesArray.length > 0) {
+            examplesHTML = "<h3>Examples:</h3><ul>";
+            examplesArray.forEach(example => {
+                examplesHTML += `<li>${example}</li>`;
+            });
+            examplesHTML += "</ul>";
+        } else {
+            examplesHTML = "<h3>Examples:</h3><p>No examples available.</p>";
+        }
+
+        outputDiv.innerHTML = `
+            <div class="output-box">
+                <h3>Strategy Summary:</h3>
+                <p>${strategySummary}</p>
+                ${examplesHTML}
+            </div>
+            <div class="output-box">
+                <h3>Keyword Prompt:</h3>
+                <pre>${prompt}</pre>
+                <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+            </div>
+            <div class="output-box">
+                <h3>Follow-Up Prompt:</h3>
+                <pre>${followUp}</pre>
+                <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+            </div>
+        `;
+    } else {
+        outputDiv.innerHTML = '<p style="color: red;">Please select a valid keyword strategy.</p>';
+    }
+}
+
+// Copy to Clipboard Function for copying the generated prompts
+function copyPrompt(button) {
+    const preElement = button.previousElementSibling; // Get the <pre> element
+    const textToCopy = preElement.innerText.trim();
+
+    navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+            const originalText = button.innerText; // Save original button text
+            button.innerText = "Copied! Let's Go!"; // Update to "Copied!"
+            button.disabled = true; // Disable button temporarily
+
+            setTimeout(() => {
+                button.innerText = originalText; // Revert button text
+                button.disabled = false; // Enable button
+            }, 2000); // Revert after 2 seconds
+        })
+        .catch(err => console.error("Failed to copy text: ", err));
+}
+</script>
+
+</body>
+</html>
