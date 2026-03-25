@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>"I tested this" Post Genie</title>
+  <link rel="icon" href="spm.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient-start: #1f2937;
+      --bg-gradient-end: #111827;
+      --card-bg: rgba(31, 41, 55, 0.5);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-heading: #ffffff;
+      --accent-primary: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-success: #34d399;
+      --code-bg: rgba(0, 0, 0, 0.3);
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { max-width: 1000px; width: 100%; margin: 0 auto; flex-grow: 1; }
+    header { text-align: center; margin-bottom: 50px; }
+    h1 { font-size: 2.5rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; text-transform: uppercase; }
+    .page-flow { color: var(--accent-primary); font-family: 'Source Code Pro', monospace; font-size: 0.9rem; margin-top: 10px; }
+    
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin: 60px 0 10px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--card-border);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .guideline-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .guideline-box h4 {
+      color: var(--text-heading);
+      margin-bottom: 10px;
+      font-size: 1rem;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+    .guideline-box ul { list-style: none; padding-left: 0; }
+    .guideline-box li { margin-bottom: 8px; color: var(--text-secondary); }
+    .guideline-box strong { color: var(--accent-primary); }
+
+    .prompts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+      gap: 25px;
+    }
+    @media (max-width: 600px) { .prompts-grid { grid-template-columns: 1fr; } h1 { font-size: 1.8rem; } }
+
+    .prompt-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 25px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease;
+    }
+    .prompt-card:hover { transform: translateY(-5px); }
+    .prompt-card h3 { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .prompt-text {
+      background-color: var(--code-bg);
+      padding: 15px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      margin-bottom: 15px;
+      border: 1px solid var(--card-border);
+      line-height: 1.4;
+      max-height: 350px;
+      overflow-y: auto;
+    }
+    .prompt-text::-webkit-scrollbar { width: 6px; }
+    .prompt-text::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 3px; }
+
+    .copy-button {
+      align-self: flex-end;
+      padding: 10px 18px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--bg-gradient-end);
+      background-color: var(--accent-primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+      transition: background-color 0.2s;
+    }
+    .copy-button:hover { background-color: var(--accent-hover); }
+    .copy-button.copied { background-color: var(--accent-success); }
+    
+    .workflow-note {
+      background: rgba(34, 211, 238, 0.1);
+      border: 1px solid var(--accent-primary);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      font-size: 0.9rem;
+    }
+
+    footer { text-align: center; padding: 60px 0 20px; color: var(--text-secondary); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>"I tested this" Post Genie</h1>
+      <p class="page-flow">Product → AI Extraction → Insight Content → Curiosity → Soft Mention → DM → Sale</p>
+    </header>
+
+    <!-- Section 1 -->
+    <h2 class="section-title">Section #1: Extraction & Engagement</h2>
+    
+    <div class="workflow-note">
+      <strong>Daily Workflow (Plug & Play):</strong><br>
+      1, Pick product | 2, Run extractor (once per product) | 3, Pick 2 ideas | 4, Generate posts | 5, Add soft mention | 6, Post<br>
+      ⏱ <strong>Time:</strong> 45 minutes
+    </div>
+
+    <main class="prompts-grid">
+      <div class="prompt-card">
+        <h3>Content Extraction Master Prompt</h3>
+        <pre id="p1" class="prompt-text">ROLE: You are a viral content strategist and insight extractor.
+
+INPUT:
+[PASTE YOUR PRODUCT CONTENT / PROMPT]
+
+TASK:
+Break this into high-performing content assets.
+
+OUTPUT:
+1. 15 scroll-stopping hooks
+2. 10 short-form post ideas
+3. 5 deep insights (unique, non-obvious)
+4. 5 “mistakes people make”
+5. 5 “before vs after transformations”
+6. 5 contrarian or bold opinions
+7. 5 curiosity-driven statements
+
+RULES:
+* Avoid generic advice
+* Make each idea feel like a discovery
+* Make people feel “I didn’t know this”
+* Keep it simple, sharp, and practical</pre>
+        <button class="copy-button" onclick="copyText('p1', this)">Copy Prompt</button>
+      </div>
+
+      <div class="prompt-card">
+        <h3>Post Creation Prompt</h3>
+        <pre id="p2" class="prompt-text">Turn this idea into a high-performing social media post:
+
+[INSERT IDEA]
+
+STYLE:
+* Sound like a creator sharing a discovery
+* No selling tone
+* No hype or exaggeration
+* Clear, simple, powerful
+
+STRUCTURE:
+1. Hook (pattern interrupt)
+2. Insight (what you discovered)
+3. Value (why it matters)
+4. Micro-example (if possible)
+5. Ending = curiosity (NOT CTA)
+
+Make it feel like:
+“I figured something out… and you should know this.”</pre>
+        <button class="copy-button" onclick="copyText('p2', this)">Copy Prompt</button>
+      </div>
+
+      <div class="prompt-card">
+        <h3>AI Prompt for Soft Mentions</h3>
+        <pre id="p3" class="prompt-text">Add a subtle, curiosity-driven product mention to this post:
+
+[INSERT POST]
+
+RULES:
+* No direct selling
+* No call to buy
+* Make it feel natural
+* Use phrases like:
+  * “I broke this down deeper…”
+  * “I built a system around this…”
+  * “I documented this fully…”
+
+Goal:
+Make readers curious, not pressured.</pre>
+        <button class="copy-button" onclick="copyText('p3', this)">Copy Prompt</button>
+      </div>
+
+      <div class="prompt-card">
+        <h3>First Reply (DM)</h3>
+        <pre id="p4" class="prompt-text">Hey, glad this resonated.
+
+I actually explored this deeply and structured it into a practical PDF.
+
+If you want, I can share the access link.</pre>
+        <button class="copy-button" onclick="copyText('p4', this)">Copy Reply</button>
+      </div>
+
+      <div class="prompt-card">
+        <h3>Final Reply (DM)</h3>
+        <pre id="p5" class="prompt-text">Perfect. Here’s the access:
+
+[INSERT LINK]
+
+Take your time with it. It’s designed to be practical, not just theory.
+
+Let me know if you have any questions.</pre>
+        <button class="copy-button" onclick="copyText('p5', this)">Copy Reply</button>
+      </div>
+    </main>
+
+    <!-- Section 2 -->
+    <h2 class="section-title">Section #2: Hook to Post</h2>
+    
+    <div class="guideline-box">
+      <h4>Types of Posts:</h4>
+      <ul>
+        <li>1. <strong>Pattern Interrupt</strong> -> “Most AI prompts fail for a reason nobody talks about.”</li>
+        <li>2. <strong>Specific Discovery</strong> -> “I tested 37 prompts. Only 2 actually worked.”</li>
+        <li>3. <strong>Contrarian Insight</strong> -> “More prompts ≠ better results.”</li>
+        <li>4. <strong>Hidden Problem</strong> -> “Your AI outputs look fake for one small reason.”</li>
+      </ul>
+    </div>
+
+    <main class="prompts-grid">
+      <div class="prompt-card">
+        <h3>Post Creation Prompt (From Hook)</h3>
+        <pre id="s2p1" class="prompt-text">Turn this hook into a high-performing social media post:
+
+HOOK:
+[INSERT HOOK]
+
+STYLE:
+* Sound like a creator sharing a discovery
+* No selling tone
+* No hype or exaggeration
+
+STRUCTURE:
+1. Keep the hook as the first line
+2. Expand into insight (what you discovered)
+3. Explain why it matters
+4. Add a quick example (if possible)
+5. End with curiosity (not CTA)
+
+IMPORTANT:
+* Do NOT rewrite the hook
+* The hook must feel natural, not clickbait</pre>
+        <button class="copy-button" onclick="copyText('s2p1', this)">Copy Prompt</button>
+      </div>
+
+      <div class="prompt-card">
+        <h3>Hook Alternative Generator</h3>
+        <pre id="s2p2" class="prompt-text">Generate 5 alternative scroll-stopping hooks for this idea:
+
+[INSERT IDEA]
+
+Rules:
+* Each hook must feel natural and curiosity-driven
+* Avoid hype or clickbait
+* Focus on insight, not drama</pre>
+        <button class="copy-button" onclick="copyText('s2p2', this)">Copy Prompt</button>
+      </div>
+    </main>
+
+    <!-- Section 3 -->
+    <h2 class="section-title">Section #3: "I tested this" Posts</h2>
+    <main class="prompts-grid">
+      <div class="prompt-card">
+        <h3>Find Test Angles</h3>
+        <pre id="s3p1" class="prompt-text">From this content:
+
+[PASTE YOUR PRODUCT / PROMPT]
+
+Extract 10 things that can be “tested” or compared.
+
+Examples:
+* Different versions
+* Small tweaks
+* Opposite approaches
+* Before vs after usage
+
+Keep them simple and practical.</pre>
+        <button class="copy-button" onclick="copyText('s3p1', this)">Copy Prompt</button>
+      </div>
+
+      <div class="prompt-card">
+        <h3>Generate Test Scenario</h3>
+        <pre id="s3p2" class="prompt-text">Create a simple “test scenario” for this idea:
+
+[INSERT TEST IDEA]
+
+Include:
+* What is being tested
+* Version A vs Version B
+* What output/result is expected
+* What difference to observe
+
+Keep it realistic and simple.</pre>
+        <button class="copy-button" onclick="copyText('s3p2', this)">Copy Prompt</button>
+      </div>
+
+      <div class="prompt-card">
+        <h3>Generate Insights</h3>
+        <pre id="s3p3" class="prompt-text">Based on this test:
+
+[INSERT TEST SCENARIO]
+
+Generate:
+1. 3 realistic observations
+2. 2 surprising differences
+3. 1 key takeaway
+
+Keep it honest, not exaggerated.
+Avoid fake claims.</pre>
+        <button class="copy-button" onclick="copyText('s3p3', this)">Copy Prompt</button>
+      </div>
+
+      <div class="prompt-card">
+        <h3>“I Tested This” Post Generator</h3>
+        <pre id="s3p4" class="prompt-text">Turn this into an “I tested this” social media post:
+
+TEST:
+[INSERT TEST IDEA]
+
+SCENARIO:
+[INSERT SCENARIO]
+
+OBSERVATIONS:
+[INSERT INSIGHTS]
+
+STYLE:
+* First person (“I tested…”)
+* Curious, not authoritative
+* No hype
+* No selling
+
+STRUCTURE:
+1. Hook: “I tested…” or similar
+2. What I tested
+3. What happened
+4. What surprised me
+5. Takeaway
+6. End with curiosity
+
+Make it feel like:
+“I tried something and learned something interesting.”</pre>
+        <button class="copy-button" onclick="copyText('s3p4', this)">Copy Prompt</button>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function copyText(id, btn) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>
