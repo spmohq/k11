@@ -33,7 +33,7 @@
       padding: 40px 20px;
       min-height: 100vh;
     }
-    .container { max-width: 950px; width: 100%; margin: 0 auto; flex-grow: 1; }
+    .container { max-width: 950px; margin: 0 auto; flex-grow: 1; }
     header { text-align: center; margin-bottom: 40px; }
     h1 { font-size: 2.2rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; text-transform: uppercase; }
     
@@ -86,7 +86,7 @@
       margin-bottom: 15px;
       line-height: 1.6;
       color: #e5e7eb;
-      max-height: 400px;
+      max-height: 500px;
       overflow-y: auto;
     }
     /* Scrollbar Styling */
@@ -126,8 +126,8 @@
   <!-- Input Area -->
   <section class="input-section">
     <div class="input-group">
-      <label>Paste Your System Here:</label>
-      <textarea id="systemInput" placeholder="Paste your step-by-step process, framework, or content here..."></textarea>
+      <label>Paste your system below:</label>
+      <textarea id="systemInput" placeholder="Paste your step-by-step process, framework, or manual content here..."></textarea>
     </div>
   </section>
 
@@ -135,7 +135,7 @@
     
     <!-- Prompt 1 -->
     <div class="prompt-card">
-      <h2>Prompt #1: Prompt Library Extractor</h2>
+      <h2>Prompt #1: Prompt Library Organizer</h2>
       <div id="p1" class="prompt-text">Extract and organize all prompts from the guide into a clean prompt library. 
 
 Group them into categories. 
@@ -146,12 +146,13 @@ Make them copy-paste ready with placeholders.</div>
 
     <!-- Prompt 2 -->
     <div class="prompt-card">
-      <h2>Prompt #2: Course Module Converter</h2>
+      <h2>Prompt #2: Course Module Architect</h2>
       <div id="p2" class="prompt-text">Convert the following steps into structured course modules.
 
 For each module:
 - Add a title
 - Add a short description
+- Finish the module with a short concluding statement without title.
 - Keep original content intact
 
 <span class="dynamic-val" id="outSystem">[Paste your system]</span></div>
@@ -201,7 +202,7 @@ This should be structured so I can quickly use “Find and Replace” in Google 
 </div>
 
 <script>
-  // Dynamic replacement logic for Prompt #2
+  // Dynamic replacement logic
   const systemInput = document.getElementById('systemInput');
   const outSystem = document.getElementById('outSystem');
 
