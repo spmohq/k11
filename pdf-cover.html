@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cover Page of PDF</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #f8f9fa;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .prompt-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e1e8ed;
+            position: relative;
+        }
+
+        .prompt-label {
+            display: block;
+            font-weight: bold;
+            color: #3498db;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .prompt-text {
+            white-space: pre-wrap;
+            font-size: 1.05rem;
+            color: #34495e;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-copy {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn-copy:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-code {
+            background-color: #95a5a6;
+            color: white;
+            display: block;
+            margin: 40px auto;
+        }
+
+        .btn-code:hover {
+            background-color: #7f8c8d;
+        }
+
+        .success-msg {
+            background-color: #2ecc71 !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .prompt-card { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Cover Page of PDF</h1>
+    </header>
+
+    <!-- Prompt 1 -->
+    <div class="prompt-card">
+        <span class="prompt-label">Prompt#1</span>
+        <div class="prompt-text" id="p1">Create a clean, modern 3:4 vertical cover-page image (2250 × 3000 px) that visually represents the theme of this PDF. 
+The design should be minimal, elegant, and professional, with soft gradients, subtle depth, and a clear focal point that symbolizes learning, clarity, and step-by-step guidance. 
+Avoid clutter. Use a color palette that feels calm, modern, and trustworthy. Leave enough visual space at the top and center for placing the title and tagline.</div>
+        <button class="btn btn-copy" onclick="copyPrompt('p1', this)">Copy Prompt</button>
+    </div>
+
+    <!-- Prompt 2 -->
+    <div class="prompt-card">
+        <span class="prompt-label">Prompt#2</span>
+        <div class="prompt-text" id="p2">Please give me the content for the cover page of this PDF. It must contain the following five elements:
+
+1. Title
+2. Subtitle
+3. Tagline
+4. A place for an image that expresses the theme of this PDF (also please give me an AI prompt for this theme tailored to ideogram.io)
+5. Author’s name (Siva Prasad Mukherjee)</div>
+        <button class="btn btn-copy" onclick="copyPrompt('p2', this)">Copy Prompt</button>
+    </div>
+
+    <!-- Prompt 3 -->
+    <div class="prompt-card">
+        <span class="prompt-label">Prompt#3</span>
+        <div class="prompt-text" id="p3">Please guide me step-by-step on how to design the cover page of my PDF using Google Docs.
+Explain everything assuming I have zero experience.
+Include specific details such as:
+• Recommended font names
+• Font sizes
+• Spacing
+• Alignment
+• Placement of each element (title, subtitle, author name, etc.)
+• Page setup settings
+• Any design best practices I should follow.</div>
+        <button class="btn btn-copy" onclick="copyPrompt('p3', this)">Copy Prompt</button>
+    </div>
+
+    <button class="btn btn-code" onclick="copyPageCode(this)">Copy Entire Page Code</button>
+
+    <script>
+        function copyPrompt(id, btn) {
+            const text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = btn.innerText;
+                btn.innerText = 'Copied!';
+                btn.classList.add('success-msg');
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.classList.remove('success-msg');
+                }, 2000);
+            });
+        }
+
+        function copyPageCode(btn) {
+            const code = document.documentElement.outerHTML;
+            navigator.clipboard.writeText(code).then(() => {
+                const originalText = btn.innerText;
+                btn.innerText = 'HTML Code Copied!';
+                btn.classList.add('success-msg');
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.classList.remove('success-msg');
+                }, 2000);
+            });
+        }
+    </script>
+
+</body>
+</html>
