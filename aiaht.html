@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Assisted How-to Article</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #202124;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #f8f9fa;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 2px solid #e8eaed;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            color: #1a73e8;
+            font-size: 2.2rem;
+            margin: 0;
+        }
+
+        .prompt-card {
+            background: #ffffff;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+            position: relative;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .prompt-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .prompt-number {
+            display: inline-block;
+            color: #1a73e8;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .prompt-text {
+            white-space: pre-wrap;
+            font-size: 15px;
+            color: #3c4043;
+            margin-bottom: 20px;
+        }
+
+        .copy-btn {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background-color: #1557b0;
+        }
+
+        .copy-btn.success {
+            background-color: #188038;
+        }
+
+        .footer-actions {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid #dadce0;
+        }
+
+        .code-btn {
+            background-color: #5f6368;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.2s;
+        }
+
+        .code-btn:hover {
+            background-color: #3c4043;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>AI-Assisted How-to Article</h1>
+</header>
+
+<!-- Prompt 1 -->
+<div class="prompt-card">
+    <span class="prompt-number">Prompt#1</span>
+    <div class="prompt-text" id="p1">Now transform this sellable PDF guide into a public-facing, actionable, AI-assisted How-to Guide article tailored specifically for Medium with Medium-optimized headline and sub-headline.
+
+The article should subtly increase curiosity about the structured solution without feeling promotional.
+
+Add a stronger hook in the first 3 lines and optimize this specifically for Medium algorithm engagement.
+
+Also add this follow-up CTA: If this helped you, you can buy me a coffee and access more simple techniques, strategies, and insights here: https://buymeacoffee.com/spmukherjee</div>
+    <button class="copy-btn" onclick="copyPrompt('p1', this)">Copy Prompt</button>
+</div>
+
+<!-- Prompt 2 -->
+<div class="prompt-card">
+    <span class="prompt-number">Prompt#2</span>
+    <div class="prompt-text" id="p2">Section TITLE REQUIREMENTS
+The section title must:
+• Clearly communicate the central insight of the section
+• Avoid hype, exaggeration, or emotional manipulation
+• Avoid vague or abstract phrasing
+• Avoid clickbait curiosity framing
+• Be intellectually compelling but calm
+
+Do not use overly clever or metaphor-only titles.</div>
+    <button class="copy-btn" onclick="copyPrompt('p2', this)">Copy Prompt</button>
+</div>
+
+<!-- Prompt 3 -->
+<div class="prompt-card">
+    <span class="prompt-number">Prompt#3</span>
+    <div class="prompt-text" id="p3">Please optimize it with the followings:
+1️⃣ Stronger first 3 lines
+2️⃣ Sharper section titles</div>
+    <button class="copy-btn" onclick="copyPrompt('p3', this)">Copy Prompt</button>
+</div>
+
+<!-- Prompt 4 -->
+<div class="prompt-card">
+    <span class="prompt-number">Prompt#4</span>
+    <div class="prompt-text" id="p4">Rewrite this article in modern, natural, everyday conversational English as spoken in Kolkata, West Bengal, India — but without local slang, regional grammar, or phrasing that could confuse a global audience. It must be bold, direct and easily understood by a 21-year-old.
+
+Strict Rule:
+Must subtly reflect Kolkata conversational cadence through sentence rhythm and phrasing by using slightly formal, polite, and smoothly flowing sentence structures, with balanced pacing and no abrupt or overly casual wording — without slang, regional grammar, or loss of conservative authority.
+
+Rule (Mandatory):
+
+Do not rewrite the AI prompts. Keep their original text exactly as it is.</div>
+    <button class="copy-btn" onclick="copyPrompt('p4', this)">Copy Prompt</button>
+</div>
+
+<!-- Prompt 5 -->
+<div class="prompt-card">
+    <span class="prompt-number">Prompt#5</span>
+    <div class="prompt-text" id="p5">review this article and rate it</div>
+    <button class="copy-btn" onclick="copyPrompt('p5', this)">Copy Prompt</button>
+</div>
+
+<!-- Prompt 6 -->
+<div class="prompt-card">
+    <span class="prompt-number">Prompt#6</span>
+    <div class="prompt-text" id="p6">Please optimize with what you have recommended in your review.</div>
+    <button class="copy-btn" onclick="copyPrompt('p6', this)">Copy Prompt</button>
+</div>
+
+<!-- Prompt 7 -->
+<div class="prompt-card">
+    <span class="prompt-number">Prompt#7</span>
+    <div class="prompt-text" id="p7">Now please show me exactly how the final Medium layouts would look (title, subtitle, section formatting, and closing line) — ready to paste into my Medium draft editor. 
+Also suggest Medium-style tags (the 5–7 keywords that help with discovery on the platform).</div>
+    <button class="copy-btn" onclick="copyPrompt('p7', this)">Copy Prompt</button>
+</div>
+
+<!-- Prompt 8 -->
+<div class="prompt-card">
+    <span class="prompt-number">Prompt#8</span>
+    <div class="prompt-text" id="p8">mock up a visual Medium draft with bold highlights, block quotes, and spacing optimized for readability—so it’s ready to publish exactly as-is.</div>
+    <button class="copy-btn" onclick="copyPrompt('p8', this)">Copy Prompt</button>
+</div>
+
+<!-- Prompt 9 -->
+<div class="prompt-card">
+    <span class="prompt-number">Prompt#9</span>
+    <div class="prompt-text" id="p9">Create a ready-to-publish Medium layout with suggested bold + italic highlights for key phrases, spacing optimized for mobile, and block quotes visually separated—so it will be Medium-perfect on first paste.</div>
+    <button class="copy-btn" onclick="copyPrompt('p9', this)">Copy Prompt</button>
+</div>
+
+<!-- Prompt 10 -->
+<div class="prompt-card">
+    <span class="prompt-number">Prompt#10</span>
+    <div class="prompt-text" id="p10">Create a minimalist feature image for this Medium article.
+Size: 1400 × 788 px, 16:9 aspect ratio.
+Choose an appropriate background color automatically based on the article’s topic and mood (e.g., calm = soft neutrals, productivity = light blues/greens, serious topics = muted grays, energetic topics = bold warm tones).
+Use a clean, modern composition consistent with Medium’s editorial style:
+– clear, bold, high-contrast title text
+– subtle, small line-icons related to the topic
+– plenty of negative space
+– minimal color palette (background + 1–2 accent colors)
+Keep the design flat, simple, and professional — no textures, gradients, or visual clutter.</div>
+    <button class="copy-btn" onclick="copyPrompt('p10', this)">Copy Prompt</button>
+</div>
+
+<!-- Prompt 11 -->
+<div class="prompt-card">
+    <span class="prompt-number">Prompt#11</span>
+    <div class="prompt-text" id="p11">Please create this image:</div>
+    <button class="copy-btn" onclick="copyPrompt('p11', this)">Copy Prompt</button>
+</div>
+
+<div class="footer-actions">
+    <button class="code-btn" onclick="copyPageCode()">Copy Page HTML Code</button>
+</div>
+
+<script>
+    function copyPrompt(id, btn) {
+        const text = document.getElementById(id).innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            const originalText = btn.innerText;
+            btn.innerText = 'Copied!';
+            btn.classList.add('success');
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.classList.remove('success');
+            }, 2000);
+        });
+    }
+
+    function copyPageCode() {
+        const code = document.documentElement.outerHTML;
+        navigator.clipboard.writeText(code).then(() => {
+            alert('HTML Code copied to clipboard!');
+        });
+    }
+</script>
+
+</body>
+</html>
