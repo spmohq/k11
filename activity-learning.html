@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt for Learning An Activity</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            background-color: #f4f7f9;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .input-group {
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #34495e;
+        }
+
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 15px;
+            font-family: inherit;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .prompt-card {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .prompt-header {
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 15px;
+            display: block;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        .prompt-content {
+            white-space: pre-wrap;
+            font-size: 15px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            background-color: #fff3cd;
+            padding: 0 4px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .copy-btn {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .copy-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .code-btn {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .code-btn:hover {
+            background-color: #5a6268;
+        }
+
+        .success-flash {
+            background-color: #27ae60 !important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Prompt for Learning An Activity</h1>
+
+    <div class="input-group">
+        <label for="activitiesInput">Multi-line dynamic input field: [Activities]</label>
+        <textarea id="activitiesInput" placeholder="Enter activities here..." oninput="updatePrompt()">Enter activities here...</textarea>
+    </div>
+
+    <div class="prompt-card">
+        <span class="prompt-header">Prompt</span>
+        <div class="prompt-content" id="promptText">Act as an expert AI Prompt Engineer.
+
+Your task is to rewrite the following prompt to make it more AI-optimized, clear, and high-performing.
+
+Requirements:
+
+Improve clarity, precision, and structure
+Fix all grammar and phrasing issues
+Maintain the original intent without changing meaning
+Make it beginner-friendly and easy to understand
+Enhance it for better AI output quality and reliability
+
+Output Instructions:
+
+Provide only the rewritten prompt
+Do not include explanations
+Give me the prompt in canvas editor in .txt format without markdown like the texts of a Microsoft notepad file for easy copy / paste. Please don't use Unicode style in it, deliver it in typographic presentation format.
+
+Prompt to optimize:
+
+Act as a beginner-friendly setup assistant.
+
+Guide me step-by-step to:
+
+<span id="displayActivities" class="highlight">[Activities]</span>
+
+Assume I have zero experience.</div>
+        
+        <div class="btn-container">
+            <button class="btn copy-btn" onclick="copyPrompt('promptText', this)">Copy Prompt</button>
+            <button class="btn code-btn" onclick="copyCode(this)">Copy Page Code</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function updatePrompt() {
+        const input = document.getElementById('activitiesInput').value;
+        document.getElementById('displayActivities').innerText = input || '[Activities]';
+    }
+
+    function copyPrompt(elementId, btn) {
+        const text = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            const originalText = btn.innerText;
+            btn.innerText = 'Copied!';
+            btn.classList.add('success-flash');
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.classList.remove('success-flash');
+            }, 2000);
+        });
+    }
+
+    function copyCode(btn) {
+        const code = document.documentElement.outerHTML;
+        navigator.clipboard.writeText(code).then(() => {
+            const originalText = btn.innerText;
+            btn.innerText = 'Code Copied!';
+            btn.classList.add('success-flash');
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.classList.remove('success-flash');
+            }, 2000);
+        });
+    }
+
+    // Initialize display
+    updatePrompt();
+</script>
+
+</body>
+</html>
