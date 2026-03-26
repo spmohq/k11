@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete PDF System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f7f6;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            padding-bottom: 20px;
+            border-bottom: 4px solid #3498db;
+            margin-bottom: 40px;
+        }
+
+        .input-section {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            border-left: 5px solid #e67e22;
+        }
+
+        .input-label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #d35400;
+        }
+
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+            font-family: 'Consolas', 'Monaco', monospace;
+            resize: vertical;
+        }
+
+        .prompt-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            position: relative;
+            border: 1px solid #e0e0e0;
+        }
+
+        .prompt-header {
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 15px;
+            display: block;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .prompt-text {
+            white-space: pre-wrap;
+            font-size: 15px;
+            color: #2c3e50;
+        }
+
+        .placeholder-fill {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .btn-container {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .copy-prompt-btn {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .copy-prompt-btn:hover {
+            background-color: #27ae60;
+        }
+
+        .code-btn {
+            background-color: #34495e;
+            color: white;
+            display: block;
+            margin: 50px auto;
+            width: 250px;
+            font-size: 16px;
+        }
+
+        .code-btn:hover {
+            background-color: #2c3e50;
+        }
+
+        hr {
+            margin: 40px 0;
+            border: 0;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Complete PDF System</h1>
+
+    <!-- SECTION 1: CONTENT -->
+    <div class="input-section">
+        <label class="input-label" for="contentInput">Multi-line dynamic input field for Prompt#1: [Content]</label>
+        <textarea id="contentInput" placeholder="Enter content here..." oninput="sync()"></textarea>
+    </div>
+
+    <!-- PROMPT 1 -->
+    <div class="prompt-card">
+        <span class="prompt-header">Prompt#1</span>
+        <div class="prompt-text" id="p1">My question is:
+
+What should be done to apply or implement what this article recommend?
+
+Please answer it and provide me its step be step execution process.
+
+ARTICLE:
+
+<span class="val-content placeholder-fill">[Content]</span></div>
+        <div class="btn-container">
+            <button class="btn copy-prompt-btn" onclick="copyPrompt('p1')">Copy Prompt</button>
+        </div>
+    </div>
+
+    <!-- PROMPT 2 -->
+    <div class="prompt-card">
+        <span class="prompt-header">Prompt#2</span>
+        <div class="prompt-text" id="p2">Using the content you just generated, transform it into a detailed, step-by-step execution guide.
+
+Do NOT rewrite from scratch.  
+Do NOT change the core meaning.  
+Do NOT remove any important information.  
+
+Your job is to EXPAND and RESTRUCTURE the existing content into micro-level actionable steps for complete beginners.
+
+STRUCTURE RULE:
+- Each step of the content must become an independent section
+- Each step must be clearly separated and labeled
+
+STEP FORMAT (MANDATORY):
+
+Step #X: [Start with a command verb + clear action]
+
+What to do:
+- [Clear instruction based on the original content]
+
+Exactly how to do it:
+- Break the action into micro-steps:
+  - Where to go (exact website/page)
+  - What to click (exact button/link name)
+  - What to type (if required)
+  - Do NOT skip transitions (login → dashboard → settings, etc.)
+- Write each instruction as if you are guiding someone in real-time while they are using their phone or computer
+- Use real-time guiding phrases such as:
+  - “Now click on…”
+  - “You’ll see…”
+  - “On your screen…”
+  - “At the top/bottom…”
+  - “Once you do that…”
+  - “Right after that…”
+  - “Make sure you…”
+- Keep instructions sequential and flowing, like live guidance
+
+What you should see:
+- Describe the expected result in real-time language
+- Use phrases like:
+  - “Now your screen should show…”
+  - “You’ll notice that…”
+  - “At this point, you should see…”
+
+AI Prompt for This Step:
+- Provide a ready-to-use prompt specific to this step, if applicable and needed
+- Must include placeholders like [your input]
+- Must NOT be generic
+- Must produce structured, usable output
+- Must support execution (not replace the action)
+
+STRICT RULES:
+- Number each step (Step #1, Step #2, Step #3…)
+- Start each step with a command verb (Open, Click, Type, Select, Scroll, etc.)
+- Assume the reader has zero prior knowledge
+- Break every major action into micro-steps
+- Avoid vague phrases like “log in” or “go to dashboard” — always expand them
+- Maintain a real-time guiding tone throughout, as if the user is following along on their device right now
+
+VOICE ENFORCEMENT RULE (CRITICAL):
+- Write as if you are sitting beside the user and guiding them live
+- Do NOT sound like a manual or documentation
+- Do NOT compress steps into summaries
+- Every instruction must feel immediate, actionable, and visual
+
+IMPORTANT:
+- Do not merge multiple actions into one step
+- Do not skip any step from the original content
+- Only expand and clarify — do not introduce unrelated steps
+
+
+OPTION FOR THIS GUIDE (MANDATORY):
+
+Option: A hybrid execution guide (recommended)
+
+→ Meaning:
+
+Steps like Choose your niche, Understand your audience, Find content types, Generate ideas → guided using ChatGPT + research actions inside Facebook
+Steps like Create reels, Write scripts, Stay consistent → guided using FB + Canva + phone actions
+Monetization setup → guided inside Facebook settings
+
+Thus make a complete practical + strategic guide.</div>
+        <div class="btn-container">
+            <button class="btn copy-prompt-btn" onclick="copyPrompt('p2')">Copy Prompt</button>
+        </div>
+    </div>
+
+    <!-- PROMPT 3 -->
+    <div class="prompt-card">
+        <span class="prompt-header">Prompt#3</span>
+        <div class="prompt-text" id="p3">Turn this into a sellable AI-assisted How-to Guide product</div>
+        <div class="btn-container">
+            <button class="btn copy-prompt-btn" onclick="copyPrompt('p3')">Copy Prompt</button>
+        </div>
+    </div>
+
+    <!-- PROMPT 4 -->
+    <div class="prompt-card">
+        <span class="prompt-header">Prompt#4</span>
+        <div class="prompt-text" id="p4">Extract and organize all prompts from the guide into a clean prompt library. 
+
+Group them into categories. 
+
+Make them copy-paste ready with placeholders.</div>
+        <div class="btn-container">
+            <button class="btn copy-prompt-btn" onclick="copyPrompt('p4')">Copy Prompt</button>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- SECTION 2: ONE MODULE -->
+    <div class="input-section">
+        <label class="input-label" for="moduleInput">Multi-line dynamic input field for Prompt#5: [One Module]</label>
+        <textarea id="moduleInput" placeholder="Enter module text here..." oninput="sync()"></textarea>
+    </div>
+
+    <!-- PROMPT 5 -->
+    <div class="prompt-card">
+        <span class="prompt-header">Prompt#5</span>
+        <div class="prompt-text" id="p5">Convert the following section of the ebook into structured course modules.
+
+For this module:
+- Add a title
+- Add a short description without title
+- Finish the module with a short concluding statement without title.
+- Keep original content intact
+
+<span class="val-module placeholder-fill">[One Module]</span></div>
+        <div class="btn-container">
+            <button class="btn copy-prompt-btn" onclick="copyPrompt('p5')">Copy Prompt</button>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- SECTION 3: REWRITTEN TEXT -->
+    <div class="input-section">
+        <label class="input-label" for="rewrittenInput">Multi-line dynamic input field for Prompt#6: [Rewritten Text]</label>
+        <textarea id="rewrittenInput" placeholder="Enter text to rewrite here..." oninput="sync()"></textarea>
+    </div>
+
+    <!-- PROMPT 6 -->
+    <div class="prompt-card">
+        <span class="prompt-header">Prompt#6</span>
+        <div class="prompt-text" id="p6">Rewrite the following sentence(s) in modern, natural, everyday conversational English as spoken in Kolkata, West Bengal, India — but without local slang, regional grammar, or phrasing that could confuse a global audience. It must be bold, direct and easily understood by a 21-year-old.
+
+Strict Rule:
+Must subtly reflect Kolkata conversational cadence through sentence rhythm and phrasing by using slightly formal, polite, and smoothly flowing sentence structures, with balanced pacing and no abrupt or overly casual wording — without slang, regional grammar, or loss of conservative authority.
+
+PLEASE DON'T REWRITE THE PROMPT / PROMPTS. KEEP THEM INTACT.
+
+Sentence(s):
+<span class="val-rewritten placeholder-fill">[Rewritten Text]</span></div>
+        <div class="btn-container">
+            <button class="btn copy-prompt-btn" onclick="copyPrompt('p6')">Copy Prompt</button>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- SECTION 4: KOLKATA TEXT -->
+    <div class="input-section">
+        <label class="input-label" for="kolkataInput">Multi-line dynamic input field for Prompt#7: [Kolkata Text]</label>
+        <textarea id="kolkataInput" placeholder="Enter text here..." oninput="sync()"></textarea>
+    </div>
+
+    <!-- PROMPT 7 -->
+    <div class="prompt-card">
+        <span class="prompt-header">Prompt#7</span>
+        <div class="prompt-text" id="p7">Now generate the final document in a Google Docs–ready format using style markers.
+
+Strict rules:
+- Output ONLY the document
+- No explanations, no notes
+
+Formatting system (MANDATORY):
+- [TITLE] Main title of the document
+- [SUBTITLE] Supporting subtitle (optional, directly below title)
+
+- [H1] Section heading
+- [H2] Sub-section heading (if needed)
+- [BODY] Paragraph text
+
+- [BULLETS]
+  • Point 1
+  • Point 2
+
+- [CLOSING] Final closing line
+
+Spacing rules:
+- Keep clean spacing between all elements
+- Each tag must be on its own line
+
+Goal:
+This should be structured so I can quickly use “Find and Replace” in Google Docs to convert:
+[TITLE] → Title style  
+[H1] → Heading 1  
+[H2] → Heading 2  
+
+<span class="val-kolkata placeholder-fill">[Kolkata Text]</span></div>
+        <div class="btn-container">
+            <button class="btn copy-prompt-btn" onclick="copyPrompt('p7')">Copy Prompt</button>
+        </div>
+    </div>
+
+    <button class="btn code-btn" onclick="copyPageCode()">Copy Entire Page Code</button>
+
+    <script>
+        function sync() {
+            const content = document.getElementById('contentInput').value || '[Content]';
+            const module = document.getElementById('moduleInput').value || '[One Module]';
+            const rewritten = document.getElementById('rewrittenInput').value || '[Rewritten Text]';
+            const kolkata = document.getElementById('kolkataInput').value || '[Kolkata Text]';
+
+            document.querySelectorAll('.val-content').forEach(el => el.textContent = content);
+            document.querySelectorAll('.val-module').forEach(el => el.textContent = module);
+            document.querySelectorAll('.val-rewritten').forEach(el => el.textContent = rewritten);
+            document.querySelectorAll('.val-kolkata').forEach(el => el.textContent = kolkata);
+        }
+
+        function copyPrompt(id) {
+            const text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.querySelector(`#${id} + .btn-container .copy-prompt-btn`);
+                const originalText = btn.innerText;
+                btn.innerText = 'Copied!';
+                btn.style.backgroundColor = '#27ae60';
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.backgroundColor = '#2ecc71';
+                }, 2000);
+            });
+        }
+
+        function copyPageCode() {
+            const code = document.documentElement.outerHTML;
+            navigator.clipboard.writeText(code).then(() => {
+                alert('HTML code copied to clipboard!');
+            });
+        }
+    </script>
+</body>
+</html>
