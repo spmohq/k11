@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3 Important Prompts</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            background-color: #fcfcfc;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 15px;
+        }
+
+        .input-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 35px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #34495e;
+        }
+
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 12px;
+            border: 1px solid #ccd1d9;
+            border-radius: 5px;
+            font-size: 15px;
+            font-family: inherit;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        .prompt-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #e0e6ed;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .prompt-header {
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 12px;
+            display: block;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .prompt-text {
+            white-space: pre-wrap;
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .dynamic-val {
+            background-color: #fff9c4;
+            padding: 0 4px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 18px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .copy-btn {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .copy-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .code-btn {
+            background-color: #95a5a6;
+            color: white;
+            display: block;
+            margin: 40px auto;
+            width: fit-content;
+        }
+
+        .code-btn:hover {
+            background-color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>3 Important Prompts - Question's Prompt, Extract Prompts & Modules</h1>
+
+    <div class="input-container">
+        <label for="questionInput">Multi-line dynamic input field: [Question]</label>
+        <textarea id="questionInput" placeholder="Enter your question here..." oninput="updatePrompt()"></textarea>
+    </div>
+
+    <!-- Prompt 1 -->
+    <div class="prompt-card">
+        <span class="prompt-header">Prompt#1</span>
+        <div class="prompt-text" id="p1">My question is:
+
+<span id="displayQuestion" class="dynamic-val">[Question]</span>
+
+Please answer it and provide me its step be step execution process.</div>
+        <button class="btn copy-btn" onclick="copyText('p1')">Copy Prompt</button>
+    </div>
+
+    <!-- Prompt 2 -->
+    <div class="prompt-card">
+        <span class="prompt-header">Prompt#2</span>
+        <div class="prompt-text" id="p2">Extract and organize all prompts from the guide into a clean prompt library. 
+Group them into categories. 
+Make them copy-paste ready with placeholders.</div>
+        <button class="btn copy-btn" onclick="copyText('p2')">Copy Prompt</button>
+    </div>
+
+    <!-- Prompt 3 -->
+    <div class="prompt-card">
+        <span class="prompt-header">Prompt#3</span>
+        <div class="prompt-text" id="p3">Give me a bullet-list of all the Modules and Chapters of this sellable AI-assisted How-to Guide product</div>
+        <button class="btn copy-btn" onclick="copyText('p3')">Copy Prompt</button>
+    </div>
+
+    <button class="btn code-btn" onclick="copyCode()">Copy Entire Page Code</button>
+
+    <script>
+        function updatePrompt() {
+            const input = document.getElementById('questionInput').value;
+            document.getElementById('displayQuestion').innerText = input || '[Question]';
+        }
+
+        function copyText(id) {
+            const text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.querySelector(`#${id} + .copy-btn`);
+                const originalText = btn.innerText;
+                btn.innerText = 'Copied!';
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                }, 2000);
+            });
+        }
+
+        function copyCode() {
+            const code = document.documentElement.outerHTML;
+            navigator.clipboard.writeText(code).then(() => {
+                alert('HTML code copied to clipboard!');
+            });
+        }
+    </script>
+</body>
+</html>
